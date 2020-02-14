@@ -146,7 +146,7 @@ Finally, note that in the examples and data we use in this book and course, we f
 
 ---
 
-## Movies Example {#imdb}
+## Movies Example {#movie-example}
 
 ### Research question
 
