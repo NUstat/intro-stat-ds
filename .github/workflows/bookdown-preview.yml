@@ -20,7 +20,7 @@ jobs:
         run: sudo apt-get update && apt-get install -y --no-install-recommends
       - name: Install Bookdown
         run: |-
-          Rscript -e "install.packages('bookdown', repos = 'https://demo.rstudiopm.com/all/__linux__/bionic/latest')"
+          Rscript -e "install.packages(c('bookdown', 'kableExtra'), repos = 'https://demo.rstudiopm.com/all/__linux__/bionic/latest')"
       - name: Build book
         run: |-
           Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
