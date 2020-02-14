@@ -119,8 +119,8 @@ dir.create("docs/images")
 system("cp -r images/* docs/images/")
 # Copy previous_versions/ to docs/previous_versions/
 # Should switch to use purrr here at some point
-dir.create("docs/previous_versions/")
-system("cp -r previous_versions/* docs/previous_versions/")
+# dir.create("docs/previous_versions/")
+# system("cp -r previous_versions/* docs/previous_versions/")
 
 # For some reason logo needs to be done separately.
 # Loaded in _includes/logo.html
