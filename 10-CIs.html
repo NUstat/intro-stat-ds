@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 10 Confidence Intervals | Introduction to Statistics and Data Science</title>
   <meta name="description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
-  <meta name="generator" content="bookdown 0.17.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 10 Confidence Intervals | Introduction to Statistics and Data Science" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Chester Ismay, Albert Y. Kim, Arend M. Kuyper, Elizabeth Tipton, and Kaitlyn G. Fitzgerald" />
 
 
-<meta name="date" content="2020-02-03" />
+<meta name="date" content="2020-02-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -62,68 +62,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -300,7 +273,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3.3" data-path="6-multiple-regression.html"><a href="6-multiple-regression.html#simpsonsparadox"><i class="fa fa-check"></i><b>6.3.3</b> Simpson’s Paradox</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="6-multiple-regression.html"><a href="6-multiple-regression.html#conclusion-5"><i class="fa fa-check"></i><b>6.4</b> Conclusion</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="6-multiple-regression.html"><a href="6-multiple-regression.html#whats-to-come-4"><i class="fa fa-check"></i><b>6.4.1</b> What’s to come?</a></li>
+<li class="chapter" data-level="6.4.1" data-path="2-viz.html"><a href="2-viz.html#whats-to-come-3"><i class="fa fa-check"></i><b>6.4.1</b> What’s to come?</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>III Statistical Theory</b></span></li>
@@ -323,7 +296,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="8-populations.html"><a href="8-populations.html#needed-packages-6"><i class="fa fa-check"></i>Needed packages</a></li>
 <li class="chapter" data-level="8.1" data-path="8-populations.html"><a href="8-populations.html#terminology"><i class="fa fa-check"></i><b>8.1</b> Terminology &amp; Notation</a></li>
 <li class="chapter" data-level="8.2" data-path="8-populations.html"><a href="8-populations.html#sample-selection"><i class="fa fa-check"></i><b>8.2</b> Populations &amp; Sampling</a></li>
-<li class="chapter" data-level="8.3" data-path="8-populations.html"><a href="8-populations.html#imdb"><i class="fa fa-check"></i><b>8.3</b> Movies Example</a><ul>
+<li class="chapter" data-level="8.3" data-path="8-populations.html"><a href="8-populations.html#movie-example"><i class="fa fa-check"></i><b>8.3</b> Movies Example</a><ul>
 <li class="chapter" data-level="8.3.1" data-path="8-populations.html"><a href="8-populations.html#research-question"><i class="fa fa-check"></i><b>8.3.1</b> Research question</a></li>
 <li class="chapter" data-level="8.3.2" data-path="8-populations.html"><a href="8-populations.html#population-of-interest"><i class="fa fa-check"></i><b>8.3.2</b> Population of interest</a></li>
 <li class="chapter" data-level="8.3.3" data-path="8-populations.html"><a href="8-populations.html#development-of-population-frame"><i class="fa fa-check"></i><b>8.3.3</b> Development of population frame</a></li>
@@ -353,7 +326,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="9-sampling.html"><a href="9-sampling.html#standardization"><i class="fa fa-check"></i><b>9.5</b> Standardization, Special Distributions, and Theory</a><ul>
 <li class="chapter" data-level="9.5.1" data-path="9-sampling.html"><a href="9-sampling.html#standard-errors-based-on-theory"><i class="fa fa-check"></i><b>9.5.1</b> Standard Errors based on Theory</a></li>
-<li class="chapter" data-level="9.5.2" data-path="9-sampling.html"><a href="9-sampling.html#standardization-1"><i class="fa fa-check"></i><b>9.5.2</b> Standardization</a></li>
+<li class="chapter" data-level="9.5.2" data-path="9-sampling.html"><a href="9-sampling.html#standardization"><i class="fa fa-check"></i><b>9.5.2</b> Standardization</a></li>
 <li class="chapter" data-level="9.5.3" data-path="9-sampling.html"><a href="9-sampling.html#special-distributions"><i class="fa fa-check"></i><b>9.5.3</b> Special distributions</a></li>
 </ul></li>
 <li class="chapter" data-level="9.6" data-path="9-sampling.html"><a href="9-sampling.html#size"><i class="fa fa-check"></i><b>9.6</b> Sample Size and Sampling Distributions</a><ul>
@@ -392,7 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.2.2" data-path="11-pvalues.html"><a href="11-pvalues.html#p-values"><i class="fa fa-check"></i><b>11.2.2</b> P-values</a></li>
 </ul></li>
 <li class="chapter" data-level="11.3" data-path="11-pvalues.html"><a href="11-pvalues.html#p-value-and-null-distribution-example"><i class="fa fa-check"></i><b>11.3</b> P-value and Null Distribution Example</a><ul>
-<li class="chapter" data-level="11.3.1" data-path="8-populations.html"><a href="8-populations.html#imdb"><i class="fa fa-check"></i><b>11.3.1</b> IMDB data</a></li>
+<li class="chapter" data-level="11.3.1" data-path="11-pvalues.html"><a href="11-pvalues.html#imdb"><i class="fa fa-check"></i><b>11.3.1</b> IMDB data</a></li>
 <li class="chapter" data-level="11.3.2" data-path="11-pvalues.html"><a href="11-pvalues.html#p-values-using-formulas"><i class="fa fa-check"></i><b>11.3.2</b> p-values using formulas</a></li>
 <li class="chapter" data-level="11.3.3" data-path="11-pvalues.html"><a href="11-pvalues.html#t.test"><i class="fa fa-check"></i><b>11.3.3</b> p-values using <code>t.test</code></a></li>
 <li class="chapter" data-level="11.3.4" data-path="11-pvalues.html"><a href="11-pvalues.html#pvalues-regression"><i class="fa fa-check"></i><b>11.3.4</b> p-values using regression</a></li>
@@ -523,7 +496,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <html>
-<img src='https://raw.githubusercontent.com/akuyper/image_hosting/master/nu_official_images/DeptStatistics-LogoShort-HorizPurple.fw.png?token=AJB4JQK753ENZAL3YEPMRP26IFN3Q' alt="Intro to Statistics and Data Science">
+<img src='https://nulib.github.io/moderndive_book/wide_format.png' alt="Intro to Statistics and Data Science">
 </html>
 <div id="CIs" class="section level1">
 <h1><span class="header-section-number">Chapter 10</span> Confidence Intervals</h1>
@@ -531,11 +504,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="needed-packages-8" class="section level3 unnumbered">
 <h3>Needed Packages</h3>
 <p>Let’s load all the packages needed for this chapter (this assumes you’ve already installed them). If needed, read Section <a href="1-getting-started.html#packages">1.3</a> for information on how to install and load R packages.</p>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb301-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb301-2" data-line-number="2"><span class="kw">library</span>(moderndive)</a>
-<a class="sourceLine" id="cb301-3" data-line-number="3"><span class="kw">library</span>(dslabs)</a>
-<a class="sourceLine" id="cb301-4" data-line-number="4"><span class="kw">library</span>(infer)</a>
-<a class="sourceLine" id="cb301-5" data-line-number="5"><span class="kw">library</span>(janitor)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(moderndive)
+<span class="kw">library</span>(dslabs)
+<span class="kw">library</span>(infer)
+<span class="kw">library</span>(janitor)</code></pre></div>
 </div>
 <div id="combining-an-estimate-with-its-precision" class="section level2">
 <h2><span class="header-section-number">10.1</span> Combining an estimate with its precision</h2>
@@ -546,8 +519,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="sampling-distributions-of-standardized-statistics" class="section level3">
 <h3><span class="header-section-number">10.1.1</span> Sampling distributions of standardized statistics</h3>
 <p>In order to construct a confidence interval, we need to know the sampling distribution of a <em>standardized</em> statistic. We can standardize an estimate by subtracting its mean and dividing by its standard error:</p>
-<p><span class="math display">\[STAT = \frac{Estimate - Mean(Estimate)}{SE(Estimate)}\]</span>
-While we have seen that the sampling distribution of many common estimators are normally distributed (see Table <a href="9-sampling.html#tab:SE-table-ch-9">9.6</a>), this is not always the case for the <em>standardized estimate</em> computed by <span class="math inline">\(STAT\)</span>. This is because the standard errors of many estimators, which appear on the denominator of <span class="math inline">\(STAT\)</span>, are a function of an additional estimated quantity – the sample variance <span class="math inline">\(s^2\)</span>. When this is the case, the sampling distribution for <strong>STAT is a t-distribution with a specified degrees of freedom (df)</strong>. Table <a href="10-CIs.html#tab:samp-dist-table-ch-10">10.1</a> shows the distribution of the standardized statistics for many of the common statistics we have seen previously.</p>
+<p><span class="math display">\[STAT = \frac{Estimate - Mean(Estimate)}{SE(Estimate)}\]</span> While we have seen that the sampling distribution of many common estimators are normally distributed (see Table <a href="9-sampling.html#tab:SE-table-ch-9">9.6</a>), this is not always the case for the <em>standardized estimate</em> computed by <span class="math inline">\(STAT\)</span>. This is because the standard errors of many estimators, which appear on the denominator of <span class="math inline">\(STAT\)</span>, are a function of an additional estimated quantity – the sample variance <span class="math inline">\(s^2\)</span>. When this is the case, the sampling distribution for <strong>STAT is a t-distribution with a specified degrees of freedom (df)</strong>. Table <a href="10-CIs.html#tab:samp-dist-table-ch-10">10.1</a> shows the distribution of the standardized statistics for many of the common statistics we have seen previously.</p>
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:samp-dist-table-ch-10">TABLE 10.1: </span>Properties of Sample Statistics
@@ -687,45 +659,42 @@ Regression slope
 <li>99% of values are between -2.575 and +2.575</li>
 </ul>
 <div class="figure" style="text-align: center"><span id="fig:N-CIs"></span>
-<img src="ismaykimkuyper_files/figure-html/N-CIs-1.png" alt="N(0,1) 95% cutoff values" width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/N-CIs-1.png" alt="N(0,1) 95% cutoff values" width="\textwidth" />
 <p class="caption">
 FIGURE 10.1: N(0,1) 95% cutoff values
 </p>
 </div>
-<p>Using this, we can define a 95% confidence interval for a population parameter as,
-<span class="math display">\[Estimate \ \pm 1.96*SE(Estimate),\]</span> or written in interval notation as
-<span class="math display">\[[Estimate \ \ – \ 1.96*SE(Estimate),\ \ \ Estimate + 1.96*SE(Estimate)]\]</span></p>
+<p>Using this, we can define a 95% confidence interval for a population parameter as, <span class="math display">\[Estimate \ \pm 1.96*SE(Estimate),\]</span> or written in interval notation as <span class="math display">\[[Estimate \ \ – \ 1.96*SE(Estimate),\ \ \ Estimate + 1.96*SE(Estimate)]\]</span></p>
 <p>For example, a 95% confidence interval for the population mean <span class="math inline">\(\mu\)</span> can be constructed based upon the sample mean as, <span class="math display">\[[\bar{x} - 1.96\frac{\sigma}{\sqrt{n}}, \ \bar{x} + 1.96\frac{\sigma}{\sqrt{n}}],\]</span> when the population standard deviation is known. We will show later on in this section how to construct a confidence interval for the mean using a t-distribution when the population standard deviation is unknown.</p>
 <p>Let’s return to our football fan example. Imagine that we have data on the population of 40,000 fans, their ages and whether or not they are cheering for the home team. This simulated data exists in the data frame <code>football_fans</code>.</p>
-<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb302-1" data-line-number="1">football_fans &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">home_fan =</span> <span class="kw">rbinom</span>(<span class="dv">40000</span>, <span class="dv">1</span>, <span class="fl">0.91</span>),</a>
-<a class="sourceLine" id="cb302-2" data-line-number="2">                            <span class="dt">age =</span> <span class="kw">rnorm</span>(<span class="dv">40000</span>, <span class="dv">30</span>, <span class="dv">8</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb302-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">age =</span> <span class="kw">case_when</span>(age <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">~</span><span class="st"> </span><span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb302-4" data-line-number="4">                         age <span class="op">&gt;=</span><span class="dv">0</span> <span class="op">~</span><span class="st"> </span>age))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">football_fans &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">home_fan =</span> <span class="kw">rbinom</span>(<span class="dv">40000</span>, <span class="dv">1</span>, <span class="fl">0.91</span>),
+                            <span class="dt">age =</span> <span class="kw">rnorm</span>(<span class="dv">40000</span>, <span class="dv">30</span>, <span class="dv">8</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">age =</span> <span class="kw">case_when</span>(age <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">~</span><span class="st"> </span><span class="dv">0</span>,
+                         age <span class="op">&gt;=</span><span class="dv">0</span> <span class="op">~</span><span class="st"> </span>age))</code></pre></div>
 <p>We see that the average age in this population is <span class="math inline">\(\mu =\)</span> 30.064 and the standard deviation is <span class="math inline">\(\sigma =\)</span> 8.017.</p>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb303-1" data-line-number="1">football_fans <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb303-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mu =</span> <span class="kw">mean</span>(age),</a>
-<a class="sourceLine" id="cb303-3" data-line-number="3">            <span class="dt">sigma =</span> <span class="kw">sd</span>(age))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">football_fans <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mu =</span> <span class="kw">mean</span>(age),
+            <span class="dt">sigma =</span> <span class="kw">sd</span>(age))</code></pre></div>
 <pre><code>    mu sigma
 1 30.1  8.02</code></pre>
 <p>Let’s take a sample of 100 fans from this population and compute the average age, <span class="math inline">\(\bar{x}\)</span> and its standard error <span class="math inline">\(SE(\bar{x})\)</span>.</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb305-1" data-line-number="1">sample_<span class="dv">100</span>_fans &lt;-<span class="st"> </span>football_fans <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb305-2" data-line-number="2"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb305-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb305-4" data-line-number="4">mean_age_stats &lt;-<span class="st"> </span>sample_<span class="dv">100</span>_fans <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb305-5" data-line-number="5"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb305-6" data-line-number="6">            <span class="dt">xbar =</span> <span class="kw">mean</span>(age),</a>
-<a class="sourceLine" id="cb305-7" data-line-number="7">            <span class="dt">sigma =</span> <span class="kw">sd</span>(football_fans<span class="op">$</span>age),</a>
-<a class="sourceLine" id="cb305-8" data-line-number="8">            <span class="dt">SE_xbar =</span> sigma<span class="op">/</span><span class="kw">sqrt</span>(n))</a>
-<a class="sourceLine" id="cb305-9" data-line-number="9">mean_age_stats</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample_100_fans &lt;-<span class="st"> </span>football_fans <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">100</span>)
+
+mean_age_stats &lt;-<span class="st"> </span>sample_100_fans <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>(),
+            <span class="dt">xbar =</span> <span class="kw">mean</span>(age),
+            <span class="dt">sigma =</span> <span class="kw">sd</span>(football_fans<span class="op">$</span>age),
+            <span class="dt">SE_xbar =</span> sigma<span class="op">/</span><span class="kw">sqrt</span>(n))
+mean_age_stats</code></pre></div>
 <pre><code>    n xbar sigma SE_xbar
 1 100 29.7  8.02   0.802</code></pre>
 <p>Because the population standard deviation is known and therefore the standarized mean follows a <span class="math inline">\(N(0,1)\)</span> distribution, we can construct a 95% confidence interval for <span class="math inline">\(\bar{x}\)</span> by</p>
-<p><span class="math display">\[29.7 \pm 1.96*\frac{8.02}{\sqrt{100}},\]</span>
-which results in the interval <span class="math inline">\([28.1, 31.3]\)</span>.</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb307-1" data-line-number="1">CI &lt;-<span class="st"> </span>mean_age_stats <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb307-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">lower =</span> xbar <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_xbar,</a>
-<a class="sourceLine" id="cb307-3" data-line-number="3">            <span class="dt">upper =</span> xbar <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_xbar)</a>
-<a class="sourceLine" id="cb307-4" data-line-number="4">CI</a></code></pre></div>
+<p><span class="math display">\[29.7 \pm 1.96*\frac{8.02}{\sqrt{100}},\]</span> which results in the interval <span class="math inline">\([28.1, 31.3]\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">CI &lt;-<span class="st"> </span>mean_age_stats <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">lower =</span> xbar <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_xbar,
+            <span class="dt">upper =</span> xbar <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_xbar)
+CI</code></pre></div>
 <pre><code>  lower upper
 1  28.1  31.3</code></pre>
 <!--  `pennies_sample` had $\bar{x} =$ NA and $SE(\bar{x}) = \frac{s}{\sqrt{n}} =$ NA, which gives a confidence interval of (NA, NA).  -->
@@ -753,45 +722,44 @@ which results in the interval <span class="math inline">\([28.1, 31.3]\)</span>.
 <div id="finding-critical-values" class="section level3">
 <h3><span class="header-section-number">10.1.4</span> Finding critical values</h3>
 <p>Suppose we have a sample of <span class="math inline">\(n = 20\)</span> and are using a t-distribution to construct a 95% confidence interval for the mean. Remember that the t-distribution is characterized by its degrees of freedom; here the appropriate degrees of freedom are <span class="math inline">\(df = n - 1 = 19\)</span>. We can find the appropriate critical value using the <code>qt()</code> function in R. Recall that in order for 95% of the data to fall in the middle, this means that 2.5% of the data must fall in each tail, respectively. We therefore want to find the critical value that has a probability of 0.025 to the <em>left</em> (i.e. in the <em>lower tail</em>).</p>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb309-1" data-line-number="1"><span class="kw">qt</span>(<span class="dt">p =</span> <span class="fl">.025</span>, <span class="dt">df =</span> <span class="dv">19</span>, <span class="dt">lower.tail =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qt</span>(<span class="dt">p =</span> .<span class="dv">025</span>, <span class="dt">df =</span> <span class="dv">19</span>, <span class="dt">lower.tail =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>[1] -2.09</code></pre>
 <p>Note that because the t-distribution is symmetric, we know that the upper cutoff value will be +2.09 and therefore it’s not necessary to calculate it separately. For demonstration purposes, however, we’ll show how to calculate it in two ways in R: by specifying that we want the value that gives 2.5% in the upper tail (i.e. <code>lower.tail = FALSE</code>) or by specifying that we want the value that gives 97.5% in the lower tail. Note these two are logically equivalent.</p>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb311-1" data-line-number="1"><span class="kw">qt</span>(<span class="dt">p =</span> <span class="fl">.025</span>, <span class="dt">df =</span> <span class="dv">19</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qt</span>(<span class="dt">p =</span> .<span class="dv">025</span>, <span class="dt">df =</span> <span class="dv">19</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>[1] 2.09</code></pre>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb313-1" data-line-number="1"><span class="kw">qt</span>(<span class="dt">p =</span> <span class="fl">.975</span>, <span class="dt">df =</span> <span class="dv">19</span>, <span class="dt">lower.tail =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qt</span>(<span class="dt">p =</span> .<span class="dv">975</span>, <span class="dt">df =</span> <span class="dv">19</span>, <span class="dt">lower.tail =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>[1] 2.09</code></pre>
 <p>Importantly, changing the degrees of freedom (by having a different sample size) will change the critical value for the t-distribution. For example, if instead we have <span class="math inline">\(n = 50\)</span>, the correct critical value would be <span class="math inline">\(\pm 2.01\)</span>. The larger the sample size for the t-distribution, the closer the critical value gets to the corresponding critical value in the N(0,1) distribution (in the 95% case, 1.96).</p>
-<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb315-1" data-line-number="1"><span class="kw">qt</span>(<span class="dt">p =</span> <span class="fl">.025</span>, <span class="dt">df =</span> <span class="dv">49</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qt</span>(<span class="dt">p =</span> .<span class="dv">025</span>, <span class="dt">df =</span> <span class="dv">49</span>)</code></pre></div>
 <pre><code>[1] -2.01</code></pre>
 <p>Recall that the critical values for 99%, 95%, and 90% confidence intervals for the <span class="math inline">\(N(0,1)\)</span> are given by <span class="math inline">\(\pm 2.575, \pm 1.96,\)</span>and <span class="math inline">\(\pm 1.645\)</span> respectively. These are likely numbers you will memorize from using frequently, but they can also be calculated using the <code>rnorm()</code> function in R.</p>
-<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb317-1" data-line-number="1"><span class="kw">qnorm</span>(.<span class="dv">005</span>) <span class="co">#99% (i.e. 0.5% in each tail)</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qnorm</span>(.<span class="dv">005</span>) <span class="co">#99% (i.e. 0.5% in each tail)</span></code></pre></div>
 <pre><code>[1] -2.58</code></pre>
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb319-1" data-line-number="1"><span class="kw">qnorm</span>(.<span class="dv">025</span>) <span class="co">#95% (i.e. 2.5% in each tail)</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qnorm</span>(.<span class="dv">025</span>) <span class="co">#95% (i.e. 2.5% in each tail)</span></code></pre></div>
 <pre><code>[1] -1.96</code></pre>
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb321-1" data-line-number="1"><span class="kw">qnorm</span>(.<span class="dv">05</span>) <span class="co">#90% (i.e. 5% in each tail)</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qnorm</span>(.<span class="dv">05</span>) <span class="co">#90% (i.e. 5% in each tail)</span></code></pre></div>
 <pre><code>[1] -1.64</code></pre>
 </div>
 <div id="example" class="section level3">
 <h3><span class="header-section-number">10.1.5</span> Example</h3>
 <p>Returning to our football fans example, let’s assume we don’t know the true population standard deviation <span class="math inline">\(\sigma\)</span>, but instead we have to estimate it by <span class="math inline">\(s\)</span>, the standard deviation calculated in our sample. This means we need to calculate <span class="math inline">\(SE(\bar{x})\)</span> using <span class="math inline">\(\frac{s}{\sqrt{n}}\)</span> instead of <span class="math inline">\(\frac{\sigma}{\sqrt{n}}\)</span>.</p>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb323-1" data-line-number="1">mean_age_stats_unknown_sd &lt;-<span class="st"> </span>sample_<span class="dv">100</span>_fans <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb323-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb323-3" data-line-number="3">            <span class="dt">xbar =</span> <span class="kw">mean</span>(age),</a>
-<a class="sourceLine" id="cb323-4" data-line-number="4">            <span class="dt">s =</span> <span class="kw">sd</span>(age),</a>
-<a class="sourceLine" id="cb323-5" data-line-number="5">            <span class="dt">SE_xbar =</span> s<span class="op">/</span><span class="kw">sqrt</span>(n))</a>
-<a class="sourceLine" id="cb323-6" data-line-number="6">mean_age_stats_unknown_sd</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mean_age_stats_unknown_sd &lt;-<span class="st"> </span>sample_100_fans <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>(),
+            <span class="dt">xbar =</span> <span class="kw">mean</span>(age),
+            <span class="dt">s =</span> <span class="kw">sd</span>(age),
+            <span class="dt">SE_xbar =</span> s<span class="op">/</span><span class="kw">sqrt</span>(n))
+mean_age_stats_unknown_sd</code></pre></div>
 <pre><code>    n xbar    s SE_xbar
 1 100 29.7 7.78   0.778</code></pre>
 <p>In this case, we should use the t-distribution to construct our confidence interval because - refering back to Table <a href="10-CIs.html#tab:samp-dist-table-ch-10">10.1</a> - we know <span class="math inline">\(\frac{\bar{x} - \mu}{\frac{s}{\sqrt{n}}} \sim t(df = n-1)\)</span>. Recall that we took a sample of size <span class="math inline">\(n = 100\)</span>, so our degrees of freedom here are <span class="math inline">\(df = 99\)</span>, and the appropriate critical value for a 95% confidence interval is -1.984.</p>
-<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb325-1" data-line-number="1"><span class="kw">qt</span>(<span class="dt">p =</span> <span class="fl">.025</span>, <span class="dt">df =</span> <span class="dv">99</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qt</span>(<span class="dt">p =</span> .<span class="dv">025</span>, <span class="dt">df =</span> <span class="dv">99</span>)</code></pre></div>
 <pre><code>[1] -1.98</code></pre>
 <p>Therefore, our confidence interval is given by</p>
-<p><span class="math display">\[29.7 \pm 1.98*\frac{7.78}{\sqrt{100}},\]</span>
-which results in the interval <span class="math inline">\([28.1, 31.2]\)</span>.</p>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb327-1" data-line-number="1">CI &lt;-<span class="st"> </span>mean_age_stats_unknown_sd <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb327-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">lower =</span> xbar <span class="op">-</span><span class="st"> </span><span class="fl">1.98</span><span class="op">*</span>SE_xbar,</a>
-<a class="sourceLine" id="cb327-3" data-line-number="3">            <span class="dt">upper =</span> xbar <span class="op">+</span><span class="st"> </span><span class="fl">1.98</span><span class="op">*</span>SE_xbar)</a>
-<a class="sourceLine" id="cb327-4" data-line-number="4">CI</a></code></pre></div>
+<p><span class="math display">\[29.7 \pm 1.98*\frac{7.78}{\sqrt{100}},\]</span> which results in the interval <span class="math inline">\([28.1, 31.2]\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">CI &lt;-<span class="st"> </span>mean_age_stats_unknown_sd <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">lower =</span> xbar <span class="op">-</span><span class="st"> </span><span class="fl">1.98</span><span class="op">*</span>SE_xbar,
+            <span class="dt">upper =</span> xbar <span class="op">+</span><span class="st"> </span><span class="fl">1.98</span><span class="op">*</span>SE_xbar)
+CI</code></pre></div>
 <pre><code>  lower upper
 1  28.1  31.2</code></pre>
 </div>
@@ -800,71 +768,71 @@ which results in the interval <span class="math inline">\([28.1, 31.2]\)</span>.
 <h2><span class="header-section-number">10.2</span> Interpreting a Confidence Interval</h2>
 <p>Like many statistics, while a confidence interval is fairly straightforward to construct, it is very easy to interpret incorrectly. In fact, many researchers – statisticians included – get the interpretation of confidence intervals wrong. This goes back to the idea of <strong>counterfactual thinking</strong> that we introduced previously: a confidence interval is a property of a population and estimator, not a particular sample. It asks: if I constructed this interval in every possible sample, in what percentage of samples would I correctly include the true population parameter? For a 99% confidence interval, this answer is 99% of samples; for a 95% confidence interval, the answer is 95% of samples, etc.</p>
 <p>To see this, let’s return to the football fans example and consider the sampling distribution of the sample mean age. Recall that we have population data for all 40,000 fans. Below we take 10,000 repeated samples of size 100 and display the sampling distribution of the sample mean in Figure <a href="10-CIs.html#fig:samp-dist-mean">10.2</a>. Recall that the true population mean is 30.064</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb329-1" data-line-number="1">samples_football_fans &lt;-<span class="st"> </span>football_fans <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb329-2" data-line-number="2"><span class="st">  </span><span class="kw">rep_sample_n</span>(<span class="dt">size =</span>  <span class="dv">100</span>, <span class="dt">reps =</span> <span class="dv">10000</span>)</a>
-<a class="sourceLine" id="cb329-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb329-4" data-line-number="4">samp_means_football_fans &lt;-<span class="st"> </span>samples_football_fans <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb329-5" data-line-number="5"><span class="st">  </span><span class="kw">group_by</span>(replicate) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb329-6" data-line-number="6"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">xbar =</span> <span class="kw">mean</span>(age),</a>
-<a class="sourceLine" id="cb329-7" data-line-number="7">            <span class="dt">sigma =</span> <span class="kw">sd</span>(football_fans<span class="op">$</span>age),</a>
-<a class="sourceLine" id="cb329-8" data-line-number="8">            <span class="dt">n =</span> <span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb329-9" data-line-number="9">            <span class="dt">SE_xbar =</span> sigma <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(n))</a>
-<a class="sourceLine" id="cb329-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb329-11" data-line-number="11">samp_dist_plot &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb329-12" data-line-number="12"><span class="st">  </span><span class="kw">ggplot</span>(samp_means_football_fans) <span class="op">+</span></a>
-<a class="sourceLine" id="cb329-13" data-line-number="13"><span class="st">    </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> xbar), <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb329-14" data-line-number="14"><span class="st">    </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">mean</span>(football_fans<span class="op">$</span>age), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>)</a>
-<a class="sourceLine" id="cb329-15" data-line-number="15">samp_dist_plot</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">samples_football_fans &lt;-<span class="st"> </span>football_fans <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rep_sample_n</span>(<span class="dt">size =</span>  <span class="dv">100</span>, <span class="dt">reps =</span> <span class="dv">10000</span>)
+
+samp_means_football_fans &lt;-<span class="st"> </span>samples_football_fans <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(replicate) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">xbar =</span> <span class="kw">mean</span>(age),
+            <span class="dt">sigma =</span> <span class="kw">sd</span>(football_fans<span class="op">$</span>age),
+            <span class="dt">n =</span> <span class="kw">n</span>(),
+            <span class="dt">SE_xbar =</span> sigma <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(n))
+
+samp_dist_plot &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(samp_means_football_fans) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> xbar), <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">mean</span>(football_fans<span class="op">$</span>age), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>)
+samp_dist_plot</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:samp-dist-mean"></span>
-<img src="ismaykimkuyper_files/figure-html/samp-dist-mean-1.png" alt="Sampling Distribution of Average Age of Fans at a Football Game" width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/samp-dist-mean-1.png" alt="Sampling Distribution of Average Age of Fans at a Football Game" width="\textwidth" />
 <p class="caption">
 FIGURE 10.2: Sampling Distribution of Average Age of Fans at a Football Game
 </p>
 </div>
 <p>Assume that the sample we actually observed was <code>replicate = 77</code>, which had <span class="math inline">\(\bar{x} =\)</span> 29.7. If we used this sample mean to construct a 95% confidence interval, the population mean would be in this interval, right? Figure <a href="10-CIs.html#fig:samp-dist-mean-2">10.3</a> shows a confidence interval shaded around <span class="math inline">\(\bar{x} =\)</span> 29.7, which is indicated by the red line. This confidence interval successfully includes the true population mean.</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb330-1" data-line-number="1">CI &lt;-<span class="st"> </span>samp_means_football_fans <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb330-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(replicate <span class="op">==</span><span class="st"> </span><span class="dv">77</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb330-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">lower =</span> xbar <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_xbar,</a>
-<a class="sourceLine" id="cb330-4" data-line-number="4">            <span class="dt">upper =</span> xbar <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_xbar)</a>
-<a class="sourceLine" id="cb330-5" data-line-number="5">CI</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">CI &lt;-<span class="st"> </span>samp_means_football_fans <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(replicate <span class="op">==</span><span class="st"> </span><span class="dv">77</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">lower =</span> xbar <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_xbar,
+            <span class="dt">upper =</span> xbar <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_xbar)
+CI</code></pre></div>
 <pre><code># A tibble: 1 x 2
   lower upper
   &lt;dbl&gt; &lt;dbl&gt;
 1  28.1  31.2</code></pre>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb332-1" data-line-number="1">xbar &lt;-<span class="st"> </span>samp_means_football_fans <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb332-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(replicate <span class="op">==</span><span class="st"> </span><span class="dv">77</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb332-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(xbar) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb332-4" data-line-number="4"><span class="st">  </span><span class="kw">as.numeric</span>()</a>
-<a class="sourceLine" id="cb332-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb332-6" data-line-number="6">samp_dist_plot <span class="op">+</span></a>
-<a class="sourceLine" id="cb332-7" data-line-number="7"><span class="st">  </span><span class="kw">shade_ci</span>(CI) <span class="op">+</span></a>
-<a class="sourceLine" id="cb332-8" data-line-number="8"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> xbar, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xbar &lt;-<span class="st"> </span>samp_means_football_fans <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(replicate <span class="op">==</span><span class="st"> </span><span class="dv">77</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(xbar) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as.numeric</span>()
+
+samp_dist_plot <span class="op">+</span>
+<span class="st">  </span><span class="kw">shade_ci</span>(CI) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> xbar, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:samp-dist-mean-2"></span>
-<img src="ismaykimkuyper_files/figure-html/samp-dist-mean-2-1.png" alt="Confidence Interval shaded for an observed sample mean of 29.8" width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/samp-dist-mean-2-1.png" alt="Confidence Interval shaded for an observed sample mean of 29.8" width="\textwidth" />
 <p class="caption">
 FIGURE 10.3: Confidence Interval shaded for an observed sample mean of 29.8
 </p>
 </div>
 <p>Assume now that we were unlucky and drew a sample with a mean far from the population mean. One such case is <code>replicate =</code> 545, which had <span class="math inline">\(\bar{x} =\)</span> 32.3. In this case, is the population mean in this interval? Figure <a href="10-CIs.html#fig:samp-dist-mean-3">10.4</a> displays this scenario.</p>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb333-1" data-line-number="1">CI &lt;-<span class="st"> </span>samp_means_football_fans <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb333-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(replicate <span class="op">==</span><span class="st"> </span><span class="dv">545</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb333-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">lower =</span> xbar <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_xbar,</a>
-<a class="sourceLine" id="cb333-4" data-line-number="4">            <span class="dt">upper =</span> xbar <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_xbar)</a>
-<a class="sourceLine" id="cb333-5" data-line-number="5">CI</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">CI &lt;-<span class="st"> </span>samp_means_football_fans <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(replicate <span class="op">==</span><span class="st"> </span><span class="dv">545</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">lower =</span> xbar <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_xbar,
+            <span class="dt">upper =</span> xbar <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_xbar)
+CI</code></pre></div>
 <pre><code># A tibble: 1 x 2
   lower upper
   &lt;dbl&gt; &lt;dbl&gt;
 1  30.7  33.8</code></pre>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb335-1" data-line-number="1">xbar &lt;-<span class="st"> </span>samp_means_football_fans <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb335-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(replicate <span class="op">==</span><span class="st"> </span><span class="dv">545</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb335-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(xbar) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb335-4" data-line-number="4"><span class="st">  </span><span class="kw">as.numeric</span>()</a>
-<a class="sourceLine" id="cb335-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb335-6" data-line-number="6">samp_dist_plot <span class="op">+</span></a>
-<a class="sourceLine" id="cb335-7" data-line-number="7"><span class="st">  </span><span class="kw">shade_ci</span>(CI) <span class="op">+</span></a>
-<a class="sourceLine" id="cb335-8" data-line-number="8"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> xbar, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xbar &lt;-<span class="st"> </span>samp_means_football_fans <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(replicate <span class="op">==</span><span class="st"> </span><span class="dv">545</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(xbar) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as.numeric</span>()
+
+samp_dist_plot <span class="op">+</span>
+<span class="st">  </span><span class="kw">shade_ci</span>(CI) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> xbar, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:samp-dist-mean-3"></span>
-<img src="ismaykimkuyper_files/figure-html/samp-dist-mean-3-1.png" alt="Confidence Interval shaded for an observed sample mean of 32.3" width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/samp-dist-mean-3-1.png" alt="Confidence Interval shaded for an observed sample mean of 32.3" width="\textwidth" />
 <p class="caption">
 FIGURE 10.4: Confidence Interval shaded for an observed sample mean of 32.3
 </p>
@@ -872,16 +840,16 @@ FIGURE 10.4: Confidence Interval shaded for an observed sample mean of 32.3
 <p>In this case, the confidence interval does not include the true population mean. Importantly, remember that in real life we only have the data in front of us from one sample. <em>We don’t know what the population mean is</em>, and we don’t know if our estimate is the value near to the mean (Figure <a href="10-CIs.html#fig:samp-dist-mean-2">10.3</a> ) or far from the mean (Figure <a href="10-CIs.html#fig:samp-dist-mean-3">10.4</a> ). Also recall <code>replicate =</code> 545 was a legitimate random sample drawn from the population of 40,000 football fans. Just by chance, it is possible to observe a sample mean that is far from the true population mean.</p>
 <p>We could compute 95% confidence intervals for all 10,000 of our repeated samples, and we would expect approximately 95% of them to contain the true mean; this is the definition of what it means to be “95% confident” in statistics. Another way to think about it, when constructing 95% confidence intervals, we expect that we’ll only end up with an “unlucky” sample- that is, a sample whose mean is far enough from the population mean such that the confidence interval doesn’t capture it - just 5% of the time.</p>
 <p>For each of our 10,000 samples, let’s create a new variable <code>captured_95</code> to indicate whether the true population mean <span class="math inline">\(\mu\)</span> is captured between the lower and upper values of the confidence interval for the given sample. Let’s look at the results for the first 5 samples.</p>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb336-1" data-line-number="1">mu &lt;-<span class="st"> </span>football_fans <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb336-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="kw">mean</span>(age)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb336-3" data-line-number="3"><span class="st">  </span><span class="kw">as.numeric</span>()</a>
-<a class="sourceLine" id="cb336-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb336-5" data-line-number="5">CIs_football_fans &lt;-<span class="st"> </span>samp_means_football_fans <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb336-6" data-line-number="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">lower =</span> xbar <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_xbar,</a>
-<a class="sourceLine" id="cb336-7" data-line-number="7">         <span class="dt">upper =</span> xbar <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_xbar,</a>
-<a class="sourceLine" id="cb336-8" data-line-number="8">         <span class="dt">captured_95 =</span> lower <span class="op">&lt;=</span><span class="st"> </span>mu <span class="op">&amp;</span><span class="st"> </span>mu <span class="op">&lt;=</span><span class="st"> </span>upper)</a>
-<a class="sourceLine" id="cb336-9" data-line-number="9">CIs_football_fans <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb336-10" data-line-number="10"><span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mu &lt;-<span class="st"> </span>football_fans <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="kw">mean</span>(age)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as.numeric</span>()
+
+CIs_football_fans &lt;-<span class="st"> </span>samp_means_football_fans <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">lower =</span> xbar <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_xbar,
+         <span class="dt">upper =</span> xbar <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_xbar,
+         <span class="dt">captured_95 =</span> lower <span class="op">&lt;=</span><span class="st"> </span>mu <span class="op">&amp;</span><span class="st"> </span>mu <span class="op">&lt;=</span><span class="st"> </span>upper)
+CIs_football_fans <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</code></pre></div>
 <pre><code># A tibble: 5 x 8
   replicate  xbar sigma     n SE_xbar lower upper captured_95
       &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;      
@@ -891,41 +859,41 @@ FIGURE 10.4: Confidence Interval shaded for an observed sample mean of 32.3
 4         4  30.7  8.02   100   0.802  29.1  32.2 TRUE       
 5         5  30.2  8.02   100   0.802  28.6  31.7 TRUE       </code></pre>
 <p>We see that each of the first 5 confidence intervals do contain <span class="math inline">\(\mu\)</span>. Let’s look across all 10,000 confidence intervals (from our 10,000 repeated samples), and see what proportion contain <span class="math inline">\(\mu\)</span>.</p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb338-1" data-line-number="1">CIs_football_fans <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb338-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="kw">sum</span>(captured_<span class="dv">95</span>)<span class="op">/</span><span class="kw">n</span>())</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">CIs_football_fans <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="kw">sum</span>(captured_<span class="dv">95</span>)<span class="op">/</span><span class="kw">n</span>())</code></pre></div>
 <pre><code># A tibble: 1 x 1
   `sum(captured_95)/n()`
                    &lt;dbl&gt;
 1                  0.951</code></pre>
 <p>In fact, 95.06% of the 10,000 do capture the true mean. If we were to take an infinite number of repeated samples, we would see this number approach exactly 95%.</p>
 <p>For visualization purposes, we’ll take a smaller subset of 100 of these confidence intervals and display the results in Figure <a href="10-CIs.html#fig:CI-fig">10.5</a>. In this smaller subset, 96 of the 100 95% confidence intervals contain the true population mean.</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb340-1" data-line-number="1">CI_subset &lt;-<span class="st"> </span><span class="kw">sample_n</span>(CIs_football_fans, <span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb340-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">replicate_id =</span> <span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>))</a>
-<a class="sourceLine" id="cb340-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb340-4" data-line-number="4"><span class="kw">ggplot</span>(CI_subset) <span class="op">+</span></a>
-<a class="sourceLine" id="cb340-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> xbar, <span class="dt">y =</span> replicate_id, <span class="dt">color =</span> captured_<span class="dv">95</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb340-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">y =</span> replicate_id, <span class="dt">yend =</span> replicate_id, <span class="dt">x =</span> lower, <span class="dt">xend =</span> upper, </a>
-<a class="sourceLine" id="cb340-7" data-line-number="7">                   <span class="dt">color =</span> captured_<span class="dv">95</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb340-8" data-line-number="8"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="kw">expression</span>(<span class="st">&quot;Age&quot;</span>),</a>
-<a class="sourceLine" id="cb340-9" data-line-number="9">       <span class="dt">y =</span> <span class="st">&quot;Replicate ID&quot;</span>,</a>
-<a class="sourceLine" id="cb340-10" data-line-number="10">       <span class="dt">title =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;95% percentile-based confidence intervals for &quot;</span>, </a>
-<a class="sourceLine" id="cb340-11" data-line-number="11">                             mu, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb340-12" data-line-number="12"><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;orange&quot;</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb340-13" data-line-number="13"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> mu, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) </a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">CI_subset &lt;-<span class="st"> </span><span class="kw">sample_n</span>(CIs_football_fans, <span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">replicate_id =</span> <span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>))
+
+<span class="kw">ggplot</span>(CI_subset) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> xbar, <span class="dt">y =</span> replicate_id, <span class="dt">color =</span> captured_<span class="dv">95</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">y =</span> replicate_id, <span class="dt">yend =</span> replicate_id, <span class="dt">x =</span> lower, <span class="dt">xend =</span> upper, 
+                   <span class="dt">color =</span> captured_<span class="dv">95</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="kw">expression</span>(<span class="st">&quot;Age&quot;</span>),
+       <span class="dt">y =</span> <span class="st">&quot;Replicate ID&quot;</span>,
+       <span class="dt">title =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;95% percentile-based confidence intervals for &quot;</span>, 
+                             mu, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;orange&quot;</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> mu, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) </code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:CI-fig"></span>
-<img src="ismaykimkuyper_files/figure-html/CI-fig-1.png" alt="Confidence Interval for Average Age from 100 repeated samples of size 100" width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/CI-fig-1.png" alt="Confidence Interval for Average Age from 100 repeated samples of size 100" width="\textwidth" />
 <p class="caption">
 FIGURE 10.5: Confidence Interval for Average Age from 100 repeated samples of size 100
 </p>
 </div>
 <p>What if we instead constructed 90% confidence intervals? That is, we instead used 1.645 as our critical value instead of 1.96.</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb341-1" data-line-number="1">CIs_<span class="dv">90</span>_football_fans &lt;-<span class="st"> </span>samp_means_football_fans <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb341-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">lower =</span> xbar <span class="op">-</span><span class="st"> </span><span class="fl">1.645</span><span class="op">*</span>SE_xbar,</a>
-<a class="sourceLine" id="cb341-3" data-line-number="3">         <span class="dt">upper =</span> xbar <span class="op">+</span><span class="st"> </span><span class="fl">1.645</span><span class="op">*</span>SE_xbar,</a>
-<a class="sourceLine" id="cb341-4" data-line-number="4">         <span class="dt">captured_90 =</span> lower <span class="op">&lt;=</span><span class="st"> </span>mu <span class="op">&amp;</span><span class="st"> </span>mu <span class="op">&lt;=</span><span class="st"> </span>upper)</a>
-<a class="sourceLine" id="cb341-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb341-6" data-line-number="6">CIs_<span class="dv">90</span>_football_fans <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb341-7" data-line-number="7"><span class="st">  </span><span class="kw">summarize</span>(<span class="kw">sum</span>(captured_<span class="dv">90</span>)<span class="op">/</span><span class="kw">n</span>())</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">CIs_90_football_fans &lt;-<span class="st"> </span>samp_means_football_fans <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">lower =</span> xbar <span class="op">-</span><span class="st"> </span><span class="fl">1.645</span><span class="op">*</span>SE_xbar,
+         <span class="dt">upper =</span> xbar <span class="op">+</span><span class="st"> </span><span class="fl">1.645</span><span class="op">*</span>SE_xbar,
+         <span class="dt">captured_90 =</span> lower <span class="op">&lt;=</span><span class="st"> </span>mu <span class="op">&amp;</span><span class="st"> </span>mu <span class="op">&lt;=</span><span class="st"> </span>upper)
+
+CIs_90_football_fans <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="kw">sum</span>(captured_<span class="dv">90</span>)<span class="op">/</span><span class="kw">n</span>())</code></pre></div>
 <pre><code># A tibble: 1 x 1
   `sum(captured_90)/n()`
                    &lt;dbl&gt;
@@ -936,8 +904,7 @@ FIGURE 10.5: Confidence Interval for Average Age from 100 repeated samples of si
 <h2><span class="header-section-number">10.3</span> Margin of Error and Width of an Interval</h2>
 <p>Recall that we said in general, a confidence interal is of the form:</p>
 <p><span class="math display">\[\text{Estimate} \pm \text{Critical Value} * SE(\text{Estimate})\]</span></p>
-<p>The second element of the confidence interval (<span class="math inline">\(\text{Critical Value} * SE(\text{Estimate}\)</span>) is often called the <strong>margin of error</strong>. Therefore, another general way of writing the confidence interval is
-<span class="math display">\[\text{Estimate} \pm \text{Margin of Error}\]</span></p>
+<p>The second element of the confidence interval (<span class="math inline">\(\text{Critical Value} * SE(\text{Estimate}\)</span>) is often called the <strong>margin of error</strong>. Therefore, another general way of writing the confidence interval is <span class="math display">\[\text{Estimate} \pm \text{Margin of Error}\]</span></p>
 <p>Note that as the <em>margin of error</em> decreases, the <em>width of the interval</em> also decreases. But what makes the margin of error decrease? We’ve already discussed one way: by decreasing the level of confidence. That is, using a lower confidence level (e.g. 90% instead of 95%) will decrease the critical value (e.g. 1.645 instead of 1.96) and thus result in a smaller margin of error and narrower confidence interval.</p>
 <p>There is a trade-off here between the width of an interval and the level of confidence. In general we might think narrower intervals are preferrable to wider ones, but by narrowing your interval, you are increasing the chance that your interval will not capture the true mean. That is, a 90% confidence interval is narrower than a 95% confidence interval, but it has a 10% chance of missing the mean as opposed to just a 5% chance of missing it. The trade-off in the other direction is this: a 99% confidence level has a higher chance of capturing the true mean, but it might be too wide of an interval to be practically useful. This Garfield comic demonstrates how there are drawbacks to using a higher-confidence (and therefore wider) interval.</p>
 <p><img src="images/garfield_comic.png" width="80%" style="display: block; margin: auto;" /></p>
@@ -948,7 +915,7 @@ FIGURE 10.5: Confidence Interval for Average Age from 100 repeated samples of si
 <p>Let’s revisit our exercise of trying to estimate the proportion of red balls in the bowl from Chapter <a href="9-sampling.html#sampling">9</a>. We are now interested in determining a confidence interval for population parameter <span class="math inline">\(\pi\)</span>, the proportion of balls that are red out of the total <span class="math inline">\(N = 2400\)</span> red and white balls.</p>
 <p>We will use the first sample reported from Ilyas and Yohan in Subsection <a href="9-sampling.html#student-shovels">9.2.3</a> for our point estimate. They observed 21 red balls out of the 50 in their shovel. This data is stored in the <code>tactile_shovel1</code> data frame in the <code>moderndive</code> package.</p>
 <!-- Need to include this in the pkg! -->
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb343-1" data-line-number="1">tactile_shovel1</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tactile_shovel1</code></pre></div>
 <pre><code># A tibble: 50 x 1
    color
    &lt;chr&gt;
@@ -966,20 +933,20 @@ FIGURE 10.5: Confidence Interval for Average Age from 100 repeated samples of si
 <div id="observed-statistic" class="section level3">
 <h3><span class="header-section-number">10.4.1</span> Observed Statistic</h3>
 <p>We can use our data wrangling tools to compute the proportion that are red in this data.</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb345-1" data-line-number="1">prop_red_stats &lt;-<span class="st"> </span>tactile_shovel1 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb345-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb345-3" data-line-number="3">            <span class="dt">pi_hat =</span> <span class="kw">sum</span>(color <span class="op">==</span><span class="st"> &quot;red&quot;</span>) <span class="op">/</span><span class="st"> </span>n,</a>
-<a class="sourceLine" id="cb345-4" data-line-number="4">            <span class="dt">SE_pi_hat =</span> <span class="kw">sqrt</span>(pi_hat<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>pi_hat)<span class="op">/</span>n))</a>
-<a class="sourceLine" id="cb345-5" data-line-number="5">prop_red_stats</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prop_red_stats &lt;-<span class="st"> </span>tactile_shovel1 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>(),
+            <span class="dt">pi_hat =</span> <span class="kw">sum</span>(color <span class="op">==</span><span class="st"> &quot;red&quot;</span>) <span class="op">/</span><span class="st"> </span>n,
+            <span class="dt">SE_pi_hat =</span> <span class="kw">sqrt</span>(pi_hat<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>pi_hat)<span class="op">/</span>n))
+prop_red_stats</code></pre></div>
 <pre><code># A tibble: 1 x 3
       n pi_hat SE_pi_hat
   &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;
 1    50   0.42    0.0698</code></pre>
 <p>As shown in Table <a href="10-CIs.html#tab:samp-dist-table-ch-10">10.1</a>, the appropriate distribution for a confidence interval of <span class="math inline">\(\hat{\pi}\)</span> is <span class="math inline">\(N(0,1)\)</span>, so we can use the critical value 1.96 to construct a 95% confidence interval.</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb347-1" data-line-number="1">CI &lt;-<span class="st"> </span>prop_red_stats <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb347-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">lower =</span> pi_hat <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_pi_hat,</a>
-<a class="sourceLine" id="cb347-3" data-line-number="3">            <span class="dt">upper =</span> pi_hat <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_pi_hat)</a>
-<a class="sourceLine" id="cb347-4" data-line-number="4">CI</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">CI &lt;-<span class="st"> </span>prop_red_stats <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">lower =</span> pi_hat <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_pi_hat,
+            <span class="dt">upper =</span> pi_hat <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_pi_hat)
+CI</code></pre></div>
 <pre><code># A tibble: 1 x 2
   lower upper
   &lt;dbl&gt; &lt;dbl&gt;
@@ -991,7 +958,7 @@ FIGURE 10.5: Confidence Interval for Average Age from 100 repeated samples of si
 <h2><span class="header-section-number">10.5</span> Example: Comparing two proportions</h2>
 <p>If you see someone else yawn, are you more likely to yawn? In an <a href="http://www.discovery.com/tv-shows/mythbusters/mythbusters-database/yawning-contagious/">episode</a> of the show <em>Mythbusters</em>, they tested the myth that yawning is contagious. The snippet from the show is available to view in the United States on the Discovery Network website <a href="https://www.discovery.com/tv-shows/mythbusters/videos/is-yawning-contagious">here</a>. More information about the episode is also available on IMDb <a href="https://www.imdb.com/title/tt0768479/">here</a>.</p>
 <p>Fifty adults who thought they were being considered for an appearance on the show were interviewed by a show recruiter (“confederate”) who either yawned or did not. Participants then sat by themselves in a large van and were asked to wait. While in the van, the Mythbusters watched via hidden camera to see if the unaware participants yawned. The data frame containing the results is available at <code>mythbusters_yawn</code> in the <code>moderndive</code> package. Let’s check it out.</p>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb349-1" data-line-number="1">mythbusters_yawn</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mythbusters_yawn</code></pre></div>
 <pre><code># A tibble: 50 x 3
     subj group   yawn 
    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;
@@ -1012,12 +979,12 @@ FIGURE 10.5: Confidence Interval for Average Age from 100 repeated samples of si
 <li>The <code>yawn</code> variable is either <code>&quot;yes&quot;</code> if the participant yawned or <code>&quot;no&quot;</code> if the participant did not yawn.</li>
 </ul>
 <p>We can use the <code>janitor</code> package to get a glimpse into this data in a table format:</p>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb351-1" data-line-number="1">mythbusters_yawn <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb351-2" data-line-number="2"><span class="st">  </span><span class="kw">tabyl</span>(group, yawn) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb351-3" data-line-number="3"><span class="st">  </span><span class="kw">adorn_percentages</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb351-4" data-line-number="4"><span class="st">  </span><span class="kw">adorn_pct_formatting</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb351-5" data-line-number="5"><span class="st">  </span><span class="co"># To show original counts</span></a>
-<a class="sourceLine" id="cb351-6" data-line-number="6"><span class="st">  </span><span class="kw">adorn_ns</span>()</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mythbusters_yawn <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">tabyl</span>(group, yawn) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">adorn_percentages</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">adorn_pct_formatting</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># To show original counts</span>
+<span class="st">  </span><span class="kw">adorn_ns</span>()</code></pre></div>
 <pre><code>   group         no        yes
  control 75.0% (12) 25.0%  (4)
     seed 70.6% (24) 29.4% (10)</code></pre>
@@ -1032,32 +999,32 @@ FIGURE 10.5: Confidence Interval for Average Age from 100 repeated samples of si
 <div id="compute-the-point-estimate" class="section level3">
 <h3><span class="header-section-number">10.5.1</span> Compute the point estimate</h3>
 <p>Note that the parameter we are interested in here is <span class="math inline">\(\pi_1 - \pi_2\)</span>, which we will estimate by <span class="math inline">\(\hat{\pi_1} - \hat{\pi_2}\)</span>. Recall that the standard error is given by <span class="math inline">\(\sqrt{\frac{\hat{\pi}_1(1-\hat{\pi}_1)}{n_1} + \frac{\hat{\pi}_2(1 - \hat{\pi}_2)}{n_2}} = \sqrt{Var(\hat{\pi}_1) + Var(\hat{\pi}_2)}\)</span>. We can use <code>group_by()</code> to calculate <span class="math inline">\(\hat{\pi}\)</span> for each group (i.e. <span class="math inline">\(\hat{\pi}_1\)</span> and <span class="math inline">\(\hat{\pi}_2\)</span>) as well as the corresponding variance components for each group (i.e. <span class="math inline">\(Var(\hat{\pi}_1)\)</span> and <span class="math inline">\(Var(\hat{\pi}_2)\)</span>).</p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb353-1" data-line-number="1">prop_yes_stats &lt;-<span class="st"> </span>mythbusters_yawn <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb353-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(group) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb353-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb353-4" data-line-number="4">            <span class="dt">pi_hat =</span> <span class="kw">sum</span>(yawn <span class="op">==</span><span class="st"> &quot;yes&quot;</span>)<span class="op">/</span>n,</a>
-<a class="sourceLine" id="cb353-5" data-line-number="5">            <span class="dt">var_pi_hat =</span> pi_hat<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>pi_hat)<span class="op">/</span>n) </a>
-<a class="sourceLine" id="cb353-6" data-line-number="6">prop_yes_stats</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prop_yes_stats &lt;-<span class="st"> </span>mythbusters_yawn <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(group) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>(),
+            <span class="dt">pi_hat =</span> <span class="kw">sum</span>(yawn <span class="op">==</span><span class="st"> &quot;yes&quot;</span>)<span class="op">/</span>n,
+            <span class="dt">var_pi_hat =</span> pi_hat<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>pi_hat)<span class="op">/</span>n) 
+prop_yes_stats</code></pre></div>
 <pre><code># A tibble: 2 x 4
   group       n pi_hat var_pi_hat
   &lt;chr&gt;   &lt;int&gt;  &lt;dbl&gt;      &lt;dbl&gt;
 1 control    16  0.25     0.0117 
 2 seed       34  0.294    0.00611</code></pre>
 <p>We can then combine these estimates to obtain estimates for <span class="math inline">\(\hat{\pi_1} - \hat{\pi_2}\)</span> and <span class="math inline">\(SE(\hat{\pi_1} - \hat{\pi_2})\)</span>, which are needed for our confidence interval.</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb355-1" data-line-number="1">diff_prop_yes_stats &lt;-<span class="st"> </span>prop_yes_stats <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb355-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">diff_in_props =</span> <span class="kw">diff</span>(pi_hat),</a>
-<a class="sourceLine" id="cb355-3" data-line-number="3">            <span class="dt">SE_diff =</span> <span class="kw">sqrt</span>(<span class="kw">sum</span>(var_pi_hat))) </a>
-<a class="sourceLine" id="cb355-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb355-5" data-line-number="5">diff_prop_yes_stats</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diff_prop_yes_stats &lt;-<span class="st"> </span>prop_yes_stats <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">diff_in_props =</span> <span class="kw">diff</span>(pi_hat),
+            <span class="dt">SE_diff =</span> <span class="kw">sqrt</span>(<span class="kw">sum</span>(var_pi_hat))) 
+
+diff_prop_yes_stats</code></pre></div>
 <pre><code># A tibble: 1 x 2
   diff_in_props SE_diff
           &lt;dbl&gt;   &lt;dbl&gt;
 1        0.0441   0.134</code></pre>
 <p>This <code>diff_in_props</code> value represents the proportion of those that yawned after seeing a seed yawn (0.2941) minus the proportion of those that yawned with not seeing a seed (0.25). Using the <span class="math inline">\(N(0,1)\)</span> distribution, we can construct the following 95% confidence interval.</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb357-1" data-line-number="1">CI &lt;-<span class="st"> </span>diff_prop_yes_stats <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb357-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">lower =</span> diff_in_props <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_diff,</a>
-<a class="sourceLine" id="cb357-3" data-line-number="3">            <span class="dt">upper =</span> diff_in_props <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_diff)</a>
-<a class="sourceLine" id="cb357-4" data-line-number="4">CI</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">CI &lt;-<span class="st"> </span>diff_prop_yes_stats <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">lower =</span> diff_in_props <span class="op">-</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_diff,
+            <span class="dt">upper =</span> diff_in_props <span class="op">+</span><span class="st"> </span><span class="fl">1.96</span><span class="op">*</span>SE_diff)
+CI</code></pre></div>
 <pre><code># A tibble: 1 x 2
    lower upper
    &lt;dbl&gt; &lt;dbl&gt;
@@ -1131,7 +1098,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))

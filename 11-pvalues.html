@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 11 P-values | Introduction to Statistics and Data Science</title>
   <meta name="description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
-  <meta name="generator" content="bookdown 0.17.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 11 P-values | Introduction to Statistics and Data Science" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Chester Ismay, Albert Y. Kim, Arend M. Kuyper, Elizabeth Tipton, and Kaitlyn G. Fitzgerald" />
 
 
-<meta name="date" content="2020-02-03" />
+<meta name="date" content="2020-02-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -62,68 +62,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -300,7 +273,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3.3" data-path="6-multiple-regression.html"><a href="6-multiple-regression.html#simpsonsparadox"><i class="fa fa-check"></i><b>6.3.3</b> Simpson’s Paradox</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="6-multiple-regression.html"><a href="6-multiple-regression.html#conclusion-5"><i class="fa fa-check"></i><b>6.4</b> Conclusion</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="6-multiple-regression.html"><a href="6-multiple-regression.html#whats-to-come-4"><i class="fa fa-check"></i><b>6.4.1</b> What’s to come?</a></li>
+<li class="chapter" data-level="6.4.1" data-path="2-viz.html"><a href="2-viz.html#whats-to-come-3"><i class="fa fa-check"></i><b>6.4.1</b> What’s to come?</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>III Statistical Theory</b></span></li>
@@ -323,7 +296,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="8-populations.html"><a href="8-populations.html#needed-packages-6"><i class="fa fa-check"></i>Needed packages</a></li>
 <li class="chapter" data-level="8.1" data-path="8-populations.html"><a href="8-populations.html#terminology"><i class="fa fa-check"></i><b>8.1</b> Terminology &amp; Notation</a></li>
 <li class="chapter" data-level="8.2" data-path="8-populations.html"><a href="8-populations.html#sample-selection"><i class="fa fa-check"></i><b>8.2</b> Populations &amp; Sampling</a></li>
-<li class="chapter" data-level="8.3" data-path="8-populations.html"><a href="8-populations.html#imdb"><i class="fa fa-check"></i><b>8.3</b> Movies Example</a><ul>
+<li class="chapter" data-level="8.3" data-path="8-populations.html"><a href="8-populations.html#movie-example"><i class="fa fa-check"></i><b>8.3</b> Movies Example</a><ul>
 <li class="chapter" data-level="8.3.1" data-path="8-populations.html"><a href="8-populations.html#research-question"><i class="fa fa-check"></i><b>8.3.1</b> Research question</a></li>
 <li class="chapter" data-level="8.3.2" data-path="8-populations.html"><a href="8-populations.html#population-of-interest"><i class="fa fa-check"></i><b>8.3.2</b> Population of interest</a></li>
 <li class="chapter" data-level="8.3.3" data-path="8-populations.html"><a href="8-populations.html#development-of-population-frame"><i class="fa fa-check"></i><b>8.3.3</b> Development of population frame</a></li>
@@ -353,7 +326,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="9-sampling.html"><a href="9-sampling.html#standardization"><i class="fa fa-check"></i><b>9.5</b> Standardization, Special Distributions, and Theory</a><ul>
 <li class="chapter" data-level="9.5.1" data-path="9-sampling.html"><a href="9-sampling.html#standard-errors-based-on-theory"><i class="fa fa-check"></i><b>9.5.1</b> Standard Errors based on Theory</a></li>
-<li class="chapter" data-level="9.5.2" data-path="9-sampling.html"><a href="9-sampling.html#standardization-1"><i class="fa fa-check"></i><b>9.5.2</b> Standardization</a></li>
+<li class="chapter" data-level="9.5.2" data-path="9-sampling.html"><a href="9-sampling.html#standardization"><i class="fa fa-check"></i><b>9.5.2</b> Standardization</a></li>
 <li class="chapter" data-level="9.5.3" data-path="9-sampling.html"><a href="9-sampling.html#special-distributions"><i class="fa fa-check"></i><b>9.5.3</b> Special distributions</a></li>
 </ul></li>
 <li class="chapter" data-level="9.6" data-path="9-sampling.html"><a href="9-sampling.html#size"><i class="fa fa-check"></i><b>9.6</b> Sample Size and Sampling Distributions</a><ul>
@@ -392,7 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.2.2" data-path="11-pvalues.html"><a href="11-pvalues.html#p-values"><i class="fa fa-check"></i><b>11.2.2</b> P-values</a></li>
 </ul></li>
 <li class="chapter" data-level="11.3" data-path="11-pvalues.html"><a href="11-pvalues.html#p-value-and-null-distribution-example"><i class="fa fa-check"></i><b>11.3</b> P-value and Null Distribution Example</a><ul>
-<li class="chapter" data-level="11.3.1" data-path="8-populations.html"><a href="8-populations.html#imdb"><i class="fa fa-check"></i><b>11.3.1</b> IMDB data</a></li>
+<li class="chapter" data-level="11.3.1" data-path="11-pvalues.html"><a href="11-pvalues.html#imdb"><i class="fa fa-check"></i><b>11.3.1</b> IMDB data</a></li>
 <li class="chapter" data-level="11.3.2" data-path="11-pvalues.html"><a href="11-pvalues.html#p-values-using-formulas"><i class="fa fa-check"></i><b>11.3.2</b> p-values using formulas</a></li>
 <li class="chapter" data-level="11.3.3" data-path="11-pvalues.html"><a href="11-pvalues.html#t.test"><i class="fa fa-check"></i><b>11.3.3</b> p-values using <code>t.test</code></a></li>
 <li class="chapter" data-level="11.3.4" data-path="11-pvalues.html"><a href="11-pvalues.html#pvalues-regression"><i class="fa fa-check"></i><b>11.3.4</b> p-values using regression</a></li>
@@ -523,7 +496,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <html>
-<img src='https://raw.githubusercontent.com/akuyper/image_hosting/master/nu_official_images/DeptStatistics-LogoShort-HorizPurple.fw.png?token=AJB4JQK753ENZAL3YEPMRP26IFN3Q' alt="Intro to Statistics and Data Science">
+<img src='https://nulib.github.io/moderndive_book/wide_format.png' alt="Intro to Statistics and Data Science">
 </html>
 <div id="pvalues" class="section level1">
 <h1><span class="header-section-number">Chapter 11</span> P-values</h1>
@@ -531,10 +504,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="needed-packages-9" class="section level3 unnumbered">
 <h3>Needed Packages</h3>
 <p>Let’s load all the packages needed for this chapter (this assumes you’ve already installed them). If needed, read Section <a href="1-getting-started.html#packages">1.3</a> for information on how to install and load R packages.</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb359-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb359-2" data-line-number="2"><span class="kw">library</span>(moderndive)</a>
-<a class="sourceLine" id="cb359-3" data-line-number="3"><span class="kw">library</span>(infer)</a>
-<a class="sourceLine" id="cb359-4" data-line-number="4"><span class="kw">library</span>(ggplot2movies)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(moderndive)
+<span class="kw">library</span>(infer)
+<span class="kw">library</span>(ggplot2movies)</code></pre></div>
 </div>
 <div id="proof-by-contradiction" class="section level2">
 <h2><span class="header-section-number">11.1</span> Stochastic Proof by Contradiction</h2>
@@ -560,8 +533,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>There is no relationship between two variables in the population (e.g. <span class="math inline">\(\beta_1\)</span>)</li>
 <li>The population parameter is equal to some norm known or assumed by previous data or literature (e.g. <span class="math inline">\(\pi = 0.5\)</span> or <span class="math inline">\(\mu = \mu_{norm}\)</span>)</li>
 </ul>
-<p>Importantly, this hypothesis is about the value or relationship in the population, not the sample. (This is a very easy mistake to make). Remember, you have data in your sample, so you know without a doubt if there is a difference or relationship in your data (that is your estimate). What you do not know is if there is a difference or relationship in the population.
-Once a null hypothesis is determined, the next step is to determine what the sampling distribution of the estimator would be if this null hypothesis were true (Step 2). We can determine what this null distribution would look like, just as we’ve done with sampling distributions more generally: using mathematical theory and formulas for known distributions.</p>
+<p>Importantly, this hypothesis is about the value or relationship in the population, not the sample. (This is a very easy mistake to make). Remember, you have data in your sample, so you know without a doubt if there is a difference or relationship in your data (that is your estimate). What you do not know is if there is a difference or relationship in the population. Once a null hypothesis is determined, the next step is to determine what the sampling distribution of the estimator would be if this null hypothesis were true (Step 2). We can determine what this null distribution would look like, just as we’ve done with sampling distributions more generally: using mathematical theory and formulas for known distributions.</p>
 </div>
 <div id="p-values" class="section level3">
 <h3><span class="header-section-number">11.2.2</span> P-values</h3>
@@ -586,7 +558,7 @@ FIGURE 11.1: P-value diagram
 <div id="imdb" class="section level3">
 <h3><span class="header-section-number">11.3.1</span> IMDB data</h3>
 <p>The <code>movies</code> dataset in the <code>ggplot2movies</code> package contains information on 58,788 movies that have been rated by users of IMDB.com.</p>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb360-1" data-line-number="1">movies</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies</code></pre></div>
 <pre><code># A tibble: 58,788 x 24
    title  year length budget rating votes    r1    r2    r3    r4    r5    r6
    &lt;chr&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -604,7 +576,7 @@ FIGURE 11.1: P-value diagram
 #   r10 &lt;dbl&gt;, mpaa &lt;chr&gt;, Action &lt;int&gt;, Animation &lt;int&gt;, Comedy &lt;int&gt;,
 #   Drama &lt;int&gt;, Documentary &lt;int&gt;, Romance &lt;int&gt;, Short &lt;int&gt;</code></pre>
 <p>We’ll focus on a random sample of 68 movies that are classified as either “action” or “romance” movies but not both. We disregard movies that are classified as both so that we can assign all 68 movies into either category. Furthermore, since the original <code>movies</code> dataset was a little messy, we provided a pre-wrangled version of our data in the <code>movies_sample</code> data frame included in the <code>moderndive</code> package (you can look at the code to do this data wrangling <a href="https://github.com/moderndive/moderndive/blob/master/data-raw/process_data_sets.R#L14">here</a>):</p>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb362-1" data-line-number="1">movies_sample</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies_sample</code></pre></div>
 <pre><code># A tibble: 68 x 4
    title                     year rating genre  
    &lt;chr&gt;                    &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;  
@@ -624,23 +596,23 @@ FIGURE 11.1: P-value diagram
 <p>We start by assuming there is no difference, therefore our null value is <span class="math inline">\(\mu_1 - \mu_2 = 0\)</span>. We want to calculate <span class="math inline">\(t\_stat\)</span> for this scenario:</p>
 <p><span class="math display">\[t\_stat = \frac{Estimate - Null \ \ value}{SE(Estimate)} = \frac{(\bar{x}_1 - \bar{x}_2) - 0}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}\]</span></p>
 <p>Let’s compute all the necessary values from our sample data. We need: the number of movies (<code>n</code>), the mean rating (<code>xbar</code>), and the standard deviation (<code>s</code>) split by the binary variable <code>genre</code>. We’ll also calculate <span class="math inline">\(\frac{s_i^2}{n_i}\)</span> for each group (<code>var_xbar</code>), which is needed to calculate the denominator of <span class="math inline">\(t\_stat\)</span>.</p>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb364-1" data-line-number="1">genre_mean_stats &lt;-<span class="st"> </span>movies_sample <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb364-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(genre) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb364-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>(), </a>
-<a class="sourceLine" id="cb364-4" data-line-number="4">            <span class="dt">xbar =</span> <span class="kw">mean</span>(rating), </a>
-<a class="sourceLine" id="cb364-5" data-line-number="5">            <span class="dt">s =</span> <span class="kw">sd</span>(rating),</a>
-<a class="sourceLine" id="cb364-6" data-line-number="6">            <span class="dt">var_xbar =</span> s<span class="op">^</span><span class="dv">2</span><span class="op">/</span>n)</a>
-<a class="sourceLine" id="cb364-7" data-line-number="7">genre_mean_stats</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">genre_mean_stats &lt;-<span class="st"> </span>movies_sample <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(genre) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>(), 
+            <span class="dt">xbar =</span> <span class="kw">mean</span>(rating), 
+            <span class="dt">s =</span> <span class="kw">sd</span>(rating),
+            <span class="dt">var_xbar =</span> s<span class="op">^</span><span class="dv">2</span><span class="op">/</span>n)
+genre_mean_stats</code></pre></div>
 <pre><code># A tibble: 2 x 5
   genre       n  xbar     s var_xbar
   &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
 1 Action     32  5.28  1.36   0.0579
 2 Romance    36  6.32  1.61   0.0720</code></pre>
 <p>So we have 36 movies with an average rating of 6.32 stars out of 10 and 32 movies with a sample mean rating of 5.28 stars out of 10. The difference in these average ratings is thus 6.32 - 5.28 = 1.05. And the standard error of this difference is 0.36. Our resulting <code>t_stat</code> is 2.906.</p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb366-1" data-line-number="1">genre_mean_stats <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb366-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">diff_in_means =</span> <span class="kw">diff</span>(xbar),</a>
-<a class="sourceLine" id="cb366-3" data-line-number="3">            <span class="dt">SE_diff =</span> <span class="kw">sqrt</span>(<span class="kw">sum</span>(var_xbar)),</a>
-<a class="sourceLine" id="cb366-4" data-line-number="4">            <span class="dt">t_stat =</span> diff_in_means <span class="op">/</span><span class="st"> </span>SE_diff) </a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">genre_mean_stats <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">diff_in_means =</span> <span class="kw">diff</span>(xbar),
+            <span class="dt">SE_diff =</span> <span class="kw">sqrt</span>(<span class="kw">sum</span>(var_xbar)),
+            <span class="dt">t_stat =</span> diff_in_means <span class="op">/</span><span class="st"> </span>SE_diff) </code></pre></div>
 <pre><code># A tibble: 1 x 3
   diff_in_means SE_diff t_stat
           &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
@@ -650,12 +622,12 @@ FIGURE 11.1: P-value diagram
 <div id="p-values-using-formulas" class="section level3">
 <h3><span class="header-section-number">11.3.2</span> p-values using formulas</h3>
 <p>Recall from Chapter <a href="10-CIs.html#CIs">10</a> that even though the sampling distribution of many estimators are normally distributed, the standardized statistic <span class="math inline">\(t\_stat\)</span> computed above often follows a <span class="math inline">\(t(df)\)</span> distribution because the formula for the standard error of many estimators involves an additional estimated quantity, <span class="math inline">\(s^2\)</span>, when the population variance is unknown. Recall that (differences in) proportions still follow the <span class="math inline">\(N(0,1)\)</span> distribution because they do not require <span class="math inline">\(s^2\)</span> to be estimated. An abbreviated version of Table <a href="10-CIs.html#tab:samp-dist-table-ch-10">10.1</a> with the relevant degrees of freedom for the t-distribution is given below:</p>
-<table>
+<table style="width:94%;">
 <colgroup>
-<col width="17%" />
-<col width="32%" />
-<col width="21%" />
-<col width="28%" />
+<col width="16%" />
+<col width="30%" />
+<col width="20%" />
+<col width="26%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -693,11 +665,10 @@ FIGURE 11.1: P-value diagram
 </tbody>
 </table>
 <p>Note that for difference in means, the exact degrees of freedom formula is much more complicated. We use <span class="math inline">\(min(n_1 -1, n_2 – 1)\)</span> as a conservative approximation when doing computations manually. For the regression parameters, <span class="math inline">\(k\)</span> is equal to the number of predictors in the model. So for a model with one predictor, <span class="math inline">\(k = 1\)</span> and the degrees of freedom would be <span class="math inline">\(n - 1 - 1 = n - 2\)</span>.</p>
-<p><strong>Caveat</strong>:
-It is important to note that the t-distribution is often referred to as a “small sample” distribution. That is because once the degrees of freedom are large enough (when the sample size is large), the t-distribution is actually quite similar to the normal distribution as we have seen previously. For analysis purposes, however, you don’t need to determine when to use one or the other as your sampling distribution: unless dealing with proportions, you can always use the t-distribution instead of the Normal distribution.</p>
+<p><strong>Caveat</strong>: It is important to note that the t-distribution is often referred to as a “small sample” distribution. That is because once the degrees of freedom are large enough (when the sample size is large), the t-distribution is actually quite similar to the normal distribution as we have seen previously. For analysis purposes, however, you don’t need to determine when to use one or the other as your sampling distribution: unless dealing with proportions, you can always use the t-distribution instead of the Normal distribution.</p>
 <p>We can calculate a p-value by asking: Assuming the null distribution, what is the probability that we will see a <span class="math inline">\(t\_stat\)</span> value as extreme as the one from our data? Typically, we want to calculate what is called a “two-sided” p-value, which calculates the probability that you would observe a <span class="math inline">\(t\_stat\)</span> value as extreme as the one observed <em>in either direction</em>. That is, we are interested in values of <span class="math inline">\(t\_stat\)</span> that are as large <em>in magnitude</em> as the one we observed, in both the positive and negative directions. For example, if we observe a <span class="math inline">\(t\_stat\)</span> value of 2.0, the appropriate two-sided p-value is represented by the probability shaded in Figure <a href="11-pvalues.html#fig:t-two-tail">11.2</a></p>
 <div class="figure" style="text-align: center"><span id="fig:t-two-tail"></span>
-<img src="ismaykimkuyper_files/figure-html/t-two-tail-1.png" alt="2*pt(-2, df = 99)" width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/t-two-tail-1.png" alt="2*pt(-2, df = 99)" width="\textwidth" />
 <p class="caption">
 FIGURE 11.2: 2*pt(-2, df = 99)
 </p>
@@ -708,14 +679,14 @@ FIGURE 11.2: 2*pt(-2, df = 99)
 <div id="t.test" class="section level3">
 <h3><span class="header-section-number">11.3.3</span> p-values using <code>t.test</code></h3>
 <p>There is a convenient function in R called <code>t.test</code> that will conduct the above calculations for you, including <span class="math inline">\(t\_stat\)</span> and its <span class="math inline">\(p-value\)</span>. For a difference in means like the IMDB example, <code>t.test</code> requires two arguments <code>x</code> and <code>y</code> that are numeric vectors of data values for each group you are comparing. In this example, <code>x</code> would be the ratings for romance movies and <code>y</code> would be the ratings for action movies. We can create these two vectors by using <code>filter()</code> on our <code>movies_sample</code> data.</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb368-1" data-line-number="1">romance &lt;-<span class="st"> </span>movies_sample <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb368-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(genre <span class="op">==</span><span class="st"> &quot;Romance&quot;</span>)</a>
-<a class="sourceLine" id="cb368-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb368-4" data-line-number="4">action &lt;-<span class="st"> </span>movies_sample <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb368-5" data-line-number="5"><span class="st">  </span><span class="kw">filter</span>(genre <span class="op">==</span><span class="st"> &quot;Action&quot;</span>) </a>
-<a class="sourceLine" id="cb368-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb368-7" data-line-number="7">movies_t.test &lt;-<span class="st"> </span><span class="kw">t.test</span>(<span class="dt">x =</span> romance<span class="op">$</span>rating, <span class="dt">y =</span> action<span class="op">$</span>rating)</a>
-<a class="sourceLine" id="cb368-8" data-line-number="8">movies_t.test</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">romance &lt;-<span class="st"> </span>movies_sample <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(genre <span class="op">==</span><span class="st"> &quot;Romance&quot;</span>)
+
+action &lt;-<span class="st"> </span>movies_sample <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(genre <span class="op">==</span><span class="st"> &quot;Action&quot;</span>) 
+
+movies_t.test &lt;-<span class="st"> </span><span class="kw">t.test</span>(<span class="dt">x =</span> romance<span class="op">$</span>rating, <span class="dt">y =</span> action<span class="op">$</span>rating)
+movies_t.test</code></pre></div>
 <pre><code>
     Welch Two Sample t-test
 
@@ -728,7 +699,7 @@ sample estimates:
 mean of x mean of y 
      6.32      5.28 </code></pre>
 <p>We see that <code>t.test</code> returns the same values for <span class="math inline">\(\bar{x}_1 = 6.32\)</span> and <span class="math inline">\(\bar{x}_2 = 5.28\)</span> that we saw before. The output shows a rounded value for <span class="math inline">\(t\_stat\)</span> as <span class="math inline">\(t = 3\)</span>, but we can access the unrounded value using <code>movies_t.test$statistic</code> and find that it gives the same value <span class="math inline">\(t\_stat = 2.91\)</span>.</p>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb370-1" data-line-number="1">movies_t.test<span class="op">$</span>statistic</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies_t.test<span class="op">$</span>statistic</code></pre></div>
 <pre><code>   t 
 2.91 </code></pre>
 <p>Note the degrees of freedom in <code>movies_t.test</code> are different due to the fact that <code>t.test</code> is able to use the more complicated exact formula for degrees of freedom, whereas we used the conservative approximate formula <span class="math inline">\(df = min(n_1 - 1, n_2 - 1)\)</span>. Using <code>t.test</code> gives a p-value of 0.005, which is similar to the value we computed using formulas above 0.007. Again, the p-values here will not match exactly due to the different degrees of freedom.</p>
@@ -736,8 +707,8 @@ mean of x mean of y
 <div id="pvalues-regression" class="section level3">
 <h3><span class="header-section-number">11.3.4</span> p-values using regression</h3>
 <p>We can also use a regression model to estimate the difference between means. We can fit the model <span class="math display">\[\widehat{rating} = b_0 + b_1*genre,\]</span> where <code>action</code> is the reference category (because it comes before <code>romance</code> in alphabetical order). Recalling what we learned in <a href="5-regression.html#model2">5.2</a>, <span class="math inline">\(b_0\)</span> is interpreted as the average rating for <code>action</code> movies, and <span class="math inline">\(b_1\)</span> is the <em>offset</em> in average rating for <code>romance</code> movies, relative to <code>action</code> movies. That is, <span class="math inline">\(b_1 = \bar{x}_{romance} - \bar{x}_{action}\)</span>, which is exactly the estimate we’re interested in. Let’s fit this model and take a look at its summary output.</p>
-<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb372-1" data-line-number="1">movies_model &lt;-<span class="st"> </span><span class="kw">lm</span>(rating <span class="op">~</span><span class="st"> </span>genre, <span class="dt">data =</span> movies_sample)</a>
-<a class="sourceLine" id="cb372-2" data-line-number="2"><span class="kw">summary</span>(movies_model)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies_model &lt;-<span class="st"> </span><span class="kw">lm</span>(rating <span class="op">~</span><span class="st"> </span>genre, <span class="dt">data =</span> movies_sample)
+<span class="kw">summary</span>(movies_model)</code></pre></div>
 <pre><code>
 Call:
 lm(formula = rating ~ genre, data = movies_sample)
@@ -763,16 +734,16 @@ F-statistic: 8.28 on 1 and 66 DF,  p-value: 0.0054</code></pre>
 <div id="ride-share" class="section level2">
 <h2><span class="header-section-number">11.4</span> Example: Ride-share prices</h2>
 <p>Imagine you work for a ride share company, which we will call company A, and you want to know how your competitor’s prices compare to yours. We will call your competitor company B. Because you work for company A, you have access to all of the company’s data and know that the average price for a ride is <span class="math inline">\(\mu_A = \$19.50\)</span>. However, you are only able to obtain a random sample of data on 100 rides from company B. Let’s load in this sample data and take a look at it.</p>
-<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb374-1" data-line-number="1">rides_B &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vQpOEBZ5zXfOnoIeRxql4X1-djLqCZRkNg4X1yqhdYXCqm_exyaeYDgWaj4KJ2FgpqPZPoDvD71gYEr/pub?gid=0&amp;single=true&amp;output=csv&quot;</span>)</a>
-<a class="sourceLine" id="cb374-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb374-3" data-line-number="3"><span class="kw">glimpse</span>(rides_B)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rides_B &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vQpOEBZ5zXfOnoIeRxql4X1-djLqCZRkNg4X1yqhdYXCqm_exyaeYDgWaj4KJ2FgpqPZPoDvD71gYEr/pub?gid=0&amp;single=true&amp;output=csv&quot;</span>)
+
+<span class="kw">glimpse</span>(rides_B)</code></pre></div>
 <pre><code>Observations: 100
 Variables: 2
 $ price    &lt;dbl&gt; 16.75, 18.97, 20.95, 7.41, 24.60, 20.75, 22.73, 15.21, 24.14…
 $ duration &lt;dbl&gt; 16.3, 13.5, 21.1, 22.4, 18.9, 25.1, 38.1, 21.8, 26.1, 15.6, …</code></pre>
 <p>We want to know whether or not <span class="math inline">\(\mu_{\text{B}} = \$19.50\)</span>, so we estimate <span class="math inline">\(\mu_{\text{B}}\)</span> by <span class="math inline">\(\bar{x}_{\text{B}}\)</span>. We find that in our sample, the average company B ride price is <span class="math inline">\(\$20.30\)</span>.</p>
-<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb376-1" data-line-number="1">rides_B <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb376-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">xbar =</span> <span class="kw">mean</span>(price))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rides_B <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">xbar =</span> <span class="kw">mean</span>(price))</code></pre></div>
 <pre><code># A tibble: 1 x 1
    xbar
   &lt;dbl&gt;
@@ -781,31 +752,31 @@ $ duration &lt;dbl&gt; 16.3, 13.5, 21.1, 22.4, 18.9, 25.1, 38.1, 21.8, 26.1, 15.
 <div id="using-formulas" class="section level3">
 <h3><span class="header-section-number">11.4.1</span> Using formulas</h3>
 <p>Note, we begin by assuming that company B also has a population average of $19.50, and we will examine whether our data seem to be consistent with that null hypothesis. That is, we start with the null hypothesis that <span class="math inline">\(\mu_{\text{B}} = \$19.50\)</span>. Note that this is a null hypothesis of the type <span class="math inline">\(\mu = \mu_{norm}\)</span>, where we have a specific null value we want to compare our sample to. If this null hypothesis is true, we expect the t-statistic <span class="math inline">\(\frac{\bar{x} - 19.50}{\frac{s}{\sqrt{n}}}\)</span> to follow a t-distribution with <span class="math inline">\(df = n - 1 = 99\)</span>. Let’s compute this t-statistic for the values in our sample and compare it to this known sampling distribution.</p>
-<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb378-1" data-line-number="1">rides_B <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb378-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">xbar =</span> <span class="kw">mean</span>(price),</a>
-<a class="sourceLine" id="cb378-3" data-line-number="3">            <span class="dt">s =</span> <span class="kw">sd</span>(price),</a>
-<a class="sourceLine" id="cb378-4" data-line-number="4">            <span class="dt">n =</span> <span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb378-5" data-line-number="5">            <span class="dt">SE =</span> s<span class="op">/</span><span class="kw">sqrt</span>(n),</a>
-<a class="sourceLine" id="cb378-6" data-line-number="6">            <span class="dt">t_stat =</span> (xbar <span class="op">-</span><span class="st"> </span><span class="fl">19.50</span>)<span class="op">/</span>SE)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rides_B <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">xbar =</span> <span class="kw">mean</span>(price),
+            <span class="dt">s =</span> <span class="kw">sd</span>(price),
+            <span class="dt">n =</span> <span class="kw">n</span>(),
+            <span class="dt">SE =</span> s<span class="op">/</span><span class="kw">sqrt</span>(n),
+            <span class="dt">t_stat =</span> (xbar <span class="op">-</span><span class="st"> </span><span class="fl">19.50</span>)<span class="op">/</span>SE)</code></pre></div>
 <pre><code># A tibble: 1 x 5
    xbar     s     n    SE t_stat
   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;
 1  20.3  5.18   100 0.518   1.53</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:B-fig"></span>
-<img src="ismaykimkuyper_files/figure-html/B-fig-1.png" alt="t-statistic for average price of Uber rides (n = 100)" width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/B-fig-1.png" alt="t-statistic for average price of Uber rides (n = 100)" width="\textwidth" />
 <p class="caption">
 FIGURE 11.3: t-statistic for average price of Uber rides (n = 100)
 </p>
 </div>
 <p>By looking at Figure <a href="11-pvalues.html#fig:B-fig">11.3</a> and computing the p-value using <code>pt()</code>, we see that if company B does in fact have the same true population average price as company A (i.e. if <span class="math inline">\(\mu_{\text{B}} = \$19.50\)</span>), we would expect to observe an average price as large or larger than the one we did (i.e. <span class="math inline">\(\bar{x}_{\text{B}} = 20.3\)</span>) about 13% of the time.</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb380-1" data-line-number="1"><span class="dv">2</span><span class="op">*</span><span class="kw">pt</span>(<span class="op">-</span><span class="fl">1.53</span>, <span class="dt">df =</span> <span class="dv">99</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span><span class="op">*</span><span class="kw">pt</span>(<span class="op">-</span><span class="fl">1.53</span>, <span class="dt">df =</span> <span class="dv">99</span>)</code></pre></div>
 <pre><code>[1] 0.129</code></pre>
 </div>
 <div id="using-t.test" class="section level3">
 <h3><span class="header-section-number">11.4.2</span> Using <code>t.test</code></h3>
 <p>Let’s compute the same information using <code>t.test</code>. Note in this case, we are only concerned with one mean (rather than a difference in two group means), so we only need to specify <code>x</code>. There is a default argument in <code>t.test</code> that sets the null value <code>mu = 0</code>, which we need to change to <code>mu = 19.5</code>. Let’s run <code>t.test</code> on this data and examine the results.</p>
-<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb382-1" data-line-number="1">rides_t.test &lt;-<span class="st"> </span><span class="kw">t.test</span>(rides_B<span class="op">$</span>price, <span class="dt">mu =</span> <span class="fl">19.5</span>)</a>
-<a class="sourceLine" id="cb382-2" data-line-number="2">rides_t.test</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rides_t.test &lt;-<span class="st"> </span><span class="kw">t.test</span>(rides_B<span class="op">$</span>price, <span class="dt">mu =</span> <span class="fl">19.5</span>)
+rides_t.test</code></pre></div>
 <pre><code>
     One Sample t-test
 
@@ -817,20 +788,20 @@ alternative hypothesis: true mean is not equal to 19.5
 sample estimates:
 mean of x 
      20.3 </code></pre>
-<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb384-1" data-line-number="1">rides_t.test<span class="op">$</span>stderr</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rides_t.test<span class="op">$</span>stderr</code></pre></div>
 <pre><code>[1] 0.518</code></pre>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb386-1" data-line-number="1">rides_t.test<span class="op">$</span>statistic</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rides_t.test<span class="op">$</span>statistic</code></pre></div>
 <pre><code>   t 
 1.53 </code></pre>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb388-1" data-line-number="1">rides_t.test<span class="op">$</span>p.value</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rides_t.test<span class="op">$</span>p.value</code></pre></div>
 <pre><code>[1] 0.13</code></pre>
 <p><code>t.test</code> gives all the same values we saw when using the formulas to calculate these quantities “by hand.”</p>
 </div>
 <div id="using-regression" class="section level3">
 <h3><span class="header-section-number">11.4.3</span> Using regression</h3>
 <p>We can use a regression model with an <em>intercept only</em> to estimate the mean of a single variable. In this case, our model would be <span class="math inline">\(\widehat{price} = b_0\)</span>. In order to specify this in R, we simply put a <code>1</code> on the right hand side of the tilde instead of specifying any predictor variables. Let’s look at the results of this model.</p>
-<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb390-1" data-line-number="1">ride_model &lt;-<span class="st"> </span><span class="kw">lm</span>(price <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> rides_B)</a>
-<a class="sourceLine" id="cb390-2" data-line-number="2"><span class="kw">summary</span>(ride_model)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ride_model &lt;-<span class="st"> </span><span class="kw">lm</span>(price <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> rides_B)
+<span class="kw">summary</span>(ride_model)</code></pre></div>
 <pre><code>
 Call:
 lm(formula = price ~ 1, data = rides_B)
@@ -847,11 +818,11 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 
 Residual standard error: 5.18 on 99 degrees of freedom</code></pre>
 <p>We see that this model gives the correct estimate <span class="math inline">\(\bar{x}_B = 20.3\)</span>, standard error <span class="math inline">\(SE(\bar{x}_B) = 0.518\)</span>, and degrees of freedom <span class="math inline">\(n - 1 = 99\)</span>. But what’s going on with the very large t-value of 39.1? In a regression framework, the model always assumes the null value is zero and therefore the <code>t_stat</code> is computed as <span class="math inline">\(\frac{Estimate - 0}{SE(Estimate)}\)</span>. We could use the model output for <span class="math inline">\(\bar{x}, SE(\bar{x})\)</span>, and <span class="math inline">\(df\)</span> to compute the correct t-value and p-value ourselves by subtracting off the null value of 19.5, similar to when we did the calculations via formulas. Alternatively, we could get the regression model to report the correct t-value and p-value by first <em>centering</em> our variable around the null value.</p>
-<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb392-1" data-line-number="1">rides_B &lt;-<span class="st"> </span>rides_B <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb392-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">price_centered =</span> price <span class="op">-</span><span class="st"> </span><span class="fl">19.5</span>)</a>
-<a class="sourceLine" id="cb392-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb392-4" data-line-number="4">ride_model_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(price_centered <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> rides_B)</a>
-<a class="sourceLine" id="cb392-5" data-line-number="5"><span class="kw">summary</span>(ride_model_<span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rides_B &lt;-<span class="st"> </span>rides_B <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">price_centered =</span> price <span class="op">-</span><span class="st"> </span><span class="fl">19.5</span>)
+
+ride_model_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(price_centered <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> rides_B)
+<span class="kw">summary</span>(ride_model_<span class="dv">2</span>)</code></pre></div>
 <pre><code>
 Call:
 lm(formula = price_centered ~ 1, data = rides_B)
@@ -947,7 +918,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))

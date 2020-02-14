@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Multiple Regression | Introduction to Statistics and Data Science</title>
   <meta name="description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
-  <meta name="generator" content="bookdown 0.17.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Multiple Regression | Introduction to Statistics and Data Science" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Chester Ismay, Albert Y. Kim, Arend M. Kuyper, Elizabeth Tipton, and Kaitlyn G. Fitzgerald" />
 
 
-<meta name="date" content="2020-02-03" />
+<meta name="date" content="2020-02-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -62,68 +62,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -300,7 +273,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3.3" data-path="6-multiple-regression.html"><a href="6-multiple-regression.html#simpsonsparadox"><i class="fa fa-check"></i><b>6.3.3</b> Simpson’s Paradox</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="6-multiple-regression.html"><a href="6-multiple-regression.html#conclusion-5"><i class="fa fa-check"></i><b>6.4</b> Conclusion</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="6-multiple-regression.html"><a href="6-multiple-regression.html#whats-to-come-4"><i class="fa fa-check"></i><b>6.4.1</b> What’s to come?</a></li>
+<li class="chapter" data-level="6.4.1" data-path="2-viz.html"><a href="2-viz.html#whats-to-come-3"><i class="fa fa-check"></i><b>6.4.1</b> What’s to come?</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>III Statistical Theory</b></span></li>
@@ -323,7 +296,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="8-populations.html"><a href="8-populations.html#needed-packages-6"><i class="fa fa-check"></i>Needed packages</a></li>
 <li class="chapter" data-level="8.1" data-path="8-populations.html"><a href="8-populations.html#terminology"><i class="fa fa-check"></i><b>8.1</b> Terminology &amp; Notation</a></li>
 <li class="chapter" data-level="8.2" data-path="8-populations.html"><a href="8-populations.html#sample-selection"><i class="fa fa-check"></i><b>8.2</b> Populations &amp; Sampling</a></li>
-<li class="chapter" data-level="8.3" data-path="8-populations.html"><a href="8-populations.html#imdb"><i class="fa fa-check"></i><b>8.3</b> Movies Example</a><ul>
+<li class="chapter" data-level="8.3" data-path="8-populations.html"><a href="8-populations.html#movie-example"><i class="fa fa-check"></i><b>8.3</b> Movies Example</a><ul>
 <li class="chapter" data-level="8.3.1" data-path="8-populations.html"><a href="8-populations.html#research-question"><i class="fa fa-check"></i><b>8.3.1</b> Research question</a></li>
 <li class="chapter" data-level="8.3.2" data-path="8-populations.html"><a href="8-populations.html#population-of-interest"><i class="fa fa-check"></i><b>8.3.2</b> Population of interest</a></li>
 <li class="chapter" data-level="8.3.3" data-path="8-populations.html"><a href="8-populations.html#development-of-population-frame"><i class="fa fa-check"></i><b>8.3.3</b> Development of population frame</a></li>
@@ -353,7 +326,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="9-sampling.html"><a href="9-sampling.html#standardization"><i class="fa fa-check"></i><b>9.5</b> Standardization, Special Distributions, and Theory</a><ul>
 <li class="chapter" data-level="9.5.1" data-path="9-sampling.html"><a href="9-sampling.html#standard-errors-based-on-theory"><i class="fa fa-check"></i><b>9.5.1</b> Standard Errors based on Theory</a></li>
-<li class="chapter" data-level="9.5.2" data-path="9-sampling.html"><a href="9-sampling.html#standardization-1"><i class="fa fa-check"></i><b>9.5.2</b> Standardization</a></li>
+<li class="chapter" data-level="9.5.2" data-path="9-sampling.html"><a href="9-sampling.html#standardization"><i class="fa fa-check"></i><b>9.5.2</b> Standardization</a></li>
 <li class="chapter" data-level="9.5.3" data-path="9-sampling.html"><a href="9-sampling.html#special-distributions"><i class="fa fa-check"></i><b>9.5.3</b> Special distributions</a></li>
 </ul></li>
 <li class="chapter" data-level="9.6" data-path="9-sampling.html"><a href="9-sampling.html#size"><i class="fa fa-check"></i><b>9.6</b> Sample Size and Sampling Distributions</a><ul>
@@ -392,7 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.2.2" data-path="11-pvalues.html"><a href="11-pvalues.html#p-values"><i class="fa fa-check"></i><b>11.2.2</b> P-values</a></li>
 </ul></li>
 <li class="chapter" data-level="11.3" data-path="11-pvalues.html"><a href="11-pvalues.html#p-value-and-null-distribution-example"><i class="fa fa-check"></i><b>11.3</b> P-value and Null Distribution Example</a><ul>
-<li class="chapter" data-level="11.3.1" data-path="8-populations.html"><a href="8-populations.html#imdb"><i class="fa fa-check"></i><b>11.3.1</b> IMDB data</a></li>
+<li class="chapter" data-level="11.3.1" data-path="11-pvalues.html"><a href="11-pvalues.html#imdb"><i class="fa fa-check"></i><b>11.3.1</b> IMDB data</a></li>
 <li class="chapter" data-level="11.3.2" data-path="11-pvalues.html"><a href="11-pvalues.html#p-values-using-formulas"><i class="fa fa-check"></i><b>11.3.2</b> p-values using formulas</a></li>
 <li class="chapter" data-level="11.3.3" data-path="11-pvalues.html"><a href="11-pvalues.html#t.test"><i class="fa fa-check"></i><b>11.3.3</b> p-values using <code>t.test</code></a></li>
 <li class="chapter" data-level="11.3.4" data-path="11-pvalues.html"><a href="11-pvalues.html#pvalues-regression"><i class="fa fa-check"></i><b>11.3.4</b> p-values using regression</a></li>
@@ -523,7 +496,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <html>
-<img src='https://raw.githubusercontent.com/akuyper/image_hosting/master/nu_official_images/DeptStatistics-LogoShort-HorizPurple.fw.png?token=AJB4JQK753ENZAL3YEPMRP26IFN3Q' alt="Intro to Statistics and Data Science">
+<img src='https://nulib.github.io/moderndive_book/wide_format.png' alt="Intro to Statistics and Data Science">
 </html>
 <div id="multiple-regression" class="section level1">
 <h1><span class="header-section-number">Chapter 6</span> Multiple Regression</h1>
@@ -541,10 +514,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>As well as the more advanced <code>purrr</code>, <code>tibble</code>, <code>stringr</code>, and <code>forcats</code> packages</li>
 </ul>
 <p>If needed, read Section <a href="1-getting-started.html#packages">1.3</a> for information on how to install and load R packages.</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb185-2" data-line-number="2"><span class="kw">library</span>(moderndive)</a>
-<a class="sourceLine" id="cb185-3" data-line-number="3"><span class="kw">library</span>(skimr)</a>
-<a class="sourceLine" id="cb185-4" data-line-number="4"><span class="kw">library</span>(ISLR)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(moderndive)
+<span class="kw">library</span>(skimr)
+<span class="kw">library</span>(ISLR)</code></pre></div>
 </div>
 <div id="model3" class="section level2">
 <h2><span class="header-section-number">6.1</span> Two numerical explanatory variables</h2>
@@ -569,11 +542,11 @@ In the forthcoming Learning Checks, we'll consider a different regression model
 <div id="model3EDA" class="section level3">
 <h3><span class="header-section-number">6.1.1</span> Exploratory data analysis</h3>
 <p>Let’s load the <code>Credit</code> dataset, but to keep things simple let’s <code>select()</code> only the subset of the variables we’ll consider in this chapter, and save this data in a new data frame called <code>credit_ch6</code>. Notice our slightly different use of the <code>select()</code> verb here than we introduced in Subsection <a href="3-wrangling.html#select">3.8.1</a>. For example, we’ll select the <code>Balance</code> variable from <code>Credit</code> but then save it with a new variable name <code>debt</code>. We do this because here the term “debt” is a little more interpretable than “balance.”</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1"><span class="kw">library</span>(ISLR)</a>
-<a class="sourceLine" id="cb186-2" data-line-number="2">credit_ch6 &lt;-<span class="st"> </span>Credit <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb186-3" data-line-number="3"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb186-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(<span class="dt">debt =</span> Balance, <span class="dt">credit_limit =</span> Limit, </a>
-<a class="sourceLine" id="cb186-5" data-line-number="5">         <span class="dt">income =</span> Income, <span class="dt">credit_rating =</span> Rating, <span class="dt">age =</span> Age)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ISLR)
+credit_ch6 &lt;-<span class="st"> </span>Credit <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="dt">debt =</span> Balance, <span class="dt">credit_limit =</span> Limit, 
+         <span class="dt">income =</span> Income, <span class="dt">credit_rating =</span> Rating, <span class="dt">age =</span> Age)</code></pre></div>
 <p>Recall the three common steps in an exploratory data analysis we saw in Subsection <a href="5-regression.html#model1EDA">5.1.1</a>:</p>
 <ol style="list-style-type: decimal">
 <li>Looking at the raw data values.</li>
@@ -581,7 +554,7 @@ In the forthcoming Learning Checks, we'll consider a different regression model
 <li>Creating data visualizations.</li>
 </ol>
 <p>Let’s begin by looking at the raw values either in RStudio’s spreadsheet viewer or by using the <code>glimpse()</code> function from the <code>dplyr</code> package. You can observe the effect of our use of <code>select()</code> to keep and rename the relevant variables.</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" data-line-number="1"><span class="kw">glimpse</span>(credit_ch6)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glimpse</span>(credit_ch6)</code></pre></div>
 <pre><code>Observations: 400
 Variables: 5
 $ debt          &lt;int&gt; 333, 903, 580, 964, 331, 1151, 203, 872, 279, 1350, 140…
@@ -590,9 +563,9 @@ $ income        &lt;dbl&gt; 14.9, 106.0, 104.6, 148.9, 55.9, 80.2, 21.0, 71.4, 1
 $ credit_rating &lt;int&gt; 283, 483, 514, 681, 357, 569, 259, 512, 266, 491, 589, …
 $ age           &lt;int&gt; 34, 82, 71, 36, 68, 77, 37, 87, 66, 41, 30, 64, 57, 49,…</code></pre>
 <p>Furthermore, let’s look at a random sample of five out of the 400 credit card holders in Table <a href="6-multiple-regression.html#tab:model3-data-preview">6.1</a>. Once again, note that due to the random nature of the sampling, you will likely end up with a different subset of five rows.</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">9</span>)</a>
-<a class="sourceLine" id="cb189-2" data-line-number="2">credit_ch6 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb189-3" data-line-number="3"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dt">size =</span> <span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">9</span>)
+credit_ch6 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">sample_n</span>(<span class="dt">size =</span> <span class="dv">5</span>)</code></pre></div>
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:model3-data-preview">TABLE 6.1: </span>Random sample of 5 credit card holders.
@@ -705,9 +678,9 @@ age
 </tbody>
 </table>
 <p>Now that we’ve looked at the raw values in our <code>credit_ch6</code> data frame and have a sense of the data, let’s move on to the next common step in an exploratory data analysis: computing summary statistics. As we did in our exploratory data analyses in Sections <a href="5-regression.html#model1EDA">5.1.1</a> and <a href="5-regression.html#model2EDA">5.2.1</a> from the previous chapter, let’s use the <code>skim()</code> function from the <code>skimr</code> package, being sure to only <code>select()</code> the variables of interest in our model:</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" data-line-number="1">credit_ch6 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb190-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(debt, credit_limit, income) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb190-3" data-line-number="3"><span class="st">  </span><span class="kw">skim</span>()</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">credit_ch6 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(debt, credit_limit, income) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">skim</span>()</code></pre></div>
 <pre><code>Skim summary statistics
  n obs: 400 
  n variables: 3 
@@ -720,13 +693,13 @@ credit_limit     0      400 400 4735.6  2308.2  855 3088    4622.5 5872.75 13913
    income       0      400 400 45.22 35.24 10.35 21.01 33.12 57.47 186.63</code></pre>
 <p>Observe the summary statistics for the outcome variable <code>debt</code>: the mean and median credit card debt are $520.01 and $459.50 respectively and that 25% of card holders had debts of $68.75 or less. Let’s now look at one of the explanatory variables <code>credit_limit</code>: the mean and median credit card limit are $4735.6 and $4622.50 respectively while 75% of card holders had incomes of $57,470 or less.</p>
 <p>Since our outcome variable <code>debt</code> and the explanatory variables <code>credit_limit</code> and <code>income</code> are numerical, we can compute the correlation coefficient between the different possible pairs of these variables. First, we can run the <code>cor()</code> command as seen in Subsection <a href="5-regression.html#model1EDA">5.1.1</a> twice, once for each explanatory variable:</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" data-line-number="1"><span class="kw">cor</span>(credit_ch6<span class="op">$</span>debt, credit_ch6<span class="op">$</span>credit_limit)</a>
-<a class="sourceLine" id="cb192-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb192-3" data-line-number="3"><span class="kw">cor</span>(credit_ch6<span class="op">$</span>debt, credit_ch6<span class="op">$</span>income)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(credit_ch6<span class="op">$</span>debt, credit_ch6<span class="op">$</span>credit_limit)
+
+<span class="kw">cor</span>(credit_ch6<span class="op">$</span>debt, credit_ch6<span class="op">$</span>income)</code></pre></div>
 <p>Or we can simultaneously compute them by returning a <em>correlation matrix</em> which we display in Table <a href="6-multiple-regression.html#tab:model3-correlation">6.2</a>.  We can read off the correlation coefficient for any pair of variables by looking them up in the appropriate row/column combination.</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1">credit_ch6 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb193-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(debt, credit_limit, income) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb193-3" data-line-number="3"><span class="st">  </span><span class="kw">cor</span>()</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">credit_ch6 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(debt, credit_limit, income) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">cor</span>()</code></pre></div>
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:model3-correlation">TABLE 6.2: </span>Correlation coefficients between credit card debt, credit limit, and income.
@@ -801,21 +774,21 @@ income
 <p>We say there is a high degree of <em>collinearity</em> between the <code>credit_limit</code> and <code>income</code> explanatory variables. Collinearity (or multicollinearity) is a phenomenon where one explanatory variable in a multiple regression model is highly correlated with another.</p>
 <p>So in our case since <code>credit_limit</code> and <code>income</code> are highly correlated, if we knew someone’s <code>credit_limit</code>, we could make pretty good guesses about their <code>income</code> as well. Thus, these two variables provide somewhat redundant information. However, we’ll leave discussion on how to work with collinear explanatory variables to a more intermediate-level book on regression modeling.</p>
 <p>Let’s visualize the relationship of the outcome variable with each of the two explanatory variables in two separate plots in Figure <a href="6-multiple-regression.html#fig:2numxplot1">6.1</a>.</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1"><span class="kw">ggplot</span>(credit_ch6, <span class="kw">aes</span>(<span class="dt">x =</span> credit_limit, <span class="dt">y =</span> debt)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb194-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb194-3" data-line-number="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Credit limit (in $)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Credit card debt (in $)&quot;</span>, </a>
-<a class="sourceLine" id="cb194-4" data-line-number="4">       <span class="dt">title =</span> <span class="st">&quot;Debt and credit limit&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb194-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb194-6" data-line-number="6">  </a>
-<a class="sourceLine" id="cb194-7" data-line-number="7"><span class="kw">ggplot</span>(credit_ch6, <span class="kw">aes</span>(<span class="dt">x =</span> income, <span class="dt">y =</span> debt)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb194-8" data-line-number="8"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb194-9" data-line-number="9"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Income (in $1000)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Credit card debt (in $)&quot;</span>, </a>
-<a class="sourceLine" id="cb194-10" data-line-number="10">       <span class="dt">title =</span> <span class="st">&quot;Debt and income&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb194-11" data-line-number="11"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(credit_ch6, <span class="kw">aes</span>(<span class="dt">x =</span> credit_limit, <span class="dt">y =</span> debt)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Credit limit (in $)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Credit card debt (in $)&quot;</span>, 
+       <span class="dt">title =</span> <span class="st">&quot;Debt and credit limit&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>)
+  
+<span class="kw">ggplot</span>(credit_ch6, <span class="kw">aes</span>(<span class="dt">x =</span> income, <span class="dt">y =</span> debt)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Income (in $1000)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Credit card debt (in $)&quot;</span>, 
+       <span class="dt">title =</span> <span class="st">&quot;Debt and income&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>`geom_smooth()` using formula &#39;y ~ x&#39;
 `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:2numxplot1"></span>
-<img src="ismaykimkuyper_files/figure-html/2numxplot1-1.png" alt="Relationship between credit card debt and credit limit/income." width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/2numxplot1-1.png" alt="Relationship between credit card debt and credit limit/income." width="\textwidth" />
 <p class="caption">
 FIGURE 6.1: Relationship between credit card debt and credit limit/income.
 </p>
@@ -846,7 +819,8 @@ FIGURE 6.2: 3D scatterplot and regression plane.
 </ol>
 <p>What can you say about the relationship between a credit card holder’s debt and their credit rating and age?</p>
 <div class="learncheck">
-
+<p>
+</p>
 </div>
 </div>
 <div id="model3table" class="section level3">
@@ -857,10 +831,10 @@ FIGURE 6.2: 3D scatterplot and regression plane.
 <li>We first “fit” the linear regression model using the <code>lm(y ~ x1 + x2, data)</code> function and save it in <code>debt_model</code>.</li>
 <li>We get the regression table by applying the <code>summary()</code> function to <code>debt_model</code>.</li>
 </ol>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1"><span class="co"># Fit regression model:</span></a>
-<a class="sourceLine" id="cb196-2" data-line-number="2">debt_model &lt;-<span class="st"> </span><span class="kw">lm</span>(debt <span class="op">~</span><span class="st"> </span>credit_limit <span class="op">+</span><span class="st"> </span>income, <span class="dt">data =</span> credit_ch6)</a>
-<a class="sourceLine" id="cb196-3" data-line-number="3"><span class="co"># Get regression table:</span></a>
-<a class="sourceLine" id="cb196-4" data-line-number="4"><span class="kw">summary</span>(debt_model)<span class="op">$</span>coefficients</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit regression model:</span>
+debt_model &lt;-<span class="st"> </span><span class="kw">lm</span>(debt <span class="op">~</span><span class="st"> </span>credit_limit <span class="op">+</span><span class="st"> </span>income, <span class="dt">data =</span> credit_ch6)
+<span class="co"># Get regression table:</span>
+<span class="kw">summary</span>(debt_model)<span class="op">$</span>coefficients</code></pre></div>
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:model3-table-output">TABLE 6.3: </span>Multiple regression table
@@ -957,7 +931,8 @@ income
 </div>
 <p><strong>(LC6.2)</strong> Fit a new simple linear regression using <code>lm(debt ~ credit_rating + age, data = credit_ch6)</code> where <code>credit_rating</code> and <code>age</code> are the new numerical explanatory variables <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>. Get information about the “best-fitting” regression plane from the regression table by applying the <code>summary()</code> function. How do the regression results match up with the results from your previous exploratory data analysis?</p>
 <div class="learncheck">
-
+<p>
+</p>
 </div>
 </div>
 <div id="model3points" class="section level3">
@@ -968,11 +943,11 @@ income
 \widehat{y} = \widehat{\text{debt}} &amp;= -385.179 + 0.264 \cdot \text{limit} - 7.663 \cdot \text{income}
 \end{aligned}
 \]</span></p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1">debt_model_data &lt;-<span class="st"> </span>credit_ch6 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb197-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(debt, credit_limit, income) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb197-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">debt_hat =</span> <span class="kw">fitted</span>(debt_model),</a>
-<a class="sourceLine" id="cb197-4" data-line-number="4">         <span class="dt">residual =</span> <span class="kw">residuals</span>(debt_model)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb197-5" data-line-number="5"><span class="st">  </span><span class="kw">rownames_to_column</span>(<span class="st">&quot;ID&quot;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">debt_model_data &lt;-<span class="st"> </span>credit_ch6 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(debt, credit_limit, income) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">debt_hat =</span> <span class="kw">fitted</span>(debt_model),
+         <span class="dt">residual =</span> <span class="kw">residuals</span>(debt_model)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rownames_to_column</span>(<span class="st">&quot;ID&quot;</span>)</code></pre></div>
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:model3-points-table">TABLE 6.4: </span>Regression points (First 10 credit card holders out of 400).
@@ -1228,10 +1203,10 @@ residual
 <div id="model4EDA" class="section level3">
 <h3><span class="header-section-number">6.2.1</span> Exploratory data analysis</h3>
 <p>Recall that data on the 463 courses at UT Austin can be found in the <code>evals</code> data frame included in the <code>moderndive</code> package. However, to keep things simple, let’s <code>select()</code> only the subset of the variables we’ll consider in this chapter, and save this data in a new data frame called <code>evals_ch6</code>. Note that these are different than the variables chosen in Chapter <a href="5-regression.html#regression">5</a>.</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" data-line-number="1">evals_ch6 &lt;-<span class="st"> </span>evals <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb198-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(ID, score, age, gender)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">evals_ch6 &lt;-<span class="st"> </span>evals <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(ID, score, age, gender)</code></pre></div>
 <p>Let’s first look at the raw data values by either looking at <code>evals_ch6</code> using RStudio’s spreadsheet viewer or by using the <code>glimpse()</code> function:</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1"><span class="kw">glimpse</span>(evals_ch6)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glimpse</span>(evals_ch6)</code></pre></div>
 <pre><code>Observations: 463
 Variables: 4
 $ ID     &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,…
@@ -1239,8 +1214,8 @@ $ score  &lt;dbl&gt; 4.7, 4.1, 3.9, 4.8, 4.6, 4.3, 2.8, 4.1, 3.4, 4.5, 3.8, 4.5,
 $ age    &lt;int&gt; 36, 36, 36, 36, 59, 59, 59, 51, 51, 40, 40, 40, 40, 40, 40, 40…
 $ gender &lt;fct&gt; female, female, female, female, male, male, male, male, male, …</code></pre>
 <p>Let’s also display a random sample of 5 rows of the 463 rows corresponding to different courses in Table <a href="6-multiple-regression.html#tab:model4-data-preview">6.5</a>. Remember due to the random nature of the sampling, you will likely end up with a different subset of 5 rows.</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1">evals_ch6 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb201-2" data-line-number="2"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dt">size =</span> <span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">evals_ch6 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">sample_n</span>(<span class="dt">size =</span> <span class="dv">5</span>)</code></pre></div>
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:model4-data-preview">TABLE 6.5: </span>A random sample of 5 out of the 463 courses at UT Austin
@@ -1335,9 +1310,9 @@ male
 </tbody>
 </table>
 <p>Now that we’ve looked at the raw values in our <code>evals_ch6</code> data frame and have a sense of the data, let’s compute summary statistics.</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1">evals_ch6 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb202-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(score, age, gender) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb202-3" data-line-number="3"><span class="st">  </span><span class="kw">skim</span>()</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">evals_ch6 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(score, age, gender) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">skim</span>()</code></pre></div>
 <pre><code>Skim summary statistics
  n obs: 463 
  n variables: 3 
@@ -1352,20 +1327,20 @@ male
     score       0      463 463 4.17 0.54 2.3 3.8 4.3 4.6    5</code></pre>
 <p>Observe for example that we have no missing data, that there are 268 courses taught by male instructors and 195 courses taught by female instructors, and that the average instructor age is 48.37. Recall however that each row of our data represents a particular course and that the same instructor often teaches more than one course. Therefore the average age of the unique instructors may differ.</p>
 <p>Furthermore, let’s compute the correlation coefficient between our two numerical variables: <code>score</code> and <code>age</code>. Recall from Subsection <a href="5-regression.html#model1EDA">5.1.1</a> that correlation coefficients only exist between numerical variables. We observe that they are “weakly negatively” correlated.</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" data-line-number="1">evals_ch6 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb204-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">correlation =</span> <span class="kw">cor</span>(score, age))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">evals_ch6 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">correlation =</span> <span class="kw">cor</span>(score, age))</code></pre></div>
 <pre><code># A tibble: 1 x 1
   correlation
         &lt;dbl&gt;
 1      -0.107</code></pre>
 <p>Let’s now perform the last of the three common steps in an exploratory data analysis: creating data visualizations. Given that the outcome variable <code>score</code> and explanatory variable <code>age</code> are both numerical, we’ll use a scatterplot to display their relationship. How can we incorporate the categorical variable <code>gender</code> however? By <code>mapping</code> the variable <code>gender</code> to the <code>color</code> aesthetic, thereby creating a <em>colored</em> scatterplot. The following code is similar to the code that created the scatterplot of teaching score over “beauty” score in Figure <a href="5-regression.html#fig:numxplot1">5.2</a>, but with <code>color = gender</code> added to the <code>aes()</code>thetic mapping.</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" data-line-number="1"><span class="kw">ggplot</span>(evals_ch6, <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> score, <span class="dt">color =</span> gender)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb206-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb206-3" data-line-number="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Teaching Score&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;Gender&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb206-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(evals_ch6, <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> score, <span class="dt">color =</span> gender)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Teaching Score&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;Gender&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>`geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:numxcatxplot1"></span>
-<img src="ismaykimkuyper_files/figure-html/numxcatxplot1-1.png" alt="Colored scatterplot of relationship of teaching and beauty scores." width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/numxcatxplot1-1.png" alt="Colored scatterplot of relationship of teaching and beauty scores." width="\textwidth" />
 <p class="caption">
 FIGURE 6.3: Colored scatterplot of relationship of teaching and beauty scores.
 </p>
@@ -1491,10 +1466,10 @@ continentOceania
 <p>Recall our interpretation of the <code>Estimate</code> column. Since <code>Africa</code> was the “baseline for comparison” group, the <code>Intercept</code> term corresponds to the mean life expectancy for all countries in Africa of 54.8 years. The other four values of <code>Estimate</code> correspond to “offsets” relative to the baseline group. So, for example, the “offset” corresponding to the Americas is +18.8 as compared to the baseline for comparison group Africa. In other words, the average life expectancy for countries in the Americas is 18.8 years <em>higher</em>. Thus the mean life expectancy for all countries in the Americas is 54.8 + 18.8 = 73.6. The same interpretation holds for Asia, Europe, and Oceania.</p>
 <p>Going back to our multiple regression model for teaching <code>score</code> using <code>age</code> and <code>gender</code> in Figure <a href="6-multiple-regression.html#fig:numxcatxplot1">6.3</a>, we generate the regression table using the same two-step approach from Chapter <a href="5-regression.html#regression">5</a>: we first “fit” the model using the <code>lm()</code> “linear model” function and then we apply the <code>summary()</code> function. This time however, our model formula won’t be of the form <code>y ~ x</code>, but rather of the form <code>y ~ x1 + x2 + x1 * x2</code>. In other words, we include a <em>main effect</em> for each of our two explanatory variables <code>x1</code> and <code>x2</code>, as well as an <em>interaction term</em> <code>x1 * x2</code>. In terms of the general mathematical equation, an interaction model with two explanatory variables is of the form:</p>
 <p><span class="math display">\[\widehat{y} = b_0 + b_1 \cdot x_1 + b_2 \cdot x_2 + b_{1,2} \cdot x_1 \cdot x_2\]</span></p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1"><span class="co"># Fit regression model:</span></a>
-<a class="sourceLine" id="cb208-2" data-line-number="2">score_model_interaction &lt;-<span class="st"> </span><span class="kw">lm</span>(score <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>gender <span class="op">+</span><span class="st"> </span>age <span class="op">*</span><span class="st"> </span>gender, <span class="dt">data =</span> evals_ch6)</a>
-<a class="sourceLine" id="cb208-3" data-line-number="3"><span class="co"># Get regression table:</span></a>
-<a class="sourceLine" id="cb208-4" data-line-number="4"><span class="kw">summary</span>(score_model_interaction)<span class="op">$</span>coefficients</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit regression model:</span>
+score_model_interaction &lt;-<span class="st"> </span><span class="kw">lm</span>(score <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>gender <span class="op">+</span><span class="st"> </span>age <span class="op">*</span><span class="st"> </span>gender, <span class="dt">data =</span> evals_ch6)
+<span class="co"># Get regression table:</span>
+<span class="kw">summary</span>(score_model_interaction)<span class="op">$</span>coefficients</code></pre></div>
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:regtable-interaction">TABLE 6.7: </span>Regression table for interaction model.
@@ -1696,7 +1671,7 @@ Male instructors
 `geom_parallel_slopes()` instead of `gg_parallel_slopes()`; read the help
 file by running `?geom_parallel_slopes` to learn how.</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:numxcatx-parallel"></span>
-<img src="ismaykimkuyper_files/figure-html/numxcatx-parallel-1.png" alt="Parallel slopes model of relationship of score with age and gender." width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/numxcatx-parallel-1.png" alt="Parallel slopes model of relationship of score with age and gender." width="\textwidth" />
 <p class="caption">
 FIGURE 6.4: Parallel slopes model of relationship of score with age and gender.
 </p>
@@ -1704,10 +1679,10 @@ FIGURE 6.4: Parallel slopes model of relationship of score with age and gender.
 <p>Observe in Figure <a href="6-multiple-regression.html#fig:numxcatx-parallel">6.4</a> that we have parallel lines corresponding to the female and male instructors respectively: here they have the same negative slope. This is different from the interaction model displayed in Figure <a href="6-multiple-regression.html#fig:numxcatxplot1">6.3</a>, which allowed <code>male</code> and <code>female</code> to have different slopes. Figure <a href="6-multiple-regression.html#fig:numxcatx-parallel">6.4</a> is telling us that instructors who are older will tend to receive lower teaching scores than instructors who are younger. Furthermore, since the lines are parallel, the associated penalty for aging is assumed to be the same for both female and male instructors.</p>
 <p>However, observe also in Figure <a href="6-multiple-regression.html#fig:numxcatx-parallel">6.4</a> that these two lines have different intercepts as evidenced by the fact that the blue line corresponding to the male instructors is higher than the red line corresponding to the female instructors. This is telling us that irrespective of age, female instructors tended to receive lower teaching scores than male instructors.</p>
 <p>In order to obtain the precise numerical values of the two intercepts and the single common slope, we once again “fit” the model using the <code>lm()</code> “linear model” function and then apply the <code>summary()</code> function. Our model formula this time is of the form <code>y ~ x1 + x2</code>, where <code>x1</code> and <code>x2</code> represent the two predictor variables, <code>age</code> and <code>gender</code>, but we do not include the extra interaction term <code>x1 * x2</code>.</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" data-line-number="1"><span class="co"># Fit regression model:</span></a>
-<a class="sourceLine" id="cb210-2" data-line-number="2">score_model_parallel_slopes &lt;-<span class="st"> </span><span class="kw">lm</span>(score <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>gender, <span class="dt">data =</span> evals_ch6)</a>
-<a class="sourceLine" id="cb210-3" data-line-number="3"><span class="co"># Get regression table:</span></a>
-<a class="sourceLine" id="cb210-4" data-line-number="4"><span class="kw">summary</span>(score_model_parallel_slopes)<span class="op">$</span>coefficients</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit regression model:</span>
+score_model_parallel_slopes &lt;-<span class="st"> </span><span class="kw">lm</span>(score <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>gender, <span class="dt">data =</span> evals_ch6)
+<span class="co"># Get regression table:</span>
+<span class="kw">summary</span>(score_model_parallel_slopes)<span class="op">$</span>coefficients</code></pre></div>
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:regtable-parallel-slopes">TABLE 6.9: </span>Regression table for parallel slopes model.
@@ -1862,7 +1837,7 @@ Male instructors
 file by running `?geom_parallel_slopes` to learn how.</code></pre>
 <pre><code>`geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:numxcatx-comparison"></span>
-<img src="ismaykimkuyper_files/figure-html/numxcatx-comparison-1.png" alt="Comparison of interaction and parallel slopes models." width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/numxcatx-comparison-1.png" alt="Comparison of interaction and parallel slopes models." width="\textwidth" />
 <p class="caption">
 FIGURE 6.5: Comparison of interaction and parallel slopes models.
 </p>
@@ -1876,7 +1851,7 @@ FIGURE 6.5: Comparison of interaction and parallel slopes models.
 <p>We answer this question visually first by finding the intersection of the red regression line and the vertical line at <span class="math inline">\(x\)</span> = age = 36. We mark this value with a large red dot in Figure <a href="6-multiple-regression.html#fig:fitted-values">6.6</a>. Similarly, we can identify the fitted value <span class="math inline">\(\widehat{y}\)</span> = <span class="math inline">\(\widehat{\text{score}}\)</span> for the male instructor by finding the intersection of the blue regression line and the vertical line at <span class="math inline">\(x\)</span> = age = 59. We mark this value with a large blue dot in Figure <a href="6-multiple-regression.html#fig:fitted-values">6.6</a>.</p>
 <pre><code>`geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:fitted-values"></span>
-<img src="ismaykimkuyper_files/figure-html/fitted-values-1.png" alt="Fitted values for two new professors." width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/fitted-values-1.png" alt="Fitted values for two new professors." width="\textwidth" />
 <p class="caption">
 FIGURE 6.6: Fitted values for two new professors.
 </p>
@@ -1888,12 +1863,12 @@ FIGURE 6.6: Fitted values for two new professors.
 </ul>
 <p>So our fitted values would be: 4.883 - 0.018 <span class="math inline">\(\cdot\)</span> 36 = 4.25 and 4.437 - 0.004 <span class="math inline">\(\cdot\)</span> 59 = 4.20 respectively.</p>
 <p>Now what if we want the fitted values not just for the instructors of these two courses, but for the instructors of all 463 courses included in the <code>evals_ch6</code> data frame? Doing this by hand would be long and tedious! This is where our data wrangling code from Subsection <a href="5-regression.html#model1points">5.1.3</a> can help: it will quickly automate this for all 463 courses. We present a preview of just the first 10 rows out of 463 in Table <a href="6-multiple-regression.html#tab:model4-points-table">6.11</a>.</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" data-line-number="1">score_model_interaction_data &lt;-<span class="st"> </span>evals_ch6 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb214-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(score, age, gender) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb214-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">score_hat =</span> <span class="kw">fitted</span>(score_model_interaction),</a>
-<a class="sourceLine" id="cb214-4" data-line-number="4">         <span class="dt">residual =</span> <span class="kw">residuals</span>(score_model_interaction)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb214-5" data-line-number="5"><span class="st">  </span><span class="kw">rownames_to_column</span>(<span class="st">&quot;ID&quot;</span>)</a>
-<a class="sourceLine" id="cb214-6" data-line-number="6">score_model_interaction_data</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">score_model_interaction_data &lt;-<span class="st"> </span>evals_ch6 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(score, age, gender) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">score_hat =</span> <span class="kw">fitted</span>(score_model_interaction),
+         <span class="dt">residual =</span> <span class="kw">residuals</span>(score_model_interaction)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rownames_to_column</span>(<span class="st">&quot;ID&quot;</span>)
+score_model_interaction_data</code></pre></div>
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:model4-points-table">TABLE 6.11: </span>Regression points (First 10 out of 463 courses)
@@ -2131,7 +2106,8 @@ female
 </div>
 <p><strong>(LC6.3)</strong> Compute the observed values, fitted values, and residuals not for the interaction model as we just did, but rather for the parallel slopes model we saved in <code>score_model_parallel_slopes</code>.</p>
 <div class="learncheck">
-
+<p>
+</p>
 </div>
 </div>
 </div>
@@ -2142,7 +2118,7 @@ female
 <p>When do we use an interaction model versus a parallel slopes model? Recall in Sections <a href="6-multiple-regression.html#model4interactiontable">6.2.2</a> and <a href="6-multiple-regression.html#model4table">6.2.3</a> we fit both interaction and parallel slopes models for the outcome variable <span class="math inline">\(y\)</span> (teaching score) using a numerical explanatory variable <span class="math inline">\(x_1\)</span> (age) and a categorical explanatory variable <span class="math inline">\(x_2\)</span> (gender). We compared these models in Figure <a href="6-multiple-regression.html#fig:numxcatx-comparison">6.5</a>, which we display again now.</p>
 <pre><code>`geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:recall-parallel-vs-interaction"></span>
-<img src="ismaykimkuyper_files/figure-html/recall-parallel-vs-interaction-1.png" alt="Previously seen comparison of interaction and parallel slopes models." width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/recall-parallel-vs-interaction-1.png" alt="Previously seen comparison of interaction and parallel slopes models." width="\textwidth" />
 <p class="caption">
 FIGURE 6.7: Previously seen comparison of interaction and parallel slopes models.
 </p>
@@ -2171,16 +2147,16 @@ FIGURE 6.7: Previously seen comparison of interaction and parallel slopes models
 file by running `?geom_parallel_slopes` to learn how.</code></pre>
 <pre><code>`geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:numxcatx-comparison-2"></span>
-<img src="ismaykimkuyper_files/figure-html/numxcatx-comparison-2-1.png" alt="Comparison of interaction and parallel slopes models for MA schools." width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/numxcatx-comparison-2-1.png" alt="Comparison of interaction and parallel slopes models for MA schools." width="\textwidth" />
 <p class="caption">
 FIGURE 6.8: Comparison of interaction and parallel slopes models for MA schools.
 </p>
 </div>
 <p>Look closely at the left-hand plot of Figure <a href="6-multiple-regression.html#fig:numxcatx-comparison-2">6.8</a> corresponding to an interaction model. While the slopes are indeed different, they do not differ <em>by much</em>. In other words, they are nearly identical. Now compare the left-hand plot with the right-hand plot corresponding to a parallel slopes model. The two models don’t appear all that different. Therefore in this case, it can be argued that the additional complexity of the interaction model is <em>not warranted</em>. Thus following Occam’s Razor, we should prefer the “simpler” parallel slopes model.</p>
 <p>Let’s explicitly define what “simpler” means in this case. Let’s compare the regression tables for the interaction and parallel slopes models in Tables <a href="6-multiple-regression.html#tab:model2-interaction">6.12</a> and <a href="6-multiple-regression.html#tab:model2-parallel-slopes">6.13</a>.</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" data-line-number="1">model_<span class="dv">2</span>_interaction &lt;-<span class="st"> </span><span class="kw">lm</span>(average_sat_math <span class="op">~</span><span class="st"> </span>perc_disadvan <span class="op">*</span><span class="st"> </span>size, </a>
-<a class="sourceLine" id="cb218-2" data-line-number="2">                          <span class="dt">data =</span> MA_schools)</a>
-<a class="sourceLine" id="cb218-3" data-line-number="3"><span class="kw">summary</span>(model_<span class="dv">2</span>_interaction)<span class="op">$</span>coefficients</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_2_interaction &lt;-<span class="st"> </span><span class="kw">lm</span>(average_sat_math <span class="op">~</span><span class="st"> </span>perc_disadvan <span class="op">*</span><span class="st"> </span>size, 
+                          <span class="dt">data =</span> MA_schools)
+<span class="kw">summary</span>(model_2_interaction)<span class="op">$</span>coefficients</code></pre></div>
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:model2-interaction">TABLE 6.12: </span>Interaction model regression table
@@ -2308,9 +2284,9 @@ perc_disadvan:sizelarge
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1">model_<span class="dv">2</span>_parallel_slopes &lt;-<span class="st"> </span><span class="kw">lm</span>(average_sat_math <span class="op">~</span><span class="st"> </span>perc_disadvan <span class="op">+</span><span class="st"> </span>size, </a>
-<a class="sourceLine" id="cb219-2" data-line-number="2">                              <span class="dt">data =</span> MA_schools)</a>
-<a class="sourceLine" id="cb219-3" data-line-number="3"><span class="kw">summary</span>(model_<span class="dv">2</span>_parallel_slopes)<span class="op">$</span>coefficients</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_2_parallel_slopes &lt;-<span class="st"> </span><span class="kw">lm</span>(average_sat_math <span class="op">~</span><span class="st"> </span>perc_disadvan <span class="op">+</span><span class="st"> </span>size, 
+                              <span class="dt">data =</span> MA_schools)
+<span class="kw">summary</span>(model_2_parallel_slopes)<span class="op">$</span>coefficients</code></pre></div>
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:model2-parallel-slopes">TABLE 6.13: </span>Parallel slopes regression table
@@ -2411,10 +2387,10 @@ sizelarge
 <div id="correlationcoefficient2" class="section level3">
 <h3><span class="header-section-number">6.3.2</span> Correlation coefficient</h3>
 <p>Recall from Table <a href="6-multiple-regression.html#tab:model3-correlation">6.2</a> that the correlation coefficient between <code>income</code> in thousands of dollars and credit card <code>debt</code> was 0.464. What if instead we looked at the correlation coefficient between <code>income</code> and credit card <code>debt</code>, but where <code>income</code> was in dollars and not thousands of dollars? This can be done by multiplying <code>income</code> by 1000.</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" data-line-number="1">credit_ch6 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb220-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(debt, income) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb220-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">income =</span> income <span class="op">*</span><span class="st"> </span><span class="dv">1000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb220-4" data-line-number="4"><span class="st">  </span><span class="kw">cor</span>()</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">credit_ch6 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(debt, income) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">income =</span> income <span class="op">*</span><span class="st"> </span><span class="dv">1000</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">cor</span>()</code></pre></div>
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:cor-credit-2">TABLE 6.14: </span>Correlation between income (in dollars) and credit card debt
@@ -2463,7 +2439,7 @@ income
 <p>Recall in Section <a href="6-multiple-regression.html#model3">6.1</a>, we saw the two seemingly contradictory results when studying the relationship between credit card debt and income. On the one hand, the right hand plot of Figure <a href="6-multiple-regression.html#fig:2numxplot1">6.1</a> suggested that the relationship between credit card debt and income was <em>positive</em>. We re-display this plot in Figure <a href="6-multiple-regression.html#fig:2numxplot1-repeat">6.9</a>.</p>
 <pre><code>`geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:2numxplot1-repeat"></span>
-<img src="ismaykimkuyper_files/figure-html/2numxplot1-repeat-1.png" alt="Relationship between credit card debt and income." width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/2numxplot1-repeat-1.png" alt="Relationship between credit card debt and income." width="\textwidth" />
 <p class="caption">
 FIGURE 6.9: Relationship between credit card debt and income.
 </p>
@@ -2574,7 +2550,7 @@ income
 <p>In other words, while in <em>isolation</em> the relationship between debt and income may be positive, when taking into account credit limit as well, this relationship becomes negative. These seemingly paradoxical results are due to a phenomenon aptly named <a href="https://en.wikipedia.org/wiki/Simpson%27s_paradox"><em>Simpson’s Paradox</em></a>. Simpson’s Paradox occurs when trends that exist for the data in aggregate either disappear or reverse when the data are broken down into groups.</p>
 <p>Let’s show how Simpson’s Paradox manifests itself in the <code>credit_ch6</code> data. Let’s first visualize the distribution of the numerical explanatory variable credit limit with a histogram in Figure <a href="6-multiple-regression.html#fig:credit-limit-quartiles">6.10</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:credit-limit-quartiles"></span>
-<img src="ismaykimkuyper_files/figure-html/credit-limit-quartiles-1.png" alt="Histogram of credit limits and brackets." width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/credit-limit-quartiles-1.png" alt="Histogram of credit limits and brackets." width="\textwidth" />
 <p class="caption">
 FIGURE 6.10: Histogram of credit limits and brackets.
 </p>
@@ -2595,7 +2571,7 @@ FIGURE 6.10: Histogram of credit limits and brackets.
 <pre><code>`geom_smooth()` using formula &#39;y ~ x&#39;
 `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:2numxplot4"></span>
-<img src="ismaykimkuyper_files/figure-html/2numxplot4-1.png" alt="Relationship between credit card debt and income by credit limit bracket." width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/2numxplot4-1.png" alt="Relationship between credit card debt and income by credit limit bracket." width="\textwidth" />
 <p class="caption">
 FIGURE 6.11: Relationship between credit card debt and income by credit limit bracket.
 </p>
@@ -2611,7 +2587,7 @@ FIGURE 6.11: Relationship between credit card debt and income by credit limit br
 <!-- ```{r echo=FALSE, purl=FALSE, results="asis"} -->
 <!-- generate_r_file_link("06-multiple-regression.R") -->
 <!-- ``` -->
-<div id="whats-to-come-4" class="section level3">
+<div id="whats-to-come-3" class="section level3">
 <h3><span class="header-section-number">6.4.1</span> What’s to come?</h3>
 <p>Congratulations! We’ve completed the “Data modeling” portion of this book. We’re ready to proceed to the next part of the book: “Statistical Theory.” These chapters will lay the foundation for key ideas in statistics such as randomization (Chapter <a href="7-causality.html#causality">7</a>), populations and samples (Chapter <a href="8-populations.html#populations">8</a>), and sampling distributions (Chapter <a href="9-sampling.html#sampling">9</a>).</p>
 <p>In Parts I and II of the book, we’ve been focusing only on exploratory data analysis and exploring relationships that exist <em>in our observed dataset</em>. Once we’ve established some of the statistical theory in Part III, we will be able to move beyond exploratory data analysis and into “statistical inference” in Part IV, where we will learn how (and when it is appropirate) to make inferences about statistical relationships <em>in a population beyond our dataset</em>.</p>
@@ -2684,7 +2660,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))

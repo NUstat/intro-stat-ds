@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 13 Putting it all together | Introduction to Statistics and Data Science</title>
   <meta name="description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
-  <meta name="generator" content="bookdown 0.17.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 13 Putting it all together | Introduction to Statistics and Data Science" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Chester Ismay, Albert Y. Kim, Arend M. Kuyper, Elizabeth Tipton, and Kaitlyn G. Fitzgerald" />
 
 
-<meta name="date" content="2020-02-03" />
+<meta name="date" content="2020-02-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -62,68 +62,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -300,7 +273,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3.3" data-path="6-multiple-regression.html"><a href="6-multiple-regression.html#simpsonsparadox"><i class="fa fa-check"></i><b>6.3.3</b> Simpson’s Paradox</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="6-multiple-regression.html"><a href="6-multiple-regression.html#conclusion-5"><i class="fa fa-check"></i><b>6.4</b> Conclusion</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="6-multiple-regression.html"><a href="6-multiple-regression.html#whats-to-come-4"><i class="fa fa-check"></i><b>6.4.1</b> What’s to come?</a></li>
+<li class="chapter" data-level="6.4.1" data-path="2-viz.html"><a href="2-viz.html#whats-to-come-3"><i class="fa fa-check"></i><b>6.4.1</b> What’s to come?</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>III Statistical Theory</b></span></li>
@@ -323,7 +296,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="8-populations.html"><a href="8-populations.html#needed-packages-6"><i class="fa fa-check"></i>Needed packages</a></li>
 <li class="chapter" data-level="8.1" data-path="8-populations.html"><a href="8-populations.html#terminology"><i class="fa fa-check"></i><b>8.1</b> Terminology &amp; Notation</a></li>
 <li class="chapter" data-level="8.2" data-path="8-populations.html"><a href="8-populations.html#sample-selection"><i class="fa fa-check"></i><b>8.2</b> Populations &amp; Sampling</a></li>
-<li class="chapter" data-level="8.3" data-path="8-populations.html"><a href="8-populations.html#imdb"><i class="fa fa-check"></i><b>8.3</b> Movies Example</a><ul>
+<li class="chapter" data-level="8.3" data-path="8-populations.html"><a href="8-populations.html#movie-example"><i class="fa fa-check"></i><b>8.3</b> Movies Example</a><ul>
 <li class="chapter" data-level="8.3.1" data-path="8-populations.html"><a href="8-populations.html#research-question"><i class="fa fa-check"></i><b>8.3.1</b> Research question</a></li>
 <li class="chapter" data-level="8.3.2" data-path="8-populations.html"><a href="8-populations.html#population-of-interest"><i class="fa fa-check"></i><b>8.3.2</b> Population of interest</a></li>
 <li class="chapter" data-level="8.3.3" data-path="8-populations.html"><a href="8-populations.html#development-of-population-frame"><i class="fa fa-check"></i><b>8.3.3</b> Development of population frame</a></li>
@@ -353,7 +326,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="9-sampling.html"><a href="9-sampling.html#standardization"><i class="fa fa-check"></i><b>9.5</b> Standardization, Special Distributions, and Theory</a><ul>
 <li class="chapter" data-level="9.5.1" data-path="9-sampling.html"><a href="9-sampling.html#standard-errors-based-on-theory"><i class="fa fa-check"></i><b>9.5.1</b> Standard Errors based on Theory</a></li>
-<li class="chapter" data-level="9.5.2" data-path="9-sampling.html"><a href="9-sampling.html#standardization-1"><i class="fa fa-check"></i><b>9.5.2</b> Standardization</a></li>
+<li class="chapter" data-level="9.5.2" data-path="9-sampling.html"><a href="9-sampling.html#standardization"><i class="fa fa-check"></i><b>9.5.2</b> Standardization</a></li>
 <li class="chapter" data-level="9.5.3" data-path="9-sampling.html"><a href="9-sampling.html#special-distributions"><i class="fa fa-check"></i><b>9.5.3</b> Special distributions</a></li>
 </ul></li>
 <li class="chapter" data-level="9.6" data-path="9-sampling.html"><a href="9-sampling.html#size"><i class="fa fa-check"></i><b>9.6</b> Sample Size and Sampling Distributions</a><ul>
@@ -392,7 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.2.2" data-path="11-pvalues.html"><a href="11-pvalues.html#p-values"><i class="fa fa-check"></i><b>11.2.2</b> P-values</a></li>
 </ul></li>
 <li class="chapter" data-level="11.3" data-path="11-pvalues.html"><a href="11-pvalues.html#p-value-and-null-distribution-example"><i class="fa fa-check"></i><b>11.3</b> P-value and Null Distribution Example</a><ul>
-<li class="chapter" data-level="11.3.1" data-path="8-populations.html"><a href="8-populations.html#imdb"><i class="fa fa-check"></i><b>11.3.1</b> IMDB data</a></li>
+<li class="chapter" data-level="11.3.1" data-path="11-pvalues.html"><a href="11-pvalues.html#imdb"><i class="fa fa-check"></i><b>11.3.1</b> IMDB data</a></li>
 <li class="chapter" data-level="11.3.2" data-path="11-pvalues.html"><a href="11-pvalues.html#p-values-using-formulas"><i class="fa fa-check"></i><b>11.3.2</b> p-values using formulas</a></li>
 <li class="chapter" data-level="11.3.3" data-path="11-pvalues.html"><a href="11-pvalues.html#t.test"><i class="fa fa-check"></i><b>11.3.3</b> p-values using <code>t.test</code></a></li>
 <li class="chapter" data-level="11.3.4" data-path="11-pvalues.html"><a href="11-pvalues.html#pvalues-regression"><i class="fa fa-check"></i><b>11.3.4</b> p-values using regression</a></li>
@@ -523,7 +496,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <html>
-<img src='https://raw.githubusercontent.com/akuyper/image_hosting/master/nu_official_images/DeptStatistics-LogoShort-HorizPurple.fw.png?token=AJB4JQK753ENZAL3YEPMRP26IFN3Q' alt="Intro to Statistics and Data Science">
+<img src='https://nulib.github.io/moderndive_book/wide_format.png' alt="Intro to Statistics and Data Science">
 </html>
 <div id="putting-together" class="section level1">
 <h1><span class="header-section-number">Chapter 13</span> Putting it all together</h1>
@@ -531,7 +504,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="needed-packages-11" class="section level3 unnumbered">
 <h3>Needed Packages</h3>
 <p>Let’s load all the packages needed for this chapter (this assumes you’ve already installed them). If needed, read Section <a href="1-getting-started.html#packages">1.3</a> for information on how to install and load R packages.</p>
-<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb420-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
 </div>
 <div id="a-general-process-for-using-statistics" class="section level2">
 <h2><span class="header-section-number">13.1</span> A general process for using statistics</h2>
@@ -552,8 +525,8 @@ Explore/ Estimate -> Question -> Hypothesize ->
 <h2><span class="header-section-number">13.2</span> Example: Treatment effect</h2>
 <p>The Tennessee STAR experiment was conducted in the 1980s in order to determine if class size effects student learning. In each school in the experiment, Kindergarten students were randomized to either be in a small classroom (13-17 students) or a regular sized classroom (22-27 students). This design was replicated in about 80 schools throughout the state. For information on the study, see <a href="https://en.wikipedia.org/wiki/Class-size_reduction">here</a>.</p>
 <p>For this example, we focus on data from a <em>single school</em>. In this school, there were 137 Kindergarten students that were randomly divided into 7 classes: 3 “small” classes and 4 “regular” classes. Teachers were also randomly assigned to these classrooms. At the end of the year, students were tested and achievement scores obtained. Let’s load this data and take a look at it.</p>
-<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb421-1" data-line-number="1">star_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vTluVgdD7hdPLkKPMpN3OZjpBdZ1HloCGEQ1abcgfcWJHGYQppUGyXsGaPz74XQRwaMobDFLZgN3caU/pub?gid=0&amp;single=true&amp;output=csv&quot;</span>)</a>
-<a class="sourceLine" id="cb421-2" data-line-number="2"><span class="kw">glimpse</span>(star_data)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">star_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vTluVgdD7hdPLkKPMpN3OZjpBdZ1HloCGEQ1abcgfcWJHGYQppUGyXsGaPz74XQRwaMobDFLZgN3caU/pub?gid=0&amp;single=true&amp;output=csv&quot;</span>)
+<span class="kw">glimpse</span>(star_data)</code></pre></div>
 <pre><code>Observations: 137
 Variables: 6
 $ school_id &lt;dbl&gt; 169229, 169229, 169229, 169229, 169229, 169229, 169229, 169…
@@ -575,12 +548,11 @@ $ small     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0,
 <p><strong>Model</strong>: To answer this, we can use a regression model, treating <code>small</code> as a dummy variable:</p>
 <p><span class="math display">\[\widehat{math} = b_0 + b_1*small\]</span></p>
 <p><strong>Null Hypothesis</strong>: We can use a <strong>stochastic proof by contradiction</strong> in order to prove that there is a difference. To do so, we begin by assuming that there is <strong>no difference</strong> (our null) and then look to see if our data shows a difference large enough to contradict this.</p>
-<p><span class="math display">\[H_0: \beta_1 = 0\]</span>
-<span class="math display">\[H_A: \beta_1 \neq 0\]</span></p>
+<p><span class="math display">\[H_0: \beta_1 = 0\]</span> <span class="math display">\[H_A: \beta_1 \neq 0\]</span></p>
 <p>Notice here that the <em>population parameter</em> we are interested in is <span class="math inline">\(\beta_1\)</span>, which we estimate by the <em>sample statistic</em> <span class="math inline">\(b_1\)</span> in our model. Because the treatment of having small class sizes is fairly costly (as it would require hiring and paying more teachers), we want to make sure we have pretty strong evidence that it is effective before recommending that it should be adopted as a policy. Therefore, we design our test to have a Type I error of <span class="math inline">\(\alpha = 0.01\)</span>. That is, we are only willing to tolerate a 1% probability of falsely finding the treatment to be effective when in fact it is not, so we will only reject the null hypothesis if <span class="math inline">\(p &lt; 0.01.\)</span></p>
 <p><strong>Estimate</strong>: Our estimated model is found in the table below.</p>
-<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb423-1" data-line-number="1">star_model &lt;-<span class="st"> </span><span class="kw">lm</span>(math <span class="op">~</span><span class="st"> </span>small, <span class="dt">data =</span> star_data)</a>
-<a class="sourceLine" id="cb423-2" data-line-number="2"><span class="kw">summary</span>(star_model)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">star_model &lt;-<span class="st"> </span><span class="kw">lm</span>(math <span class="op">~</span><span class="st"> </span>small, <span class="dt">data =</span> star_data)
+<span class="kw">summary</span>(star_model)</code></pre></div>
 <pre><code>
 Call:
 lm(formula = math ~ small, data = star_data)
@@ -614,20 +586,19 @@ $ important &lt;dbl&gt; 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0,
 <p>The variable <code>important</code> has a value of 1 if the student answered “extremely important” and a value of 0 otherwise.</p>
 <p><strong>Question</strong>: Do Beta University students in 2019 think it is as important for a young person to not live with their parents as people did in 2002?</p>
 <p><strong>Null Hypothesis</strong>: We wish to know if the average percent of students in 2019 is different from that in 2002. To answer this, we conduct a <strong>stochastic proof by contradiction</strong>, in which we assume that the percent of students in 2019 would be 29% just as in 2002. Our null hypothesis is thus that the <em>proportion</em> is 0.29.</p>
-<p><span class="math display">\[H_0: \pi = 0.29\]</span>
-<span class="math display">\[H_A: \pi \neq 0.29\]</span></p>
+<p><span class="math display">\[H_0: \pi = 0.29\]</span> <span class="math display">\[H_A: \pi \neq 0.29\]</span></p>
 <p>Given the cost of collecting this data and associated trade-offs, we decided to set our Type I error at 10%.</p>
 <p><strong>Estimate</strong>: Let’s use <code>prop.test()</code> to obtain our estimate. Recall that <code>prop.test()</code> requires an argument <code>x</code> that gives the counts of “successes,” which in this case means the number of people who responded “extremely important” (i.e. <code>important == 1</code> in the data), and an argument <code>n</code> for the total number of “trials,” which in this case means the total number of people surveyed (i.e. <code>n = 100</code>).</p>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb426-1" data-line-number="1">beta_U_summary &lt;-<span class="st"> </span>beta_U_data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb426-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">important =</span> <span class="kw">sum</span>(important),</a>
-<a class="sourceLine" id="cb426-3" data-line-number="3">            <span class="dt">n =</span> <span class="kw">n</span>())</a>
-<a class="sourceLine" id="cb426-4" data-line-number="4">beta_U_summary</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">beta_U_summary &lt;-<span class="st"> </span>beta_U_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">important =</span> <span class="kw">sum</span>(important),
+            <span class="dt">n =</span> <span class="kw">n</span>())
+beta_U_summary</code></pre></div>
 <pre><code># A tibble: 1 x 2
   important     n
       &lt;dbl&gt; &lt;int&gt;
 1        32   100</code></pre>
 <p>The default for <code>prop.test()</code> assumes the null hypothesis is <span class="math inline">\(\pi = 0.5\)</span>, so we need to override that here by specifying <code>p = 0.29</code>.</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb428-1" data-line-number="1"><span class="kw">prop.test</span>(<span class="dt">x =</span> beta_U_summary<span class="op">$</span>important, <span class="dt">n =</span> beta_U_summary<span class="op">$</span>n, <span class="dt">p =</span> <span class="fl">0.29</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prop.test</span>(<span class="dt">x =</span> beta_U_summary<span class="op">$</span>important, <span class="dt">n =</span> beta_U_summary<span class="op">$</span>n, <span class="dt">p =</span> <span class="fl">0.29</span>)</code></pre></div>
 <pre><code>
     1-sample proportions test with continuity correction
 
@@ -650,15 +621,15 @@ sample estimates:
 <p>Let’s return to the Lego dataset we explored in the beginning of this course. One of the authors of this book is both a huge Harry Potter fan and a Lego connoisseur. After buying a few of these sets, he began to wonder about the relationship between the number of minifigures in these sets and the price of the set. To answer this, he returned to the <code>legosets</code> data, focusing only on the subset relevant to this question.</p>
 <p><strong>Question</strong>: What is the relationship between the number of minifigures in a Harry Potter lego set and the price of the set?</p>
 <p>Let’s load in the data, create the relevant Harry Potter subset, and <code>skim</code> the relevant variables. Recall that <code>USD_MSRP</code> is our price variable in US dollars.</p>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb430-1" data-line-number="1">legosets &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vSwB0bCE4w7qrep4lIC-QVyF307mxFNUYQ08LZqiFsC_ks1bt_ZEJqiTEo7SaCl6g4TQ8gig2ZIfQJu/pub?gid=0&amp;single=true&amp;output=csv&quot;</span>)</a>
-<a class="sourceLine" id="cb430-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb430-3" data-line-number="3">legosets_HP &lt;-<span class="st"> </span>legosets <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb430-4" data-line-number="4"><span class="st">  </span><span class="kw">filter</span>(Theme <span class="op">==</span><span class="st"> &quot;Harry Potter&quot;</span>)</a>
-<a class="sourceLine" id="cb430-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb430-6" data-line-number="6"><span class="kw">skim_with</span>(<span class="dt">numeric =</span> <span class="kw">list</span>(<span class="dt">hist =</span> <span class="ot">NULL</span>))</a>
-<a class="sourceLine" id="cb430-7" data-line-number="7">legosets_HP <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb430-8" data-line-number="8"><span class="st">  </span><span class="kw">select</span>(USD_MSRP, Minifigures) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb430-9" data-line-number="9"><span class="st">  </span><span class="kw">skim</span>()</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">legosets &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vSwB0bCE4w7qrep4lIC-QVyF307mxFNUYQ08LZqiFsC_ks1bt_ZEJqiTEo7SaCl6g4TQ8gig2ZIfQJu/pub?gid=0&amp;single=true&amp;output=csv&quot;</span>)
+
+legosets_HP &lt;-<span class="st"> </span>legosets <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(Theme <span class="op">==</span><span class="st"> &quot;Harry Potter&quot;</span>)
+
+<span class="kw">skim_with</span>(<span class="dt">numeric =</span> <span class="kw">list</span>(<span class="dt">hist =</span> <span class="ot">NULL</span>))
+legosets_HP <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(USD_MSRP, Minifigures) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">skim</span>()</code></pre></div>
 <pre><code>Skim summary statistics
  n obs: 53 
  n variables: 2 
@@ -673,12 +644,12 @@ sample estimates:
 <p><strong>Model</strong>: A question about ‘relationships’ in statistics typically means that we are interested in the slope in a regression, i.e.,</p>
 <p><span class="math display">\[\widehat{USD\_MSRP} = b_0 + b_1*Minifigures\]</span></p>
 <p>This model can be estimated in R using the following syntax:</p>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb432-1" data-line-number="1">lego_model &lt;-<span class="st"> </span><span class="kw">lm</span>(USD_MSRP <span class="op">~</span><span class="st"> </span>Minifigures, <span class="dt">data =</span> legosets_HP)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lego_model &lt;-<span class="st"> </span><span class="kw">lm</span>(USD_MSRP <span class="op">~</span><span class="st"> </span>Minifigures, <span class="dt">data =</span> legosets_HP)</code></pre></div>
 <p>Note that we do not necessarily need to use a hypothesis test here to make a <em>decision</em> about anything; rather, we are interested in simply <em>estimating</em> the magnitude of the relationship between minifigures and price in the population of Harry Potter legosets. Therefore, we can simply construct a confidence interval, rather than conducting a hypothesis test.</p>
 <!-- **Null hypothesis**: Recalling that we seek to prove that there is a relationship, we invoke a **stochastic proof by contradiction** by assuming that there is **no relationship** between the number of minifigures and price. In the model, this means assuming that the slope $\beta_1 = 0$.  -->
 <!-- We decide to use a small Type I error (1%) for this test. -->
 <p><strong>Estimate</strong>: We can obtain our estimate <span class="math inline">\(b_1\)</span> from our data using <code>summary(lego_model)</code>, which provides us an estimate of this relationship.</p>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb433-1" data-line-number="1"><span class="kw">summary</span>(lego_model)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(lego_model)</code></pre></div>
 <pre><code>
 Call:
 lm(formula = USD_MSRP ~ Minifigures, data = legosets_HP)
@@ -699,7 +670,7 @@ Residual standard error: 19.9 on 49 degrees of freedom
 Multiple R-squared:  0.662, Adjusted R-squared:  0.655 
 F-statistic: 95.9 on 1 and 49 DF,  p-value: 4.03e-13</code></pre>
 <p>Here the slope <span class="math inline">\(b_1 = 10.54\)</span>; this means that for every additional minifigure in a Harry Potter lego set, the average price increases by $10.54. How confident are we in this estimate? Is it precise? We can use the function <code>confint()</code> to construct a 95% confidence interval.</p>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb435-1" data-line-number="1"><span class="kw">confint</span>(lego_model)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">confint</span>(lego_model)</code></pre></div>
 <pre><code>             2.5 % 97.5 %
 (Intercept) -13.24   6.33
 Minifigures   8.38  12.70</code></pre>
@@ -780,7 +751,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))

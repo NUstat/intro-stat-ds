@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Sampling Distributions | Introduction to Statistics and Data Science</title>
   <meta name="description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
-  <meta name="generator" content="bookdown 0.17.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Sampling Distributions | Introduction to Statistics and Data Science" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Chester Ismay, Albert Y. Kim, Arend M. Kuyper, Elizabeth Tipton, and Kaitlyn G. Fitzgerald" />
 
 
-<meta name="date" content="2020-02-03" />
+<meta name="date" content="2020-02-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -62,68 +62,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -300,7 +273,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3.3" data-path="6-multiple-regression.html"><a href="6-multiple-regression.html#simpsonsparadox"><i class="fa fa-check"></i><b>6.3.3</b> Simpson’s Paradox</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="6-multiple-regression.html"><a href="6-multiple-regression.html#conclusion-5"><i class="fa fa-check"></i><b>6.4</b> Conclusion</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="6-multiple-regression.html"><a href="6-multiple-regression.html#whats-to-come-4"><i class="fa fa-check"></i><b>6.4.1</b> What’s to come?</a></li>
+<li class="chapter" data-level="6.4.1" data-path="2-viz.html"><a href="2-viz.html#whats-to-come-3"><i class="fa fa-check"></i><b>6.4.1</b> What’s to come?</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>III Statistical Theory</b></span></li>
@@ -323,7 +296,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="8-populations.html"><a href="8-populations.html#needed-packages-6"><i class="fa fa-check"></i>Needed packages</a></li>
 <li class="chapter" data-level="8.1" data-path="8-populations.html"><a href="8-populations.html#terminology"><i class="fa fa-check"></i><b>8.1</b> Terminology &amp; Notation</a></li>
 <li class="chapter" data-level="8.2" data-path="8-populations.html"><a href="8-populations.html#sample-selection"><i class="fa fa-check"></i><b>8.2</b> Populations &amp; Sampling</a></li>
-<li class="chapter" data-level="8.3" data-path="8-populations.html"><a href="8-populations.html#imdb"><i class="fa fa-check"></i><b>8.3</b> Movies Example</a><ul>
+<li class="chapter" data-level="8.3" data-path="8-populations.html"><a href="8-populations.html#movie-example"><i class="fa fa-check"></i><b>8.3</b> Movies Example</a><ul>
 <li class="chapter" data-level="8.3.1" data-path="8-populations.html"><a href="8-populations.html#research-question"><i class="fa fa-check"></i><b>8.3.1</b> Research question</a></li>
 <li class="chapter" data-level="8.3.2" data-path="8-populations.html"><a href="8-populations.html#population-of-interest"><i class="fa fa-check"></i><b>8.3.2</b> Population of interest</a></li>
 <li class="chapter" data-level="8.3.3" data-path="8-populations.html"><a href="8-populations.html#development-of-population-frame"><i class="fa fa-check"></i><b>8.3.3</b> Development of population frame</a></li>
@@ -353,7 +326,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="9-sampling.html"><a href="9-sampling.html#standardization"><i class="fa fa-check"></i><b>9.5</b> Standardization, Special Distributions, and Theory</a><ul>
 <li class="chapter" data-level="9.5.1" data-path="9-sampling.html"><a href="9-sampling.html#standard-errors-based-on-theory"><i class="fa fa-check"></i><b>9.5.1</b> Standard Errors based on Theory</a></li>
-<li class="chapter" data-level="9.5.2" data-path="9-sampling.html"><a href="9-sampling.html#standardization-1"><i class="fa fa-check"></i><b>9.5.2</b> Standardization</a></li>
+<li class="chapter" data-level="9.5.2" data-path="9-sampling.html"><a href="9-sampling.html#standardization"><i class="fa fa-check"></i><b>9.5.2</b> Standardization</a></li>
 <li class="chapter" data-level="9.5.3" data-path="9-sampling.html"><a href="9-sampling.html#special-distributions"><i class="fa fa-check"></i><b>9.5.3</b> Special distributions</a></li>
 </ul></li>
 <li class="chapter" data-level="9.6" data-path="9-sampling.html"><a href="9-sampling.html#size"><i class="fa fa-check"></i><b>9.6</b> Sample Size and Sampling Distributions</a><ul>
@@ -392,7 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.2.2" data-path="11-pvalues.html"><a href="11-pvalues.html#p-values"><i class="fa fa-check"></i><b>11.2.2</b> P-values</a></li>
 </ul></li>
 <li class="chapter" data-level="11.3" data-path="11-pvalues.html"><a href="11-pvalues.html#p-value-and-null-distribution-example"><i class="fa fa-check"></i><b>11.3</b> P-value and Null Distribution Example</a><ul>
-<li class="chapter" data-level="11.3.1" data-path="8-populations.html"><a href="8-populations.html#imdb"><i class="fa fa-check"></i><b>11.3.1</b> IMDB data</a></li>
+<li class="chapter" data-level="11.3.1" data-path="11-pvalues.html"><a href="11-pvalues.html#imdb"><i class="fa fa-check"></i><b>11.3.1</b> IMDB data</a></li>
 <li class="chapter" data-level="11.3.2" data-path="11-pvalues.html"><a href="11-pvalues.html#p-values-using-formulas"><i class="fa fa-check"></i><b>11.3.2</b> p-values using formulas</a></li>
 <li class="chapter" data-level="11.3.3" data-path="11-pvalues.html"><a href="11-pvalues.html#t.test"><i class="fa fa-check"></i><b>11.3.3</b> p-values using <code>t.test</code></a></li>
 <li class="chapter" data-level="11.3.4" data-path="11-pvalues.html"><a href="11-pvalues.html#pvalues-regression"><i class="fa fa-check"></i><b>11.3.4</b> p-values using regression</a></li>
@@ -523,7 +496,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <html>
-<img src='https://raw.githubusercontent.com/akuyper/image_hosting/master/nu_official_images/DeptStatistics-LogoShort-HorizPurple.fw.png?token=AJB4JQK753ENZAL3YEPMRP26IFN3Q' alt="Intro to Statistics and Data Science">
+<img src='https://nulib.github.io/moderndive_book/wide_format.png' alt="Intro to Statistics and Data Science">
 </html>
 <div id="sampling" class="section level1">
 <h1><span class="header-section-number">Chapter 9</span> Sampling Distributions</h1>
@@ -531,10 +504,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="needed-packages-7" class="section level3 unnumbered">
 <h3>Needed packages</h3>
 <p>Let’s load all the packages needed for this chapter (this assumes you’ve already installed them). If needed, read Section <a href="1-getting-started.html#packages">1.3</a> for information on how to install and load R packages.</p>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb267-2" data-line-number="2"><span class="kw">library</span>(moderndive)</a>
-<a class="sourceLine" id="cb267-3" data-line-number="3"><span class="kw">library</span>(skimr)</a>
-<a class="sourceLine" id="cb267-4" data-line-number="4"><span class="kw">library</span>(dslabs)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(moderndive)
+<span class="kw">library</span>(skimr)
+<span class="kw">library</span>(dslabs)</code></pre></div>
 <hr />
 </div>
 <div id="theory" class="section level2">
@@ -620,8 +593,8 @@ FIGURE 9.6: Hand-drawn histogram of 33 proportions.
 <li>The shape of this distribution is somewhat bell-shaped.</li>
 </ul>
 <p>Let’s construct this same hand-drawn histogram in R using your data visualization skills that you honed in Chapter <a href="2-viz.html#viz">2</a>. Each of the 33 student’s proportion red is saved in a data frame <code>tactile_prop_red</code> which is included in the <code>moderndive</code> package you loaded earlier.</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" data-line-number="1">tactile_prop_red</a>
-<a class="sourceLine" id="cb268-2" data-line-number="2"><span class="kw">View</span>(tactile_prop_red)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tactile_prop_red
+<span class="kw">View</span>(tactile_prop_red)</code></pre></div>
 <p>Let’s display only the first 10 out of 33 rows of <code>tactile_prop_red</code>’s contents in Table <a href="9-sampling.html#tab:tactilered">9.1</a>.</p>
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
@@ -788,12 +761,12 @@ Josh
 </table>
 <p>Observe for each <code>student</code> we have their names, the number of <code>red_balls</code> they obtained, and the corresponding proportion out of 50 balls that were red named <code>prop_red</code>. Observe, we also have a variable <code>replicate</code> enumerating each of the 33 students; we chose this name because each row can be viewed as one instance of a replicated activity: using the shovel to remove 50 balls and computing the proportion of those balls that are red.</p>
 <p>We visualize the distribution of these 33 proportions using a <code>geom_histogram()</code> with <code>binwidth = 0.05</code> in Figure <a href="9-sampling.html#fig:samplingdistribution-tactile">9.7</a>, which is appropriate since the variable <code>prop_red</code> is numerical. This computer-generated histogram matches our hand-drawn histogram from the earlier Figure <a href="9-sampling.html#fig:sampling-exercise-5">9.6</a>.</p>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb269-1" data-line-number="1"><span class="kw">ggplot</span>(tactile_prop_red, <span class="kw">aes</span>(<span class="dt">x =</span> prop_red)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb269-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.05</span>, <span class="dt">boundary =</span> <span class="fl">0.4</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb269-3" data-line-number="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Proportion of 50 balls that were red&quot;</span>, </a>
-<a class="sourceLine" id="cb269-4" data-line-number="4">       <span class="dt">title =</span> <span class="st">&quot;Distribution of 33 proportions red&quot;</span>) </a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(tactile_prop_red, <span class="kw">aes</span>(<span class="dt">x =</span> prop_red)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.05</span>, <span class="dt">boundary =</span> <span class="fl">0.4</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Proportion of 50 balls that were red&quot;</span>, 
+       <span class="dt">title =</span> <span class="st">&quot;Distribution of 33 proportions red&quot;</span>) </code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:samplingdistribution-tactile"></span>
-<img src="ismaykimkuyper_files/figure-html/samplingdistribution-tactile-1.png" alt="Distribution of 33 proportions based on 33 samples of size 50" width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/samplingdistribution-tactile-1.png" alt="Distribution of 33 proportions based on 33 samples of size 50" width="\textwidth" />
 <p class="caption">
 FIGURE 9.7: Distribution of 33 proportions based on 33 samples of size 50
 </p>
@@ -817,7 +790,7 @@ with the ggplot2 histogram so that `boundary` isn't needed. -->
 <div id="using-the-virtual-shovel-once" class="section level3">
 <h3><span class="header-section-number">9.3.1</span> Using the virtual shovel once</h3>
 <p>Let’s start by performing the virtual analogue of the tactile sampling simulation we performed in <a href="9-sampling.html#sampling-activity">9.2</a>. We first need a virtual analogue of the bowl seen in Figure <a href="9-sampling.html#fig:sampling-exercise-1">9.1</a>. To this end, we included a data frame <code>bowl</code> in the <code>moderndive</code> package whose rows correspond exactly with the contents of the actual bowl.</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb270-1" data-line-number="1">bowl</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bowl</code></pre></div>
 <pre><code># A tibble: 2,400 x 2
    ball_ID color
      &lt;int&gt; &lt;chr&gt;
@@ -835,9 +808,9 @@ with the ggplot2 histogram so that `boundary` isn't needed. -->
 <!-- Albert will make sure identification-vs-measurement matches the name of a Subsection. -->
 <p>Observe in the output that <code>bowl</code> has 2400 rows, telling us that the bowl contains 2400 equally-sized balls. The first variable <code>ball_ID</code> is used merely as an “identification variable” for this data frame; none of the balls in the actual bowl are marked with numbers. The second variable <code>color</code> indicates whether a particular virtual ball is red or white. View the contents of the bowl in RStudio’s data viewer and scroll through the contents to convince yourselves that <code>bowl</code> is indeed a virtual version of the actual bowl in Figure <a href="9-sampling.html#fig:sampling-exercise-1">9.1</a>.</p>
 <p>Now that we have a virtual analogue of our bowl, we now need a virtual analogue for the shovel seen in Figure <a href="9-sampling.html#fig:sampling-exercise-2">9.2</a>; we’ll use this virtual shovel to generate our virtual random samples of 50 balls. We’re going to use the <code>rep_sample_n()</code> function included in the <code>moderndive</code> package. This function allows us to take <code>rep</code>eated, or <code>rep</code>licated, <code>samples</code> of size <code>n</code>. Run the following and explore <code>virtual_shovel</code>’s contents in the RStudio viewer.</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb272-1" data-line-number="1">virtual_shovel &lt;-<span class="st"> </span>bowl <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb272-2" data-line-number="2"><span class="st">  </span><span class="kw">rep_sample_n</span>(<span class="dt">size =</span> <span class="dv">50</span>)</a>
-<a class="sourceLine" id="cb272-3" data-line-number="3"><span class="kw">View</span>(virtual_shovel)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">virtual_shovel &lt;-<span class="st"> </span>bowl <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rep_sample_n</span>(<span class="dt">size =</span> <span class="dv">50</span>)
+<span class="kw">View</span>(virtual_shovel)</code></pre></div>
 <p>Let’s display only the first 10 out of 50 rows of <code>virtual_shovel</code>’s contents in Table <a href="9-sampling.html#tab:virtual-shovel">9.2</a>.</p>
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
@@ -971,8 +944,8 @@ white
 </table>
 <p>The <code>ball_ID</code> variable identifies which of the balls from <code>bowl</code> are included in our sample of 50 balls and <code>color</code> denotes its color. However what does the <code>replicate</code> variable indicate? In <code>virtual_shovel</code>’s case, <code>replicate</code> is equal to 1 for all 50 rows. This is telling us that these 50 rows correspond to a first repeated/replicated use of the shovel, in our case our first sample. We’ll see below when we “virtually” take 10,000 samples, <code>replicate</code> will take values between 1 and 10,000. Before we do this, let’s compute the proportion of balls in our virtual sample of size 50 that are red using the <code>dplyr</code> data wrangling verbs you learned in Chapter <a href="3-wrangling.html#wrangling">3</a>. Let’s breakdown the steps individually:</p>
 <p>First, for each of our 50 sampled balls, identify if it is red using a test for equality using <code>==</code>. For every row where <code>color == &quot;red&quot;</code>, the Boolean <code>TRUE</code> is returned and for every row where <code>color</code> is not equal to <code>&quot;red&quot;</code>, the Boolean <code>FALSE</code> is returned. Let’s create a new Boolean variable <code>is_red</code> using the <code>mutate()</code> function from Section <a href="3-wrangling.html#mutate">3.5</a>:</p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb273-1" data-line-number="1">virtual_shovel <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb273-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">is_red =</span> (color <span class="op">==</span><span class="st"> &quot;red&quot;</span>))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">virtual_shovel <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">is_red =</span> (color <span class="op">==</span><span class="st"> &quot;red&quot;</span>))</code></pre></div>
 <pre><code># A tibble: 50 x 4
 # Groups:   replicate [1]
    replicate ball_ID color is_red
@@ -989,27 +962,27 @@ white
 10         1    1485 white FALSE 
 # … with 40 more rows</code></pre>
 <p>Second, we compute the number of balls out of 50 that are red using the <code>summarize()</code> function. Recall from Section <a href="3-wrangling.html#summarize">3.3</a> that <code>summarize()</code> takes a data frame with many rows and returns a data frame with a single row containing summary statistics that you specify, like <code>mean()</code> and <code>median()</code>. In this case we use the <code>sum()</code>:</p>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" data-line-number="1">virtual_shovel <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb275-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">is_red =</span> (color <span class="op">==</span><span class="st"> &quot;red&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb275-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">num_red =</span> <span class="kw">sum</span>(is_red))  </a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">virtual_shovel <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">is_red =</span> (color <span class="op">==</span><span class="st"> &quot;red&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">num_red =</span> <span class="kw">sum</span>(is_red))  </code></pre></div>
 <pre><code># A tibble: 1 x 2
   replicate num_red
       &lt;int&gt;   &lt;int&gt;
 1         1      12</code></pre>
 <p>Why does this work? Because R treats <code>TRUE</code> like the number <code>1</code> and <code>FALSE</code> like the number <code>0</code>. So summing the number of <code>TRUE</code>’s and <code>FALSE</code>’s is equivalent to summing <code>1</code>’s and <code>0</code>’s, which in the end counts the number of balls where <code>color</code> is <code>red</code>. In our case, 12 of the 50 balls were red.</p>
 <p>Third and last, we compute the proportion of the 50 sampled balls that are red by dividing <code>num_red</code> by 50:</p>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb277-1" data-line-number="1">virtual_shovel <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb277-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">is_red =</span> color <span class="op">==</span><span class="st"> &quot;red&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb277-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">num_red =</span> <span class="kw">sum</span>(is_red)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb277-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop_red =</span> num_red <span class="op">/</span><span class="st"> </span><span class="dv">50</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">virtual_shovel <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">is_red =</span> color <span class="op">==</span><span class="st"> &quot;red&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">num_red =</span> <span class="kw">sum</span>(is_red)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop_red =</span> num_red <span class="op">/</span><span class="st"> </span><span class="dv">50</span>)</code></pre></div>
 <pre><code># A tibble: 1 x 3
   replicate num_red prop_red
       &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;
 1         1      12     0.24</code></pre>
 <p>In other words, this “virtual” sample’s balls were 24% red. Let’s make the above code a little more compact and succinct by combining the first <code>mutate()</code> and the <code>summarize()</code> as follows:</p>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb279-1" data-line-number="1">virtual_shovel <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb279-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">num_red =</span> <span class="kw">sum</span>(color <span class="op">==</span><span class="st"> &quot;red&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb279-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop_red =</span> num_red <span class="op">/</span><span class="st"> </span><span class="dv">50</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">virtual_shovel <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">num_red =</span> <span class="kw">sum</span>(color <span class="op">==</span><span class="st"> &quot;red&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop_red =</span> num_red <span class="op">/</span><span class="st"> </span><span class="dv">50</span>)</code></pre></div>
 <pre><code># A tibble: 1 x 3
   replicate num_red prop_red
       &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;
@@ -1019,16 +992,16 @@ white
 <div id="using-the-virtual-shovel-10000-times" class="section level3">
 <h3><span class="header-section-number">9.3.2</span> Using the virtual shovel 10,000 times</h3>
 <p>Recall that in our tactile sampling exercise in Section <a href="9-sampling.html#sampling-activity">9.2</a> we had 33 students each use the shovel, yielding 33 samples of size 50 balls, which we then used to compute 33 proportions. In other words we repeated/replicated using the shovel 33 times. We can perform this repeated/replicated sampling virtually by once again using our virtual shovel function <code>rep_sample_n()</code>, but by adding the <code>reps = 10000</code> argument, indicating we want to repeat the sampling 10,000 times. Be sure to scroll through the contents of <code>virtual_samples</code> in RStudio’s viewer.</p>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb281-1" data-line-number="1">virtual_samples &lt;-<span class="st"> </span>bowl <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb281-2" data-line-number="2"><span class="st">  </span><span class="kw">rep_sample_n</span>(<span class="dt">size =</span> <span class="dv">50</span>, <span class="dt">reps =</span> <span class="dv">10000</span>)</a>
-<a class="sourceLine" id="cb281-3" data-line-number="3"><span class="kw">View</span>(virtual_samples)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">virtual_samples &lt;-<span class="st"> </span>bowl <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rep_sample_n</span>(<span class="dt">size =</span> <span class="dv">50</span>, <span class="dt">reps =</span> <span class="dv">10000</span>)
+<span class="kw">View</span>(virtual_samples)</code></pre></div>
 <p>Observe that while the first 50 rows of <code>replicate</code> are equal to <code>1</code>, the next 50 rows of <code>replicate</code> are equal to <code>2</code>. This is telling us that the first 50 rows correspond to the first sample of 50 balls while the next 50 correspond to the second sample of 50 balls. This pattern continues for all <code>reps = 10000</code> replicates and thus <code>virtual_samples</code> has 10,000 <span class="math inline">\(\times\)</span> 50 = 500,000 rows.</p>
 <p>Let’s now take the data frame <code>virtual_samples</code> with 10,000 <span class="math inline">\(\times\)</span> 50 = 500,000 rows corresponding to 10,000 samples of size 50 balls and compute the resulting 10,000 proportions red. We’ll use the same <code>dplyr</code> verbs as we did in the previous section, but this time with an additional <code>group_by()</code> of the <code>replicate</code> variable. Recall from Section <a href="3-wrangling.html#groupby">3.4</a> that by assigning the grouping variable “meta-data” before <code>summarizing()</code>, we’ll obtain 10,000 different proportions red:</p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb282-1" data-line-number="1">virtual_prop_red &lt;-<span class="st"> </span>virtual_samples <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb282-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(replicate) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb282-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">red =</span> <span class="kw">sum</span>(color <span class="op">==</span><span class="st"> &quot;red&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb282-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop_red =</span> red <span class="op">/</span><span class="st"> </span><span class="dv">50</span>)</a>
-<a class="sourceLine" id="cb282-5" data-line-number="5"><span class="kw">View</span>(virtual_prop_red)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">virtual_prop_red &lt;-<span class="st"> </span>virtual_samples <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(replicate) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">red =</span> <span class="kw">sum</span>(color <span class="op">==</span><span class="st"> &quot;red&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop_red =</span> red <span class="op">/</span><span class="st"> </span><span class="dv">50</span>)
+<span class="kw">View</span>(virtual_prop_red)</code></pre></div>
 <p>Let’s display only the first 10 out of 10,000 rows of <code>virtual_prop_red</code>’s contents in Table <a href="9-sampling.html#tab:tactilered">9.1</a>. As one would expect, there is variation in the resulting <code>prop_red</code> proportions red for the first 10 out 10,000 repeated/replicated samples.</p>
 <!-- Albert will remove `boundary` here on updates to chalkboard image. -->
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
@@ -1162,12 +1135,12 @@ prop_red
 </tbody>
 </table>
 <p>Let’s visualize the distribution of these 10,000 proportions red based on 10,000 virtual samples using a histogram with <code>binwidth = 0.05</code> in Figure <a href="9-sampling.html#fig:samplingdistribution-virtual">9.8</a>.</p>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb283-1" data-line-number="1"><span class="kw">ggplot</span>(virtual_prop_red, <span class="kw">aes</span>(<span class="dt">x =</span> prop_red)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb283-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.05</span>, <span class="dt">boundary =</span> <span class="fl">0.4</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb283-3" data-line-number="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Proportion of 50 balls that were red&quot;</span>, </a>
-<a class="sourceLine" id="cb283-4" data-line-number="4">       <span class="dt">title =</span> <span class="st">&quot;Distribution of 10,000 proportions red&quot;</span>) </a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(virtual_prop_red, <span class="kw">aes</span>(<span class="dt">x =</span> prop_red)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.05</span>, <span class="dt">boundary =</span> <span class="fl">0.4</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Proportion of 50 balls that were red&quot;</span>, 
+       <span class="dt">title =</span> <span class="st">&quot;Distribution of 10,000 proportions red&quot;</span>) </code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:samplingdistribution-virtual"></span>
-<img src="ismaykimkuyper_files/figure-html/samplingdistribution-virtual-1.png" alt="Distribution of 10,000 proportions based on 10,000 samples of size 50" width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/samplingdistribution-virtual-1.png" alt="Distribution of 10,000 proportions based on 10,000 samples of size 50" width="\textwidth" />
 <p class="caption">
 FIGURE 9.8: Distribution of 10,000 proportions based on 10,000 samples of size 50
 </p>
@@ -1204,13 +1177,13 @@ FIGURE 9.9: Common distribution shapes
 </ul>
 <p>The Normal distribution is characterized by two parameters: <span class="math inline">\(\mu\)</span>, which determines the center of the distribution, and <span class="math inline">\(\sigma\)</span> which determines the spread. In Figure <a href="9-sampling.html#fig:samplingdistribution-virtual">9.8</a>, the solid- and dashed-line curves have the same standard deviation (i.e. <span class="math inline">\(\sigma = 1\)</span>), so they have identical spread, but they have different means, so the dashed curve is simply shifted to the right to be centered at <span class="math inline">\(\mu = 2\)</span>. On the other hand, the solid- and dotted-line curves are centered around the same value (i.e. <span class="math inline">\(\mu = 0\)</span>), but the dotted curve has a larger standard deviation and is therefore more spread out. The solid line is a special case of the Normal distribution called the <strong>Standard Normal distribution</strong>, which has mean 0 and standard deviation 1. Importantly, for all possible values of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>, the normal distribution is <strong>symmetric</strong> and <strong>unimodal</strong>.</p>
 <div class="figure" style="text-align: center"><span id="fig:normaldist"></span>
-<img src="ismaykimkuyper_files/figure-html/normaldist-1.png" alt="Normal distribution" width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/normaldist-1.png" alt="Normal distribution" width="\textwidth" />
 <p class="caption">
 FIGURE 9.10: Normal distribution
 </p>
 </div>
 <p>The Chi-squared distribution is unimodal but skewed right. The Chi-squared distribution depends on one parameter <span class="math inline">\(df\)</span>.</p>
-<p><img src="ismaykimkuyper_files/figure-html/unnamed-chunk-261-1.png" width="\textwidth" style="display: block; margin: auto;" /></p>
+<p><img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-261-1.png" width="\textwidth" style="display: block; margin: auto;" /></p>
 <p>The <strong>Normal Distribution</strong> is the most common and important of all distributions. As a result of the Central Limit Theorem (CLT), when sample sizes are large, most sampling distributions will be approximated well by a Normal Distribution. In fact, we can see in Figure <a href="9-sampling.html#fig:samplingdistribution-virtual">9.8</a> that the sampling distribution of <span class="math inline">\(\hat{\pi}\)</span> follows a Normal distribution. We will discuss the CLT further in Section <a href="9-sampling.html#clt">9.7</a></p>
 </div>
 <div id="bias" class="section level3">
@@ -1222,34 +1195,33 @@ FIGURE 9.10: Normal distribution
 <li>A sample statistic is an <strong>unbiased estimator</strong> of a population parameter if in the average sample it equals the population parameter value.</li>
 </ul>
 <p>We can calculate the mean of our simulated sampling distribution of proportion of red balls <span class="math inline">\(\hat{\pi}\)</span> and compare it to the true population proportion <span class="math inline">\(\pi\)</span>.</p>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb284-1" data-line-number="1"><span class="co">#mean of sampling distribution of pi_hat</span></a>
-<a class="sourceLine" id="cb284-2" data-line-number="2">virtual_prop_red <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb284-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_pi_hat =</span> <span class="kw">mean</span>(prop_red))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#mean of sampling distribution of pi_hat</span>
+virtual_prop_red <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_pi_hat =</span> <span class="kw">mean</span>(prop_red))</code></pre></div>
 <pre><code># A tibble: 1 x 1
   mean_pi_hat
         &lt;dbl&gt;
 1       0.375</code></pre>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb286-1" data-line-number="1"><span class="co">#true population proportion</span></a>
-<a class="sourceLine" id="cb286-2" data-line-number="2">bowl <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb286-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">pi =</span> <span class="kw">sum</span>(color <span class="op">==</span><span class="st"> &quot;red&quot;</span>) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>())</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#true population proportion</span>
+bowl <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">pi =</span> <span class="kw">sum</span>(color <span class="op">==</span><span class="st"> &quot;red&quot;</span>) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>())</code></pre></div>
 <pre><code># A tibble: 1 x 1
      pi
   &lt;dbl&gt;
 1 0.375</code></pre>
 <p>Here we see that <span class="math inline">\(\hat{\pi}=\)</span> 0.375, which is a good approximation to the true proportion of red balls in the bowl (<span class="math inline">\(\pi =\)</span> 0.375). This is because the sample proportion <span class="math inline">\(\hat{\pi} = \frac{\# \  of \ successes}{\# \ of \ trials}\)</span> is an unbiased estimator of the population proportion <span class="math inline">\(\pi\)</span>.</p>
 <p>The difficulty with introducing this idea of bias in an introductory course is that most statistics used at this level (e.g., proportions, means, regression coefficients) are unbiased. Examples of biased statistics are more common in more complex models. One example, however, that illustrates this bias concept is that of sample variance estimator.</p>
-<p>Recall that we have used <em>standard deviation</em> as a summary statistic for how spread out data is. <strong>Variance</strong> is simply standard deviation <em>squared</em>, and thus it is also a measure of spread. The sample standard deviation is usually denoted by the letter <span class="math inline">\(s\)</span>, and sample variance by <span class="math inline">\(s^2\)</span>. These are estimators for the population standard deviation (denoted <span class="math inline">\(\sigma\)</span>) and the population variance (denoted <span class="math inline">\(\sigma^2\)</span>). We estimate the sample variance using
-<span class="math inline">\(s^2= \frac{\sum_{i = 1}^n(x_i - \bar{x})^2}{(n-1)}\)</span>, where <span class="math inline">\(n\)</span> is the sample size (check out <a href="A-appendixA.html#appendixA">A</a> if you are unfamiliar with the <span class="math inline">\(\sum\)</span> notation and using subscripts <span class="math inline">\(i\)</span>). When we use the <code>sd()</code> function in R, it is using the square root of this function in the background: <span class="math inline">\(s= \sqrt{s^2} = \sqrt{\frac{\sum_{i = 1}^n(x_i - \bar{x})^2}{(n-1)}}\)</span>. Until now, we have simply used this estimator without reason. You might ask: why is this divided by <span class="math inline">\(n – 1\)</span> instead of simply by <span class="math inline">\(n\)</span> like the formula for the mean (i.e. <span class="math inline">\(\frac{\sum x_i}{n}\)</span>)? To see why, let’s look at an example.</p>
+<p>Recall that we have used <em>standard deviation</em> as a summary statistic for how spread out data is. <strong>Variance</strong> is simply standard deviation <em>squared</em>, and thus it is also a measure of spread. The sample standard deviation is usually denoted by the letter <span class="math inline">\(s\)</span>, and sample variance by <span class="math inline">\(s^2\)</span>. These are estimators for the population standard deviation (denoted <span class="math inline">\(\sigma\)</span>) and the population variance (denoted <span class="math inline">\(\sigma^2\)</span>). We estimate the sample variance using <span class="math inline">\(s^2= \frac{\sum_{i = 1}^n(x_i - \bar{x})^2}{(n-1)}\)</span>, where <span class="math inline">\(n\)</span> is the sample size (check out <a href="A-appendixA.html#appendixA">A</a> if you are unfamiliar with the <span class="math inline">\(\sum\)</span> notation and using subscripts <span class="math inline">\(i\)</span>). When we use the <code>sd()</code> function in R, it is using the square root of this function in the background: <span class="math inline">\(s= \sqrt{s^2} = \sqrt{\frac{\sum_{i = 1}^n(x_i - \bar{x})^2}{(n-1)}}\)</span>. Until now, we have simply used this estimator without reason. You might ask: why is this divided by <span class="math inline">\(n – 1\)</span> instead of simply by <span class="math inline">\(n\)</span> like the formula for the mean (i.e. <span class="math inline">\(\frac{\sum x_i}{n}\)</span>)? To see why, let’s look at an example.</p>
 <p>The <code>gapminder</code> dataset in the <code>dslabs</code> package has life expectancy data on 185 countries in 2016. We will consider these 185 countries to be our population. The true variance of life expectancy in this population is <span class="math inline">\(\sigma^2 = 57.5\)</span>.</p>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb288-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;gapminder&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;dslabs&quot;</span>)</a>
-<a class="sourceLine" id="cb288-2" data-line-number="2">gapminder_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw">filter</span>(gapminder, year <span class="op">==</span><span class="st"> </span><span class="dv">2016</span>)</a>
-<a class="sourceLine" id="cb288-3" data-line-number="3">gapminder_<span class="dv">2016</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb288-4" data-line-number="4"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">sigma2 =</span> <span class="kw">var</span>(life_expectancy))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;gapminder&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;dslabs&quot;</span>)
+gapminder_<span class="dv">2016</span> &lt;-<span class="st"> </span><span class="kw">filter</span>(gapminder, year <span class="op">==</span><span class="st"> </span><span class="dv">2016</span>)
+gapminder_<span class="dv">2016</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">sigma2 =</span> <span class="kw">var</span>(life_expectancy))</code></pre></div>
 <pre><code>  sigma2
 1   57.5</code></pre>
 <p>Let’s draw 10,000 repeated samples of n = 5 countries from this population. The data for the first 2 samples (replicates) is shown in <a href="9-sampling.html#tab:s2-bias">9.4</a>.</p>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb290-1" data-line-number="1">samples &lt;-<span class="st"> </span><span class="kw">rep_sample_n</span>(gapminder_<span class="dv">2016</span>, <span class="dt">size =</span> <span class="dv">5</span>, <span class="dt">reps =</span> <span class="dv">10000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb290-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(replicate, country, year, life_expectancy, continent, region)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">samples &lt;-<span class="st"> </span><span class="kw">rep_sample_n</span>(gapminder_<span class="dv">2016</span>, <span class="dt">size =</span> <span class="dv">5</span>, <span class="dt">reps =</span> <span class="dv">10000</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(replicate, country, year, life_expectancy, continent, region)</code></pre></div>
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:s2-bias">TABLE 9.4: </span>Life expectancy data for 2 out of 10,000 samples of size n = 5 countries
@@ -1484,11 +1456,11 @@ Western Africa
 <li><p><span class="math inline">\(s_n^2= \frac{\sum(x_i - \bar{x})^2}{n}\)</span></p></li>
 <li><p><span class="math inline">\(s^2= \frac{\sum(x_i - \bar{x})^2}{(n-1)}\)</span></p></li>
 </ol>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb291-1" data-line-number="1">n &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb291-2" data-line-number="2">variances &lt;-<span class="st"> </span>samples <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb291-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(replicate) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb291-4" data-line-number="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">s2_n =</span> <span class="kw">sum</span>((life_expectancy <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(life_expectancy))<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>n, </a>
-<a class="sourceLine" id="cb291-5" data-line-number="5">            <span class="dt">s2 =</span> <span class="kw">sum</span>((life_expectancy <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(life_expectancy))<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">5</span>
+variances &lt;-<span class="st"> </span>samples <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(replicate) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">s2_n =</span> <span class="kw">sum</span>((life_expectancy <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(life_expectancy))<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>n, 
+            <span class="dt">s2 =</span> <span class="kw">sum</span>((life_expectancy <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(life_expectancy))<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</code></pre></div>
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:s2-bias-2">TABLE 9.5: </span>Sample variances of life expectancy for first 10 samples
@@ -1620,27 +1592,27 @@ s2
 </tbody>
 </table>
 <p>Table <a href="9-sampling.html#tab:s2-bias-2">9.5</a> shows the results for the first 10 samples. Let’s look at the average of <span class="math inline">\(s_n^2\)</span> and <span class="math inline">\(s^2\)</span> across all 10,000 samples.</p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb292-1" data-line-number="1">variances <span class="op">%&gt;%</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb292-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_s2_n =</span> <span class="kw">mean</span>(s2_n),</a>
-<a class="sourceLine" id="cb292-3" data-line-number="3">            <span class="dt">mean_s2   =</span> <span class="kw">mean</span>(s2))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">variances <span class="op">%&gt;%</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_s2_n =</span> <span class="kw">mean</span>(s2_n),
+            <span class="dt">mean_s2   =</span> <span class="kw">mean</span>(s2))</code></pre></div>
 <pre><code># A tibble: 1 x 2
   mean_s2_n mean_s2
       &lt;dbl&gt;   &lt;dbl&gt;
 1      45.9    57.4</code></pre>
 <p>Remember that the true value of the variance in this population is <span class="math inline">\(\sigma^2 = 57.5\)</span>. We can see that <span class="math inline">\(s_n^2\)</span> is biased; on average it is equal to 45.913. By dividing by <span class="math inline">\(n – 1\)</span> instead of <span class="math inline">\(n\)</span>, however, the bias is removed; the average value of <span class="math inline">\(s^2\)</span> = 57.391. Therefore we use <span class="math inline">\(s^2= \frac{\sum(x_i - \bar{x})^2}{(n-1)}\)</span> as our usual estimator for <span class="math inline">\(\sigma^2\)</span> because it is unbiased.</p>
 <p>In Figure <a href="9-sampling.html#fig:s2-bias-3">9.11</a> we visualize the sampling distribution of <span class="math inline">\(s_n^2\)</span> and <span class="math inline">\(s^2\)</span>. The black dotted line corresponds to the population variance (<span class="math inline">\(\sigma^2\)</span>), and we can see that the mean of the <span class="math inline">\(s^2\)</span>s line up with it very well (blue vertical line), but on average the <span class="math inline">\(s_n^2\)</span>s are an underestimate (red vertical line).</p>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb294-1" data-line-number="1"><span class="kw">ggplot</span>(variances) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb294-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> s2_n, <span class="dt">fill =</span> <span class="st">&quot;red&quot;</span>), <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb294-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> s2, <span class="dt">fill =</span> <span class="st">&quot;blue&quot;</span>), <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb294-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">mean</span>(variances<span class="op">$</span>s2_n), <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb294-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">mean</span>(variances<span class="op">$</span>s2), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb294-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">var</span>(gapminder_<span class="dv">2016</span><span class="op">$</span>life_expectancy), <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb294-7" data-line-number="7"><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">name=</span><span class="st">&quot;Estimator&quot;</span>, <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&#39;blue&#39;</span> =<span class="st"> &#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span> =<span class="st"> &#39;red&#39;</span>), </a>
-<a class="sourceLine" id="cb294-8" data-line-number="8">          <span class="dt">labels =</span> <span class="kw">expression</span>(s<span class="op">^</span><span class="dv">2</span>, s[n]<span class="op">^</span><span class="dv">2</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb294-9" data-line-number="9"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sample variance estimate&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb294-10" data-line-number="10"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Number of samples&quot;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(variances) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> s2_n, <span class="dt">fill =</span> <span class="st">&quot;red&quot;</span>), <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> s2, <span class="dt">fill =</span> <span class="st">&quot;blue&quot;</span>), <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">mean</span>(variances<span class="op">$</span>s2_n), <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">mean</span>(variances<span class="op">$</span>s2), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">var</span>(gapminder_<span class="dv">2016</span><span class="op">$</span>life_expectancy), <span class="dt">linetype =</span> <span class="dv">2</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">name=</span><span class="st">&quot;Estimator&quot;</span>, <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&#39;blue&#39;</span> =<span class="st"> &#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span> =<span class="st"> &#39;red&#39;</span>), 
+          <span class="dt">labels =</span> <span class="kw">expression</span>(s<span class="op">^</span><span class="dv">2</span>, s[n]<span class="op">^</span><span class="dv">2</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sample variance estimate&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Number of samples&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:s2-bias-3"></span>
-<img src="ismaykimkuyper_files/figure-html/s2-bias-3-1.png" alt="Sample variance estimates for 10,000 samples of size n = 5" width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/s2-bias-3-1.png" alt="Sample variance estimates for 10,000 samples of size n = 5" width="\textwidth" />
 <p class="caption">
 FIGURE 9.11: Sample variance estimates for 10,000 samples of size n = 5
 </p>
@@ -1682,9 +1654,7 @@ FIGURE 9.12: Bias vs. Precision
 <div id="standard-errors-based-on-theory" class="section level3">
 <h3><span class="header-section-number">9.5.1</span> Standard Errors based on Theory</h3>
 <p>In Section <a href="9-sampling.html#precision">9.4.3</a> we explained that the standard error gives you a sense of how far from the average value an estimate might be in an observed sample. In simulations, you could see that a wide distribution meant a large standard error, while a narrow distribution meant a small standard error. We could see this relationship by beginning with a case in which we knew the right answer (e.g., the population mean) and then simulating random samples of the same size, estimating this parameter in each possible sample.</p>
-<p>But we can be more precise than this. Using mathematical properties of the normal distribution, a formula can be derived for this standard error. For example, for the sample mean, the standard error is,
-<span class="math display">\[SE(\bar{x}) = \frac{\sigma}{\sqrt{n}} = \frac{s}{\sqrt{n}},\]</span>
-where <span class="math inline">\(s = \sqrt{\frac{\sum (x_i – \bar{x})^2}{n – 1}}\)</span> is the sample standard deviation.</p>
+<p>But we can be more precise than this. Using mathematical properties of the normal distribution, a formula can be derived for this standard error. For example, for the sample mean, the standard error is, <span class="math display">\[SE(\bar{x}) = \frac{\sigma}{\sqrt{n}} = \frac{s}{\sqrt{n}},\]</span> where <span class="math inline">\(s = \sqrt{\frac{\sum (x_i – \bar{x})^2}{n – 1}}\)</span> is the sample standard deviation.</p>
 <p>Note that this standard error is a function of both the spread of the underlying data (the <span class="math inline">\(x_i\)</span>’s) and the sample size (<span class="math inline">\(n\)</span>). We will discuss more about the role of sample size in Section <a href="9-sampling.html#size">9.6</a>.</p>
 <p>In Table <a href="9-sampling.html#tab:SE-table-ch-9">9.6</a> we provide properties of some estimators, including their standard errors, for many common statistics. Note that this is not exhaustive – there are many more estimators in the world of statistics, but the ones listed here are common and provide a solid introduction.</p>
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
@@ -1844,26 +1814,23 @@ Normal
 </ul>
 <p>At this point, this is all you know, but in Chapters <a href="10-CIs.html#CIs">10</a> – <a href="12-hypothesis-tests.html#hypothesis-tests">12</a>, we will put these properties to good use.</p>
 </div>
-<div id="standardization-1" class="section level3">
+<div id="standardization" class="section level3">
 <h3><span class="header-section-number">9.5.2</span> Standardization</h3>
 <p>In order to make inferences, there is one additional step – <strong>standardization</strong>. Standardization is a useful statistical tool, in general, as it allows us to put measures that are on different scales all onto the same scale. You are already familiar with standardized measures – e.g., proportions and percentages – which allow you to make comparisons more easily. The idea is similar here.</p>
-<p>To standardize, we take an estimate and divide it by its standard error, i.e.,
-<span class="math display">\[STAT = \frac{Estimate}{Standard \ \  Error}\]</span>
-Note that you can calculate this statistic based on only values in your sample. For example, for the sample mean discussed previously, we would use:
-<span class="math display">\[STAT = \frac{\bar{x}}{SE(\bar{x})} = \frac{\bar{x}}{\frac{s}{\sqrt{n}}} = \frac{\sqrt{n}*\bar{x}}{s} =  
+<p>To standardize, we take an estimate and divide it by its standard error, i.e., <span class="math display">\[STAT = \frac{Estimate}{Standard \ \  Error}\]</span> Note that you can calculate this statistic based on only values in your sample. For example, for the sample mean discussed previously, we would use: <span class="math display">\[STAT = \frac{\bar{x}}{SE(\bar{x})} = \frac{\bar{x}}{\frac{s}{\sqrt{n}}} = \frac{\sqrt{n}*\bar{x}}{s} =  
                  \frac{\sqrt{10}*5.2}{{2.1}} = 7.83\]</span></p>
 <p>As another example, recall in Chapter <a href="5-regression.html#regression">5</a> when we fit the regression model:</p>
 <p><span class="math display">\[\widehat{score} = b_0 + b_1 \cdot\text{bty avg}\]</span></p>
 <p>and found <span class="math inline">\(b_1 = 0.0666\)</span>. Using the formulas in Table <a href="9-sampling.html#tab:SE-table-ch-9">9.6</a>, we can calculate the standard error of <span class="math inline">\(b_1\)</span> by <span class="math display">\[SE(b_1) = \sqrt{\frac{s_y^2}{(n-1)s_x^2}}\]</span></p>
 <p>Here, <span class="math inline">\(s_y^2\)</span> refers to the variance of the outcome variable <span class="math inline">\(y\)</span>, which in this case is <code>score</code>, and <span class="math inline">\(s_x^2\)</span> refers to the variance in the explanatory variable <span class="math inline">\(x\)</span>, which in this case is <code>bty_avg</code>. We can use our data wrangling skills to calculate these quantities.</p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb295-1" data-line-number="1">evals_ch5 &lt;-<span class="st"> </span>evals <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb295-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(score, bty_avg, age)</a>
-<a class="sourceLine" id="cb295-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb295-4" data-line-number="4">evals_ch5 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb295-5" data-line-number="5"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb295-6" data-line-number="6">            <span class="dt">sy2 =</span> <span class="kw">var</span>(score),</a>
-<a class="sourceLine" id="cb295-7" data-line-number="7">            <span class="dt">sx2 =</span> <span class="kw">var</span>(bty_avg)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb295-8" data-line-number="8"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">SE_b1 =</span> <span class="kw">sqrt</span>(sy2<span class="op">/</span>((n<span class="dv">-1</span>)<span class="op">*</span>sx2)))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">evals_ch5 &lt;-<span class="st"> </span>evals <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(score, bty_avg, age)
+
+evals_ch5 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>(),
+            <span class="dt">sy2 =</span> <span class="kw">var</span>(score),
+            <span class="dt">sx2 =</span> <span class="kw">var</span>(bty_avg)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">SE_b1 =</span> <span class="kw">sqrt</span>(sy2<span class="op">/</span>((n<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span>sx2)))</code></pre></div>
 <pre><code># A tibble: 1 x 4
       n   sy2   sx2  SE_b1
   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
@@ -1897,14 +1864,14 @@ FIGURE 9.13: Empirical Rule: property of the Normal Distribution
 </ul>
 <p>Working on this type of standardized scale makes it easy for us to quickly determine where in the distribution we expect a value to fall. For example, if we have a value of 2.5, we know it will fall fairly far out in the right tail of the distribution. Or if we have a value of -0.5, we know it falls slightly to the left of center. This is displayed in Figure <a href="9-sampling.html#fig:STAT-values">9.14</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:STAT-values"></span>
-<img src="ismaykimkuyper_files/figure-html/STAT-values-1.png" alt="N(0,1) example values: STAT = -0.5, STAT = 2.5" width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/STAT-values-1.png" alt="N(0,1) example values: STAT = -0.5, STAT = 2.5" width="\textwidth" />
 <p class="caption">
 FIGURE 9.14: N(0,1) example values: STAT = -0.5, STAT = 2.5
 </p>
 </div>
 <p>In general, the t-distribution has the same shape as the Standard Normal distribution (symmetric, unimodal), but it has <strong>heavier tails</strong>. As sample size increases (and therefore degrees of freedom increases), the t-distribution becomes a very close approximation to the Normal distribution.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-268"></span>
-<img src="ismaykimkuyper_files/figure-html/unnamed-chunk-268-1.png" alt="t-distribution with example 95% cutoff values" width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-268-1.png" alt="t-distribution with example 95% cutoff values" width="\textwidth" />
 <p class="caption">
 FIGURE 9.15: t-distribution with example 95% cutoff values
 </p>
@@ -1931,9 +1898,9 @@ FIGURE 9.15: t-distribution with example 95% cutoff values
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><img src="images/sampling/shovel_025.jpg" style="height:1.7in" /></td>
-<td align="center"><img src="images/sampling/shovel_050.jpg" style="height:1.7in" /></td>
-<td align="center"><img src="images/sampling/shovel_100.jpg" style="height:1.7in" /></td>
+<td align="center"><img src="images/sampling/shovel_025.jpg" height="163" /></td>
+<td align="center"><img src="images/sampling/shovel_050.jpg" height="163" /></td>
+<td align="center"><img src="images/sampling/shovel_100.jpg" height="163" /></td>
 </tr>
 </tbody>
 </table>
@@ -1944,71 +1911,71 @@ FIGURE 9.15: t-distribution with example 95% cutoff values
 <li>Visualize the distribution of these 10,000 proportion red using a histogram.</li>
 </ol>
 <p>Run each of the following code segments individually and then compare the three resulting histograms.</p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb297-1" data-line-number="1"><span class="co"># Segment 1: sample size = 25 ------------------------------</span></a>
-<a class="sourceLine" id="cb297-2" data-line-number="2"><span class="co"># 1.a) Virtually use shovel 10,000 times</span></a>
-<a class="sourceLine" id="cb297-3" data-line-number="3">virtual_samples_<span class="dv">25</span> &lt;-<span class="st"> </span>bowl <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb297-4" data-line-number="4"><span class="st">  </span><span class="kw">rep_sample_n</span>(<span class="dt">size =</span> <span class="dv">25</span>, <span class="dt">reps =</span> <span class="dv">10000</span>)</a>
-<a class="sourceLine" id="cb297-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb297-6" data-line-number="6"><span class="co"># 1.b) Compute resulting 10,000 replicates of proportion red</span></a>
-<a class="sourceLine" id="cb297-7" data-line-number="7">virtual_prop_red_<span class="dv">25</span> &lt;-<span class="st"> </span>virtual_samples_<span class="dv">25</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb297-8" data-line-number="8"><span class="st">  </span><span class="kw">group_by</span>(replicate) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb297-9" data-line-number="9"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">red =</span> <span class="kw">sum</span>(color <span class="op">==</span><span class="st"> &quot;red&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb297-10" data-line-number="10"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop_red =</span> red <span class="op">/</span><span class="st"> </span><span class="dv">25</span>)</a>
-<a class="sourceLine" id="cb297-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb297-12" data-line-number="12"><span class="co"># 1.c) Plot distribution via a histogram</span></a>
-<a class="sourceLine" id="cb297-13" data-line-number="13"><span class="kw">ggplot</span>(virtual_prop_red_<span class="dv">25</span>, <span class="kw">aes</span>(<span class="dt">x =</span> prop_red)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb297-14" data-line-number="14"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.05</span>, <span class="dt">boundary =</span> <span class="fl">0.4</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb297-15" data-line-number="15"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Proportion of 25 balls that were red&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;25&quot;</span>) </a>
-<a class="sourceLine" id="cb297-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb297-17" data-line-number="17"><span class="co"># Segment 2: sample size = 50 ------------------------------</span></a>
-<a class="sourceLine" id="cb297-18" data-line-number="18"><span class="co"># 2.a) Virtually use shovel 10,000 times</span></a>
-<a class="sourceLine" id="cb297-19" data-line-number="19">virtual_samples_<span class="dv">50</span> &lt;-<span class="st"> </span>bowl <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb297-20" data-line-number="20"><span class="st">  </span><span class="kw">rep_sample_n</span>(<span class="dt">size =</span> <span class="dv">50</span>, <span class="dt">reps =</span> <span class="dv">10000</span>)</a>
-<a class="sourceLine" id="cb297-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb297-22" data-line-number="22"><span class="co"># 2.b) Compute resulting 10,000 replicates of proportion red</span></a>
-<a class="sourceLine" id="cb297-23" data-line-number="23">virtual_prop_red_<span class="dv">50</span> &lt;-<span class="st"> </span>virtual_samples_<span class="dv">50</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb297-24" data-line-number="24"><span class="st">  </span><span class="kw">group_by</span>(replicate) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb297-25" data-line-number="25"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">red =</span> <span class="kw">sum</span>(color <span class="op">==</span><span class="st"> &quot;red&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb297-26" data-line-number="26"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop_red =</span> red <span class="op">/</span><span class="st"> </span><span class="dv">50</span>)</a>
-<a class="sourceLine" id="cb297-27" data-line-number="27"></a>
-<a class="sourceLine" id="cb297-28" data-line-number="28"><span class="co"># 2.c) Plot distribution via a histogram</span></a>
-<a class="sourceLine" id="cb297-29" data-line-number="29"><span class="kw">ggplot</span>(virtual_prop_red_<span class="dv">50</span>, <span class="kw">aes</span>(<span class="dt">x =</span> prop_red)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb297-30" data-line-number="30"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.05</span>, <span class="dt">boundary =</span> <span class="fl">0.4</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb297-31" data-line-number="31"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Proportion of 50 balls that were red&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;50&quot;</span>)  </a>
-<a class="sourceLine" id="cb297-32" data-line-number="32"></a>
-<a class="sourceLine" id="cb297-33" data-line-number="33"><span class="co"># Segment 3: sample size = 100 ------------------------------</span></a>
-<a class="sourceLine" id="cb297-34" data-line-number="34"><span class="co"># 3.a) Virtually using shovel with 100 slots 10,000 times</span></a>
-<a class="sourceLine" id="cb297-35" data-line-number="35">virtual_samples_<span class="dv">100</span> &lt;-<span class="st"> </span>bowl <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb297-36" data-line-number="36"><span class="st">  </span><span class="kw">rep_sample_n</span>(<span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">reps =</span> <span class="dv">10000</span>)</a>
-<a class="sourceLine" id="cb297-37" data-line-number="37"></a>
-<a class="sourceLine" id="cb297-38" data-line-number="38"><span class="co"># 3.b) Compute resulting 10,000 replicates of proportion red</span></a>
-<a class="sourceLine" id="cb297-39" data-line-number="39">virtual_prop_red_<span class="dv">100</span> &lt;-<span class="st"> </span>virtual_samples_<span class="dv">100</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb297-40" data-line-number="40"><span class="st">  </span><span class="kw">group_by</span>(replicate) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb297-41" data-line-number="41"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">red =</span> <span class="kw">sum</span>(color <span class="op">==</span><span class="st"> &quot;red&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb297-42" data-line-number="42"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop_red =</span> red <span class="op">/</span><span class="st"> </span><span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb297-43" data-line-number="43"></a>
-<a class="sourceLine" id="cb297-44" data-line-number="44"><span class="co"># 3.c) Plot distribution via a histogram</span></a>
-<a class="sourceLine" id="cb297-45" data-line-number="45"><span class="kw">ggplot</span>(virtual_prop_red_<span class="dv">100</span>, <span class="kw">aes</span>(<span class="dt">x =</span> prop_red)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb297-46" data-line-number="46"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.05</span>, <span class="dt">boundary =</span> <span class="fl">0.4</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb297-47" data-line-number="47"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Proportion of 100 balls that were red&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;100&quot;</span>) </a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Segment 1: sample size = 25 ------------------------------</span>
+<span class="co"># 1.a) Virtually use shovel 10,000 times</span>
+virtual_samples_<span class="dv">25</span> &lt;-<span class="st"> </span>bowl <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rep_sample_n</span>(<span class="dt">size =</span> <span class="dv">25</span>, <span class="dt">reps =</span> <span class="dv">10000</span>)
+
+<span class="co"># 1.b) Compute resulting 10,000 replicates of proportion red</span>
+virtual_prop_red_<span class="dv">25</span> &lt;-<span class="st"> </span>virtual_samples_<span class="dv">25</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(replicate) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">red =</span> <span class="kw">sum</span>(color <span class="op">==</span><span class="st"> &quot;red&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop_red =</span> red <span class="op">/</span><span class="st"> </span><span class="dv">25</span>)
+
+<span class="co"># 1.c) Plot distribution via a histogram</span>
+<span class="kw">ggplot</span>(virtual_prop_red_<span class="dv">25</span>, <span class="kw">aes</span>(<span class="dt">x =</span> prop_red)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.05</span>, <span class="dt">boundary =</span> <span class="fl">0.4</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Proportion of 25 balls that were red&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;25&quot;</span>) 
+
+<span class="co"># Segment 2: sample size = 50 ------------------------------</span>
+<span class="co"># 2.a) Virtually use shovel 10,000 times</span>
+virtual_samples_<span class="dv">50</span> &lt;-<span class="st"> </span>bowl <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rep_sample_n</span>(<span class="dt">size =</span> <span class="dv">50</span>, <span class="dt">reps =</span> <span class="dv">10000</span>)
+
+<span class="co"># 2.b) Compute resulting 10,000 replicates of proportion red</span>
+virtual_prop_red_<span class="dv">50</span> &lt;-<span class="st"> </span>virtual_samples_<span class="dv">50</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(replicate) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">red =</span> <span class="kw">sum</span>(color <span class="op">==</span><span class="st"> &quot;red&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop_red =</span> red <span class="op">/</span><span class="st"> </span><span class="dv">50</span>)
+
+<span class="co"># 2.c) Plot distribution via a histogram</span>
+<span class="kw">ggplot</span>(virtual_prop_red_<span class="dv">50</span>, <span class="kw">aes</span>(<span class="dt">x =</span> prop_red)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.05</span>, <span class="dt">boundary =</span> <span class="fl">0.4</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Proportion of 50 balls that were red&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;50&quot;</span>)  
+
+<span class="co"># Segment 3: sample size = 100 ------------------------------</span>
+<span class="co"># 3.a) Virtually using shovel with 100 slots 10,000 times</span>
+virtual_samples_<span class="dv">100</span> &lt;-<span class="st"> </span>bowl <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rep_sample_n</span>(<span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">reps =</span> <span class="dv">10000</span>)
+
+<span class="co"># 3.b) Compute resulting 10,000 replicates of proportion red</span>
+virtual_prop_red_<span class="dv">100</span> &lt;-<span class="st"> </span>virtual_samples_<span class="dv">100</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(replicate) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">red =</span> <span class="kw">sum</span>(color <span class="op">==</span><span class="st"> &quot;red&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop_red =</span> red <span class="op">/</span><span class="st"> </span><span class="dv">100</span>)
+
+<span class="co"># 3.c) Plot distribution via a histogram</span>
+<span class="kw">ggplot</span>(virtual_prop_red_<span class="dv">100</span>, <span class="kw">aes</span>(<span class="dt">x =</span> prop_red)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.05</span>, <span class="dt">boundary =</span> <span class="fl">0.4</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Proportion of 100 balls that were red&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;100&quot;</span>) </code></pre></div>
 <p>For easy comparison, we present the three resulting histograms in a single row with matching x and y axes in Figure <a href="9-sampling.html#fig:comparing-sampling-distributions">9.16</a>. What do you observe?</p>
 <div class="figure" style="text-align: center"><span id="fig:comparing-sampling-distributions"></span>
-<img src="ismaykimkuyper_files/figure-html/comparing-sampling-distributions-1.png" alt="Comparing the distributions of proportion red for different sample sizes" width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/comparing-sampling-distributions-1.png" alt="Comparing the distributions of proportion red for different sample sizes" width="\textwidth" />
 <p class="caption">
 FIGURE 9.16: Comparing the distributions of proportion red for different sample sizes
 </p>
 </div>
 <p>Observe that as the sample size increases, the spread of the 10,000 replicates of the proportion red decreases. In other words, as the sample size increases, there are less differences due to sampling variation and the distribution centers more tightly around the same value. Eyeballing Figure <a href="9-sampling.html#fig:comparing-sampling-distributions">9.16</a>, things appear to center tightly around roughly 40%.</p>
 <p>We can be numerically explicit about the amount of spread in our 3 sets of 10,000 values of <code>prop_red</code> by computing the standard deviation for each of the three sampling distributions. For all three sample sizes, let’s compute the standard deviation of the 10,000 proportions red by running the following data wrangling code that uses the <code>sd()</code> summary function.</p>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb298-1" data-line-number="1"><span class="co"># n = 25</span></a>
-<a class="sourceLine" id="cb298-2" data-line-number="2">virtual_prop_red_<span class="dv">25</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb298-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">SE =</span> <span class="kw">sd</span>(prop_red))</a>
-<a class="sourceLine" id="cb298-4" data-line-number="4"><span class="co"># n = 50</span></a>
-<a class="sourceLine" id="cb298-5" data-line-number="5">virtual_prop_red_<span class="dv">50</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb298-6" data-line-number="6"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">SE =</span> <span class="kw">sd</span>(prop_red))</a>
-<a class="sourceLine" id="cb298-7" data-line-number="7"><span class="co"># n = 100</span></a>
-<a class="sourceLine" id="cb298-8" data-line-number="8">virtual_prop_red_<span class="dv">100</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb298-9" data-line-number="9"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">SE =</span> <span class="kw">sd</span>(prop_red))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># n = 25</span>
+virtual_prop_red_<span class="dv">25</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">SE =</span> <span class="kw">sd</span>(prop_red))
+<span class="co"># n = 50</span>
+virtual_prop_red_<span class="dv">50</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">SE =</span> <span class="kw">sd</span>(prop_red))
+<span class="co"># n = 100</span>
+virtual_prop_red_<span class="dv">100</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">SE =</span> <span class="kw">sd</span>(prop_red))</code></pre></div>
 <p>Let’s compare these 3 measures of spread of the distributions in Table <a href="9-sampling.html#tab:comparing-n">9.7</a>.</p>
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
@@ -2089,44 +2056,44 @@ Importantly, note that the $SE$ is a function of sample size (as seen in Table \
 <div id="clt-example" class="section level3">
 <h3><span class="header-section-number">9.7.2</span> CLT example</h3>
 <p>Let’s return to the <code>gapminder</code> dataset, this time looking at the variable <code>infant_mortality</code>. We’ll first subset our data to only include the year 2015, and we’ll exclude the 7 countries that have missing data for <code>infant_mortality</code>. Figure <a href="9-sampling.html#fig:infant-mortality">9.17</a> shows the distribution of <code>infant_mortality</code>, which is skewed right.</p>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb299-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;gapminder&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;dslabs&quot;</span>) </a>
-<a class="sourceLine" id="cb299-2" data-line-number="2">gapminder_<span class="dv">2015</span> &lt;-<span class="st"> </span>gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb299-3" data-line-number="3"><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>, <span class="op">!</span><span class="kw">is.na</span>(infant_mortality))</a>
-<a class="sourceLine" id="cb299-4" data-line-number="4"><span class="kw">ggplot</span>(gapminder_<span class="dv">2015</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb299-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> infant_mortality), <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>)  <span class="op">+</span></a>
-<a class="sourceLine" id="cb299-6" data-line-number="6"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Infant mortality per 1,000 live births&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb299-7" data-line-number="7"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Number of countries&quot;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;gapminder&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;dslabs&quot;</span>) 
+gapminder_<span class="dv">2015</span> &lt;-<span class="st"> </span>gapminder <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>, <span class="op">!</span><span class="kw">is.na</span>(infant_mortality))
+<span class="kw">ggplot</span>(gapminder_<span class="dv">2015</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> infant_mortality), <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>)  <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Infant mortality per 1,000 live births&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Number of countries&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:infant-mortality"></span>
-<img src="ismaykimkuyper_files/figure-html/infant-mortality-1.png" alt="Infant mortality rates per 1,000 live births across 178 countries in 2015" width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/infant-mortality-1.png" alt="Infant mortality rates per 1,000 live births across 178 countries in 2015" width="\textwidth" />
 <p class="caption">
 FIGURE 9.17: Infant mortality rates per 1,000 live births across 178 countries in 2015
 </p>
 </div>
 <p>Let’s run 3 simulations where we take 10,000 samples of size <span class="math inline">\(n = 5\)</span>, <span class="math inline">\(n = 30\)</span> and <span class="math inline">\(n = 100\)</span> and plot the sampling distribution of the mean for each.</p>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb300-1" data-line-number="1">sample_<span class="dv">5</span> &lt;-<span class="st"> </span><span class="kw">rep_sample_n</span>(gapminder_<span class="dv">2015</span>, <span class="dt">size =</span> <span class="dv">5</span>, <span class="dt">reps =</span> <span class="dv">10000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb300-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(replicate) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb300-3" data-line-number="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_infant_mortality =</span> <span class="kw">mean</span>(infant_mortality)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb300-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb300-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb300-6" data-line-number="6">sample_<span class="dv">30</span> &lt;-<span class="st"> </span><span class="kw">rep_sample_n</span>(gapminder_<span class="dv">2015</span>, <span class="dt">size =</span> <span class="dv">30</span>, <span class="dt">reps =</span> <span class="dv">10000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb300-7" data-line-number="7"><span class="st">  </span><span class="kw">group_by</span>(replicate) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb300-8" data-line-number="8"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_infant_mortality =</span> <span class="kw">mean</span>(infant_mortality)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb300-9" data-line-number="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n =</span> <span class="dv">30</span>)</a>
-<a class="sourceLine" id="cb300-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb300-11" data-line-number="11">sample_<span class="dv">100</span> &lt;-<span class="st"> </span><span class="kw">rep_sample_n</span>(gapminder_<span class="dv">2015</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">reps =</span> <span class="dv">10000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb300-12" data-line-number="12"><span class="st">  </span><span class="kw">group_by</span>(replicate) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb300-13" data-line-number="13"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_infant_mortality =</span> <span class="kw">mean</span>(infant_mortality)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb300-14" data-line-number="14"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n =</span> <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb300-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb300-16" data-line-number="16">all_samples &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(sample_<span class="dv">5</span>, sample_<span class="dv">30</span>, sample_<span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb300-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb300-18" data-line-number="18"><span class="kw">ggplot</span>(all_samples) <span class="op">+</span></a>
-<a class="sourceLine" id="cb300-19" data-line-number="19"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> mean_infant_mortality), <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">bins =</span> <span class="dv">50</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb300-20" data-line-number="20"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>n, <span class="dt">ncol =</span> <span class="dv">1</span>, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb300-21" data-line-number="21"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Mean infant mortality&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb300-22" data-line-number="22"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Number of samples&quot;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample_<span class="dv">5</span> &lt;-<span class="st"> </span><span class="kw">rep_sample_n</span>(gapminder_<span class="dv">2015</span>, <span class="dt">size =</span> <span class="dv">5</span>, <span class="dt">reps =</span> <span class="dv">10000</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(replicate) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_infant_mortality =</span> <span class="kw">mean</span>(infant_mortality)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n =</span> <span class="dv">5</span>)
+
+sample_<span class="dv">30</span> &lt;-<span class="st"> </span><span class="kw">rep_sample_n</span>(gapminder_<span class="dv">2015</span>, <span class="dt">size =</span> <span class="dv">30</span>, <span class="dt">reps =</span> <span class="dv">10000</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(replicate) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_infant_mortality =</span> <span class="kw">mean</span>(infant_mortality)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n =</span> <span class="dv">30</span>)
+
+sample_<span class="dv">100</span> &lt;-<span class="st"> </span><span class="kw">rep_sample_n</span>(gapminder_<span class="dv">2015</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">reps =</span> <span class="dv">10000</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(replicate) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_infant_mortality =</span> <span class="kw">mean</span>(infant_mortality)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n =</span> <span class="dv">100</span>)
+
+all_samples &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(sample_<span class="dv">5</span>, sample_<span class="dv">30</span>, sample_<span class="dv">100</span>)
+
+<span class="kw">ggplot</span>(all_samples) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> mean_infant_mortality), <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">bins =</span> <span class="dv">50</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>n, <span class="dt">ncol =</span> <span class="dv">1</span>, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Mean infant mortality&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Number of samples&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:infant-mortality-2"></span>
-<img src="ismaykimkuyper_files/figure-html/infant-mortality-2-1.png" alt="Sampling distributions of the mean infant mortality for various sample sizes" width="\textwidth" />
+<img src="tipton_kitzgerald_kuyper_files/figure-html/infant-mortality-2-1.png" alt="Sampling distributions of the mean infant mortality for various sample sizes" width="\textwidth" />
 <p class="caption">
 FIGURE 9.18: Sampling distributions of the mean infant mortality for various sample sizes
 </p>
@@ -2213,7 +2180,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))

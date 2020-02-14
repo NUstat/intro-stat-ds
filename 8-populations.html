@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 Populations and Generalizability | Introduction to Statistics and Data Science</title>
   <meta name="description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
-  <meta name="generator" content="bookdown 0.17.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 Populations and Generalizability | Introduction to Statistics and Data Science" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Chester Ismay, Albert Y. Kim, Arend M. Kuyper, Elizabeth Tipton, and Kaitlyn G. Fitzgerald" />
 
 
-<meta name="date" content="2020-02-03" />
+<meta name="date" content="2020-02-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -62,68 +62,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -300,7 +273,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3.3" data-path="6-multiple-regression.html"><a href="6-multiple-regression.html#simpsonsparadox"><i class="fa fa-check"></i><b>6.3.3</b> Simpson’s Paradox</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="6-multiple-regression.html"><a href="6-multiple-regression.html#conclusion-5"><i class="fa fa-check"></i><b>6.4</b> Conclusion</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="6-multiple-regression.html"><a href="6-multiple-regression.html#whats-to-come-4"><i class="fa fa-check"></i><b>6.4.1</b> What’s to come?</a></li>
+<li class="chapter" data-level="6.4.1" data-path="2-viz.html"><a href="2-viz.html#whats-to-come-3"><i class="fa fa-check"></i><b>6.4.1</b> What’s to come?</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>III Statistical Theory</b></span></li>
@@ -323,7 +296,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="8-populations.html"><a href="8-populations.html#needed-packages-6"><i class="fa fa-check"></i>Needed packages</a></li>
 <li class="chapter" data-level="8.1" data-path="8-populations.html"><a href="8-populations.html#terminology"><i class="fa fa-check"></i><b>8.1</b> Terminology &amp; Notation</a></li>
 <li class="chapter" data-level="8.2" data-path="8-populations.html"><a href="8-populations.html#sample-selection"><i class="fa fa-check"></i><b>8.2</b> Populations &amp; Sampling</a></li>
-<li class="chapter" data-level="8.3" data-path="8-populations.html"><a href="8-populations.html#imdb"><i class="fa fa-check"></i><b>8.3</b> Movies Example</a><ul>
+<li class="chapter" data-level="8.3" data-path="8-populations.html"><a href="8-populations.html#movie-example"><i class="fa fa-check"></i><b>8.3</b> Movies Example</a><ul>
 <li class="chapter" data-level="8.3.1" data-path="8-populations.html"><a href="8-populations.html#research-question"><i class="fa fa-check"></i><b>8.3.1</b> Research question</a></li>
 <li class="chapter" data-level="8.3.2" data-path="8-populations.html"><a href="8-populations.html#population-of-interest"><i class="fa fa-check"></i><b>8.3.2</b> Population of interest</a></li>
 <li class="chapter" data-level="8.3.3" data-path="8-populations.html"><a href="8-populations.html#development-of-population-frame"><i class="fa fa-check"></i><b>8.3.3</b> Development of population frame</a></li>
@@ -353,7 +326,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="9-sampling.html"><a href="9-sampling.html#standardization"><i class="fa fa-check"></i><b>9.5</b> Standardization, Special Distributions, and Theory</a><ul>
 <li class="chapter" data-level="9.5.1" data-path="9-sampling.html"><a href="9-sampling.html#standard-errors-based-on-theory"><i class="fa fa-check"></i><b>9.5.1</b> Standard Errors based on Theory</a></li>
-<li class="chapter" data-level="9.5.2" data-path="9-sampling.html"><a href="9-sampling.html#standardization-1"><i class="fa fa-check"></i><b>9.5.2</b> Standardization</a></li>
+<li class="chapter" data-level="9.5.2" data-path="9-sampling.html"><a href="9-sampling.html#standardization"><i class="fa fa-check"></i><b>9.5.2</b> Standardization</a></li>
 <li class="chapter" data-level="9.5.3" data-path="9-sampling.html"><a href="9-sampling.html#special-distributions"><i class="fa fa-check"></i><b>9.5.3</b> Special distributions</a></li>
 </ul></li>
 <li class="chapter" data-level="9.6" data-path="9-sampling.html"><a href="9-sampling.html#size"><i class="fa fa-check"></i><b>9.6</b> Sample Size and Sampling Distributions</a><ul>
@@ -392,7 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.2.2" data-path="11-pvalues.html"><a href="11-pvalues.html#p-values"><i class="fa fa-check"></i><b>11.2.2</b> P-values</a></li>
 </ul></li>
 <li class="chapter" data-level="11.3" data-path="11-pvalues.html"><a href="11-pvalues.html#p-value-and-null-distribution-example"><i class="fa fa-check"></i><b>11.3</b> P-value and Null Distribution Example</a><ul>
-<li class="chapter" data-level="11.3.1" data-path="8-populations.html"><a href="8-populations.html#imdb"><i class="fa fa-check"></i><b>11.3.1</b> IMDB data</a></li>
+<li class="chapter" data-level="11.3.1" data-path="11-pvalues.html"><a href="11-pvalues.html#imdb"><i class="fa fa-check"></i><b>11.3.1</b> IMDB data</a></li>
 <li class="chapter" data-level="11.3.2" data-path="11-pvalues.html"><a href="11-pvalues.html#p-values-using-formulas"><i class="fa fa-check"></i><b>11.3.2</b> p-values using formulas</a></li>
 <li class="chapter" data-level="11.3.3" data-path="11-pvalues.html"><a href="11-pvalues.html#t.test"><i class="fa fa-check"></i><b>11.3.3</b> p-values using <code>t.test</code></a></li>
 <li class="chapter" data-level="11.3.4" data-path="11-pvalues.html"><a href="11-pvalues.html#pvalues-regression"><i class="fa fa-check"></i><b>11.3.4</b> p-values using regression</a></li>
@@ -523,7 +496,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <html>
-<img src='https://raw.githubusercontent.com/akuyper/image_hosting/master/nu_official_images/DeptStatistics-LogoShort-HorizPurple.fw.png?token=AJB4JQK753ENZAL3YEPMRP26IFN3Q' alt="Intro to Statistics and Data Science">
+<img src='https://nulib.github.io/moderndive_book/wide_format.png' alt="Intro to Statistics and Data Science">
 </html>
 <div id="populations" class="section level1">
 <h1><span class="header-section-number">Chapter 8</span> Populations and Generalizability</h1>
@@ -532,9 +505,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="needed-packages-6" class="section level3 unnumbered">
 <h3>Needed packages</h3>
 <p>Let’s load all the packages needed for this chapter (this assumes you’ve already installed them). If needed, read Section <a href="1-getting-started.html#packages">1.3</a> for information on how to install and load R packages.</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb255-2" data-line-number="2"><span class="kw">library</span>(skimr)</a>
-<a class="sourceLine" id="cb255-3" data-line-number="3"><span class="kw">library</span>(ggplot2movies)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(skimr)
+<span class="kw">library</span>(ggplot2movies)</code></pre></div>
 </div>
 <div id="terminology" class="section level2">
 <h2><span class="header-section-number">8.1</span> Terminology &amp; Notation</h2>
@@ -719,7 +692,7 @@ Regression slope
 <p>Finally, note that in the examples and data we use in this book and course, we focus on <strong>random sampling with equal probabilities of selection</strong> (i.e. simple random sampling). Methods to account for clustering, stratification, and unequal selection probabilities require use of weights and, sometimes, more complicated models. Courses on survey sampling, regression, and hierarchical linear models will provide more background and details on these cases.</p>
 <hr />
 </div>
-<div id="imdb" class="section level2">
+<div id="movie-example" class="section level2">
 <h2><span class="header-section-number">8.3</span> Movies Example</h2>
 <div id="research-question" class="section level3">
 <h3><span class="header-section-number">8.3.1</span> Research question</h3>
@@ -739,10 +712,10 @@ Regression slope
 <div id="development-of-population-frame" class="section level3">
 <h3><span class="header-section-number">8.3.3</span> Development of population frame</h3>
 <p>We must develop a <strong>population frame</strong> that includes a list of all movies in our population of interest. Thankfully, the IMDb database functions as a <strong>census</strong> of movies, and that data is available in a dataset called <code>movies</code> in the <code>ggplot2movies</code> package. It includes 24 variables with information on 58788 movies and their ratings by users on IMDb. For now, we’ll look at a smaller subset of just 4 of these variables: the title of the movie, the year it was released, its length in minutes, and its average rating on IMDb (out of 10 stars). The full dataset contains information on movies released from 1893 to 2005, so we should filter only the rows for the years relevant to our population of interest. Let’s take a look at this data.</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" data-line-number="1">movies_<span class="dv">30</span>_<span class="dv">99</span> &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb256-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(title, year, length, rating) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb256-3" data-line-number="3"><span class="st">  </span><span class="kw">filter</span>(year <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1930</span> <span class="op">&amp;</span><span class="st"> </span>year <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1999</span>)</a>
-<a class="sourceLine" id="cb256-4" data-line-number="4"><span class="kw">skim</span>(movies_<span class="dv">30</span>_<span class="dv">99</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies_30_<span class="dv">99</span> &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(title, year, length, rating) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(year <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1930</span> <span class="op">&amp;</span><span class="st"> </span>year <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1999</span>)
+<span class="kw">skim</span>(movies_30_<span class="dv">99</span>)</code></pre></div>
 <pre><code>Skim summary statistics
  n obs: 46522 
  n variables: 4 
@@ -761,10 +734,10 @@ Regression slope
    rating       0    46522 46522 5.84 1.53  1 4.9   6 6.9  9.9</code></pre>
 <p>How well does this population frame match our population of interest? Should we be concerned about <em>undercoverage</em> here? The <a href="https://cran.r-project.org/web/packages/ggplot2movies/ggplot2movies.pdf">documentation</a> for the <code>ggplot2movies</code> package indicates that “movies were selected for inclusion if they had a known length and had been rated by at least one imdb user.” This means that any movies that don’t meet these critera will not appear in our population frame and therefore have no chance of ending up in our sample. We can acknowledge this potential source of undercoverage, but movies excluded by these criteria are not likely to be of interest for our question anyway, so we don’t need to be too concerned in this scenario.</p>
 <p>When we skimmed the data, we saw that one movie is as short as 1 minute and one is as long as 5220 minutes. Perhaps we feel like this list includes films that we would not classify as “standard movies,” so in order to eliminate some of these extremes, we decide to narrow our population of interest to any films that are at least 1 hour in length, but at most 3.5 hours in length.</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb258-1" data-line-number="1">movies_<span class="dv">30</span>_<span class="dv">99</span> &lt;-<span class="st"> </span>movies_<span class="dv">30</span>_<span class="dv">99</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb258-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(length <span class="op">&gt;=</span><span class="st"> </span><span class="dv">60</span> <span class="op">&amp;</span><span class="st"> </span>length <span class="op">&lt;=</span><span class="st"> </span><span class="dv">210</span>)</a>
-<a class="sourceLine" id="cb258-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb258-4" data-line-number="4"><span class="kw">skim</span>(movies_<span class="dv">30</span>_<span class="dv">99</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies_30_<span class="dv">99</span> &lt;-<span class="st"> </span>movies_30_<span class="dv">99</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(length <span class="op">&gt;=</span><span class="st"> </span><span class="dv">60</span> <span class="op">&amp;</span><span class="st"> </span>length <span class="op">&lt;=</span><span class="st"> </span><span class="dv">210</span>)
+
+<span class="kw">skim</span>(movies_30_<span class="dv">99</span>)</code></pre></div>
 <pre><code>Skim summary statistics
  n obs: 39123 
  n variables: 4 
@@ -796,9 +769,9 @@ Regression slope
 <p>Now that we’ve solidified our population of interest and our population frame, we can establish a sampling plan for how to take a random sample from this population. Perhaps we decide it is feasible for our research team to watch and record data on 500 movies, so we decide to draw a sample of <span class="math inline">\(n = 500\)</span>. We will demonstrate 3 different random sampling plans, but note that in real life you will make a decision about the most appropriate and feasible plan and only draw one random sample.</p>
 <p><strong>Simple random sampling</strong></p>
 <p>Let’s start by drawing a simple random sample, where each of the 39123 movies have an equal probability of ending up in our sample. We can accomplish this in R using the <code>sample_n()</code> function.</p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb260-1" data-line-number="1">movies_SRS &lt;-<span class="st"> </span>movies_<span class="dv">30</span>_<span class="dv">99</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb260-2" data-line-number="2"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">500</span>)</a>
-<a class="sourceLine" id="cb260-3" data-line-number="3"><span class="kw">glimpse</span>(movies_SRS)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies_SRS &lt;-<span class="st"> </span>movies_30_<span class="dv">99</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">500</span>)
+<span class="kw">glimpse</span>(movies_SRS)</code></pre></div>
 <pre><code>Observations: 500
 Variables: 4
 $ title  &lt;chr&gt; &quot;Anne of Green Gables&quot;, &quot;Dark Age&quot;, &quot;Tevya&quot;, &quot;Cyclone on Horse…
@@ -807,14 +780,14 @@ $ length &lt;int&gt; 78, 91, 93, 60, 105, 98, 100, 102, 87, 78, 120, 122, 91, 87
 $ rating &lt;dbl&gt; 7.1, 4.5, 6.4, 5.6, 6.7, 4.6, 5.2, 3.4, 6.1, 3.5, 7.6, 6.8, 3.…</code></pre>
 <p><strong>Stratified sampling with unequal probability</strong></p>
 <p>Perhaps we expect movies within a particular decade to be more similar to each other than to movies in other decades. In this case, we could take a <em>stratified sample</em> (instead of a simple random sample), where the population is partitioned into sub-groups (i.e. strata) by decade, and a random sample is taken within each decade. In order to accomplish this in R, let’s first create a new decade variable and then use <code>group_by()</code> in combination with <code>sample_n()</code> to take an independent random sample for each decade. Note that since there are 7 decades, we can sample 71 movies from each decade in order to end up with approximately 500 movies total in our sample (<span class="math inline">\(7 * 71 = 497\)</span>)</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb262-1" data-line-number="1">movies_<span class="dv">30</span>_<span class="dv">99</span> &lt;-<span class="st"> </span>movies_<span class="dv">30</span>_<span class="dv">99</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb262-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">decade =</span> <span class="kw">floor</span>(year <span class="op">/</span><span class="st"> </span><span class="dv">10</span>) <span class="op">*</span><span class="st"> </span><span class="dv">10</span>) </a>
-<a class="sourceLine" id="cb262-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb262-4" data-line-number="4">movies_strata &lt;-<span class="st"> </span>movies_<span class="dv">30</span>_<span class="dv">99</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb262-5" data-line-number="5"><span class="st">  </span><span class="kw">group_by</span>(decade) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb262-6" data-line-number="6"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">71</span>)</a>
-<a class="sourceLine" id="cb262-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb262-8" data-line-number="8"><span class="kw">glimpse</span>(movies_strata)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies_30_<span class="dv">99</span> &lt;-<span class="st"> </span>movies_30_<span class="dv">99</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">decade =</span> <span class="kw">floor</span>(year <span class="op">/</span><span class="st"> </span><span class="dv">10</span>) <span class="op">*</span><span class="st"> </span><span class="dv">10</span>) 
+
+movies_strata &lt;-<span class="st"> </span>movies_30_<span class="dv">99</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(decade) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">71</span>)
+
+<span class="kw">glimpse</span>(movies_strata)</code></pre></div>
 <pre><code>Observations: 497
 Variables: 5
 Groups: decade [7]
@@ -824,9 +797,9 @@ $ length &lt;int&gt; 76, 80, 72, 93, 90, 67, 73, 66, 62, 63, 92, 78, 82, 80, 79,
 $ rating &lt;dbl&gt; 7.2, 6.7, 7.1, 6.5, 6.9, 4.5, 5.9, 5.9, 6.8, 6.4, 5.9, 6.9, 7.…
 $ decade &lt;dbl&gt; 1930, 1930, 1930, 1930, 1930, 1930, 1930, 1930, 1930, 1930, 19…</code></pre>
 <p>Note that because there were not an equal number of movies per decade in the population, sampling a fixed number of movies per decade (e.g. 71) is actually an example of sampling with <em>unequal probabilities</em>. For example, since there were only 2863 movies in the 1930s, each movie from this decade had a <span class="math inline">\(71 / 2863 * 100 =\)</span> 2.48% chance of being selected, but movies from the 1990s only had a <span class="math inline">\(71 / 10788 * 100 =\)</span> 0.658% chance of being selected. Table <a href="8-populations.html#tab:strata-probs">8.2</a> shows the selection probabilities for each strata.</p>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" data-line-number="1">movies_<span class="dv">30</span>_<span class="dv">99</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb264-2" data-line-number="2"><span class="st">  </span><span class="kw">count</span>(decade) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb264-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prob =</span> <span class="dv">71</span> <span class="op">/</span><span class="st"> </span>n)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies_30_<span class="dv">99</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(decade) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prob =</span> <span class="dv">71</span> <span class="op">/</span><span class="st"> </span>n)</code></pre></div>
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:strata-probs">TABLE 8.2: </span>Selection probability by decade
@@ -926,15 +899,15 @@ prob
 </table>
 <p><strong>Stratified sampling with equal probability</strong></p>
 <p>We could instead decide to draw a stratified sample with equal probabilities. Since overall we want a sample with <span class="math inline">\(n = 500\)</span>, and we have a population of size <span class="math inline">\(N =\)</span> 39123, we can choose to sample <span class="math inline">\(500 / 39123 *100 = 1.28\%\)</span> of the movies from each strata. Using the function <code>sample_frac()</code> instead of <code>sample_n()</code> allows us to do this.</p>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" data-line-number="1">movies_strata_equal &lt;-<span class="st"> </span>movies_<span class="dv">30</span>_<span class="dv">99</span> <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb265-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(decade) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb265-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">N_strata =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#needed for later calculations</span></a>
-<a class="sourceLine" id="cb265-4" data-line-number="4"><span class="st">  </span><span class="kw">sample_frac</span>(<span class="fl">0.0128</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies_strata_equal &lt;-<span class="st"> </span>movies_30_<span class="dv">99</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(decade) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">N_strata =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#needed for later calculations</span>
+<span class="st">  </span><span class="kw">sample_frac</span>(<span class="fl">0.0128</span>)</code></pre></div>
 <p>Table <a href="8-populations.html#tab:strata-probs-equal">8.3</a> shows the number of movies that were sampled per strata, <code>n_strata</code>. These numbers are proportional to the total number of movies in that decade in the population <code>N_strata</code>. This results in each movie in the population having equal probability of selection into the sample.</p>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" data-line-number="1">movies_strata_equal <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb266-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(decade) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb266-3" data-line-number="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n_strata =</span> <span class="kw">n</span>(), <span class="dt">N_strata =</span> <span class="kw">unique</span>(N_strata), </a>
-<a class="sourceLine" id="cb266-4" data-line-number="4">            <span class="dt">prob =</span> n_strata <span class="op">/</span><span class="st"> </span>N_strata)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies_strata_equal <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(decade) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n_strata =</span> <span class="kw">n</span>(), <span class="dt">N_strata =</span> <span class="kw">unique</span>(N_strata), 
+            <span class="dt">prob =</span> n_strata <span class="op">/</span><span class="st"> </span>N_strata)</code></pre></div>
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:strata-probs-equal">TABLE 8.3: </span>Stratified sampling with equal probabilities (i.e. proportional to stratum size)
@@ -1180,7 +1153,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
