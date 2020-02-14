@@ -12,8 +12,8 @@ ModernDive\ Master.Rproj
 
 # bookdown output files
 *_bookdown_files
-ismaykimkuyper.Rmd
-ismaykimkuyper.pdf
+tipton_kitzgerald_kuyper.Rmd
+tipton_kitzgerald_kuyper.pdf
 moderndive.Rmd
 moderndive.pdf
 *.tex
