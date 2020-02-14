@@ -16,11 +16,14 @@ chapter_titles <- c("getting-started",
                     "tidy",
                     "regression",
                     "multiple-regression",
-                    "sampling",
+                    "causality",
+                    "populations",
+                    "sampling-distributions",
                     "confidence-intervals",
-                    "hypothesis-testing",
-                    "inference-for-regression",
-                    "thinking-with-data")
+                    "p-values",
+                    "hypothesis-tests",
+                    "putting-together"
+                    )
 chapter_numbers <- stringr::str_pad(
   string = 2:(length(chapter_titles) + 1),
   width = 2,
