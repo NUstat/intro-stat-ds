@@ -11,7 +11,8 @@ ModernDive-Master.Rproj
 ModernDive\ Master.Rproj
 
 # bookdown output files
-*_bookdown_files
+_bookdown_files
+_book
 tipton_kitzgerald_kuyper.Rmd
 tipton_kitzgerald_kuyper.pdf
 moderndive.Rmd
@@ -25,7 +26,7 @@ moderndive.pdf
 *.toc
 bib/packages.bib
 purl.Rout
-docs/*
+docs
 
 # other files
 .httr-oauth
