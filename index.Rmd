@@ -199,7 +199,9 @@ We would appreciate any feedback on typos and errors.
 If you're asking yourself this question, then you've come to the right place! Start with our "Introduction for Students".
 
 <center>
-`r include_image("images/logos/nu-libraries.png")`
+<a ref="https://www.library.northwestern.edu/">
+<img src="images/logos/nu-libraries.png" alt="Northwestern University Libraries" />
+</a>
 </center>
 
 This open textbook is produced with support from [Northwestern University Libraries](https://www.library.northwestern.edu/).
