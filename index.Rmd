@@ -18,9 +18,7 @@ always_allow_html: yes
 github-repo: nulib/moderndive_book
 graphics: yes
 description: "An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools."
-cover-image: "images/logos/book_cover.png"
-url: 'https\://nulib.github.io/moderndive_book/'
-apple-touch-icon: "images/logos/favicons/apple-touch-icon.png"
+url: 'https://nustat.github.io/intro-stat-ds/'
 favicon: "images/logos/favicons/favicon.ico"
 ---
 
@@ -199,6 +197,12 @@ We would appreciate any feedback on typos and errors.
 -->
 
 If you're asking yourself this question, then you've come to the right place! Start with our "Introduction for Students".
+
+<center>
+`r include_image("images/logos/nu-libraries.png"`
+</center>
+
+This open textbook is produced with support from [Northwestern University Libraries](https://www.library.northwestern.edu/).
 
 ## Introduction for students {-}
 
