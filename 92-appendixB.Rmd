@@ -471,7 +471,9 @@ boot_distn_one_prop %>%
 
 We see that 0.80 is contained in this confidence interval as a plausible value of $\pi$ (the unknown population proportion).  This matches with our hypothesis test results of failing to reject the null hypothesis.
 
-**Interpretation**:  We are 95% confident the true proportion of customers who are satisfied with the service they receive is between `r ci[["2.5%"]]` and `r ci[["97.5%"]]`.
+
+
+<!-- **Interpretation**:  We are 95% confident the true proportion of customers who are satisfied with the service they receive is between ` ci[["2.5%"]]` and `r ci[["97.5%"]]`. -->
 
 
 
