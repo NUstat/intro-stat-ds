@@ -206,6 +206,8 @@ If you're asking yourself this question, then you've come to the right place! St
 
 This open textbook is produced with support from [Northwestern University Libraries](https://www.library.northwestern.edu/).
 
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work by [Arend Kuyper](https://www.statistics.northwestern.edu/people/faculty/arend-m-kuyper.html) et al. is adapted from [ModernDive](https://moderndive.com/) and is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+
 ## Introduction for students {-}
 
 This book assumes no prerequisites: no algebra, no calculus, and no prior programming/coding experience. This is intended to be a gentle introduction to the practice of analyzing data and answering questions using data the way statisticians, data scientists, data journalists, and other researchers would.
