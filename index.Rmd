@@ -1,6 +1,6 @@
 --- 
 title: "Introduction to Statistics and Data Science"
-subtitle: "A moderndive into R and the tidyverse"
+subtitle: "For R and the Tidyverse"
 author: "Chester Ismay, Albert Y. Kim, Arend M. Kuyper, Elizabeth Tipton, and Kaitlyn G. Fitzgerald"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 site: bookdown::bookdown_site
@@ -172,6 +172,9 @@ image_link <- function(path,
 
 # Preface {-}
 
+```{r cover}
+knitr::include_graphics('images/logos/book_cover.png')
+```
 
 ```{block, type='learncheck', purl=FALSE}
 **Please note that this is a "development version" of this book for the new design of STAT 202. Meaning this is a work in progress being edited and updated as we go.**
