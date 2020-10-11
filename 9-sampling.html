@@ -24,7 +24,7 @@
 <meta name="author" content="Chester Ismay, Albert Y. Kim, Arend M. Kuyper, Elizabeth Tipton, and Kaitlyn G. Fitzgerald" />
 
 
-<meta name="date" content="2020-07-15" />
+<meta name="date" content="2020-10-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,7 +51,8 @@
 
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
 <link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
 <script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
 <script src="libs/dygraphs-1.1.1/shapes.js"></script>
@@ -207,7 +208,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.8.2" data-path="3-wrangling.html"><a href="3-wrangling.html#rename"><i class="fa fa-check"></i><b>3.8.2</b> <code>rename</code> variables</a></li>
 <li class="chapter" data-level="3.8.3" data-path="3-wrangling.html"><a href="3-wrangling.html#top_n-values-of-a-variable"><i class="fa fa-check"></i><b>3.8.3</b> <code>top_n</code> values of a variable</a></li>
 </ul></li>
-<li class="chapter" data-level="3.9" data-path="1-getting-started.html"><a href="1-getting-started.html#conclusion"><i class="fa fa-check"></i><b>3.9</b> Conclusion</a><ul>
+<li class="chapter" data-level="3.9" data-path="3-wrangling.html"><a href="3-wrangling.html#wrangling-conclusion"><i class="fa fa-check"></i><b>3.9</b> Conclusion</a><ul>
 <li class="chapter" data-level="3.9.1" data-path="2-viz.html"><a href="2-viz.html#summary-table"><i class="fa fa-check"></i><b>3.9.1</b> Summary table</a></li>
 <li class="chapter" data-level="3.9.2" data-path="1-getting-started.html"><a href="1-getting-started.html#additional-resources"><i class="fa fa-check"></i><b>3.9.2</b> Additional resources</a></li>
 <li class="chapter" data-level="3.9.3" data-path="3-wrangling.html"><a href="3-wrangling.html#whats-to-come"><i class="fa fa-check"></i><b>3.9.3</b> What's to come?</a></li>
@@ -1140,7 +1141,7 @@ FIGURE 9.10: Normal distribution
 </p>
 </div>
 <p>The Chi-squared distribution is unimodal but skewed right. The Chi-squared distribution depends on one parameter <span class="math inline">\(df\)</span>.</p>
-<p><img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-261-1.png" width="\textwidth" style="display: block; margin: auto;" /></p>
+<p><img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-262-1.png" width="\textwidth" style="display: block; margin: auto;" /></p>
 <p>The <strong>Normal Distribution</strong> is the most common and important of all distributions. As a result of the Central Limit Theorem (CLT), when sample sizes are large, most sampling distributions will be approximated well by a Normal Distribution. In fact, we can see in Figure <a href="9-sampling.html#fig:samplingdistribution-virtual">9.8</a> that the sampling distribution of <span class="math inline">\(\hat{\pi}\)</span> follows a Normal distribution. We will discuss the CLT further in Section <a href="9-sampling.html#clt">9.7</a></p>
 </div>
 <div id="bias" class="section level3">
@@ -1828,8 +1829,8 @@ FIGURE 9.14: N(0,1) example values: STAT = -0.5, STAT = 2.5
 </p>
 </div>
 <p>In general, the t-distribution has the same shape as the Standard Normal distribution (symmetric, unimodal), but it has <strong>heavier tails</strong>. As sample size increases (and therefore degrees of freedom increases), the t-distribution becomes a very close approximation to the Normal distribution.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-268"></span>
-<img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-268-1.png" alt="t-distribution with example 95% cutoff values" width="\textwidth" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-269"></span>
+<img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-269-1.png" alt="t-distribution with example 95% cutoff values" width="\textwidth" />
 <p class="caption">
 FIGURE 9.15: t-distribution with example 95% cutoff values
 </p>

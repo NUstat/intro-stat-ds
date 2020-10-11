@@ -24,7 +24,7 @@
 <meta name="author" content="Chester Ismay, Albert Y. Kim, Arend M. Kuyper, Elizabeth Tipton, and Kaitlyn G. Fitzgerald" />
 
 
-<meta name="date" content="2020-07-15" />
+<meta name="date" content="2020-10-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,7 +51,8 @@
 
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
 <link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
 <script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
 <script src="libs/dygraphs-1.1.1/shapes.js"></script>
@@ -207,7 +208,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.8.2" data-path="3-wrangling.html"><a href="3-wrangling.html#rename"><i class="fa fa-check"></i><b>3.8.2</b> <code>rename</code> variables</a></li>
 <li class="chapter" data-level="3.8.3" data-path="3-wrangling.html"><a href="3-wrangling.html#top_n-values-of-a-variable"><i class="fa fa-check"></i><b>3.8.3</b> <code>top_n</code> values of a variable</a></li>
 </ul></li>
-<li class="chapter" data-level="3.9" data-path="1-getting-started.html"><a href="1-getting-started.html#conclusion"><i class="fa fa-check"></i><b>3.9</b> Conclusion</a><ul>
+<li class="chapter" data-level="3.9" data-path="3-wrangling.html"><a href="3-wrangling.html#wrangling-conclusion"><i class="fa fa-check"></i><b>3.9</b> Conclusion</a><ul>
 <li class="chapter" data-level="3.9.1" data-path="2-viz.html"><a href="2-viz.html#summary-table"><i class="fa fa-check"></i><b>3.9.1</b> Summary table</a></li>
 <li class="chapter" data-level="3.9.2" data-path="1-getting-started.html"><a href="1-getting-started.html#additional-resources"><i class="fa fa-check"></i><b>3.9.2</b> Additional resources</a></li>
 <li class="chapter" data-level="3.9.3" data-path="3-wrangling.html"><a href="3-wrangling.html#whats-to-come"><i class="fa fa-check"></i><b>3.9.3</b> What's to come?</a></li>
@@ -825,7 +826,7 @@ Overcast
 </div>
 <div id="converting-to-tidy-data" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> Converting to &quot;tidy&quot; data</h3>
-<p>In this book so far, you've only seen data frames that were already in &quot;tidy&quot; format. Furthermore for the rest of this book, you'll mostly only see data frames that are already in &quot;tidy&quot; format as well. This is not always the case however with data in the wild. If your original data frame is in wide i.e. non-&quot;tidy&quot; format and you would like to use the <code>ggplot2</code> package for data visualization or the <code>dplyr</code> package for data wrangling, you will first have to convert it &quot;tidy&quot; format using the <code>gather()</code> function in the <code>tidyr</code> package <span class="citation">(Wickham and Henry <a href="#ref-R-tidyr">2020</a>)</span>.</p>
+<p>In this book so far, you've only seen data frames that were already in &quot;tidy&quot; format. Furthermore for the rest of this book, you'll mostly only see data frames that are already in &quot;tidy&quot; format as well. This is not always the case however with data in the wild. If your original data frame is in wide i.e. non-&quot;tidy&quot; format and you would like to use the <code>ggplot2</code> package for data visualization or the <code>dplyr</code> package for data wrangling, you will first have to convert it &quot;tidy&quot; format using the <code>gather()</code> function in the <code>tidyr</code> package <span class="citation">(Wickham <a href="#ref-R-tidyr">2020</a>)</span>.</p>
 <p>Going back to our <code>drinks_smaller</code> data frame from earlier:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drinks_smaller</code></pre></div>
 <pre><code># A tibble: 4 x 4
@@ -867,7 +868,7 @@ drinks_smaller_tidy</code></pre></div>
 <p>With our <code>drinks_smaller_tidy</code> &quot;tidy&quot; format data frame, we can now produce a side-by-side AKA dodged barplot using <code>geom_col()</code> and not <code>geom_bar()</code>, since we would like to map the <code>servings</code> variable to the <code>y</code>-aesthetic of the bars.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(drinks_smaller_tidy, <span class="kw">aes</span>(<span class="dt">x=</span>country, <span class="dt">y=</span>servings, <span class="dt">fill=</span>type)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre></div>
-<p><img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-123-1.png" width="\textwidth" style="display: block; margin: auto;" /></p>
+<p><img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-124-1.png" width="\textwidth" style="display: block; margin: auto;" /></p>
 <p>Converting &quot;wide&quot; format data to &quot;tidy&quot; format often confuses new R users. The only way to learn to get comfortable with the <code>gather()</code> function is with practice, practice, and more practice. For example, see the examples in the bottom of the help file for <code>gather()</code> by running <code>?gather</code>. We'll show another example of using <code>gather()</code> to convert a &quot;wide&quot; formatted data frame to &quot;tidy&quot; format in Section <a href="4-tidy.html#case-study-tidy">4.3</a>. For other examples of converting a dataset into &quot;tidy&quot; format, check out the different functions available for data tidying and a case study using data from the World Health Organization in <a href="http://r4ds.had.co.nz/tidy-data.html">R for Data Science</a> <span class="citation">(Grolemund and Wickham <a href="#ref-rds2016">2016</a>)</span>.</p>
 <div class="learncheck">
 <p>
@@ -976,7 +977,7 @@ Albert: I did for the drinks_smaller example above, but in this case it will be 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(guat_dem_tidy, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> democracy_score)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Year&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Democracy Score&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Democracy score in Guatemala 1952-1992&quot;</span>)</code></pre></div>
-<p><img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-131-1.png" width="\textwidth" style="display: block; margin: auto;" /></p>
+<p><img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-132-1.png" width="\textwidth" style="display: block; margin: auto;" /></p>
 <div class="learncheck">
 <p>
 <strong><em>Learning check</em></strong>
@@ -1052,10 +1053,10 @@ Review questions have been designed using the `fivethirtyeight` R package [@R-fi
 <p>Wickham, Hadley. 2014. “Tidy Data.” <em>Journal of Statistical Software</em> Volume 59 (Issue 10). <a href="https://www.jstatsoft.org/index.php/jss/article/view/v059i10/v59i10.pdf" class="uri">https://www.jstatsoft.org/index.php/jss/article/view/v059i10/v59i10.pdf</a>.</p>
 </div>
 <div id="ref-R-nycflights13">
-<p>Wickham, Hadley. 2019. <em>Nycflights13: Flights That Departed Nyc in 2013</em>. <a href="https://CRAN.R-project.org/package=nycflights13" class="uri">https://CRAN.R-project.org/package=nycflights13</a>.</p>
+<p>Wickham, Hadley. 2019. <em>Nycflights13: Flights That Departed Nyc in 2013</em>. <a href="http://github.com/hadley/nycflights13" class="uri">http://github.com/hadley/nycflights13</a>.</p>
 </div>
 <div id="ref-R-tidyr">
-<p>Wickham, Hadley, and Lionel Henry. 2020. <em>Tidyr: Tidy Messy Data</em>. <a href="https://CRAN.R-project.org/package=tidyr" class="uri">https://CRAN.R-project.org/package=tidyr</a>.</p>
+<p>Wickham, Hadley. 2020. <em>Tidyr: Tidy Messy Data</em>. <a href="https://CRAN.R-project.org/package=tidyr" class="uri">https://CRAN.R-project.org/package=tidyr</a>.</p>
 </div>
 </div>
             </section>

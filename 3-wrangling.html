@@ -24,7 +24,7 @@
 <meta name="author" content="Chester Ismay, Albert Y. Kim, Arend M. Kuyper, Elizabeth Tipton, and Kaitlyn G. Fitzgerald" />
 
 
-<meta name="date" content="2020-07-15" />
+<meta name="date" content="2020-10-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,7 +51,8 @@
 
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
 <link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
 <script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
 <script src="libs/dygraphs-1.1.1/shapes.js"></script>
@@ -207,7 +208,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.8.2" data-path="3-wrangling.html"><a href="3-wrangling.html#rename"><i class="fa fa-check"></i><b>3.8.2</b> <code>rename</code> variables</a></li>
 <li class="chapter" data-level="3.8.3" data-path="3-wrangling.html"><a href="3-wrangling.html#top_n-values-of-a-variable"><i class="fa fa-check"></i><b>3.8.3</b> <code>top_n</code> values of a variable</a></li>
 </ul></li>
-<li class="chapter" data-level="3.9" data-path="1-getting-started.html"><a href="1-getting-started.html#conclusion"><i class="fa fa-check"></i><b>3.9</b> Conclusion</a><ul>
+<li class="chapter" data-level="3.9" data-path="3-wrangling.html"><a href="3-wrangling.html#wrangling-conclusion"><i class="fa fa-check"></i><b>3.9</b> Conclusion</a><ul>
 <li class="chapter" data-level="3.9.1" data-path="2-viz.html"><a href="2-viz.html#summary-table"><i class="fa fa-check"></i><b>3.9.1</b> Summary table</a></li>
 <li class="chapter" data-level="3.9.2" data-path="1-getting-started.html"><a href="1-getting-started.html#additional-resources"><i class="fa fa-check"></i><b>3.9.2</b> Additional resources</a></li>
 <li class="chapter" data-level="3.9.3" data-path="3-wrangling.html"><a href="3-wrangling.html#whats-to-come"><i class="fa fa-check"></i><b>3.9.3</b> What's to come?</a></li>
@@ -979,9 +980,12 @@ FIGURE 3.5: Mutate diagram from Data Wrangling with dplyr and tidyr cheatsheet
 \text{temp in C} = \frac{\text{temp in F} - 32}{1.8}
 \]</span></p>
 <p>We can apply this formula to the <code>temp</code> variable using the <code>mutate()</code> function, which takes existing variables and mutates them to create new ones.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weather &lt;-<span class="st"> </span>weather <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">temp_in_C =</span> (temp<span class="op">-</span><span class="dv">32</span>)<span class="op">/</span><span class="fl">1.8</span>)
-<span class="kw">View</span>(weather)</code></pre></div>
+<pre><code>
+```r
+weather &lt;- weather %&gt;% 
+  mutate(temp_in_C = (temp-32)/1.8)
+View(weather)
+```</code></pre>
 <p>Note that we have overwritten the original <code>weather</code> data frame with a new version that now includes the additional variable <code>temp_in_C</code>. In other words, the <code>mutate()</code> command outputs a new data frame which then gets saved over the original <code>weather</code> data frame. Furthermore, note how in <code>mutate()</code> we used <code>temp_in_C = (temp-32)/1.8</code> to create a new variable <code>temp_in_C</code>.</p>
 <p>Why did we overwrite the data frame <code>weather</code> instead of assigning the result to a new data frame like <code>weather_new</code>, but on the other hand why did we <em>not</em> overwrite <code>temp</code>, but instead created a new variable called <code>temp_in_C</code>? As a rough rule of thumb, as long as you are not losing original information that you might need later, it's acceptable practice to overwrite existing data frames. On the other hand, had we used <code>mutate(temp = (temp-32)/1.8)</code> instead of <code>mutate(temp_in_C = (temp-32)/1.8)</code>, we would have overwritten the original variable <code>temp</code> and lost its values.</p>
 <p>Let's compute average monthly temperatures in both °F and °C using the similar <code>group_by()</code> and <code>summarize()</code> code as in the previous section.</p>
@@ -1368,7 +1372,7 @@ flights_time</code></pre></div>
 <hr />
 </div>
 </div>
-<div id="conclusion" class="section level2">
+<div id="wrangling-conclusion" class="section level2">
 <h2><span class="header-section-number">3.9</span> Conclusion</h2>
 <div id="summary-table" class="section level3">
 <h3><span class="header-section-number">3.9.1</span> Summary table</h3>

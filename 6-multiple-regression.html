@@ -24,7 +24,7 @@
 <meta name="author" content="Chester Ismay, Albert Y. Kim, Arend M. Kuyper, Elizabeth Tipton, and Kaitlyn G. Fitzgerald" />
 
 
-<meta name="date" content="2020-07-15" />
+<meta name="date" content="2020-10-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,7 +51,8 @@
 
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
 <link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
 <script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
 <script src="libs/dygraphs-1.1.1/shapes.js"></script>
@@ -207,7 +208,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.8.2" data-path="3-wrangling.html"><a href="3-wrangling.html#rename"><i class="fa fa-check"></i><b>3.8.2</b> <code>rename</code> variables</a></li>
 <li class="chapter" data-level="3.8.3" data-path="3-wrangling.html"><a href="3-wrangling.html#top_n-values-of-a-variable"><i class="fa fa-check"></i><b>3.8.3</b> <code>top_n</code> values of a variable</a></li>
 </ul></li>
-<li class="chapter" data-level="3.9" data-path="1-getting-started.html"><a href="1-getting-started.html#conclusion"><i class="fa fa-check"></i><b>3.9</b> Conclusion</a><ul>
+<li class="chapter" data-level="3.9" data-path="3-wrangling.html"><a href="3-wrangling.html#wrangling-conclusion"><i class="fa fa-check"></i><b>3.9</b> Conclusion</a><ul>
 <li class="chapter" data-level="3.9.1" data-path="2-viz.html"><a href="2-viz.html#summary-table"><i class="fa fa-check"></i><b>3.9.1</b> Summary table</a></li>
 <li class="chapter" data-level="3.9.2" data-path="1-getting-started.html"><a href="1-getting-started.html#additional-resources"><i class="fa fa-check"></i><b>3.9.2</b> Additional resources</a></li>
 <li class="chapter" data-level="3.9.3" data-path="3-wrangling.html"><a href="3-wrangling.html#whats-to-come"><i class="fa fa-check"></i><b>3.9.3</b> What's to come?</a></li>
@@ -1306,7 +1307,7 @@ FIGURE 6.3: Colored scatterplot of relationship of teaching and beauty scores.
 <p>Recall in Subsection <a href="5-regression.html#model2table">5.2.2</a> we fit a regression model for countries' life expectancies as a function of which continent the country was in. In other words, we had a numerical outcome variable <span class="math inline">\(y\)</span> = <code>lifeExp</code> and a categorical explanatory variable <span class="math inline">\(x\)</span> = <code>continent</code> which had 5 levels: <code>Africa</code>, <code>Americas</code>, <code>Asia</code>, <code>Europe</code>, and <code>Oceania</code>. Let's re-display the regression table you saw in Table <a href="5-regression.html#tab:catxplot4b">5.10</a>:</p>
 <table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:unnamed-chunk-202">TABLE 6.6: </span>Linear regression table
+<span id="tab:unnamed-chunk-203">TABLE 6.6: </span>Linear regression table
 </caption>
 <thead>
 <tr>
