@@ -473,15 +473,18 @@ $$
 
 We can apply this formula to the `temp` variable using the `mutate()` function, which takes existing variables and mutates them to create new ones.
 
+````
 ```{r, eval=FALSE}
 weather <- weather %>% 
   mutate(temp_in_C = (temp-32)/1.8)
 View(weather)
+```
 ````
+
 ```{r, eval=TRUE, echo=FALSE}
 weather <- weather %>% 
   mutate(temp_in_C = (temp-32)/1.8)
-````
+```
 
 Note that we have overwritten the original `weather` data frame with a new version that now includes the additional variable `temp_in_C`. In other words, the `mutate()` command outputs a new data frame which then gets saved over the original `weather` data frame. Furthermore, note how in `mutate()` we used `temp_in_C = (temp-32)/1.8` to create a new variable `temp_in_C`.
 
@@ -495,7 +498,7 @@ summary_monthly_temp <- weather %>%
   summarize(mean_temp_in_F = mean(temp, na.rm = TRUE), 
             mean_temp_in_C = mean(temp_in_C, na.rm = TRUE))
 summary_monthly_temp
-````
+```
 
 Let's consider another example. Passengers are often frustrated when their flights depart late, but change their mood a bit if pilots can make up some time during the flight to get them to their destination close to the original arrival time.  This is commonly referred to as "gain" and we will create this variable using the `mutate()` function. 
 
@@ -590,7 +593,7 @@ One of the most common tasks people working with data would like to perform is s
 
 Let's suppose we were interested in determining the most frequent destination airports for all domestic flights departing from New York City in 2013:
 
-```{r, eval}
+```{r}
 freq_dest <- flights %>% 
   group_by(dest) %>% 
   summarize(num_flights = n())
@@ -878,7 +881,7 @@ named_dests  %>%
 
 
 
-## Conclusion
+## Conclusion {#wrangling-conclusion}
 
 ### Summary table
 
