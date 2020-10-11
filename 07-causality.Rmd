@@ -311,7 +311,8 @@ Without randomization, here is the best approach:
 3.	Look for variables in your data that you can use in a multiple regression to control for these other possible confounders. Pay attention to how your estimate of the treatment impact changes as you add these into your model (often it will decrease). 
 4.	State very clearly the assumptions you are making, the variables you have controlled for, and the possible other variables you were unable to control for. Be tentative in your conclusions and make clear their limitations – that this work is suggestive and that future research – a randomized experiment – would be more definitive. 
 
-## Conclusion
+## Conclusion {#causality-conclusion}
+
 In this chapter we’ve focused on the role of randomization in our ability to make inferences – here about causation. As you will see in the next few chapters, randomization is also important for making inferences from outcomes observed in a sample to their values in a population. But the importance of randomization goes even deeper than this – one could say that **randomization is at the core of inferential statistics**. 
 
 In situations in which treatment is **randomly assigned** or a sample is **randomly selected** from a population, as a result of **knowing this mechanism**, we are able to imagine and explore alternative realities – what we will call **counter-factual thinking** (Chapter \@ref(sampling)) – and form ways of understanding when “effects” are likely (or unlikely) to be found simply by chance – what we will call **proof by stochastic contradiction** (Chapter \@ref(pvalues)). 

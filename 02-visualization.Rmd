@@ -989,7 +989,7 @@ Barplots are the preferred way of displaying the distribution of a categorical v
 
 
 
-## Conclusion
+## Conclusion {#data-vis-conclusion}
 
 ### Summary table
 

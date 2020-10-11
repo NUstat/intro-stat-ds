@@ -833,10 +833,11 @@ flights_time
 Another useful function is `rename()`, which as you may have guessed renames one column to another name.  Suppose we want `dep_time` and `arr_time` to be `departure_time` and `arrival_time` instead in the `flights_time` data frame:
 
 ```{r, eval=FALSE}
-flights_time_new <- flights %>% 
+flights_time <- flights %>% 
   select(contains("time")) %>% 
   rename(departure_time = dep_time,
          arrival_time = arr_time)
+
 glimpse(flights_time)
 ```
 

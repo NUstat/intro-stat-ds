@@ -1191,7 +1191,7 @@ Compute the sum of squared residuals by hand for each line and show that of thes
 
 
 
-## Conclusion
+## Conclusion {#basic-reg-conclusion}
 
 ### Additional resources {#additional-resources-basic-regression}
 
