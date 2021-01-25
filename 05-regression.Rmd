@@ -61,7 +61,7 @@ With linear regression there is always only one numerical outcome variable $y$ b
 We'll study all four of these regression scenarios using real data, all easily accessible via R packages! <!--We will also discuss the concept of *correlation* and how it is frequently incorrectly used to imply *causation*.-->
 
 
-### Needed packages {-}
+### Needed packages {#pkgs-5}
 
 Let's now load all the packages needed for this chapter (this assumes you've already installed them). In this chapter we introduce some new packages:
 

@@ -20,7 +20,7 @@ set.seed(2018)
 
 In Chapter \@ref(CIs), we covered how to construct and interpret confidence intervals, which use the theory of repeated samples to make inferences from a sample (your data) to a population. To do so, we used counterfactual thinking that underpins statistical reasoning, wherein making inferences requires you to imagine alternative versions of your data that you might have under other possible samples selected in the same way. In this chapter, we extend this counterfactual reasoning to imagine other possible samples you might have seen if you knew the trend in the population. This way of thinking will lead us to define p-values.
 
-### Needed Packages {-}
+### Needed Packages {#pkgs-11}
 
 Let’s load all the packages needed for this chapter (this assumes you’ve already installed them). If needed, read Section \@ref(packages) for information on how to install and load R packages.
 
@@ -45,7 +45,7 @@ In many scientific pursuits, the goal is not simply to estimate a population par
 
 Let’s take the difference in means between two groups as a motivating example. In order to prove that there is a difference between average SAT scores for men and women, we might proceed with what is in math called a proof by contradiction. Here, however, this proof is probabilistic (aka stochastic).
 
-**Stochastic Proof by Contraction**:
+**Stochastic Proof by Contradiction**:
 
 There are three steps in a Proof by Contradiction. In order to illustrate these, assume we wish to prove that there is a relationship between X and Y.
 
@@ -209,7 +209,7 @@ ggplot(data.frame(x = c(-5, 5)), aes(x = x)) +
 
 We can calculate this probability using the `pt()`function in R, where we plug in the appropriate degrees of freedom and our `t_stat` value as the quantile. Remember there is a default argument `lower.tail = TRUE` in the `pt()` function, which means it returns the probability *to the left* of the `t_stat` value you enter. Because the t-distribution is symmetric, you can simply multiply the probability in the lower tail by two to get the probability of falling in either tail. The p-value implied by Figure \@ref(fig:t-two-tail) would therefore be calculated by `2*pt(-2, df = 99)`. Note that in general if you have positive `t_stat` value, you will want to either use `2*pt(-t_stat, 99)` or `2*pt(t_stat, 99, lower.tail = FALSE)`. A general form that will always work regardless of the sign of `t_stat` is to use `2*pt(-abs(t_stat), 99)`, where `abs()` is the absolute value function. 
 
-In our IMDB movies example, we observe `t_stat = 2.91`, and we want to know what the probability of observing a $t\_stat$ value *as large in magnitude* as this would be under the null distribution. Note our approximate $df = min(n_1 - 1, n_2 - 1) = min(36 - 1, 32 - 1) = 31$, so our p-value is given by `2*pt(-2.91, 31)` = `r round(2*pt(-2.91, 31), 4)`. This tells us that if the null distribution is true (i.e. if there is no true difference between average ratings of romance and action movies on IMDB), we would only observe a difference as large as we did `r round(2*pt(-2.91, 31), 3)*100`% of the time. This provides evidence - via proof by contradiction - that the null distribution is likely false; that is, there is likely a true difference in average ratings of romance and action moview on IMDB.
+In our IMDB movies example, we observe `t_stat = 2.91`, and we want to know what the probability of observing a $t\_stat$ value *as large in magnitude* as this would be under the null distribution. Note our approximate $df = min(n_1 - 1, n_2 - 1) = min(36 - 1, 32 - 1) = 31$, so our p-value is given by `2*pt(-2.91, 31)` = `r round(2*pt(-2.91, 31), 4)`. This tells us that if the null distribution is true (i.e. if there is no true difference between average ratings of romance and action movies on IMDB), we would only observe a difference as large as we did `r round(2*pt(-2.91, 31), 3)*100`% of the time. This provides evidence - via proof by contradiction - that the null distribution is likely false; that is, there is likely a true difference in average ratings of romance and action movies on IMDB.
 
 ### p-values using `t.test` {#t.test}
 

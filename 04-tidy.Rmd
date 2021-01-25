@@ -31,7 +31,7 @@ In this final chapter of the "Data Science via the tidyverse" portion of the boo
 
 Although knowledge of this type of data formatting was not necessary for our treatment of data visualization in Chapter \@ref(viz) and data wrangling in Chapter \@ref(wrangling) since all the data was already in "tidy" format, we'll now see this format is actually essential to using the tools we covered in these two chapters. Furthermore, it will also be useful for all subsequent chapters in this book when we cover regression and statistical inference.  First however, we'll show you how to import spreadsheet data for use in R.
 
-### Needed packages {-}
+### Needed packages {#pkgs-4}
 
 Let's load all the packages needed for this chapter (this assumes you've already installed them). If needed, read Section \@ref(packages) for information on how to install and load R packages.
 
