@@ -26,7 +26,7 @@ jobs:
           Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
       - name: Deploy to GitHub Pages
         uses: Cecilapp/GitHub-Pages-deploy@master
-        env:
+        with:
           EMAIL: a-kuyper@northwestern.edu # must be a verified email
           GH_TOKEN: ${{ secrets.GH_PAT }} # https://github.com/settings/tokens
           BUILD_DIR: _book/                     # "_site/" by default
