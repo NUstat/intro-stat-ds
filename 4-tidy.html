@@ -579,16 +579,16 @@ FIGURE 4.1: Alcohol consumption in 4 countries.
    country      type   servings
    &lt;chr&gt;        &lt;chr&gt;     &lt;int&gt;
  1 China        beer         79
- 2 Italy        beer         85
- 3 Saudi Arabia beer          0
- 4 USA          beer        249
- 5 China        spirit      192
- 6 Italy        spirit       42
- 7 Saudi Arabia spirit        5
- 8 USA          spirit      158
- 9 China        wine          8
-10 Italy        wine        237
-11 Saudi Arabia wine          0
+ 2 China        spirit      192
+ 3 China        wine          8
+ 4 Italy        beer         85
+ 5 Italy        spirit       42
+ 6 Italy        wine        237
+ 7 Saudi Arabia beer          0
+ 8 Saudi Arabia spirit        5
+ 9 Saudi Arabia wine          0
+10 USA          beer        249
+11 USA          spirit      158
 12 USA          wine         84</code></pre>
 <p>Let's compare the <code>drinks_smaller_tidy</code> with the <code>drinks_smaller</code> data frame from earlier:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drinks_smaller</code></pre></div>
@@ -714,17 +714,6 @@ $173.55
 </tr>
 <tr>
 <td style="text-align:left;">
-2009-01-02
-</td>
-<td style="text-align:left;">
-Boeing
-</td>
-<td style="text-align:left;">
-$172.61
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 2009-01-01
 </td>
 <td style="text-align:left;">
@@ -736,17 +725,6 @@ $174.90
 </tr>
 <tr>
 <td style="text-align:left;">
-2009-01-02
-</td>
-<td style="text-align:left;">
-Amazon
-</td>
-<td style="text-align:left;">
-$171.42
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 2009-01-01
 </td>
 <td style="text-align:left;">
@@ -754,6 +732,28 @@ Google
 </td>
 <td style="text-align:left;">
 $174.34
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2009-01-02
+</td>
+<td style="text-align:left;">
+Boeing
+</td>
+<td style="text-align:left;">
+$172.61
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2009-01-02
+</td>
+<td style="text-align:left;">
+Amazon
+</td>
+<td style="text-align:left;">
+$171.42
 </td>
 </tr>
 <tr>
@@ -826,7 +826,7 @@ Overcast
 </div>
 <div id="converting-to-tidy-data" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> Converting to &quot;tidy&quot; data</h3>
-<p>In this book so far, you've only seen data frames that were already in &quot;tidy&quot; format. Furthermore for the rest of this book, you'll mostly only see data frames that are already in &quot;tidy&quot; format as well. This is not always the case however with data in the wild. If your original data frame is in wide i.e. non-&quot;tidy&quot; format and you would like to use the <code>ggplot2</code> package for data visualization or the <code>dplyr</code> package for data wrangling, you will first have to convert it &quot;tidy&quot; format using the <code>gather()</code> function in the <code>tidyr</code> package <span class="citation">(Wickham <a href="#ref-R-tidyr">2020</a>)</span>.</p>
+<p>In this book so far, you've only seen data frames that were already in &quot;tidy&quot; format. Furthermore for the rest of this book, you'll mostly only see data frames that are already in &quot;tidy&quot; format as well. This is not always the case however with data in the wild. If your original data frame is in wide i.e. non-&quot;tidy&quot; format and you would like to use the <code>ggplot2</code> package for data visualization or the <code>dplyr</code> package for data wrangling, you will first have to convert it to &quot;tidy&quot; format using the <code>pivot_longer()</code> function in the <code>tidyr</code> package <span class="citation">(Wickham <a href="#ref-R-tidyr">2020</a>)</span>.</p>
 <p>Going back to our <code>drinks_smaller</code> data frame from earlier:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drinks_smaller</code></pre></div>
 <pre><code># A tibble: 4 x 4
@@ -836,40 +836,51 @@ Overcast
 2 Italy           85     42   237
 3 Saudi Arabia     0      5     0
 4 USA            249    158    84</code></pre>
-<p>We convert it to &quot;tidy&quot; format by using the <code>gather()</code> function from the <code>tidyr</code> package as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drinks_smaller_tidy &lt;-<span class="st"> </span>drinks_smaller <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> type, <span class="dt">value =</span> servings, <span class="op">-</span>country)
+<p>We convert it to &quot;tidy&quot; format by using the <code>pivot_longer()</code> function from the <code>tidyr</code> package as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tidy drinks_smaller</span>
+drinks_smaller_tidy &lt;-<span class="st"> </span>drinks_smaller <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pivot_longer</span>(
+    <span class="dt">cols =</span> <span class="op">-</span>country, 
+    <span class="dt">names_to =</span> <span class="st">&quot;type&quot;</span>, 
+    <span class="dt">values_to =</span> <span class="st">&quot;servings&quot;</span>
+  )
+
+<span class="co"># print</span>
 drinks_smaller_tidy</code></pre></div>
 <pre><code># A tibble: 12 x 3
    country      type   servings
    &lt;chr&gt;        &lt;chr&gt;     &lt;int&gt;
  1 China        beer         79
- 2 Italy        beer         85
- 3 Saudi Arabia beer          0
- 4 USA          beer        249
- 5 China        spirit      192
- 6 Italy        spirit       42
- 7 Saudi Arabia spirit        5
- 8 USA          spirit      158
- 9 China        wine          8
-10 Italy        wine        237
-11 Saudi Arabia wine          0
+ 2 China        spirit      192
+ 3 China        wine          8
+ 4 Italy        beer         85
+ 5 Italy        spirit       42
+ 6 Italy        wine        237
+ 7 Saudi Arabia beer          0
+ 8 Saudi Arabia spirit        5
+ 9 Saudi Arabia wine          0
+10 USA          beer        249
+11 USA          spirit      158
 12 USA          wine         84</code></pre>
-<p>We set the arguments to <code>gather()</code> as follows:</p>
+<p>We set the arguments to <code>pivot_longer()</code> as follows:</p>
 <ol style="list-style-type: decimal">
-<li><code>key</code> is the name of the column/variable in the new &quot;tidy&quot; frame that contains the column names of the original data frame that you want to tidy. Observe how we set <code>key = type</code> and in the resulting <code>drinks_smaller_tidy</code> the column <code>type</code> contains the three types of alcohol <code>beer</code>, <code>spirit</code>, and <code>wine</code>.</li>
-<li><code>value</code> is the name of the column/variable in the &quot;tidy&quot; frame that contains the rows and columns of values in the original data frame you want to tidy. Observe how we set <code>value = servings</code> and in the resulting <code>drinks_smaller_tidy</code> the column <code>value</code> contains the 4 <span class="math inline">\(\times\)</span> 3 = 12 numerical values.</li>
-<li>The third argument are the columns you either want to or don't want to tidy. Observe how we set this to <code>-country</code> indicating that we don't want to tidy the <code>country</code> variable in <code>drinks_smaller</code> and rather only <code>beer</code>, <code>spirit</code>, and <code>wine</code>.</li>
+<li>The first argument, <code>cols</code>, are the columns you either want to or don't want to tidy. Observe how we set this to <code>-country</code> indicating that we don't want to tidy the <code>country</code> variable in <code>drinks_smaller</code> which leaves <code>beer</code>, <code>spirit</code>, and <code>wine</code> to be tidied.</li>
+<li><code>names_to</code> is the name of the column/variable in the new &quot;tidy&quot; frame that contains the column names of the original data frame that you want to tidy. Observe how we set <code>names_to = &quot;type&quot;</code> and in the resulting <code>drinks_smaller_tidy</code> the column <code>type</code> contains the three types of alcohol <code>beer</code>, <code>spirit</code>, and <code>wine</code>.</li>
+<li><code>values_to</code> is the name of the column/variable in the &quot;tidy&quot; frame that contains the rows and columns of values in the original data frame you want to tidy. Observe how we set <code>values_to = &quot;servings&quot;</code> and in the resulting <code>drinks_smaller_tidy</code> the column <code>servings</code> contains the 4 <span class="math inline">\(\times\)</span> 3 = 12 numerical values.</li>
 </ol>
-<p>The third argument is a little nuanced, so let's consider another example. Note the code below is very similar, but now the third argument species which columns we'd want to tidy <code>c(beer, spirit, wine)</code>, instead of the columns we don't want to tidy <code>-country</code>. Note the use of <code>c()</code> to create a vector of the columns in <code>drinks_smaller</code> that we'd like to tidy. If you run the code below, you'll see that the resulting <code>drinks_smaller_tidy</code> is the same.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drinks_smaller_tidy &lt;-<span class="st"> </span>drinks_smaller <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> type, <span class="dt">value =</span> servings, <span class="kw">c</span>(beer, spirit, wine))
-drinks_smaller_tidy</code></pre></div>
+<p>The first argument, <code>cols</code>, is a little nuanced, so let's consider another example. Note the code below is very similar, but now the first argument species which columns we'd want to tidy <code>c(beer, spirit, wine)</code>, instead of the columns we don't want to tidy <code>-country</code>. Note the use of <code>c()</code> to create a vector of the columns in <code>drinks_smaller</code> that we'd like to tidy. If you run the code below, you'll see that the result is as <code>drinks_smaller_tidy</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tidy drinks_smaller</span>
+drinks_smaller <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pivot_longer</span>(
+    <span class="dt">cols =</span> <span class="kw">c</span>(beer, spirit, wine),
+    <span class="dt">names_to =</span> <span class="st">&quot;type&quot;</span>, 
+    <span class="dt">values_to =</span> <span class="st">&quot;servings&quot;</span>
+    )</code></pre></div>
 <p>With our <code>drinks_smaller_tidy</code> &quot;tidy&quot; format data frame, we can now produce a side-by-side AKA dodged barplot using <code>geom_col()</code> and not <code>geom_bar()</code>, since we would like to map the <code>servings</code> variable to the <code>y</code>-aesthetic of the bars.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(drinks_smaller_tidy, <span class="kw">aes</span>(<span class="dt">x=</span>country, <span class="dt">y=</span>servings, <span class="dt">fill=</span>type)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre></div>
 <p><img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-124-1.png" width="\textwidth" style="display: block; margin: auto;" /></p>
-<p>Converting &quot;wide&quot; format data to &quot;tidy&quot; format often confuses new R users. The only way to learn to get comfortable with the <code>gather()</code> function is with practice, practice, and more practice. For example, see the examples in the bottom of the help file for <code>gather()</code> by running <code>?gather</code>. We'll show another example of using <code>gather()</code> to convert a &quot;wide&quot; formatted data frame to &quot;tidy&quot; format in Section <a href="4-tidy.html#case-study-tidy">4.3</a>. For other examples of converting a dataset into &quot;tidy&quot; format, check out the different functions available for data tidying and a case study using data from the World Health Organization in <a href="http://r4ds.had.co.nz/tidy-data.html">R for Data Science</a> <span class="citation">(Grolemund and Wickham <a href="#ref-rds2016">2016</a>)</span>.</p>
+<p>Converting &quot;wide&quot; format data to &quot;tidy&quot; format often confuses new R users. The only way to learn to get comfortable with the <code>pivot_longer()</code> function is with practice, practice, and more practice. For example, see the examples in the bottom of the help file for <code>pivot_longer()</code> by running <code>?pivot_longer</code>. We'll show another example of using <code>pivot_longer()</code> to convert a &quot;wide&quot; formatted data frame to &quot;tidy&quot; format in Section <a href="4-tidy.html#case-study-tidy">4.3</a>. For other examples of converting a dataset into &quot;tidy&quot; format, check out the different functions available for data tidying and a case study using data from the World Health Organization in <a href="http://r4ds.had.co.nz/tidy-data.html">R for Data Science</a> <span class="citation">(Grolemund and Wickham <a href="#ref-rds2016">2016</a>)</span>.</p>
 <div class="learncheck">
 <p>
 <strong><em>Learning check</em></strong>
@@ -880,6 +891,7 @@ drinks_smaller_tidy</code></pre></div>
 <p>After reading the help file by running <code>?airline_safety</code>, we see that <code>airline_safety</code> is a data frame containing information on different airlines companies' safety records. This data was originally reported on the data journalism website FiveThirtyEight.com in Nate Silver's article <a href="https://fivethirtyeight.com/features/should-travelers-avoid-flying-airlines-that-have-had-crashes-in-the-past/">&quot;Should Travelers Avoid Flying Airlines That Have Had Crashes in the Past?&quot;</a>. Let's ignore the <code>incl_reg_subsidiaries</code> and <code>avail_seat_km_per_week</code> variables for simplicity:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airline_safety_smaller &lt;-<span class="st"> </span>airline_safety <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(incl_reg_subsidiaries, avail_seat_km_per_week))
+
 airline_safety_smaller</code></pre></div>
 <pre><code># A tibble: 56 x 7
    airline incidents_85_99 fatal_accidents… fatalities_85_99 incidents_00_14
@@ -928,10 +940,11 @@ airline_safety_smaller</code></pre></div>
 </div>
 <div id="case-study-tidy" class="section level2">
 <h2><span class="header-section-number">4.3</span> Case study: Democracy in Guatemala</h2>
-<p>In this section, we'll show you another example of how to convert a data frame that isn't in &quot;tidy&quot; format i.e. &quot;wide&quot; format, to a data frame that is in &quot;tidy&quot; format i.e. &quot;long/narrow&quot; format. We'll do this using the <code>gather()</code> function from the <code>tidyr</code> package again. Furthermore, we'll make use of some of the <code>ggplot2</code> data visualization and <code>dplyr</code> data wrangling tools you learned in Chapters <a href="2-viz.html#viz">2</a> and <a href="3-wrangling.html#wrangling">3</a>.</p>
+<p>In this section, we'll show you another example of how to convert a data frame that isn't in &quot;tidy&quot; format i.e. &quot;wide&quot; format, to a data frame that is in &quot;tidy&quot; format i.e. &quot;long/narrow&quot; format. We'll do this using the <code>pivot_longer()</code> function from the <code>tidyr</code> package again. Furthermore, we'll make use of some of the <code>ggplot2</code> data visualization and <code>dplyr</code> data wrangling tools you learned in Chapters <a href="2-viz.html#viz">2</a> and <a href="3-wrangling.html#wrangling">3</a>.</p>
 <p>Let's use the <code>dem_score</code> data frame we imported in Section <a href="4-tidy.html#csv">4.1</a>, but focus on only data corresponding to Guatemala.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">guat_dem &lt;-<span class="st"> </span>dem_score <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(country <span class="op">==</span><span class="st"> &quot;Guatemala&quot;</span>)
+
 guat_dem</code></pre></div>
 <pre><code># A tibble: 1 x 10
   country   `1952` `1957` `1962` `1967` `1972` `1977` `1982` `1987` `1992`
@@ -944,9 +957,14 @@ guat_dem</code></pre></div>
 <li><code>democracy_score</code> to the y-position aesthetic</li>
 </ul>
 <p>Now we are stuck in a predicament, much like with our <code>drinks_smaller</code> example in Section <a href="4-tidy.html#tidy-data-ex">4.2</a>. We see that we have a variable named <code>country</code>, but its only value is <code>&quot;Guatemala&quot;</code>. We have other variables denoted by different year values. Unfortunately, the <code>guat_dem</code> data frame is not &quot;tidy&quot; and hence is not in the appropriate format to apply the Grammar of Graphics and thus we cannot use the <code>ggplot2</code> package. We need to take the values of the columns corresponding to years in <code>guat_dem</code> and convert them into a new &quot;key&quot; variable called <code>year</code>. Furthermore, we'd like to take the democracy scores on the inside of the table and turn them into a new &quot;value&quot; variable called <code>democracy_score</code>. Our resulting data frame will thus have three columns: <code>country</code>, <code>year</code>, and <code>democracy_score</code>.</p>
-<p>Recall that the <code>gather()</code> function in the <code>tidyr</code> package can complete this task for us:</p>
+<p>Recall that the <code>pivot_longer()</code> function in the <code>tidyr</code> package can complete this task for us:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">guat_dem_tidy &lt;-<span class="st"> </span>guat_dem <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> year, <span class="dt">value =</span> democracy_score, <span class="op">-</span>country) 
+<span class="st">  </span><span class="kw">pivot_longer</span>(
+    <span class="dt">cols =</span> <span class="op">-</span>country, 
+    <span class="dt">names_to =</span> <span class="st">&quot;year&quot;</span>, 
+    <span class="dt">values_to =</span> <span class="st">&quot;democracy_score&quot;</span>
+  ) 
+
 guat_dem_tidy</code></pre></div>
 <pre><code># A tibble: 9 x 3
   country   year  democracy_score
@@ -960,11 +978,11 @@ guat_dem_tidy</code></pre></div>
 7 Guatemala 1982               -7
 8 Guatemala 1987                3
 9 Guatemala 1992                3</code></pre>
-<p>We set the arguments to <code>gather()</code> as follows:</p>
+<p>We set the arguments to <code>pivot_longer()</code> as follows:</p>
 <ol style="list-style-type: decimal">
-<li><code>key</code> is the name of the column/variable in the new &quot;tidy&quot; frame that contains the column names of the original data frame that you want to tidy. Observe how we set <code>key = year</code> and in the resulting <code>guat_dem_tidy</code> the column <code>year</code> contains the years where the Guatemala's democracy score were measured.</li>
-<li><code>value</code> is the name of the column/variable in the &quot;tidy&quot; frame that contains the rows and columns of values in the original data frame you want to tidy. Observe how we set <code>value = democracy_score</code> and in the resulting <code>guat_dem_tidy</code> the column <code>democracy_score</code> contains the 1 <span class="math inline">\(\times\)</span> 9 = 9 democracy scores.</li>
-<li>The third argument are the columns you either want to or don't want to tidy. Observe how we set this to <code>-country</code> indicating that we don't want to tidy the <code>country</code> variable in <code>guat_dem</code> and rather only <code>1952</code> through <code>1992</code>.</li>
+<li>The first argument, <code>cols</code>, indicatesthe columns you either want to or don't want to tidy. Observe how we set this to <code>-country</code> indicating that we don't want to tidy the <code>country</code> variable in <code>guat_dem</code> which leaves <code>1952</code> through <code>1992</code> to be tidied.</li>
+<li><code>names_to</code> is the name of the column/variable in the new &quot;tidy&quot; frame that contains the column names of the original data frame that you want to tidy. Observe how we set <code>names_to = &quot;year&quot;</code> and in the resulting <code>guat_dem_tidy</code> the column <code>year</code> contains the years where the Guatemala's democracy score were measured.</li>
+<li><code>values_to</code> is the name of the column/variable in the &quot;tidy&quot; frame that contains the rows and columns of values in the original data frame you want to tidy. Observe how we set <code>values_to = &quot;democracy_score&quot;</code> and in the resulting <code>guat_dem_tidy</code> the column <code>democracy_score</code> contains the 1 <span class="math inline">\(\times\)</span> 9 = 9 democracy scores.</li>
 </ol>
 <!-- 
 Chester: Should we include a mention of also including all the variables you'd like to include? I rarely do this and use the negation instead. 
@@ -976,7 +994,11 @@ Albert: I did for the drinks_smaller example above, but in this case it will be 
 <p>We can now create the plot to show how the democracy score of Guatemala changed from 1952 to 1992 using a <code>geom_line()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(guat_dem_tidy, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> democracy_score)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Year&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Democracy Score&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Democracy score in Guatemala 1952-1992&quot;</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">labs</span>(
+    <span class="dt">x =</span> <span class="st">&quot;Year&quot;</span>, 
+    <span class="dt">y =</span> <span class="st">&quot;Democracy Score&quot;</span>,
+    <span class="dt">title =</span> <span class="st">&quot;Democracy score in Guatemala 1952-1992&quot;</span>
+  )</code></pre></div>
 <p><img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-132-1.png" width="\textwidth" style="display: block; margin: auto;" /></p>
 <div class="learncheck">
 <p>
@@ -1025,7 +1047,7 @@ FIGURE 4.3: Data Import cheatsheat
 </div>
 <!-- 
 
-Need to include an exercise in the DataCamp course on using gather() to turn the `police_locals` data frame into a tidy data frame.
+Need to include an exercise in the DataCamp course on using pivot_longer() to turn the `police_locals` data frame into a tidy data frame.
 
 Review questions have been designed using the `fivethirtyeight` R package [@R-fivethirtyeight] with links to the corresponding FiveThirtyEight.com articles in our free DataCamp course **Effective Data Storytelling using the `tidyverse`**.  The material in this chapter is covered in the **Tidy Data** chapter of the DataCamp course available [here](https://campus.datacamp.com/courses/effective-data-storytelling-using-the-tidyverse/tidy-data).
 
