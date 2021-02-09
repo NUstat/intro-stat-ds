@@ -85,7 +85,7 @@ For this simple regression model, $b_1 = \bar{y}_T - \bar{y}_C$ is the observed 
 
 There are several functions in R that mimic random processes. You have already seen one example in Chapters \@ref(regression) and \@ref(multiple-regression) when we used `sample_n` to randomly select a specifized number of rows from a dataset. The function `rbernoulli()` is another example, which allows us to mimic the results of a series of random coin flips. The first argument in the `rbernoulli()` function, `n`, specifies the number of trials (in this case, coin flips), and the argument `p` specifies the probability of "success"" for each trial. In our coin flip example, we can define "success" to be when the coin lands on heads. If we're using a fair coin then the probability it lands on heads is 50%, so `p = 0.5`. 
 
-Sometimes a random process can give results that don't *look* random. For example, even though any given coin flip has a 50% chance of landing on heads, it's possible to observe many tails in a row, just due to chance. In the example below, 10 coin flips resulted in only 3 heads, and the first 6 flips were tails. Note that TRUE corresponds to the notion of "success", so here TRUE = heads and FALSE = tails. 
+Sometimes a random process can give results that don't *look* random. For example, even though any given coin flip has a 50% chance of landing on heads, it's possible to observe many tails in a row, just due to chance. In the example below, 10 coin flips resulted in only 3 heads, and the first 7 flips were tails. Note that TRUE corresponds to the notion of "success", so here TRUE = heads and FALSE = tails. 
 ```{r, echo = FALSE}
 set.seed(2018)
 ```
@@ -111,9 +111,9 @@ set.seed(437)
 ```{r}
 coin_flips3 <- rbernoulli(n = 100000, p = 0.5)
 coin_flips3 %>% 
-  as.tibble() %>% 
+  as_tibble() %>% 
   count(value) %>% 
-  mutate(percent = n/sum(n))
+  mutate(percent = 100 * n/sum(n))
 ```
 
 Often times when running a randomized experiment in practice, you want to ensure that exactly half of your participants end up in the treatment group. In this case, you don't want to flip a coin for each participant, because just by chance, you could end up with 63% of people in the treatment group, for example. Instead, you can imagine each participant having an ID number, which is then randomly sorted or shuffled. You could then assign the first half of the randomly sorted ID numbers to the treatment group, for example. R has many ways of mimicing this type of random assignment process as well, such as the `randomizr` package.
