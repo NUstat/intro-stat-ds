@@ -172,7 +172,6 @@ help-files
 gs-conclusion
 additional-resources
 viz
-pkgs-2
 grammarofgraphics
 components-of-the-grammar
 gapminder
@@ -205,7 +204,6 @@ argument-specification
 additional-resources-1
 whats-to-come-3
 wrangling
-pkgs-3
 piping
 filter
 summarize
@@ -227,7 +225,6 @@ summary-table-1
 additional-resources-2
 whats-to-come
 tidy
-pkgs-4
 csv
 using-the-console
 using-rstudios-interface
@@ -241,7 +238,6 @@ tidyverse-package
 additional-resources-3
 whats-to-come-1
 regression
-pkgs-5
 model1
 model1EDA
 model1table
@@ -258,7 +254,6 @@ basic-reg-conclusion
 additional-resources-basic-regression
 whats-to-come-2
 multiple-regression
-pkgs-6
 model3
 model3EDA
 model3table
@@ -274,7 +269,6 @@ correlationcoefficient2
 simpsonsparadox
 multi-reg-conclusion
 causality
-pkgs-7
 causal-questions
 randomized-experiments
 random-processes-in-r
@@ -286,7 +280,6 @@ if-you-know-z-what-about-multiple-regression
 what-if-you-dont-know-z
 causality-conclusion
 populations
-pkgs-8
 terminology
 sample-selection
 movie-example
@@ -297,7 +290,6 @@ sampling-plan
 samples
 causality-vs.-generalizability
 sampling
-pkgs-9
 theory
 sampling-activity
 what-proportion-of-this-bowls-balls-are-red
@@ -323,7 +315,6 @@ clt-conditions
 clt-example
 summary-of-sampling-distributions
 CIs
-pkgs-10
 combining-an-estimate-with-its-precision
 sampling-distributions-of-standardized-statistics
 confidence-interval-with-the-normal-distribution
@@ -337,7 +328,6 @@ observed-statistic
 example-comparing-two-proportions
 compute-the-point-estimate
 pvalues
-pkgs-11
 proof-by-contradiction
 repeated-samples-the-null-hypothesis-and-p-values
 null-hypothesis
@@ -353,7 +343,6 @@ using-t.test
 using-regression
 interpretation-of-p-values
 hypothesis-tests
-pkgs-12
 decision-making
 trade-offs
 medicine
@@ -367,7 +356,6 @@ ride-share-example-revisited
 more-advanced-points-to-consider
 american-statistical-association-asa-statistical-standards
 putting-together
-pkgs-13
 a-general-process-for-using-statistics
 example-TE
 example-estimate-a-proportion
@@ -383,7 +371,6 @@ distribution
 outliers
 normal-distribution-discussion
 appendixC
-pkgs-C
 sorted-barplots
 interactive-graphics
 interactive-linegraphs
