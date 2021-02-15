@@ -1,6 +1,6 @@
 # Reach for the Stars {#appendixC}
 
-## Needed packages {#pkgs-C}
+### Needed packages {#pkgs-C .unnumbered}
 
 ```{r}
 library(dplyr)

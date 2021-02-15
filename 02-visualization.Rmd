@@ -34,7 +34,7 @@ At the most basic level, graphics/plots/charts (we use these terms interchangeab
 As we will see, plots/graphics also help us to identify patterns and outliers in our data.  We will see that a common extension of these ideas is to compare the *distribution* of one quantitative variable (i.e., what the spread of a variable looks like or how the variable is *distributed* in terms of its values) as we go across the levels of a different categorical variable.
 
 
-### Needed packages {#pkgs-2}
+### Needed packages {#pkgs-2 .unnumbered}
 
 Let's load all the packages needed for this chapter (this assumes you've already installed them). Read Section \@ref(packages) for information on how to install and load R packages.
 

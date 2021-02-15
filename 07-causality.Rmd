@@ -23,7 +23,7 @@ set.seed(2018)
 In this chapter we kick off the third segment of this book: statistical theory. Up until this point, we have focused only on descriptive statistics and exploring the data we have in hand. Very often the data available to us is **observational data** – data that is collected via a survey in which nothing is manipulated or via a log of data (e.g., scraped from the web). As a result, any relationship we observe is limited to our specific sample of data, and the relationships are considered **associational**. In this chapter we introduce the idea of making inferences through a discussion of **causality** and **randomization**.
 
 
-### Needed Packages {#pkgs-7}
+### Needed Packages {#pkgs-7 .unnumbered}
 
 Let’s load all the packages needed for this chapter (this assumes you’ve already installed them). If needed, read Section \@ref(packages) for information on how to install and load R packages.
 
