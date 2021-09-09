@@ -1001,7 +1001,7 @@ Let's recap all five of the Five Named Graphs (5NG) in Table \@ref(tab:viz-summa
 summary_table_ch3 <-
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vRGaUW6EMIGPhg2V7CahoSdVi_JCcESFRYV5tov6bjcwOcn7DZDzfpZgrvjfFG6PV57gcJYIrwl_Q2c/pub?gid=0&single=true&output=csv" %>% 
   read_csv(na = "") %>% 
-  rename_(" " = "X1") %>% 
+  rename(" " = "X1") %>% 
   kable(
     caption = "Summary of 5NG", 
     booktabs = TRUE
