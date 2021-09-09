@@ -45,7 +45,22 @@ R: Engine            |  RStudio: Dashboard
 
 More precisely, R is a programming language that runs computations while RStudio is an *integrated development environment (IDE)* that provides an interface by adding many convenient features and tools. So just as having access to a speedometer, rearview mirrors, and a navigation system makes driving much easier, using RStudio's interface makes using R much easier as well. 
 
-### Installing R and RStudio
+### Using RStudio Cloud
+
+RStudio Cloud (https://rstudio.cloud) is a hosted version of RStudio that allows you to begin coding directly from your browser - there is no software to install and nothing to configure on your computer.
+
+To begin using RStudio Cloud use the link provided by your instructor to gain access to the classroom workspace. You will be prompted to create a free account or log in if you have an existing account.
+
+After you open RStudio Cloud, you should be able to see the following:
+
+![](images/RStudioCloud.png)
+Click on the classroom (in this case 'Stat 202') workspace to access the available projects. To begin working click 'Start'. Now that the activity project is open navigate to the 'File' pane and open the R Markdown '.rmd' file.
+
+![](images/RStudioWorkspace.png)
+
+You can use RStudio Cloud for personal use as well by creating projects in 'Your Workspace'. However, RStudio Cloud limits the number of projects and amount of accessible time so it is recommended that you later install the software on your own computer.
+
+### Installing R and RStudio on your personal computer
 
 > **Note about RStudio Server or RStudio Cloud**: If your instructor has provided you with a link and access to RStudio Server or RStudio Cloud, then you can skip this section. We do recommend after a few months of working on RStudio Server/Cloud that you return to these instructions to install this software on your own computer though.
 You will first need to download and install both R and RStudio (Desktop version) on your computer. It is important that you install R first and then install RStudio second.
