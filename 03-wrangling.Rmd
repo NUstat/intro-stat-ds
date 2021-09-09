@@ -892,9 +892,11 @@ Let's recap our data wrangling verbs in Table \@ref(tab:wrangle-summary-table). 
 # The following Google Doc is published to CSV and loaded below using read_csv() below:
 # https://docs.google.com/spreadsheets/d/1nRkXfYMQiTj79c08xQPY0zkoJSpde3NC1w6DRhsWCss/edit#gid=0
 
-"https://docs.google.com/spreadsheets/d/e/2PACX-1vRgwl1lugQA6zxzfB6_0hM5vBjXkU7cbUVYYXLcWeaRJ9HmvNXyCjzJCgiGW8HCe1kvjLCGYHf-BvYL/pub?gid=0&single=true&output=csv" %>% 
-  read_csv(na = "") %>% 
-  select(-X1) %>% 
+temp <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vRgwl1lugQA6zxzfB6_0hM5vBjXkU7cbUVYYXLcWeaRJ9HmvNXyCjzJCgiGW8HCe1kvjLCGYHf-BvYL/pub?gid=0&single=true&output=csv" %>% 
+  read_csv(na = "",) %>% 
+  select(-X1)
+
+temp %>% 
   kable(
     caption = "Summary of data wrangling verbs", 
     booktabs = TRUE
