@@ -154,7 +154,8 @@ fig:promotions-p-value
 fig:unnamed-chunk-350
 getting-started
 r-rstudio
-installing-r-and-rstudio
+using-rstudio-cloud
+installing-r-and-rstudio-on-your-personal-computer
 using-r-via-rstudio
 code
 programming-concepts

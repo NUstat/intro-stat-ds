@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>C Learning Check Solutions | Introduction to Statistics and Data Science</title>
   <meta name="description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="C Learning Check Solutions | Introduction to Statistics and Data Science" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Elizabeth Tipton, Arend M. Kuyper, and Kaitlyn G. Fitzgerald - Adapted from ModernDive by Chester Ismay and Albert Y. Kim," />
 
 
-<meta name="date" content="2021-02-15" />
+<meta name="date" content="2021-09-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,8 @@
   <link rel="shortcut icon" href="images/logos/favicons/favicon.ico" type="image/x-icon" />
 <link rel="prev" href="B-appendixC.html"/>
 <link rel="next" href="references.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,10 +50,11 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
 <script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
 <script src="libs/dygraphs-1.1.1/shapes.js"></script>
@@ -100,6 +102,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -122,8 +125,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="1" data-path="1-getting-started.html"><a href="1-getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started with Data in R</a><ul>
 <li class="chapter" data-level="1.1" data-path="1-getting-started.html"><a href="1-getting-started.html#r-rstudio"><i class="fa fa-check"></i><b>1.1</b> What are R and RStudio?</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="1-getting-started.html"><a href="1-getting-started.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.1.1</b> Installing R and RStudio</a></li>
-<li class="chapter" data-level="1.1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#using-r-via-rstudio"><i class="fa fa-check"></i><b>1.1.2</b> Using R via RStudio</a></li>
+<li class="chapter" data-level="1.1.1" data-path="1-getting-started.html"><a href="1-getting-started.html#using-rstudio-cloud"><i class="fa fa-check"></i><b>1.1.1</b> Using RStudio Cloud</a></li>
+<li class="chapter" data-level="1.1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#installing-r-and-rstudio-on-your-personal-computer"><i class="fa fa-check"></i><b>1.1.2</b> Installing R and RStudio on your personal computer</a></li>
+<li class="chapter" data-level="1.1.3" data-path="1-getting-started.html"><a href="1-getting-started.html#using-r-via-rstudio"><i class="fa fa-check"></i><b>1.1.3</b> Using R via RStudio</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#code"><i class="fa fa-check"></i><b>1.2</b> How do I code in R?</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="1-getting-started.html"><a href="1-getting-started.html#programming-concepts"><i class="fa fa-check"></i><b>1.2.1</b> Basic programming concepts and terminology</a></li>
@@ -583,7 +587,7 @@ reordering of the book. -->
 <p><strong>Solution</strong>: It appears to be an outlier. Let's revisit the use of the <code>filter</code> command to hone in on it. We want all data points where the <code>month</code> is 5 and <code>temp&lt;25</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weather <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(month<span class="op">==</span><span class="dv">5</span> <span class="op">&amp;</span><span class="st"> </span>temp <span class="op">&lt;</span><span class="st"> </span><span class="dv">25</span>)</code></pre></div>
-<pre><code># A tibble: 1 x 16
+<pre><code># A tibble: 1 × 16
   origin  year month   day  hour  temp  dewp humid wind_dir wind_speed wind_gust
   &lt;chr&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
 1 JFK     2013     5     8    22  13.1  12.0  95.3       80       8.06        NA
@@ -779,7 +783,7 @@ not_BTV_SEA &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span>
 <p><strong>Solution</strong>: It corresponds to a count of the number of observations/rows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weather <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">count =</span> <span class="kw">n</span>())</code></pre></div>
-<pre><code># A tibble: 1 x 1
+<pre><code># A tibble: 1 × 1
   count
   &lt;int&gt;
 1 26115</code></pre>
@@ -790,7 +794,7 @@ not_BTV_SEA &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span>
 <p><strong>Solution</strong>: Consider the output of only running the first two lines:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weather <span class="op">%&gt;%</span><span class="st">   </span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(temp, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre></div>
-<pre><code># A tibble: 1 x 1
+<pre><code># A tibble: 1 × 1
    mean
   &lt;dbl&gt;
 1  55.3</code></pre>
@@ -883,19 +887,19 @@ summary_temp_by_month &lt;-<span class="st"> </span>weather <span class="op">%&g
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airline_safety_smaller &lt;-<span class="st"> </span>airline_safety <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(incl_reg_subsidiaries, avail_seat_km_per_week))
 airline_safety_smaller</code></pre></div>
-<pre><code># A tibble: 56 x 7
-   airline incidents_85_99 fatal_accidents… fatalities_85_99 incidents_00_14
-   &lt;chr&gt;             &lt;int&gt;            &lt;int&gt;            &lt;int&gt;           &lt;int&gt;
- 1 Aer Li…               2                0                0               0
- 2 Aerofl…              76               14              128               6
- 3 Aeroli…               6                0                0               1
- 4 Aerome…               3                1               64               5
- 5 Air Ca…               2                0                0               2
- 6 Air Fr…              14                4               79               6
- 7 Air In…               2                1              329               4
- 8 Air Ne…               3                0                0               5
- 9 Alaska…               5                0                0               5
-10 Alital…               7                2               50               4
+<pre><code># A tibble: 56 × 7
+   airline    incidents_85_99 fatal_accidents_… fatalities_85_99 incidents_00_14
+   &lt;chr&gt;                &lt;int&gt;             &lt;int&gt;            &lt;int&gt;           &lt;int&gt;
+ 1 Aer Lingus               2                 0                0               0
+ 2 Aeroflot                76                14              128               6
+ 3 Aerolinea…               6                 0                0               1
+ 4 Aeromexico               3                 1               64               5
+ 5 Air Canada               2                 0                0               2
+ 6 Air France              14                 4               79               6
+ 7 Air India                2                 1              329               4
+ 8 Air New Z…               3                 0                0               5
+ 9 Alaska Ai…               5                 0                0               5
+10 Alitalia                 7                 2               50               4
 # … with 46 more rows, and 2 more variables: fatal_accidents_00_14 &lt;int&gt;,
 #   fatalities_00_14 &lt;int&gt;</code></pre>
 <p>This data frame is not in &quot;tidy&quot; format. How would you convert this data frame to be in &quot;tidy&quot; format, in particular so that it has a variable <code>incident_type_years</code> indicating the indicent type/year and a variable <code>count</code> of the counts?</p>
@@ -903,7 +907,7 @@ airline_safety_smaller</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airline_safety_smaller_tidy &lt;-<span class="st"> </span>airline_safety_smaller <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> incident_type_years, <span class="dt">value =</span> count, <span class="op">-</span>airline)
 airline_safety_smaller_tidy</code></pre></div>
-<pre><code># A tibble: 336 x 3
+<pre><code># A tibble: 336 × 3
    airline               incident_type_years count
    &lt;chr&gt;                 &lt;chr&gt;               &lt;int&gt;
  1 Aer Lingus            incidents_85_99         2
@@ -947,7 +951,6 @@ airline_safety_smaller_tidy</code></pre></div>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -966,6 +969,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -986,6 +990,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true

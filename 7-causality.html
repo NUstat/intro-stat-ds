@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Randomization and Causality | Introduction to Statistics and Data Science</title>
   <meta name="description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Randomization and Causality | Introduction to Statistics and Data Science" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Elizabeth Tipton, Arend M. Kuyper, and Kaitlyn G. Fitzgerald - Adapted from ModernDive by Chester Ismay and Albert Y. Kim," />
 
 
-<meta name="date" content="2021-02-15" />
+<meta name="date" content="2021-09-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,8 @@
   <link rel="shortcut icon" href="images/logos/favicons/favicon.ico" type="image/x-icon" />
 <link rel="prev" href="6-multiple-regression.html"/>
 <link rel="next" href="8-populations.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,10 +50,11 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
 <script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
 <script src="libs/dygraphs-1.1.1/shapes.js"></script>
@@ -100,6 +102,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -122,8 +125,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="1" data-path="1-getting-started.html"><a href="1-getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started with Data in R</a><ul>
 <li class="chapter" data-level="1.1" data-path="1-getting-started.html"><a href="1-getting-started.html#r-rstudio"><i class="fa fa-check"></i><b>1.1</b> What are R and RStudio?</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="1-getting-started.html"><a href="1-getting-started.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.1.1</b> Installing R and RStudio</a></li>
-<li class="chapter" data-level="1.1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#using-r-via-rstudio"><i class="fa fa-check"></i><b>1.1.2</b> Using R via RStudio</a></li>
+<li class="chapter" data-level="1.1.1" data-path="1-getting-started.html"><a href="1-getting-started.html#using-rstudio-cloud"><i class="fa fa-check"></i><b>1.1.1</b> Using RStudio Cloud</a></li>
+<li class="chapter" data-level="1.1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#installing-r-and-rstudio-on-your-personal-computer"><i class="fa fa-check"></i><b>1.1.2</b> Installing R and RStudio on your personal computer</a></li>
+<li class="chapter" data-level="1.1.3" data-path="1-getting-started.html"><a href="1-getting-started.html#using-r-via-rstudio"><i class="fa fa-check"></i><b>1.1.3</b> Using R via RStudio</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#code"><i class="fa fa-check"></i><b>1.2</b> How do I code in R?</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="1-getting-started.html"><a href="1-getting-started.html#programming-concepts"><i class="fa fa-check"></i><b>1.2.1</b> Basic programming concepts and terminology</a></li>
@@ -510,9 +514,9 @@ coin_flips3 <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">count</span>(value) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">percent =</span> <span class="dv">100</span> <span class="op">*</span><span class="st"> </span>n<span class="op">/</span><span class="kw">sum</span>(n))</code></pre></div>
-<pre><code># A tibble: 2 x 3
+<pre><code># A tibble: 2 × 3
   value     n percent
-* &lt;lgl&gt; &lt;int&gt;   &lt;dbl&gt;
+  &lt;lgl&gt; &lt;int&gt;   &lt;dbl&gt;
 1 FALSE 49879    49.9
 2 TRUE  50121    50.1</code></pre>
 <p>Often times when running a randomized experiment in practice, you want to ensure that exactly half of your participants end up in the treatment group. In this case, you don't want to flip a coin for each participant, because just by chance, you could end up with 63% of people in the treatment group, for example. Instead, you can imagine each participant having an ID number, which is then randomly sorted or shuffled. You could then assign the first half of the randomly sorted ID numbers to the treatment group, for example. R has many ways of mimicing this type of random assignment process as well, such as the <code>randomizr</code> package.</p>
@@ -547,23 +551,23 @@ coin_flips3 <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="kw">glimpse</span>(ed_data)</code></pre></div>
 <pre><code>Rows: 335
 Columns: 10
-$ ID           &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 1…
-$ FEMALE       &lt;dbl&gt; 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0,…
-$ MINORITY     &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0,…
-$ MOM_ED       &lt;chr&gt; &quot;Some college&quot;, &quot;Vocational/technical program&quot;, &quot;Some co…
-$ DAD_ED       &lt;chr&gt; &quot;Vocational/technical program&quot;, &quot;Some college&quot;, &quot;Bachelo…
-$ SES_CONT     &lt;dbl&gt; -0.27, -0.03, 0.48, -0.03, -0.66, 1.53, 0.20, 0.07, -0.3…
-$ READ_pre     &lt;dbl&gt; 27.4, 32.5, 48.2, 43.9, 36.1, 95.8, 33.8, 33.1, 32.2, 44…
-$ MATH_pre     &lt;dbl&gt; 18.7, 30.6, 31.6, 31.4, 24.2, 49.8, 27.1, 27.4, 25.1, 41…
-$ Trt_rand     &lt;dbl&gt; 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0,…
-$ Trt_non_rand &lt;dbl&gt; 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0,…</code></pre>
+$ ID           &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17…
+$ FEMALE       &lt;dbl&gt; 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, …
+$ MINORITY     &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, …
+$ MOM_ED       &lt;chr&gt; &quot;Some college&quot;, &quot;Vocational/technical program&quot;, &quot;Some col…
+$ DAD_ED       &lt;chr&gt; &quot;Vocational/technical program&quot;, &quot;Some college&quot;, &quot;Bachelor…
+$ SES_CONT     &lt;dbl&gt; -0.27, -0.03, 0.48, -0.03, -0.66, 1.53, 0.20, 0.07, -0.32…
+$ READ_pre     &lt;dbl&gt; 27.4, 32.5, 48.2, 43.9, 36.1, 95.8, 33.8, 33.1, 32.2, 44.…
+$ MATH_pre     &lt;dbl&gt; 18.7, 30.6, 31.6, 31.4, 24.2, 49.8, 27.1, 27.4, 25.1, 41.…
+$ Trt_rand     &lt;dbl&gt; 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, …
+$ Trt_non_rand &lt;dbl&gt; 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, …</code></pre>
 <p>It includes information on 335 Kindergarten students: indicator variables for whether they are female or minority students, information on their parents' highest level of education, a continuous measure of the their socio-economic status (SES), and their reading and math scores. For our purposes, we will assume that these are all <strong>pre-treatment variables</strong> that are measured on students at the beginning of the year, before we conduct our (hypothetical) randomized experiment. We also have included two variables <code>Trt_rand</code> and <code>Trt_non_rand</code> for demonstration purposes, which we will describe below.</p>
 <p>In order to conduct our randomized experiment, we could randomly assign half of the Kindergarteners to the treatment group to recieve the new curriculum, and the other half of the students to the control group to recieve the &quot;business as usual&quot; curriculum. <code>Trt_rand</code> is the result of this <em>random assignment</em>, and is an indicator variable for whether the student is in the treatment group (<code>Trt_rand == 1</code>) or the control group (<code>Trt_rand == 0</code>). By inspecting this variable, we can see that 167 students were assigned to treatment and 168 were assigned to control.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ed_data <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">count</span>(Trt_rand)</code></pre></div>
-<pre><code># A tibble: 2 x 2
+<pre><code># A tibble: 2 × 2
   Trt_rand     n
-*    &lt;dbl&gt; &lt;int&gt;
+     &lt;dbl&gt; &lt;int&gt;
 1        0   168
 2        1   167</code></pre>
 <p>Remember that because this treatment assignment was <strong>random</strong>, we don't expect a student's treatment status to be correlated with any of their other pre-treatment characteristics. In other words, students in the treatment and control groups should look approximately the same <em>on average</em>. Looking at the means of all the numeric variables by treatment group, we can see that this is true in our example. Note how the <code>summarise_if</code> function is working here; if a variable in the dataset is numeric, then it is summarized by calculating its <code>mean</code>.</p>
@@ -571,7 +575,7 @@ $ Trt_non_rand &lt;dbl&gt; 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1,
 <span class="st">  </span><span class="kw">group_by</span>(Trt_rand) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarise_if</span>(is.numeric, mean) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(ID, Trt_non_rand))</code></pre></div>
-<pre><code># A tibble: 2 x 6
+<pre><code># A tibble: 2 × 6
   Trt_rand FEMALE MINORITY SES_CONT READ_pre MATH_pre
      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 1        0  0.542    0.327    0.296     46.8     39.0
@@ -584,7 +588,7 @@ $ Trt_non_rand &lt;dbl&gt; 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1,
 <span class="st">  </span><span class="kw">group_by</span>(Trt_non_rand) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarise_if</span>(is.numeric, mean) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(ID, Trt_rand))</code></pre></div>
-<pre><code># A tibble: 2 x 6
+<pre><code># A tibble: 2 × 6
   Trt_non_rand FEMALE MINORITY SES_CONT READ_pre MATH_pre
          &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 1            0  0.565    0.226    0.912     51.7     43.6
@@ -841,9 +845,9 @@ MATH_post_trt_non_rand
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ed_data <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(Trt_rand) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">post_trt_rand_avg =</span> <span class="kw">mean</span>(MATH_post_trt_rand))</code></pre></div>
-<pre><code># A tibble: 2 x 2
+<pre><code># A tibble: 2 × 2
   Trt_rand post_trt_rand_avg
-*    &lt;dbl&gt;             &lt;dbl&gt;
+     &lt;dbl&gt;             &lt;dbl&gt;
 1        0              39.6
 2        1              49.6</code></pre>
 <p>Remember that in a randomized experiment, we calculate the treatment effect by simply taking the difference in the group averages (i.e. <span class="math inline">\(\bar{y}_T - \bar{y}_C\)</span>), so here our estimated treatment effect is <span class="math inline">\(49.6 - 39.6 = 10.0\)</span>. Recall that we said this could be estimated using the simple linear regression model <span class="math inline">\(\hat{y} = b_0 + b_1T\)</span>. We can fit this model in R to verify that our estimated treatment effect is <span class="math inline">\(b_1 = 10.0\)</span>.</p>
@@ -860,9 +864,9 @@ Coefficients:
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ed_data <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(Trt_non_rand) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">post_trt_non_rand_avg =</span> <span class="kw">mean</span>(MATH_post_trt_non_rand))</code></pre></div>
-<pre><code># A tibble: 2 x 2
+<pre><code># A tibble: 2 × 2
   Trt_non_rand post_trt_non_rand_avg
-*        &lt;dbl&gt;                 &lt;dbl&gt;
+         &lt;dbl&gt;                 &lt;dbl&gt;
 1            0                  43.3
 2            1                  45.5</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit1_non_rand &lt;-<span class="st"> </span><span class="kw">lm</span>(MATH_post_trt_non_rand <span class="op">~</span><span class="st"> </span>Trt_non_rand, <span class="dt">data =</span> ed_data)
@@ -941,7 +945,6 @@ SES_CONT        6.37      0.798    7.98  2.37e-14</code></pre>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -960,6 +963,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -980,6 +984,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true

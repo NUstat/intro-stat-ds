@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Multiple Regression | Introduction to Statistics and Data Science</title>
   <meta name="description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Multiple Regression | Introduction to Statistics and Data Science" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Elizabeth Tipton, Arend M. Kuyper, and Kaitlyn G. Fitzgerald - Adapted from ModernDive by Chester Ismay and Albert Y. Kim," />
 
 
-<meta name="date" content="2021-02-15" />
+<meta name="date" content="2021-09-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,8 @@
   <link rel="shortcut icon" href="images/logos/favicons/favicon.ico" type="image/x-icon" />
 <link rel="prev" href="5-regression.html"/>
 <link rel="next" href="7-causality.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,10 +50,11 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
 <script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
 <script src="libs/dygraphs-1.1.1/shapes.js"></script>
@@ -100,6 +102,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -122,8 +125,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="1" data-path="1-getting-started.html"><a href="1-getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started with Data in R</a><ul>
 <li class="chapter" data-level="1.1" data-path="1-getting-started.html"><a href="1-getting-started.html#r-rstudio"><i class="fa fa-check"></i><b>1.1</b> What are R and RStudio?</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="1-getting-started.html"><a href="1-getting-started.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.1.1</b> Installing R and RStudio</a></li>
-<li class="chapter" data-level="1.1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#using-r-via-rstudio"><i class="fa fa-check"></i><b>1.1.2</b> Using R via RStudio</a></li>
+<li class="chapter" data-level="1.1.1" data-path="1-getting-started.html"><a href="1-getting-started.html#using-rstudio-cloud"><i class="fa fa-check"></i><b>1.1.1</b> Using RStudio Cloud</a></li>
+<li class="chapter" data-level="1.1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#installing-r-and-rstudio-on-your-personal-computer"><i class="fa fa-check"></i><b>1.1.2</b> Installing R and RStudio on your personal computer</a></li>
+<li class="chapter" data-level="1.1.3" data-path="1-getting-started.html"><a href="1-getting-started.html#using-r-via-rstudio"><i class="fa fa-check"></i><b>1.1.3</b> Using R via RStudio</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#code"><i class="fa fa-check"></i><b>1.2</b> How do I code in R?</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="1-getting-started.html"><a href="1-getting-started.html#programming-concepts"><i class="fa fa-check"></i><b>1.2.1</b> Basic programming concepts and terminology</a></li>
@@ -509,11 +513,11 @@ credit_ch6 &lt;-<span class="st"> </span>Credit <span class="op">%&gt;%</span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glimpse</span>(credit_ch6)</code></pre></div>
 <pre><code>Rows: 400
 Columns: 5
-$ debt          &lt;int&gt; 333, 903, 580, 964, 331, 1151, 203, 872, 279, 1350, 140…
-$ credit_limit  &lt;int&gt; 3606, 6645, 7075, 9504, 4897, 8047, 3388, 7114, 3300, 6…
-$ income        &lt;dbl&gt; 14.9, 106.0, 104.6, 148.9, 55.9, 80.2, 21.0, 71.4, 15.1…
-$ credit_rating &lt;int&gt; 283, 483, 514, 681, 357, 569, 259, 512, 266, 491, 589, …
-$ age           &lt;int&gt; 34, 82, 71, 36, 68, 77, 37, 87, 66, 41, 30, 64, 57, 49,…</code></pre>
+$ debt          &lt;int&gt; 333, 903, 580, 964, 331, 1151, 203, 872, 279, 1350, 1407…
+$ credit_limit  &lt;int&gt; 3606, 6645, 7075, 9504, 4897, 8047, 3388, 7114, 3300, 68…
+$ income        &lt;dbl&gt; 14.9, 106.0, 104.6, 148.9, 55.9, 80.2, 21.0, 71.4, 15.1,…
+$ credit_rating &lt;int&gt; 283, 483, 514, 681, 357, 569, 259, 512, 266, 491, 589, 1…
+$ age           &lt;int&gt; 34, 82, 71, 36, 68, 77, 37, 87, 66, 41, 30, 64, 57, 49, …</code></pre>
 <p>Furthermore, let's look at a random sample of five out of the 400 credit card holders in Table <a href="6-multiple-regression.html#tab:model3-data-preview">6.1</a>. Once again, note that due to the random nature of the sampling, you will likely end up with a different subset of five rows.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">9</span>)
 credit_ch6 <span class="op">%&gt;%</span>
@@ -739,7 +743,7 @@ income
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>`geom_smooth()` using formula &#39;y ~ x&#39;
 `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:2numxplot1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:2numxplot1"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/2numxplot1-1.png" alt="Relationship between credit card debt and credit limit/income." width="\textwidth" />
 <p class="caption">
 FIGURE 6.1: Relationship between credit card debt and credit limit/income.
@@ -751,7 +755,7 @@ FIGURE 6.1: Relationship between credit card debt and credit limit/income.
 <li>The numerical outcome variable <span class="math inline">\(y\)</span> <code>debt</code> is on the vertical axis</li>
 <li>The two numerical explanatory variables, <span class="math inline">\(x_1\)</span> <code>income</code> and <span class="math inline">\(x_2\)</span> <code>credit_limit</code>, are on the two axes that form the bottom plane.</li>
 </ol>
-<div class="figure" style="text-align: center"><span id="fig:3D-scatterplot"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:3D-scatterplot"></span>
 <img src="images/credit_card_balance_regression_plane.png" alt="3D scatterplot and regression plane." width="60%" />
 <p class="caption">
 FIGURE 6.2: 3D scatterplot and regression plane.
@@ -1161,10 +1165,10 @@ residual
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glimpse</span>(evals_ch6)</code></pre></div>
 <pre><code>Rows: 463
 Columns: 4
-$ ID     &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,…
-$ score  &lt;dbl&gt; 4.7, 4.1, 3.9, 4.8, 4.6, 4.3, 2.8, 4.1, 3.4, 4.5, 3.8, 4.5, 4.…
-$ age    &lt;int&gt; 36, 36, 36, 36, 59, 59, 59, 51, 51, 40, 40, 40, 40, 40, 40, 40…
-$ gender &lt;fct&gt; female, female, female, female, male, male, male, male, male, …</code></pre>
+$ ID     &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, …
+$ score  &lt;dbl&gt; 4.7, 4.1, 3.9, 4.8, 4.6, 4.3, 2.8, 4.1, 3.4, 4.5, 3.8, 4.5, 4.6…
+$ age    &lt;int&gt; 36, 36, 36, 36, 59, 59, 59, 51, 51, 40, 40, 40, 40, 40, 40, 40,…
+$ gender &lt;fct&gt; female, female, female, female, male, male, male, male, male, f…</code></pre>
 <p>Let's also display a random sample of 5 rows of the 463 rows corresponding to different courses in Table <a href="6-multiple-regression.html#tab:model4-data-preview">6.5</a>. Remember due to the random nature of the sampling, you will likely end up with a different subset of 5 rows.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">evals_ch6 <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">sample_n</span>(<span class="dt">size =</span> <span class="dv">5</span>)</code></pre></div>
@@ -1281,7 +1285,7 @@ male
 <p>Furthermore, let's compute the correlation coefficient between our two numerical variables: <code>score</code> and <code>age</code>. Recall from Subsection <a href="5-regression.html#model1EDA">5.1.1</a> that correlation coefficients only exist between numerical variables. We observe that they are &quot;weakly negatively&quot; correlated.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">evals_ch6 <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">correlation =</span> <span class="kw">cor</span>(score, age))</code></pre></div>
-<pre><code># A tibble: 1 x 1
+<pre><code># A tibble: 1 × 1
   correlation
         &lt;dbl&gt;
 1      -0.107</code></pre>
@@ -1291,7 +1295,7 @@ male
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Teaching Score&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;Gender&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>`geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:numxcatxplot1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:numxcatxplot1"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/numxcatxplot1-1.png" alt="Colored scatterplot of relationship of teaching and beauty scores." width="\textwidth" />
 <p class="caption">
 FIGURE 6.3: Colored scatterplot of relationship of teaching and beauty scores.
@@ -1622,7 +1626,7 @@ Male instructors
 `geom_parallel_slopes()` function. We suggest you use
 `geom_parallel_slopes()` instead of `gg_parallel_slopes()`; read the help
 file by running `?geom_parallel_slopes` to learn how.</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:numxcatx-parallel"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:numxcatx-parallel"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/numxcatx-parallel-1.png" alt="Parallel slopes model of relationship of score with age and gender." width="\textwidth" />
 <p class="caption">
 FIGURE 6.4: Parallel slopes model of relationship of score with age and gender.
@@ -1788,7 +1792,7 @@ Male instructors
 `geom_parallel_slopes()` instead of `gg_parallel_slopes()`; read the help
 file by running `?geom_parallel_slopes` to learn how.</code></pre>
 <pre><code>`geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:numxcatx-comparison"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:numxcatx-comparison"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/numxcatx-comparison-1.png" alt="Comparison of interaction and parallel slopes models." width="\textwidth" />
 <p class="caption">
 FIGURE 6.5: Comparison of interaction and parallel slopes models.
@@ -1802,7 +1806,7 @@ FIGURE 6.5: Comparison of interaction and parallel slopes models.
 <p>Say you have a professor who is female and is 36 years old. What fitted value <span class="math inline">\(\widehat{y}\)</span> = <span class="math inline">\(\widehat{\text{score}}\)</span> would our model yield? Say you have another professor who is male and is 59 years old. What would their fitted value <span class="math inline">\(\widehat{y}\)</span> be?</p>
 <p>We answer this question visually first by finding the intersection of the red regression line and the vertical line at <span class="math inline">\(x\)</span> = age = 36. We mark this value with a large red dot in Figure <a href="6-multiple-regression.html#fig:fitted-values">6.6</a>. Similarly, we can identify the fitted value <span class="math inline">\(\widehat{y}\)</span> = <span class="math inline">\(\widehat{\text{score}}\)</span> for the male instructor by finding the intersection of the blue regression line and the vertical line at <span class="math inline">\(x\)</span> = age = 59. We mark this value with a large blue dot in Figure <a href="6-multiple-regression.html#fig:fitted-values">6.6</a>.</p>
 <pre><code>`geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:fitted-values"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fitted-values"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/fitted-values-1.png" alt="Fitted values for two new professors." width="\textwidth" />
 <p class="caption">
 FIGURE 6.6: Fitted values for two new professors.
@@ -2069,7 +2073,7 @@ female
 <h3><span class="header-section-number">6.3.1</span> Model selection</h3>
 <p>When do we use an interaction model versus a parallel slopes model? Recall in Sections <a href="6-multiple-regression.html#model4interactiontable">6.2.2</a> and <a href="6-multiple-regression.html#model4table">6.2.3</a> we fit both interaction and parallel slopes models for the outcome variable <span class="math inline">\(y\)</span> (teaching score) using a numerical explanatory variable <span class="math inline">\(x_1\)</span> (age) and a categorical explanatory variable <span class="math inline">\(x_2\)</span> (gender). We compared these models in Figure <a href="6-multiple-regression.html#fig:numxcatx-comparison">6.5</a>, which we display again now.</p>
 <pre><code>`geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:recall-parallel-vs-interaction"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:recall-parallel-vs-interaction"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/recall-parallel-vs-interaction-1.png" alt="Previously seen comparison of interaction and parallel slopes models." width="\textwidth" />
 <p class="caption">
 FIGURE 6.7: Previously seen comparison of interaction and parallel slopes models.
@@ -2098,7 +2102,7 @@ FIGURE 6.7: Previously seen comparison of interaction and parallel slopes models
 `geom_parallel_slopes()` instead of `gg_parallel_slopes()`; read the help
 file by running `?geom_parallel_slopes` to learn how.</code></pre>
 <pre><code>`geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:numxcatx-comparison-2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:numxcatx-comparison-2"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/numxcatx-comparison-2-1.png" alt="Comparison of interaction and parallel slopes models for MA schools." width="\textwidth" />
 <p class="caption">
 FIGURE 6.8: Comparison of interaction and parallel slopes models for MA schools.
@@ -2390,7 +2394,7 @@ income
 <h3><span class="header-section-number">6.3.3</span> Simpson's Paradox</h3>
 <p>Recall in Section <a href="6-multiple-regression.html#model3">6.1</a>, we saw the two seemingly contradictory results when studying the relationship between credit card debt and income. On the one hand, the right hand plot of Figure <a href="6-multiple-regression.html#fig:2numxplot1">6.1</a> suggested that the relationship between credit card debt and income was <em>positive</em>. We re-display this plot in Figure <a href="6-multiple-regression.html#fig:2numxplot1-repeat">6.9</a>.</p>
 <pre><code>`geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:2numxplot1-repeat"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:2numxplot1-repeat"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/2numxplot1-repeat-1.png" alt="Relationship between credit card debt and income." width="\textwidth" />
 <p class="caption">
 FIGURE 6.9: Relationship between credit card debt and income.
@@ -2501,7 +2505,7 @@ income
 <p>Observe how the slope for income is -7.663 and, most importantly for now, it is negative. This contradicts our observation in Figure <a href="6-multiple-regression.html#fig:2numxplot1-repeat">6.9</a> that the relationship is positive. How can this be? Recall the interpretation of the slope for <code>income</code> in the context of a multiple regression model: <em>taking into account all the other explanatory variables in our model</em>, for every increase of one unit in income (i.e. $1000), there is an associated decrease of on average $7.663 in debt.</p>
 <p>In other words, while in <em>isolation</em> the relationship between debt and income may be positive, when taking into account credit limit as well, this relationship becomes negative. These seemingly paradoxical results are due to a phenomenon aptly named <a href="https://en.wikipedia.org/wiki/Simpson%27s_paradox"><em>Simpson's Paradox</em></a>. Simpson's Paradox occurs when trends that exist for the data in aggregate either disappear or reverse when the data are broken down into groups.</p>
 <p>Let's show how Simpson's Paradox manifests itself in the <code>credit_ch6</code> data. Let's first visualize the distribution of the numerical explanatory variable credit limit with a histogram in Figure <a href="6-multiple-regression.html#fig:credit-limit-quartiles">6.10</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:credit-limit-quartiles"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:credit-limit-quartiles"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/credit-limit-quartiles-1.png" alt="Histogram of credit limits and brackets." width="\textwidth" />
 <p class="caption">
 FIGURE 6.10: Histogram of credit limits and brackets.
@@ -2522,7 +2526,7 @@ FIGURE 6.10: Histogram of credit limits and brackets.
 </ol>
 <pre><code>`geom_smooth()` using formula &#39;y ~ x&#39;
 `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:2numxplot4"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:2numxplot4"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/2numxplot4-1.png" alt="Relationship between credit card debt and income by credit limit bracket." width="\textwidth" />
 <p class="caption">
 FIGURE 6.11: Relationship between credit card debt and income by credit limit bracket.
@@ -2560,7 +2564,6 @@ FIGURE 6.11: Relationship between credit card debt and income by credit limit br
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -2579,6 +2582,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -2599,6 +2603,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true

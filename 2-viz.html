@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Data Visualization | Introduction to Statistics and Data Science</title>
   <meta name="description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Data Visualization | Introduction to Statistics and Data Science" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Elizabeth Tipton, Arend M. Kuyper, and Kaitlyn G. Fitzgerald - Adapted from ModernDive by Chester Ismay and Albert Y. Kim," />
 
 
-<meta name="date" content="2021-02-15" />
+<meta name="date" content="2021-09-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,8 @@
   <link rel="shortcut icon" href="images/logos/favicons/favicon.ico" type="image/x-icon" />
 <link rel="prev" href="1-getting-started.html"/>
 <link rel="next" href="3-wrangling.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,10 +50,11 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
 <script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
 <script src="libs/dygraphs-1.1.1/shapes.js"></script>
@@ -100,6 +102,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -122,8 +125,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="1" data-path="1-getting-started.html"><a href="1-getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started with Data in R</a><ul>
 <li class="chapter" data-level="1.1" data-path="1-getting-started.html"><a href="1-getting-started.html#r-rstudio"><i class="fa fa-check"></i><b>1.1</b> What are R and RStudio?</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="1-getting-started.html"><a href="1-getting-started.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.1.1</b> Installing R and RStudio</a></li>
-<li class="chapter" data-level="1.1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#using-r-via-rstudio"><i class="fa fa-check"></i><b>1.1.2</b> Using R via RStudio</a></li>
+<li class="chapter" data-level="1.1.1" data-path="1-getting-started.html"><a href="1-getting-started.html#using-rstudio-cloud"><i class="fa fa-check"></i><b>1.1.1</b> Using RStudio Cloud</a></li>
+<li class="chapter" data-level="1.1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#installing-r-and-rstudio-on-your-personal-computer"><i class="fa fa-check"></i><b>1.1.2</b> Installing R and RStudio on your personal computer</a></li>
+<li class="chapter" data-level="1.1.3" data-path="1-getting-started.html"><a href="1-getting-started.html#using-r-via-rstudio"><i class="fa fa-check"></i><b>1.1.3</b> Using R via RStudio</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#code"><i class="fa fa-check"></i><b>1.2</b> How do I code in R?</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="1-getting-started.html"><a href="1-getting-started.html#programming-concepts"><i class="fa fa-check"></i><b>1.2.1</b> Basic programming concepts and terminology</a></li>
@@ -623,7 +627,7 @@ Oceania
 <!--
 Note that R will deal with large numbers using scientific notation.  So in the legend for "Population", 1.25e+09 is 1.25 $\times$ 10^9^ = 1,250,000,000 = 1.25 billion. 
 -->
-<div class="figure" style="text-align: center"><span id="fig:gapminder"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:gapminder"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/gapminder-1.png" alt="Life Expectancy over GDP per Capita in 2007" width="\textwidth" />
 <p class="caption">
 FIGURE 2.1: Life Expectancy over GDP per Capita in 2007
@@ -786,7 +790,7 @@ point
 </ul>
 <p>After running the above code, you'll notice two outputs: a warning message and the graphic shown in Figure <a href="2-viz.html#fig:noalpha">2.2</a>. Let's first unpack the warning message:</p>
 <pre><code>Warning: Removed 5 rows containing missing values (geom_point).</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:noalpha"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:noalpha"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/noalpha-1.png" alt="Arrival Delays vs Departure Delays for Alaska Airlines flights from NYC in 2013" width="\textwidth" />
 <p class="caption">
 FIGURE 2.2: Arrival Delays vs Departure Delays for Alaska Airlines flights from NYC in 2013
@@ -800,7 +804,7 @@ FIGURE 2.2: Arrival Delays vs Departure Delays for Alaska Airlines flights from 
 <li>To stress the importance of adding layers in particular the layer specifying the <code>geom</code>etric object, consider Figure <a href="2-viz.html#fig:nolayers">2.3</a> where no layers are added. A not very useful plot!</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> alaska_flights, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> dep_delay, <span class="dt">y =</span> arr_delay))</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:nolayers"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:nolayers"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/nolayers-1.png" alt="Plot with No Layers" width="\textwidth" />
 <p class="caption">
 FIGURE 2.3: Plot with No Layers
@@ -831,7 +835,7 @@ FIGURE 2.3: Plot with No Layers
 <p>The first way of addressing overplotting is by changing the transparency of the points by using the <code>alpha</code> argument in <code>geom_point()</code>. By default, this value is set to <code>1</code>. We can change this to any value between <code>0</code> and <code>1</code>, where <code>0</code> sets the points to be 100% transparent and <code>1</code> sets the points to be 100% opaque. Note how the following code is identical to the code in Section <a href="2-viz.html#scatterplots">2.3</a> that created the scatterplot with overplotting, but with <code>alpha = 0.2</code> added to the <code>geom_point()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> alaska_flights, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> dep_delay, <span class="dt">y =</span> arr_delay)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.2</span>)</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:alpha"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:alpha"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/alpha-1.png" alt="Delay scatterplot with alpha=0.2" width="\textwidth" />
 <p class="caption">
 FIGURE 2.4: Delay scatterplot with alpha=0.2
@@ -840,7 +844,7 @@ FIGURE 2.4: Delay scatterplot with alpha=0.2
 <p>The key feature to note in Figure <a href="2-viz.html#fig:alpha">2.4</a> is that the transparency of the points is cumulative: areas with a high-degree of overplotting are darker, whereas areas with a lower degree are less dark. Note furthermore that there is no <code>aes()</code> surrounding <code>alpha = 0.2</code>. This is because we are not mapping a variable to an aesthetic attribute, but rather merely changing the default setting of <code>alpha</code>. In fact, you'll receive an error if you try to change the second line above to read <code>geom_point(aes(alpha = 0.2))</code>.</p>
 <p><strong>Method 2: Jittering the points</strong></p>
 <p>The second way of addressing overplotting is by <em>jittering</em> all the points, in other words give each point a small nudge in a random direction. You can think of &quot;jittering&quot; as shaking the points around a bit on the plot. Let's illustrate using a simple example first. Say we have a data frame <code>jitter_example</code> with 4 rows of identical value 0 for both <code>x</code> and <code>y</code>:</p>
-<pre><code># A tibble: 4 x 2
+<pre><code># A tibble: 4 × 2
       x     y
   &lt;dbl&gt; &lt;dbl&gt;
 1     0     0
@@ -848,14 +852,14 @@ FIGURE 2.4: Delay scatterplot with alpha=0.2
 3     0     0
 4     0     0</code></pre>
 <p>We display the resulting scatterplot in Figure <a href="2-viz.html#fig:jitter-example-plot-1">2.5</a>; observe that the 4 points are superimposed on top of each other. While we know there are 4 values being plotted, this fact might not be apparent to others.</p>
-<div class="figure" style="text-align: center"><span id="fig:jitter-example-plot-1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:jitter-example-plot-1"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/jitter-example-plot-1-1.png" alt="Regular scatterplot of jitter example data" width="\textwidth" />
 <p class="caption">
 FIGURE 2.5: Regular scatterplot of jitter example data
 </p>
 </div>
 <p>In Figure <a href="2-viz.html#fig:jitter-example-plot-2">2.6</a> we instead display a <em>jittered scatterplot</em> where each point is given a random &quot;nudge.&quot; It is now plainly evident that this plot involves four points. Keep in mind that jittering is strictly a visualization tool; even after creating a jittered scatterplot, the original values saved in <code>jitter_example</code> remain unchanged.</p>
-<div class="figure" style="text-align: center"><span id="fig:jitter-example-plot-2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:jitter-example-plot-2"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/jitter-example-plot-2-1.png" alt="Jittered scatterplot of jitter example data" width="\textwidth" />
 <p class="caption">
 FIGURE 2.6: Jittered scatterplot of jitter example data
@@ -864,7 +868,7 @@ FIGURE 2.6: Jittered scatterplot of jitter example data
 <p>To create a jittered scatterplot, instead of using <code>geom_point()</code>, we use <code>geom_jitter()</code>. To specify how much jitter to add, we adjust the <code>width</code> and <code>height</code> arguments. This corresponds to how hard you'd like to shake the plot in units corresponding to those for both the horizontal and vertical variables (in this case minutes).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> alaska_flights, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> dep_delay, <span class="dt">y =</span> arr_delay)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="dv">30</span>, <span class="dt">height =</span> <span class="dv">30</span>)</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:jitter"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:jitter"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/jitter-1.png" alt="Jittered delay scatterplot" width="\textwidth" />
 <p class="caption">
 FIGURE 2.7: Jittered delay scatterplot
@@ -925,7 +929,7 @@ FIGURE 2.7: Jittered delay scatterplot
 <p>Let's plot a linegraph of hourly temperatures in <code>early_january_weather</code> by using <code>geom_line()</code> instead of <code>geom_point()</code> like we did for scatterplots:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> early_january_weather, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> time_hour, <span class="dt">y =</span> temp)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:hourlytemp"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:hourlytemp"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/hourlytemp-1.png" alt="Hourly Temperature in Newark for January 1-15, 2013" width="\textwidth" />
 <p class="caption">
 FIGURE 2.8: Hourly Temperature in Newark for January 1-15, 2013
@@ -972,7 +976,7 @@ FIGURE 2.8: Hourly Temperature in Newark for January 1-15, 2013
 <li>What are frequent and infrequent values?</li>
 </ol>
 <p>One way to visualize this <em>distribution</em> of this single variable <code>temp</code> is to plot them on a horizontal line as we do in Figure <a href="2-viz.html#fig:temp-on-line">2.9</a>:</p>
-<div class="figure" style="text-align: center"><span id="fig:temp-on-line"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:temp-on-line"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/temp-on-line-1.png" alt="Plot of Hourly Temperature Recordings from NYC in 2013" width="\textwidth" />
 <p class="caption">
 FIGURE 2.9: Plot of Hourly Temperature Recordings from NYC in 2013
@@ -986,7 +990,7 @@ FIGURE 2.9: Plot of Hourly Temperature Recordings from NYC in 2013
 <li>Then for each bin, we draw a bar whose height marks the corresponding count.</li>
 </ol>
 <p>Let's drill-down on an example of a histogram, shown in Figure <a href="2-viz.html#fig:histogramexample">2.10</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:histogramexample"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:histogramexample"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/histogramexample-1.png" alt="Example histogram." width="\textwidth" />
 <p class="caption">
 FIGURE 2.10: Example histogram.
@@ -1006,7 +1010,7 @@ FIGURE 2.10: Example histogram.
 <span class="st">  </span><span class="kw">geom_histogram</span>()</code></pre></div>
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <pre><code>Warning: Removed 1 rows containing non-finite values (stat_bin).</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:weather-histogram"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:weather-histogram"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/weather-histogram-1.png" alt="Histogram of hourly temperatures at three NYC airports." width="\textwidth" />
 <p class="caption">
 FIGURE 2.11: Histogram of hourly temperatures at three NYC airports.
@@ -1016,7 +1020,7 @@ FIGURE 2.11: Histogram of hourly temperatures at three NYC airports.
 <p>Now's let's unpack the resulting histogram in Figure <a href="2-viz.html#fig:weather-histogram">2.11</a>. Observe that values less than 25°F as well as values above 80°F are rather rare. However, because of the large number of bins, its hard to get a sense for which range of temperatures is covered by each bin; everything is one giant amorphous blob. So let's add white vertical borders demarcating the bins by adding a <code>color = &quot;white&quot;</code> argument to <code>geom_histogram()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> weather, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> temp)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">color =</span> <span class="st">&quot;white&quot;</span>)</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:weather-histogram-2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:weather-histogram-2"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/weather-histogram-2-1.png" alt="Histogram of hourly temperatures at three NYC airports with white borders." width="\textwidth" />
 <p class="caption">
 FIGURE 2.12: Histogram of hourly temperatures at three NYC airports with white borders.
@@ -1025,7 +1029,7 @@ FIGURE 2.12: Histogram of hourly temperatures at three NYC airports with white b
 <p>We can now better associate ranges of temperatures to each of the bins. We can also vary the color of the bars by setting the <code>fill</code> argument. Run <code>colors()</code> to see all 657 possible choice of colors!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> weather, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> temp)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;steelblue&quot;</span>)</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:weather-histogram-3"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:weather-histogram-3"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/weather-histogram-3-1.png" alt="Histogram of hourly temperatures at three NYC airports with white borders." width="\textwidth" />
 <p class="caption">
 FIGURE 2.13: Histogram of hourly temperatures at three NYC airports with white borders.
@@ -1042,7 +1046,7 @@ FIGURE 2.13: Histogram of hourly temperatures at three NYC airports with white b
 <p>Using the first method, we have the power to specify how many bins we would like to cut the x-axis up in. As mentioned in the previous section, the default number of bins is 30. We can override this default, to say 40 bins, as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> weather, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> temp)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">40</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>)</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-23"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-23"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-23-1.png" alt="Histogram with 40 bins." width="\textwidth" />
 <p class="caption">
 FIGURE 2.14: Histogram with 40 bins.
@@ -1051,7 +1055,7 @@ FIGURE 2.14: Histogram with 40 bins.
 <p>Using the second method, instead of specifying the number of bins, we specify the width of the bins by using the <code>binwidth</code> argument in the <code>geom_histogram()</code> layer. For example, let's set the width of each bin to be 10°F.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> weather, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> temp)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">10</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>)</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-24"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-24"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-24-1.png" alt="Histogram with binwidth 10." width="\textwidth" />
 <p class="caption">
 FIGURE 2.15: Histogram with binwidth 10.
@@ -1083,7 +1087,7 @@ FIGURE 2.15: Histogram with binwidth 10.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> weather, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> temp)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">5</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>month)</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:facethistogram"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:facethistogram"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/facethistogram-1.png" alt="Faceted histogram." width="\textwidth" />
 <p class="caption">
 FIGURE 2.16: Faceted histogram.
@@ -1093,7 +1097,7 @@ FIGURE 2.16: Faceted histogram.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> weather, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> temp)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">5</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>month, <span class="dt">nrow =</span> <span class="dv">4</span>)</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:facethistogram2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:facethistogram2"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/facethistogram2-1.png" alt="Faceted histogram with 4 instead of 3 rows." width="\textwidth" />
 <p class="caption">
 FIGURE 2.17: Faceted histogram with 4 instead of 3 rows.
@@ -1117,7 +1121,7 @@ FIGURE 2.17: Faceted histogram with 4 instead of 3 rows.
 <div id="boxplots" class="section level2">
 <h2><span class="header-section-number">2.7</span> 5NG#4: Boxplots</h2>
 <p>While faceted histograms are one visualization that allows us to compare distributions of a numerical variable split by another variable, another visualization that achieves this same goal are <em>side-by-side boxplots</em>. A boxplot is constructed from the information provided in the <em>five-number summary</em> of a numerical variable (see Appendix <a href="A-appendixA.html#appendixA">A</a>). To keep things simple for now, let's only consider hourly temperature recordings for the month of November in Figure <a href="2-viz.html#fig:nov1">2.18</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:nov1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:nov1"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/nov1-1.png" alt="November temperatures." width="\textwidth" />
 <p class="caption">
 FIGURE 2.18: November temperatures.
@@ -1132,14 +1136,14 @@ FIGURE 2.18: November temperatures.
 <li>Maximum: 71.06°F</li>
 </ol>
 <p>Let's mark these 5 values with dashed horizontal lines in Figure <a href="2-viz.html#fig:nov2">2.19</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:nov2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:nov2"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/nov2-1.png" alt="November temperatures." width="\textwidth" />
 <p class="caption">
 FIGURE 2.19: November temperatures.
 </p>
 </div>
 <p>Let's add the boxplot underneath these points and dashed horizontal lines in Figure <a href="2-viz.html#fig:nov3">2.20</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:nov3"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:nov3"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/nov3-1.png" alt="November temperatures." width="\textwidth" />
 <p class="caption">
 FIGURE 2.20: November temperatures.
@@ -1154,7 +1158,7 @@ FIGURE 2.20: November temperatures.
 <li>The middle 50% of points lie within the <em>interquartile range</em> between the first and third quartile of 51.98 - 35.96 = 16.02°F.</li>
 </ol>
 <p>Lastly, for clarity's sake let's remove the points but keep the dashed horizontal lines in Figure <a href="2-viz.html#fig:nov4">2.21</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:nov4"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:nov4"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/nov4-1.png" alt="November temperatures." width="\textwidth" />
 <p class="caption">
 FIGURE 2.21: November temperatures.
@@ -1166,7 +1170,7 @@ FIGURE 2.21: November temperatures.
 <p>Let's now create a side-by-side boxplot of hourly temperatures split by the 12 months as we did above with the faceted histograms. We do this by mapping the <code>month</code> variable to the x-position aesthetic, the <code>temp</code> variable to the y-position aesthetic, and by adding a <code>geom_boxplot()</code> layer:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> weather, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> month, <span class="dt">y =</span> temp)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:badbox"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:badbox"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/badbox-1.png" alt="Invalid boxplot specification" width="\textwidth" />
 <p class="caption">
 FIGURE 2.22: Invalid boxplot specification
@@ -1179,7 +1183,7 @@ FIGURE 2.22: Invalid boxplot specification
 <p>We can convert the numerical variable <code>month</code> into a categorical variable by using the <code>factor()</code> function. So after applying <code>factor(month)</code>, month goes from having numerical values 1, 2, ..., 12 to having labels &quot;1&quot;, &quot;2&quot;, ..., &quot;12.&quot;</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> weather, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(month), <span class="dt">y =</span> temp)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:monthtempbox"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:monthtempbox"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/monthtempbox-1.png" alt="Temp by month boxplot" width="\textwidth" />
 <p class="caption">
 FIGURE 2.23: Temp by month boxplot
@@ -1223,7 +1227,7 @@ fruits_counted &lt;-<span class="st"> </span><span class="kw">data_frame</span>(
   <span class="dt">number =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>)
 )</code></pre></div>
 <p>We see both the <code>fruits</code> and <code>fruits_counted</code> data frames represent the same collection of fruit. Whereas <code>fruits</code> just lists the fruit individually...</p>
-<pre><code># A tibble: 5 x 1
+<pre><code># A tibble: 5 × 1
   fruit 
   &lt;chr&gt; 
 1 apple 
@@ -1232,7 +1236,7 @@ fruits_counted &lt;-<span class="st"> </span><span class="kw">data_frame</span>(
 4 apple 
 5 orange</code></pre>
 <p>... <code>fruits_counted</code> has a variable <code>count</code> which represents pre-counted values of each fruit.</p>
-<pre><code># A tibble: 2 x 2
+<pre><code># A tibble: 2 × 2
   fruit  number
   &lt;chr&gt;   &lt;dbl&gt;
 1 apple       3
@@ -1243,7 +1247,7 @@ fruits_counted &lt;-<span class="st"> </span><span class="kw">data_frame</span>(
 <p>Let's generate barplots using these two different representations of the same basket of fruit: 3 apples and 2 oranges. Using the <code>fruits</code> data frame where all 5 fruits are listed individually in 5 rows, we map the <code>fruit</code> variable to the x-position aesthetic and add a <code>geom_bar()</code> layer.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> fruits, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> fruit)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>()</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:geombar"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:geombar"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/geombar-1.png" alt="Barplot when counts are not pre-counted" width="\textwidth" />
 <p class="caption">
 FIGURE 2.24: Barplot when counts are not pre-counted
@@ -1252,7 +1256,7 @@ FIGURE 2.24: Barplot when counts are not pre-counted
 <p>However, using the <code>fruits_counted</code> data frame where the fruit have been &quot;pre-counted&quot;, we map the <code>fruit</code> variable to the x-position aesthetic as with <code>geom_bar()</code>, but we also map the <code>count</code> variable to the y-position aesthetic, and add a <code>geom_col()</code> layer.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> fruits_counted, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> fruit, <span class="dt">y =</span> number)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_col</span>()</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:geomcol"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:geomcol"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/geomcol-1.png" alt="Barplot when counts are pre-counted" width="\textwidth" />
 <p class="caption">
 FIGURE 2.25: Barplot when counts are pre-counted
@@ -1267,7 +1271,7 @@ FIGURE 2.25: Barplot when counts are pre-counted
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> flights, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> carrier)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>()</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:flightsbar"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:flightsbar"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/flightsbar-1.png" alt="Number of flights departing NYC in 2013 by airline using geom_bar" width="\textwidth" />
 <p class="caption">
 FIGURE 2.26: Number of flights departing NYC in 2013 by airline using geom_bar
@@ -1440,7 +1444,7 @@ YV
 <h3><span class="header-section-number">2.8.2</span> Must avoid pie charts!</h3>
 <p>Unfortunately, one of the most common plots seen today for categorical data is the pie chart. While they may seem harmless enough, they actually present a problem in that humans are unable to judge angles well. As Naomi Robbins describes in her book &quot;Creating More Effective Graphs&quot; <span class="citation">(Robbins <a href="#ref-robbins2013">2013</a>)</span>, we overestimate angles greater than 90 degrees and we underestimate angles less than 90 degrees. In other words, it is difficult for us to determine relative size of one piece of the pie compared to another.</p>
 <p>Let's examine the same data used in our previous barplot of the number of flights departing NYC by airline in Figure <a href="2-viz.html#fig:flightsbar">2.26</a>, but this time we will use a pie chart in Figure <a href="2-viz.html#fig:carrierpie">2.27</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:carrierpie"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:carrierpie"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/carrierpie-1.png" alt="The dreaded pie chart" width="\textwidth" />
 <p class="caption">
 FIGURE 2.27: The dreaded pie chart
@@ -1454,7 +1458,7 @@ FIGURE 2.27: The dreaded pie chart
 </ul>
 <p>While it is quite difficult to answer these questions when looking at the pie chart in Figure <a href="2-viz.html#fig:carrierpie">2.27</a>, we can much more easily answer these questions using the barchart in Figure <a href="2-viz.html#fig:flightsbar">2.26</a>. This is true since barplots present the information in a way such that comparisons between categories can be made with single horizontal lines, whereas pie charts present the information in a way such that comparisons between categories must be made by comparing angles.</p>
 <p>There may be one exception of a pie chart not to avoid courtesy Nathan Yau at <a href="https://flowingdata.com/2008/09/19/pie-i-have-eaten-and-pie-i-have-not-eaten/" title="Pie I Have Eaten and Pie I Have Not Eaten">FlowingData.com</a>, but we will leave this for the reader to decide:</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-31"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-31"></span>
 <img src="images/Pie-I-have-Eaten.jpg" alt="The only good pie chart" width="\textwidth" />
 <p class="caption">
 FIGURE 2.28: The only good pie chart
@@ -1480,7 +1484,7 @@ FIGURE 2.28: The only good pie chart
 <p>We can now map the additional variable <code>origin</code> by adding a <code>fill = origin</code> inside the <code>aes()</code> aesthetic mapping; the <code>fill</code> aesthetic of any bar corresponds to the color used to fill the bars.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> flights, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> carrier, <span class="dt">fill =</span> origin)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>()</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:flights-stacked-bar"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:flights-stacked-bar"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/flights-stacked-bar-1.png" alt="Stacked barplot comparing the number of flights by carrier and origin." width="\textwidth" />
 <p class="caption">
 FIGURE 2.29: Stacked barplot comparing the number of flights by carrier and origin.
@@ -1493,7 +1497,7 @@ FIGURE 2.29: Stacked barplot comparing the number of flights by carrier and orig
 <p>Second, the <code>fill</code> aesthetic corresponds to the color used to fill the bars, while the <code>color</code> aesthetic corresponds to the color of the outline of the bars. Observe in Figure <a href="2-viz.html#fig:flights-stacked-bar-color">2.30</a> that mapping <code>origin</code> to <code>color</code> and not <code>fill</code> yields grey bars with different colored outlines.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> flights, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> carrier, <span class="dt">color =</span> origin)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>()</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:flights-stacked-bar-color"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:flights-stacked-bar-color"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/flights-stacked-bar-color-1.png" alt="Stacked barplot with color aesthetic used instead of fill." width="\textwidth" />
 <p class="caption">
 FIGURE 2.30: Stacked barplot with color aesthetic used instead of fill.
@@ -1512,7 +1516,7 @@ FIGURE 2.30: Stacked barplot with color aesthetic used instead of fill.
 <p>Another alternative to stacked barplots are <em>side-by-side barplots</em>, also known as a <em>dodged barplot</em>. The code to created a side-by-side barplot is identical to the code to create a stacked barplot, but with a <code>position = &quot;dodge&quot;</code> argument added to <code>geom_bar()</code>. In other words, we are overriding the default barplot type, which is a stacked barplot, and specifying it to be a side-by-side barplot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> flights, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> carrier, <span class="dt">fill =</span> origin)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-36"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-36"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-36-1.png" alt="Side-by-side AKA dodged barplot comparing the number of flights by carrier and origin." width="\textwidth" />
 <p class="caption">
 FIGURE 2.31: Side-by-side AKA dodged barplot comparing the number of flights by carrier and origin.
@@ -1532,7 +1536,7 @@ FIGURE 2.31: Side-by-side AKA dodged barplot comparing the number of flights by 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> flights, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> carrier)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>origin, <span class="dt">ncol =</span> <span class="dv">1</span>)</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:facet-bar-vert"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:facet-bar-vert"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/facet-bar-vert-1.png" alt="Faceted barplot comparing the number of flights by carrier and origin." width="\textwidth" />
 <p class="caption">
 FIGURE 2.32: Faceted barplot comparing the number of flights by carrier and origin.
@@ -1567,6 +1571,7 @@ FIGURE 2.32: Faceted barplot comparing the number of flights by carrier and orig
 <thead>
 <tr>
 <th style="text-align:right;">
+...1
 </th>
 <th style="text-align:left;">
 Named graph
@@ -1685,7 +1690,7 @@ Stacked, side-by-side, and faceted barplots show the joint distribution of 2 cat
 <!-- An R script file of all R code used in this chapter is available [here](scripts/03-visualization.R). -->
 <p>If you want to further unlock the power of the <code>ggplot2</code> package for data visualization, we suggest you that you check out RStudio's &quot;Data Visualization with ggplot2&quot; cheatsheet. This cheatsheet summarizes much more than what we've discussed in this chapter, in particular the many more than the 5 <code>geom</code> geometric objects we covered in this Chapter, while providing quick and easy to read visual descriptions.</p>
 <p>You can access this cheatsheet by going to the RStudio Menu Bar -&gt; Help -&gt; Cheatsheets -&gt; &quot;Data Visualization with ggplot2&quot;:</p>
-<div class="figure" style="text-align: center"><span id="fig:ggplot-cheatsheet"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ggplot-cheatsheet"></span>
 <img src="images/ggplot_cheatsheet-1.png" alt="Data Visualization with ggplot2 cheatsheat" width="\textwidth" />
 <p class="caption">
 FIGURE 2.33: Data Visualization with ggplot2 cheatsheat
@@ -1733,7 +1738,7 @@ In addition, we've created a mind map to help you remember which types of plots 
 <p>Robbins, Naomi. 2013. <em>Creating More Effective Graphs</em>. Chart House.</p>
 </div>
 <div id="ref-R-ggplot2">
-<p>Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, Kara Woo, Hiroaki Yutani, and Dewey Dunnington. 2021. <em>Ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>.</p>
+<p>Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, Kara Woo, Hiroaki Yutani, and Dewey Dunnington. 2021. <em>Ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://CRAN.R-project.org/package=ggplot2" class="uri">https://CRAN.R-project.org/package=ggplot2</a>.</p>
 </div>
 <div id="ref-wilkinson2005">
 <p>Wilkinson, Leland. 2005. <em>The Grammar of Graphics (Statistics and Computing)</em>. Secaucus, NJ, USA: Springer-Verlag New York, Inc.</p>
@@ -1749,7 +1754,6 @@ In addition, we've created a mind map to help you remember which types of plots 
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -1768,6 +1772,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -1788,6 +1793,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true

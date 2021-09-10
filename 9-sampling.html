@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Sampling Distributions | Introduction to Statistics and Data Science</title>
   <meta name="description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Sampling Distributions | Introduction to Statistics and Data Science" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Elizabeth Tipton, Arend M. Kuyper, and Kaitlyn G. Fitzgerald - Adapted from ModernDive by Chester Ismay and Albert Y. Kim," />
 
 
-<meta name="date" content="2021-02-15" />
+<meta name="date" content="2021-09-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,8 @@
   <link rel="shortcut icon" href="images/logos/favicons/favicon.ico" type="image/x-icon" />
 <link rel="prev" href="8-populations.html"/>
 <link rel="next" href="10-CIs.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,10 +50,11 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
 <script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
 <script src="libs/dygraphs-1.1.1/shapes.js"></script>
@@ -100,6 +102,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -122,8 +125,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="1" data-path="1-getting-started.html"><a href="1-getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started with Data in R</a><ul>
 <li class="chapter" data-level="1.1" data-path="1-getting-started.html"><a href="1-getting-started.html#r-rstudio"><i class="fa fa-check"></i><b>1.1</b> What are R and RStudio?</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="1-getting-started.html"><a href="1-getting-started.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.1.1</b> Installing R and RStudio</a></li>
-<li class="chapter" data-level="1.1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#using-r-via-rstudio"><i class="fa fa-check"></i><b>1.1.2</b> Using R via RStudio</a></li>
+<li class="chapter" data-level="1.1.1" data-path="1-getting-started.html"><a href="1-getting-started.html#using-rstudio-cloud"><i class="fa fa-check"></i><b>1.1.1</b> Using RStudio Cloud</a></li>
+<li class="chapter" data-level="1.1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#installing-r-and-rstudio-on-your-personal-computer"><i class="fa fa-check"></i><b>1.1.2</b> Installing R and RStudio on your personal computer</a></li>
+<li class="chapter" data-level="1.1.3" data-path="1-getting-started.html"><a href="1-getting-started.html#using-r-via-rstudio"><i class="fa fa-check"></i><b>1.1.3</b> Using R via RStudio</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#code"><i class="fa fa-check"></i><b>1.2</b> How do I code in R?</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="1-getting-started.html"><a href="1-getting-started.html#programming-concepts"><i class="fa fa-check"></i><b>1.2.1</b> Basic programming concepts and terminology</a></li>
@@ -480,7 +484,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="what-proportion-of-this-bowls-balls-are-red" class="section level3">
 <h3><span class="header-section-number">9.2.1</span> What proportion of this bowl's balls are red?</h3>
 <p>In this section, we provide a concrete example, based upon a classroom activity completed in an introductory statistics class with 33 students. In the class, there is a large bowl of balls that contains red and white balls. <strong>Importantly, we know that 37.5% of the balls are red (someone counted this!).</strong></p>
-<div class="figure" style="text-align: center"><span id="fig:sampling-exercise-1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:sampling-exercise-1"></span>
 <img src="images/sampling_bowl_1.jpg" alt="A bowl with red and white balls." width="80%" />
 <p class="caption">
 FIGURE 9.1: A bowl with red and white balls.
@@ -491,14 +495,14 @@ FIGURE 9.1: A bowl with red and white balls.
 <div id="taking-one-random-sample" class="section level3">
 <h3><span class="header-section-number">9.2.2</span> Taking one random sample</h3>
 <p>We begin by taking a random sample of n = 50 balls. To do so, we insert a shovel into the bowl, as seen in Figure <a href="9-sampling.html#fig:sampling-exercise-2">9.2</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:sampling-exercise-2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:sampling-exercise-2"></span>
 <img src="images/sampling_bowl_2.jpg" alt="Inserting a shovel into the bowl." width="80%" />
 <p class="caption">
 FIGURE 9.2: Inserting a shovel into the bowl.
 </p>
 </div>
 <p>Using the shovel, we remove a number of balls as seen in Figure <a href="9-sampling.html#fig:sampling-exercise-3">9.3</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:sampling-exercise-3"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:sampling-exercise-3"></span>
 <img src="images/sampling_bowl_3_cropped.jpg" alt="Fifty balls from the bowl." width="80%" />
 <p class="caption">
 FIGURE 9.3: Fifty balls from the bowl.
@@ -517,21 +521,21 @@ FIGURE 9.3: Fifty balls from the bowl.
 <li>Returned the balls into the bowl, and</li>
 <li>Mixed the contents of the bowl a little to not let a previous group’s results influence the next group’s set of results.</li>
 </ul>
-<div class="figure" style="text-align: center"><span id="fig:sampling-exercise-3b"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:sampling-exercise-3b"></span>
 <img src="images/sampling/tactile_2_a.jpg" alt="Repeating sampling activity 33 times." width="20%" /><img src="images/sampling/tactile_2_b.jpg" alt="Repeating sampling activity 33 times." width="20%" /><img src="images/sampling/tactile_2_c.jpg" alt="Repeating sampling activity 33 times." width="20%" />
 <p class="caption">
 FIGURE 9.4: Repeating sampling activity 33 times.
 </p>
 </div>
 <p>However, before returning the balls into the bowl, they are going to mark the proportion of the 50 balls they removed that are red in a histogram as seen in Figure <a href="9-sampling.html#fig:sampling-exercise-4">9.5</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:sampling-exercise-4"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:sampling-exercise-4"></span>
 <img src="images/sampling/tactile_3_a.jpg" alt="Constructing a histogram of proportions." width="80%" />
 <p class="caption">
 FIGURE 9.5: Constructing a histogram of proportions.
 </p>
 </div>
 <p>Recall from Section <a href="2-viz.html#histograms">2.5</a> that histograms allow us to visualize the <em>distribution</em> of a numerical variable: where the values center and in particular how they vary. The resulting hand-drawn histogram can be seen in Figure <a href="9-sampling.html#fig:sampling-exercise-5">9.6</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:sampling-exercise-5"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:sampling-exercise-5"></span>
 <img src="images/sampling/tactile_3_c.jpg" alt="Hand-drawn histogram of 33 proportions." width="80%" />
 <p class="caption">
 FIGURE 9.6: Hand-drawn histogram of 33 proportions.
@@ -717,7 +721,7 @@ Josh
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.05</span>, <span class="dt">boundary =</span> <span class="fl">0.4</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Proportion of 50 balls that were red&quot;</span>, 
        <span class="dt">title =</span> <span class="st">&quot;Distribution of 33 proportions red&quot;</span>) </code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:samplingdistribution-tactile"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:samplingdistribution-tactile"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/samplingdistribution-tactile-1.png" alt="Distribution of 33 proportions based on 33 samples of size 50" width="\textwidth" />
 <p class="caption">
 FIGURE 9.7: Distribution of 33 proportions based on 33 samples of size 50
@@ -743,7 +747,7 @@ with the ggplot2 histogram so that `boundary` isn't needed. -->
 <h3><span class="header-section-number">9.3.1</span> Using the virtual shovel once</h3>
 <p>Let's start by performing the virtual analogue of the tactile sampling simulation we performed in <a href="9-sampling.html#sampling-activity">9.2</a>. We first need a virtual analogue of the bowl seen in Figure <a href="9-sampling.html#fig:sampling-exercise-1">9.1</a>. To this end, we included a data frame <code>bowl</code> in the <code>moderndive</code> package whose rows correspond exactly with the contents of the actual bowl.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bowl</code></pre></div>
-<pre><code># A tibble: 2,400 x 2
+<pre><code># A tibble: 2,400 × 2
    ball_ID color
      &lt;int&gt; &lt;chr&gt;
  1       1 white
@@ -898,7 +902,7 @@ white
 <p>First, for each of our 50 sampled balls, identify if it is red using a test for equality using <code>==</code>. For every row where <code>color == &quot;red&quot;</code>, the Boolean <code>TRUE</code> is returned and for every row where <code>color</code> is not equal to <code>&quot;red&quot;</code>, the Boolean <code>FALSE</code> is returned. Let's create a new Boolean variable <code>is_red</code> using the <code>mutate()</code> function from Section <a href="3-wrangling.html#mutate">3.5</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">virtual_shovel <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">is_red =</span> (color <span class="op">==</span><span class="st"> &quot;red&quot;</span>))</code></pre></div>
-<pre><code># A tibble: 50 x 4
+<pre><code># A tibble: 50 × 4
 # Groups:   replicate [1]
    replicate ball_ID color is_red
        &lt;int&gt;   &lt;int&gt; &lt;chr&gt; &lt;lgl&gt; 
@@ -917,9 +921,9 @@ white
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">virtual_shovel <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">is_red =</span> (color <span class="op">==</span><span class="st"> &quot;red&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">num_red =</span> <span class="kw">sum</span>(is_red))  </code></pre></div>
-<pre><code># A tibble: 1 x 2
+<pre><code># A tibble: 1 × 2
   replicate num_red
-*     &lt;int&gt;   &lt;int&gt;
+      &lt;int&gt;   &lt;int&gt;
 1         1      12</code></pre>
 <p>Why does this work? Because R treats <code>TRUE</code> like the number <code>1</code> and <code>FALSE</code> like the number <code>0</code>. So summing the number of <code>TRUE</code>'s and <code>FALSE</code>'s is equivalent to summing <code>1</code>'s and <code>0</code>'s, which in the end counts the number of balls where <code>color</code> is <code>red</code>. In our case, 12 of the 50 balls were red.</p>
 <p>Third and last, we compute the proportion of the 50 sampled balls that are red by dividing <code>num_red</code> by 50:</p>
@@ -927,17 +931,17 @@ white
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">is_red =</span> color <span class="op">==</span><span class="st"> &quot;red&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">num_red =</span> <span class="kw">sum</span>(is_red)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop_red =</span> num_red <span class="op">/</span><span class="st"> </span><span class="dv">50</span>)</code></pre></div>
-<pre><code># A tibble: 1 x 3
+<pre><code># A tibble: 1 × 3
   replicate num_red prop_red
-*     &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;
+      &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;
 1         1      12     0.24</code></pre>
 <p>In other words, this &quot;virtual&quot; sample's balls were 24% red. Let's make the above code a little more compact and succinct by combining the first <code>mutate()</code> and the <code>summarize()</code> as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">virtual_shovel <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">num_red =</span> <span class="kw">sum</span>(color <span class="op">==</span><span class="st"> &quot;red&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop_red =</span> num_red <span class="op">/</span><span class="st"> </span><span class="dv">50</span>)</code></pre></div>
-<pre><code># A tibble: 1 x 3
+<pre><code># A tibble: 1 × 3
   replicate num_red prop_red
-*     &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;
+      &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;
 1         1      12     0.24</code></pre>
 <p>Great! 24% of <code>virtual_shovel</code>'s 50 balls were red! So based on this particular sample, our guess at the proportion of the <code>bowl</code>'s balls that are red is 24%. But remember from our earlier tactile sampling activity that if we repeated this sampling, we would not necessarily obtain a sample of 50 balls with 24% of them being red again; there will likely be some variation. In fact in Table <a href="9-sampling.html#tab:tactilered">9.1</a> we displayed 33 such proportions based on 33 tactile samples and then in Figure <a href="9-sampling.html#fig:sampling-exercise-5">9.6</a> we visualized the distribution of the 33 proportions in a histogram. Let's now perform the virtual analogue of having 10,000 students use the sampling shovel!</p>
 </div>
@@ -1091,7 +1095,7 @@ prop_red
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.05</span>, <span class="dt">boundary =</span> <span class="fl">0.4</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Proportion of 50 balls that were red&quot;</span>, 
        <span class="dt">title =</span> <span class="st">&quot;Distribution of 10,000 proportions red&quot;</span>) </code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:samplingdistribution-virtual"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:samplingdistribution-virtual"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/samplingdistribution-virtual-1.png" alt="Distribution of 10,000 proportions based on 10,000 samples of size 50" width="\textwidth" />
 <p class="caption">
 FIGURE 9.8: Distribution of 10,000 proportions based on 10,000 samples of size 50
@@ -1115,7 +1119,7 @@ FIGURE 9.8: Distribution of 10,000 proportions based on 10,000 samples of size 5
 <div id="dist" class="section level3">
 <h3><span class="header-section-number">9.4.1</span> Distribution</h3>
 <p>The sampling distribution of an estimator refers to the general shape of the distribution of estimates across repeated samples. We can, in general, characterize a distribution in terms of its modality and symmetry/skew. Figure <a href="9-sampling.html#fig:distribution">9.9</a> shows examples of some common distribution shapes.</p>
-<div class="figure" style="text-align: center"><span id="fig:distribution"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:distribution"></span>
 <img src="images/distribution.png" alt="Common distribution shapes" width="100%" />
 <p class="caption">
 FIGURE 9.9: Common distribution shapes
@@ -1128,7 +1132,7 @@ FIGURE 9.9: Common distribution shapes
 <li>Chi-squared distribution</li>
 </ul>
 <p>The Normal distribution is characterized by two parameters: <span class="math inline">\(\mu\)</span>, which determines the center of the distribution, and <span class="math inline">\(\sigma\)</span> which determines the spread. In Figure <a href="9-sampling.html#fig:samplingdistribution-virtual">9.8</a>, the solid- and dashed-line curves have the same standard deviation (i.e. <span class="math inline">\(\sigma = 1\)</span>), so they have identical spread, but they have different means, so the dashed curve is simply shifted to the right to be centered at <span class="math inline">\(\mu = 2\)</span>. On the other hand, the solid- and dotted-line curves are centered around the same value (i.e. <span class="math inline">\(\mu = 0\)</span>), but the dotted curve has a larger standard deviation and is therefore more spread out. The solid line is a special case of the Normal distribution called the <strong>Standard Normal distribution</strong>, which has mean 0 and standard deviation 1. Importantly, for all possible values of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>, the normal distribution is <strong>symmetric</strong> and <strong>unimodal</strong>.</p>
-<div class="figure" style="text-align: center"><span id="fig:normaldist"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:normaldist"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/normaldist-1.png" alt="Normal distribution" width="\textwidth" />
 <p class="caption">
 FIGURE 9.10: Normal distribution
@@ -1150,14 +1154,14 @@ FIGURE 9.10: Normal distribution
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#mean of sampling distribution of pi_hat</span>
 virtual_prop_red <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_pi_hat =</span> <span class="kw">mean</span>(prop_red))</code></pre></div>
-<pre><code># A tibble: 1 x 1
+<pre><code># A tibble: 1 × 1
   mean_pi_hat
         &lt;dbl&gt;
 1       0.375</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#true population proportion</span>
 bowl <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">pi =</span> <span class="kw">sum</span>(color <span class="op">==</span><span class="st"> &quot;red&quot;</span>) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>())</code></pre></div>
-<pre><code># A tibble: 1 x 1
+<pre><code># A tibble: 1 × 1
      pi
   &lt;dbl&gt;
 1 0.375</code></pre>
@@ -1547,7 +1551,7 @@ s2
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">variances <span class="op">%&gt;%</span><span class="st">  </span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_s2_n =</span> <span class="kw">mean</span>(s2_n),
             <span class="dt">mean_s2   =</span> <span class="kw">mean</span>(s2))</code></pre></div>
-<pre><code># A tibble: 1 x 2
+<pre><code># A tibble: 1 × 2
   mean_s2_n mean_s2
       &lt;dbl&gt;   &lt;dbl&gt;
 1      45.9    57.4</code></pre>
@@ -1563,7 +1567,7 @@ s2
           <span class="dt">labels =</span> <span class="kw">expression</span>(s<span class="op">^</span><span class="dv">2</span>, s[n]<span class="op">^</span><span class="dv">2</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sample variance estimate&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Number of samples&quot;</span>)</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:s2-bias-3"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:s2-bias-3"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/s2-bias-3-1.png" alt="Sample variance estimates for 10,000 samples of size n = 5" width="\textwidth" />
 <p class="caption">
 FIGURE 9.11: Sample variance estimates for 10,000 samples of size n = 5
@@ -1581,7 +1585,7 @@ FIGURE 9.11: Sample variance estimates for 10,000 samples of size n = 5
 </ul>
 <p>In statistics, we prefer estimators that are precise over those that are not. Again, this is tricky to understand at an introductory level, since nearly all sample statistics at this level can be proven to be the most precise estimators (out of all possible estimators) of the population parameters they are estimating. In more complex models, however, there are often competing estimators, and statisticians spend time studying the behavior of these estimators in comparison to one another.</p>
 <p>Figure <a href="9-sampling.html#fig:bias-precision">9.12</a> illustrates the concepts of bias and precision. Note that an estimator can be precise but also biased. That is, all of the estimates tend to be close to one another (i.e. the sampling distribution has a small standard error), but they are centered around the wrong average value. Conversely, it's possible for an estimator to be unbiased (i.e. it's centered around the true population parameter value) but imprecise (i.e. large standard error, the estimates vary quite a bit from one (theoretical) sample to another). Most of the estimators you use in this class (e.g. <span class="math inline">\(\bar{x}, s^2, \hat{\pi}\)</span>) are both precise and unbiased, which is clearly the preferred set of characteristics.</p>
-<div class="figure" style="text-align: center"><span id="fig:bias-precision"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:bias-precision"></span>
 <img src="images/bias-precision.png" alt="Bias vs. Precision" width="100%" />
 <p class="caption">
 FIGURE 9.12: Bias vs. Precision
@@ -1783,7 +1787,7 @@ evals_ch5 <span class="op">%&gt;%</span><span class="st"> </span>
             <span class="dt">sy2 =</span> <span class="kw">var</span>(score),
             <span class="dt">sx2 =</span> <span class="kw">var</span>(bty_avg)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">SE_b1 =</span> <span class="kw">sqrt</span>(sy2<span class="op">/</span>((n<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span>sx2)))</code></pre></div>
-<pre><code># A tibble: 1 x 4
+<pre><code># A tibble: 1 × 4
       n   sy2   sx2  SE_b1
   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
 1   463 0.296  2.33 0.0166</code></pre>
@@ -1801,7 +1805,7 @@ evals_ch5 <span class="op">%&gt;%</span><span class="st"> </span>
 <p>These distributions have interesting features which will be very useful to us in Chapters <a href="10-CIs.html#CIs">10</a> – <a href="12-hypothesis-tests.html#hypothesis-tests">12</a>. Below, we provide some of them:</p>
 <div id="standard-normal-distribution-vs-t-distribution" class="section level4">
 <h4><span class="header-section-number">9.5.3.1</span> Standard Normal Distribution vs T-distribution</h4>
-<div class="figure" style="text-align: center"><span id="fig:empirical-rule"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:empirical-rule"></span>
 <img src="images/empirical_rule.png" alt="Empirical Rule: property of the Normal Distribution" width="100%" />
 <p class="caption">
 FIGURE 9.13: Empirical Rule: property of the Normal Distribution
@@ -1815,14 +1819,14 @@ FIGURE 9.13: Empirical Rule: property of the Normal Distribution
 <li>Approximately 99.7% of STAT values to fall between -3 and 3</li>
 </ul>
 <p>Working on this type of standardized scale makes it easy for us to quickly determine where in the distribution we expect a value to fall. For example, if we have a value of 2.5, we know it will fall fairly far out in the right tail of the distribution. Or if we have a value of -0.5, we know it falls slightly to the left of center. This is displayed in Figure <a href="9-sampling.html#fig:STAT-values">9.14</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:STAT-values"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:STAT-values"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/STAT-values-1.png" alt="N(0,1) example values: STAT = -0.5, STAT = 2.5" width="\textwidth" />
 <p class="caption">
 FIGURE 9.14: N(0,1) example values: STAT = -0.5, STAT = 2.5
 </p>
 </div>
 <p>In general, the t-distribution has the same shape as the Standard Normal distribution (symmetric, unimodal), but it has <strong>heavier tails</strong>. As sample size increases (and therefore degrees of freedom increases), the t-distribution becomes a very close approximation to the Normal distribution.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-269"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-269"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-269-1.png" alt="t-distribution with example 95% cutoff values" width="\textwidth" />
 <p class="caption">
 FIGURE 9.15: t-distribution with example 95% cutoff values
@@ -1911,7 +1915,7 @@ virtual_prop_red_<span class="dv">100</span> &lt;-<span class="st"> </span>virtu
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.05</span>, <span class="dt">boundary =</span> <span class="fl">0.4</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Proportion of 100 balls that were red&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;100&quot;</span>) </code></pre></div>
 <p>For easy comparison, we present the three resulting histograms in a single row with matching x and y axes in Figure <a href="9-sampling.html#fig:comparing-sampling-distributions">9.16</a>. What do you observe?</p>
-<div class="figure" style="text-align: center"><span id="fig:comparing-sampling-distributions"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:comparing-sampling-distributions"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/comparing-sampling-distributions-1.png" alt="Comparing the distributions of proportion red for different sample sizes" width="\textwidth" />
 <p class="caption">
 FIGURE 9.16: Comparing the distributions of proportion red for different sample sizes
@@ -2015,7 +2019,7 @@ gapminder_<span class="dv">2015</span> &lt;-<span class="st"> </span>gapminder <
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> infant_mortality), <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>)  <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Infant mortality per 1,000 live births&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Number of countries&quot;</span>)</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:infant-mortality"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:infant-mortality"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/infant-mortality-1.png" alt="Infant mortality rates per 1,000 live births across 178 countries in 2015" width="\textwidth" />
 <p class="caption">
 FIGURE 9.17: Infant mortality rates per 1,000 live births across 178 countries in 2015
@@ -2044,7 +2048,7 @@ all_samples &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(samp
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>n, <span class="dt">ncol =</span> <span class="dv">1</span>, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Mean infant mortality&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Number of samples&quot;</span>)</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:infant-mortality-2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:infant-mortality-2"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/infant-mortality-2-1.png" alt="Sampling distributions of the mean infant mortality for various sample sizes" width="\textwidth" />
 <p class="caption">
 FIGURE 9.18: Sampling distributions of the mean infant mortality for various sample sizes
@@ -2080,7 +2084,6 @@ FIGURE 9.18: Sampling distributions of the mean infant mortality for various sam
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -2099,6 +2102,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -2119,6 +2123,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true

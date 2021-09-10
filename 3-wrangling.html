@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Data Wrangling | Introduction to Statistics and Data Science</title>
   <meta name="description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Data Wrangling | Introduction to Statistics and Data Science" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Elizabeth Tipton, Arend M. Kuyper, and Kaitlyn G. Fitzgerald - Adapted from ModernDive by Chester Ismay and Albert Y. Kim," />
 
 
-<meta name="date" content="2021-02-15" />
+<meta name="date" content="2021-09-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,8 @@
   <link rel="shortcut icon" href="images/logos/favicons/favicon.ico" type="image/x-icon" />
 <link rel="prev" href="2-viz.html"/>
 <link rel="next" href="4-tidy.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,10 +50,11 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
 <script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
 <script src="libs/dygraphs-1.1.1/shapes.js"></script>
@@ -100,6 +102,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -122,8 +125,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="1" data-path="1-getting-started.html"><a href="1-getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started with Data in R</a><ul>
 <li class="chapter" data-level="1.1" data-path="1-getting-started.html"><a href="1-getting-started.html#r-rstudio"><i class="fa fa-check"></i><b>1.1</b> What are R and RStudio?</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="1-getting-started.html"><a href="1-getting-started.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.1.1</b> Installing R and RStudio</a></li>
-<li class="chapter" data-level="1.1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#using-r-via-rstudio"><i class="fa fa-check"></i><b>1.1.2</b> Using R via RStudio</a></li>
+<li class="chapter" data-level="1.1.1" data-path="1-getting-started.html"><a href="1-getting-started.html#using-rstudio-cloud"><i class="fa fa-check"></i><b>1.1.1</b> Using RStudio Cloud</a></li>
+<li class="chapter" data-level="1.1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#installing-r-and-rstudio-on-your-personal-computer"><i class="fa fa-check"></i><b>1.1.2</b> Installing R and RStudio on your personal computer</a></li>
+<li class="chapter" data-level="1.1.3" data-path="1-getting-started.html"><a href="1-getting-started.html#using-r-via-rstudio"><i class="fa fa-check"></i><b>1.1.3</b> Using R via RStudio</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#code"><i class="fa fa-check"></i><b>1.2</b> How do I code in R?</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="1-getting-started.html"><a href="1-getting-started.html#programming-concepts"><i class="fa fa-check"></i><b>1.2.1</b> Basic programming concepts and terminology</a></li>
@@ -523,7 +527,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="filter" class="section level2">
 <h2><span class="header-section-number">3.2</span> <code>filter</code> rows</h2>
-<div class="figure" style="text-align: center"><span id="fig:filter"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:filter"></span>
 <img src="images/filter.png" alt="Diagram of " width="\textwidth" />
 <p class="caption">
 FIGURE 3.1: Diagram of
@@ -602,13 +606,13 @@ FIGURE 3.1: Diagram of
 <div id="summarize" class="section level2">
 <h2><span class="header-section-number">3.3</span> <code>summarize</code> variables</h2>
 <p>The next common task when working with data is to return <em>summary statistics</em>: a single numerical value that summarizes a large number of values, for example the mean/average or the median. Other examples of summary statistics that might not immediately come to mind include the sum, the smallest value AKA the minimum, the largest value AKA the maximum, and the standard deviation; they are all summaries of a large number of values.</p>
-<div class="figure" style="text-align: center"><span id="fig:sum1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:sum1"></span>
 <img src="images/summarize1.png" alt="Summarize diagram from Data Wrangling with dplyr and tidyr cheatsheet" width="\textwidth" />
 <p class="caption">
 FIGURE 3.2: Summarize diagram from Data Wrangling with dplyr and tidyr cheatsheet
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:sum2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:sum2"></span>
 <img src="images/summary.png" alt="Another summarize diagram from Data Wrangling with dplyr and tidyr cheatsheet" width="\textwidth" />
 <p class="caption">
 FIGURE 3.3: Another summarize diagram from Data Wrangling with dplyr and tidyr cheatsheet
@@ -619,7 +623,7 @@ FIGURE 3.3: Another summarize diagram from Data Wrangling with dplyr and tidyr c
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summary_temp &lt;-<span class="st"> </span>weather <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(temp), <span class="dt">std_dev =</span> <span class="kw">sd</span>(temp))
 summary_temp</code></pre></div>
-<pre><code># A tibble: 1 x 2
+<pre><code># A tibble: 1 × 2
    mean std_dev
   &lt;dbl&gt;   &lt;dbl&gt;
 1    NA      NA</code></pre>
@@ -630,7 +634,7 @@ summary_temp</code></pre></div>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(temp, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), 
             <span class="dt">std_dev =</span> <span class="kw">sd</span>(temp, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
 summary_temp</code></pre></div>
-<pre><code># A tibble: 1 x 2
+<pre><code># A tibble: 1 × 2
    mean std_dev
   &lt;dbl&gt;   &lt;dbl&gt;
 1  55.3    17.8</code></pre>
@@ -662,7 +666,7 @@ summary_temp</code></pre></div>
 </div>
 <div id="groupby" class="section level2">
 <h2><span class="header-section-number">3.4</span> <code>group_by</code> rows</h2>
-<div class="figure" style="text-align: center"><span id="fig:groupsummarize"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:groupsummarize"></span>
 <img src="images/group_summary.png" alt="Group by and summarize diagram from Data Wrangling with dplyr and tidyr cheatsheet" width="\textwidth" />
 <p class="caption">
 FIGURE 3.4: Group by and summarize diagram from Data Wrangling with dplyr and tidyr cheatsheet
@@ -826,47 +830,47 @@ std_dev
 <p>This code is identical to the previous code that created <code>summary_temp</code>, but with an extra <code>group_by(month)</code> added before the <code>summarize()</code>. Grouping the <code>weather</code> dataset by <code>month</code> and then applying the <code>summarize()</code> functions yields a data frame that displays the mean and standard deviation temperature split by the 12 months of the year.</p>
 <p>It is important to note that the <code>group_by()</code> function doesn't change data frames by itself. Rather it changes the <em>meta-data</em>, or data about the data, specifically the group structure. It is only after we apply the <code>summarize()</code> function that the data frame changes. For example, let's consider the <code>diamonds</code> data frame included in the <code>ggplot2</code> package. Run this code, specifically in the console:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diamonds</code></pre></div>
-<pre><code># A tibble: 53,940 x 10
+<pre><code># A tibble: 53,940 × 10
    carat cut       color clarity depth table price     x     y     z
    &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1 0.23  Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
- 2 0.21  Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
- 3 0.23  Good      E     VS1      56.9    65   327  4.05  4.07  2.31
- 4 0.290 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
- 5 0.31  Good      J     SI2      63.3    58   335  4.34  4.35  2.75
- 6 0.24  Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48
- 7 0.24  Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47
- 8 0.26  Very Good H     SI1      61.9    55   337  4.07  4.11  2.53
- 9 0.22  Fair      E     VS2      65.1    61   337  3.87  3.78  2.49
-10 0.23  Very Good H     VS1      59.4    61   338  4     4.05  2.39
+ 1  0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
+ 2  0.21 Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
+ 3  0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31
+ 4  0.29 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
+ 5  0.31 Good      J     SI2      63.3    58   335  4.34  4.35  2.75
+ 6  0.24 Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48
+ 7  0.24 Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47
+ 8  0.26 Very Good H     SI1      61.9    55   337  4.07  4.11  2.53
+ 9  0.22 Fair      E     VS2      65.1    61   337  3.87  3.78  2.49
+10  0.23 Very Good H     VS1      59.4    61   338  4     4.05  2.39
 # … with 53,930 more rows</code></pre>
 <p>Observe that the first line of the output reads <code># A tibble: 53,940 x 10</code>. This is an example of meta-data, in this case the number of observations/rows and variables/columns in <code>diamonds</code>. The actual data itself are the subsequent table of values.</p>
 <p>Now let's pipe the <code>diamonds</code> data frame into <code>group_by(cut)</code>. Run this code, specifically in the console:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diamonds <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(cut)</code></pre></div>
-<pre><code># A tibble: 53,940 x 10
+<pre><code># A tibble: 53,940 × 10
 # Groups:   cut [5]
    carat cut       color clarity depth table price     x     y     z
    &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1 0.23  Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
- 2 0.21  Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
- 3 0.23  Good      E     VS1      56.9    65   327  4.05  4.07  2.31
- 4 0.290 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
- 5 0.31  Good      J     SI2      63.3    58   335  4.34  4.35  2.75
- 6 0.24  Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48
- 7 0.24  Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47
- 8 0.26  Very Good H     SI1      61.9    55   337  4.07  4.11  2.53
- 9 0.22  Fair      E     VS2      65.1    61   337  3.87  3.78  2.49
-10 0.23  Very Good H     VS1      59.4    61   338  4     4.05  2.39
+ 1  0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
+ 2  0.21 Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
+ 3  0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31
+ 4  0.29 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
+ 5  0.31 Good      J     SI2      63.3    58   335  4.34  4.35  2.75
+ 6  0.24 Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48
+ 7  0.24 Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47
+ 8  0.26 Very Good H     SI1      61.9    55   337  4.07  4.11  2.53
+ 9  0.22 Fair      E     VS2      65.1    61   337  3.87  3.78  2.49
+10  0.23 Very Good H     VS1      59.4    61   338  4     4.05  2.39
 # … with 53,930 more rows</code></pre>
 <p>Observe that now there is additional meta-data: <code># Groups: cut [5]</code> indicating that the grouping structure meta-data has been set based on the 5 possible values AKA levels of the categorical variable <code>cut</code>: <code>&quot;Fair&quot;</code>, <code>&quot;Good&quot;</code>, <code>&quot;Very Good&quot;</code>, <code>&quot;Premium&quot;</code>, <code>&quot;Ideal&quot;</code>. On the other hand observe that the data has not changed: it is still a table of 53,940 <span class="math inline">\(\times\)</span> 10 values.</p>
 <p>Only by combining a <code>group_by()</code> with another data wrangling operation, in this case <code>summarize()</code> will the actual data be transformed.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diamonds <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(cut) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">avg_price =</span> <span class="kw">mean</span>(price))</code></pre></div>
-<pre><code># A tibble: 5 x 2
+<pre><code># A tibble: 5 × 2
   cut       avg_price
-* &lt;ord&gt;         &lt;dbl&gt;
+  &lt;ord&gt;         &lt;dbl&gt;
 1 Fair          4359.
 2 Good          3929.
 3 Very Good     3982.
@@ -876,28 +880,28 @@ std_dev
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diamonds <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(cut) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ungroup</span>()</code></pre></div>
-<pre><code># A tibble: 53,940 x 10
+<pre><code># A tibble: 53,940 × 10
    carat cut       color clarity depth table price     x     y     z
    &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1 0.23  Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
- 2 0.21  Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
- 3 0.23  Good      E     VS1      56.9    65   327  4.05  4.07  2.31
- 4 0.290 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
- 5 0.31  Good      J     SI2      63.3    58   335  4.34  4.35  2.75
- 6 0.24  Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48
- 7 0.24  Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47
- 8 0.26  Very Good H     SI1      61.9    55   337  4.07  4.11  2.53
- 9 0.22  Fair      E     VS2      65.1    61   337  3.87  3.78  2.49
-10 0.23  Very Good H     VS1      59.4    61   338  4     4.05  2.39
+ 1  0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
+ 2  0.21 Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
+ 3  0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31
+ 4  0.29 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
+ 5  0.31 Good      J     SI2      63.3    58   335  4.34  4.35  2.75
+ 6  0.24 Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48
+ 7  0.24 Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47
+ 8  0.26 Very Good H     SI1      61.9    55   337  4.07  4.11  2.53
+ 9  0.22 Fair      E     VS2      65.1    61   337  3.87  3.78  2.49
+10  0.23 Very Good H     VS1      59.4    61   338  4     4.05  2.39
 # … with 53,930 more rows</code></pre>
 <p>Let's now revisit the <code>n()</code> counting summary function we introduced in the previous section. For example, suppose we'd like to count how many flights departed each of the three airports in New York City:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">by_origin &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(origin) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">count =</span> <span class="kw">n</span>())
 by_origin</code></pre></div>
-<pre><code># A tibble: 3 x 2
+<pre><code># A tibble: 3 × 2
   origin  count
-* &lt;chr&gt;   &lt;int&gt;
+  &lt;chr&gt;   &lt;int&gt;
 1 EWR    120835
 2 JFK    111279
 3 LGA    104662</code></pre>
@@ -910,7 +914,7 @@ by_origin</code></pre></div>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">count =</span> <span class="kw">n</span>())</code></pre></div>
 <pre><code>`summarise()` has grouped output by &#39;origin&#39;. You can override using the `.groups` argument.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">by_origin_monthly</code></pre></div>
-<pre><code># A tibble: 36 x 3
+<pre><code># A tibble: 36 × 3
 # Groups:   origin [3]
    origin month count
    &lt;chr&gt;  &lt;int&gt; &lt;int&gt;
@@ -931,9 +935,9 @@ by_origin</code></pre></div>
 <span class="st">  </span><span class="kw">group_by</span>(month) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">count =</span> <span class="kw">n</span>())
 by_origin_monthly_incorrect</code></pre></div>
-<pre><code># A tibble: 12 x 2
+<pre><code># A tibble: 12 × 2
    month count
- * &lt;int&gt; &lt;int&gt;
+   &lt;int&gt; &lt;int&gt;
  1     1 27004
  2     2 24951
  3     3 28834
@@ -965,7 +969,7 @@ by_origin_monthly_incorrect</code></pre></div>
 </div>
 <div id="mutate" class="section level2">
 <h2><span class="header-section-number">3.5</span> <code>mutate</code> existing variables</h2>
-<div class="figure" style="text-align: center"><span id="fig:select"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:select"></span>
 <img src="images/mutate.png" alt="Mutate diagram from Data Wrangling with dplyr and tidyr cheatsheet" width="\textwidth" />
 <p class="caption">
 FIGURE 3.5: Mutate diagram from Data Wrangling with dplyr and tidyr cheatsheet
@@ -990,9 +994,9 @@ View(weather)
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_temp_in_F =</span> <span class="kw">mean</span>(temp, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), 
             <span class="dt">mean_temp_in_C =</span> <span class="kw">mean</span>(temp_in_C, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
 summary_monthly_temp</code></pre></div>
-<pre><code># A tibble: 12 x 3
+<pre><code># A tibble: 12 × 3
    month mean_temp_in_F mean_temp_in_C
- * &lt;int&gt;          &lt;dbl&gt;          &lt;dbl&gt;
+   &lt;int&gt;          &lt;dbl&gt;          &lt;dbl&gt;
  1     1           35.6           2.02
  2     2           34.3           1.26
  3     3           39.9           4.38
@@ -1009,7 +1013,7 @@ summary_monthly_temp</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">flights &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">gain =</span> dep_delay <span class="op">-</span><span class="st"> </span>arr_delay)</code></pre></div>
 <p>Let's take a look at <code>dep_delay</code>, <code>arr_delay</code>, and the resulting <code>gain</code> variables for the first 5 rows in our new <code>flights</code> data frame:</p>
-<pre><code># A tibble: 5 x 3
+<pre><code># A tibble: 5 × 3
   dep_delay arr_delay  gain
       &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
 1         2        11    -9
@@ -1092,7 +1096,7 @@ missing
 <p>We've recreated the <code>summary</code> function we saw in Chapter <a href="2-viz.html#viz">2</a> here using the <code>summarize</code> function in <code>dplyr</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> flights, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> gain)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>)</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-82"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-82"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-82-1.png" alt="Histogram of gain variable" width="\textwidth" />
 <p class="caption">
 FIGURE 3.6: Histogram of gain variable
@@ -1126,9 +1130,9 @@ FIGURE 3.6: Histogram of gain variable
 <span class="st">  </span><span class="kw">group_by</span>(dest) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">num_flights =</span> <span class="kw">n</span>())
 freq_dest</code></pre></div>
-<pre><code># A tibble: 105 x 2
+<pre><code># A tibble: 105 × 2
    dest  num_flights
- * &lt;chr&gt;       &lt;int&gt;
+   &lt;chr&gt;       &lt;int&gt;
  1 ABQ           254
  2 ACK           265
  3 ALB           439
@@ -1143,7 +1147,7 @@ freq_dest</code></pre></div>
 <p>Observe that by default the rows of the resulting <code>freq_dest</code> data frame are sorted in alphabetical order of <code>dest</code> destination. Say instead we would like to see the same data, but sorted from the most to the least number of flights <code>num_flights</code> instead:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">freq_dest <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">arrange</span>(num_flights)</code></pre></div>
-<pre><code># A tibble: 105 x 2
+<pre><code># A tibble: 105 × 2
    dest  num_flights
    &lt;chr&gt;       &lt;int&gt;
  1 LEX             1
@@ -1160,7 +1164,7 @@ freq_dest</code></pre></div>
 <p>This is actually giving us the opposite of what we are looking for: the rows are sorted with the least frequent destination airports displayed first. To switch the ordering to be descending instead of ascending we use the <code>desc()</code> function, which is short for &quot;descending&quot;:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">freq_dest <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(num_flights))</code></pre></div>
-<pre><code># A tibble: 105 x 2
+<pre><code># A tibble: 105 × 2
    dest  num_flights
    &lt;chr&gt;       &lt;int&gt;
  1 ORD         17283
@@ -1183,7 +1187,7 @@ freq_dest</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">View</span>(airlines)</code></pre></div>
 <p>We see that in <code>airports</code>, <code>carrier</code> is the carrier code while <code>name</code> is the full name of the airline company. Using this table, we can see that <code>&quot;VX&quot;</code>, <code>&quot;HA&quot;</code>, and <code>&quot;B6&quot;</code> correspond to Virgin America, Hawaiian Airlines, and JetBlue respectively. However, wouldn't it be nice to have all this information in a single data frame instead of two separate data frames? We can do this by &quot;joining&quot; i.e. &quot;merging&quot; the <code>flights</code> and <code>airlines</code> data frames.</p>
 <p>Note that the values in the variable <code>carrier</code> in the <code>flights</code> data frame match the values in the variable <code>carrier</code> in the <code>airlines</code> data frame. In this case, we can use the variable <code>carrier</code> as a <em>key variable</em> to match the rows of the two data frames. Key variables are almost always identification variables that uniquely identify the observational units as we saw in Subsection <a href="#identification-vs-measurement-variables"><strong>??</strong></a>. This ensures that rows in both data frames are appropriately matched during the join. Hadley and Garrett <span class="citation">(Grolemund and Wickham <a href="#ref-rds2016">2016</a>)</span> created the following diagram to help us understand how the different datasets are linked by various key variables:</p>
-<div class="figure" style="text-align: center"><span id="fig:reldiagram"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:reldiagram"></span>
 <img src="images/relational-nycflights.png" alt="Data relationships in nycflights13 from R for Data Science" width="\textwidth" />
 <p class="caption">
 FIGURE 3.7: Data relationships in nycflights13 from R for Data Science
@@ -1198,7 +1202,7 @@ FIGURE 3.7: Data relationships in nycflights13 from R for Data Science
 <span class="kw">View</span>(flights_joined)</code></pre></div>
 <p>Observe that the <code>flights</code> and <code>flights_joined</code> data frames are identical except that <code>flights_joined</code> has an additional variable <code>name</code> whose values correspond to the airline company names drawn from the <code>airlines</code> data frame.</p>
 <p>A visual representation of the <code>inner_join()</code> is given below <span class="citation">(Grolemund and Wickham <a href="#ref-rds2016">2016</a>)</span>. There are other types of joins available (such as <code>left_join()</code>, <code>right_join()</code>, <code>outer_join()</code>, and <code>anti_join()</code>), but the <code>inner_join()</code> will solve nearly all of the problems you'll encounter in this book.</p>
-<div class="figure" style="text-align: center"><span id="fig:ijdiagram"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ijdiagram"></span>
 <img src="images/join-inner.png" alt="Diagram of inner join from R for Data Science" width="\textwidth" />
 <p class="caption">
 FIGURE 3.8: Diagram of inner join from R for Data Science
@@ -1232,7 +1236,7 @@ FIGURE 3.8: Diagram of inner join from R for Data Science
 <span class="st">  </span><span class="kw">inner_join</span>(airports, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;dest&quot;</span> =<span class="st"> &quot;faa&quot;</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">rename</span>(<span class="dt">airport_name =</span> name)
 named_dests</code></pre></div>
-<pre><code># A tibble: 101 x 9
+<pre><code># A tibble: 101 × 9
    dest  num_flights airport_name          lat    lon   alt    tz dst   tzone   
    &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;               &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   
  1 ORD         17283 Chicago Ohare Intl   42.0  -87.9   668    -6 A     America…
@@ -1296,7 +1300,7 @@ named_dests</code></pre></div>
 </ul>
 <div id="select" class="section level3">
 <h3><span class="header-section-number">3.8.1</span> <code>select</code> variables</h3>
-<div class="figure" style="text-align: center"><span id="fig:selectfig"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:selectfig"></span>
 <img src="images/select.png" alt="Select diagram from Data Wrangling with dplyr and tidyr cheatsheet" width="\textwidth" />
 <p class="caption">
 FIGURE 3.9: Select diagram from Data Wrangling with dplyr and tidyr cheatsheet
@@ -1459,7 +1463,7 @@ Join/merge two data frames, matching rows by a key variable
 <!-- An R script file of all R code used in this chapter is available [here](scripts/04-wrangling.R). -->
 <p>If you want to further unlock the power of the <code>dplyr</code> package for data wrangling, we suggest you that you check out RStudio's &quot;Data Transformation with dplyr&quot; cheatsheet. This cheatsheet summarizes much more than what we've discussed in this chapter, in particular more-intermediate level and advanced data wrangling functions, while providing quick and easy to read visual descriptions.</p>
 <p>You can access this cheatsheet by going to the RStudio Menu Bar -&gt; Help -&gt; Cheatsheets -&gt; &quot;Data Transformation with dplyr&quot;:</p>
-<div class="figure" style="text-align: center"><span id="fig:dplyr-cheatsheet"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:dplyr-cheatsheet"></span>
 <img src="images/dplyr_cheatsheet-1.png" alt="Data Transformation with dplyr cheatsheat" width="\textwidth" />
 <p class="caption">
 FIGURE 3.10: Data Transformation with dplyr cheatsheat
@@ -1498,7 +1502,6 @@ Review questions have been designed using the `fivethirtyeight` R package [@R-fi
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -1517,6 +1520,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -1537,6 +1541,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true

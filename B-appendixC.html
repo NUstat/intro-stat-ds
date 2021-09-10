@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>B Reach for the Stars | Introduction to Statistics and Data Science</title>
   <meta name="description" content="An open-source and fully-reproducible electronic textbook for teaching statistical inference using tidyverse data science tools." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="B Reach for the Stars | Introduction to Statistics and Data Science" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Elizabeth Tipton, Arend M. Kuyper, and Kaitlyn G. Fitzgerald - Adapted from ModernDive by Chester Ismay and Albert Y. Kim," />
 
 
-<meta name="date" content="2021-02-15" />
+<meta name="date" content="2021-09-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,8 @@
   <link rel="shortcut icon" href="images/logos/favicons/favicon.ico" type="image/x-icon" />
 <link rel="prev" href="A-appendixA.html"/>
 <link rel="next" href="C-appendixD.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,10 +50,11 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
 <script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
 <script src="libs/dygraphs-1.1.1/shapes.js"></script>
@@ -100,6 +102,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -122,8 +125,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="1" data-path="1-getting-started.html"><a href="1-getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started with Data in R</a><ul>
 <li class="chapter" data-level="1.1" data-path="1-getting-started.html"><a href="1-getting-started.html#r-rstudio"><i class="fa fa-check"></i><b>1.1</b> What are R and RStudio?</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="1-getting-started.html"><a href="1-getting-started.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>1.1.1</b> Installing R and RStudio</a></li>
-<li class="chapter" data-level="1.1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#using-r-via-rstudio"><i class="fa fa-check"></i><b>1.1.2</b> Using R via RStudio</a></li>
+<li class="chapter" data-level="1.1.1" data-path="1-getting-started.html"><a href="1-getting-started.html#using-rstudio-cloud"><i class="fa fa-check"></i><b>1.1.1</b> Using RStudio Cloud</a></li>
+<li class="chapter" data-level="1.1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#installing-r-and-rstudio-on-your-personal-computer"><i class="fa fa-check"></i><b>1.1.2</b> Installing R and RStudio on your personal computer</a></li>
+<li class="chapter" data-level="1.1.3" data-path="1-getting-started.html"><a href="1-getting-started.html#using-r-via-rstudio"><i class="fa fa-check"></i><b>1.1.3</b> Using R via RStudio</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#code"><i class="fa fa-check"></i><b>1.2</b> How do I code in R?</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="1-getting-started.html"><a href="1-getting-started.html#programming-concepts"><i class="fa fa-check"></i><b>1.2.1</b> Basic programming concepts and terminology</a></li>
@@ -480,7 +484,7 @@ flights_table</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> flights, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> carrier)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">limits =</span> <span class="kw">names</span>(sorted_flights))</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-350"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-350"></span>
 <img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-350-1.png" alt="Number of flights departing NYC in 2013 by airline - Descending numbers" width="\textwidth" />
 <p class="caption">
 FIGURE B.1: Number of flights departing NYC in 2013 by airline - Descending numbers
@@ -501,8 +505,8 @@ flights_summarized &lt;-<span class="st"> </span>flights_day <span class="op">%&
 <span class="kw">rownames</span>(flights_summarized) &lt;-<span class="st"> </span>flights_summarized<span class="op">$</span>date
 flights_summarized &lt;-<span class="st"> </span><span class="kw">select</span>(flights_summarized, <span class="op">-</span>date)
 <span class="kw">dyRangeSelector</span>(<span class="kw">dygraph</span>(flights_summarized))</code></pre></div>
-<div id="htmlwidget-5bbcd598e1496814bc81" style="width:100%;height:384px;" class="dygraphs html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5bbcd598e1496814bc81">{"x":{"attrs":{"labels":"median_arr_delay","legend":"auto","retainDateWindow":false,"axes":{"x":{"pixelsPerLabel":60}},"showRangeSelector":true,"rangeSelectorHeight":40,"rangeSelectorPlotFillColor":" #A7B1C4","rangeSelectorPlotStrokeColor":"#808FAB","interactionModel":"Dygraph.Interaction.defaultModel"},"annotations":[],"shadings":[],"events":[],"format":"numeric","data":[[3,4,1,-7,-7,-2,-8,-8,-6,-11,-11,-14,-9,3,-3,16,1,-3,-12,-7,-3,2,-1,-1,3,-1,-9.5,-3,-12,-1,12,0,-9,-6,-3,1,-6,-5,10,-3,-5,7,-3,-6,-2,-3,-4,-12,-9.5,-3,-5,0,3,3,-8,-5,-5,11,-10,-8,-9,-13,-8,-10,-7.5,0,58,-9,-12,-7,3,-7,-7,-7,2.5,0,9,15,-3,-5,-6,3,-1,-1,-11,-11,-13,-14,-17,-10,0,-5,-4,-1,-2,-11,-9,-10,-9,-4,6,19,0,-3,-5,-8,-4,10,14,1,-3,19,13,4,23,11,-14,-11,-10,-13,-14,-13,-7,-15,-15,-12,-16,10,4,-3,2,-10,-12,-15,-12,-5,-6,-15,-3,-3,-6,5,30.5,10,-7,-14,-15,-9,-6,-10,-11,-16,-5,10,-5,-10,-6,5,-8,-9,3,-7,-5,30,4,-11,-9,3,13,4,-11,-11,-12,-8,14.5,15,5,8,14,0,11,44.5,1,2,-13.5,-15,-15,0,9,7,13,4,4,2,-16,-14,-6,-5.5,-6,-3,-1,-1,12,25,5,2,3,-7,7,3,-7,-8,11,2,-2,-4,-5,-8,-2,20,27,-1,-2,2,16,6,-2,-8,-12,-9,-9,-13,-14,10,-6,-16.5,-20,-18,-16,1,-6,-18,-15,-16,-2,-8,-18,-18,-19,-22,-16,-15,-15,-10,16,4,-17,-15,-7,-13,-16,-11,-13,-11,-8,-10,-12,-9,-9,-11,-19,-14,-15,-21,-16,-5,-10,-13,-10,5,-8,-11,-2,2,-13,-9,-7,-10,-7,-4,-2,-4,-5,-5,-4,-1,-4,-3,-5,-13,-7,-7,-9,-5,0,-4,-11,-1,-8,-8,-1,-3,-10,-9,-9,4,-12,-13,-8,-11,-2.5,-4,-6,-9,-5,-1,-1,-6,-8,-3,8,-5,-14,-17,-11.5,-7,-3,-7.5,12,9,1,10,29,35,7,0,-4,16,5.5,1,27,8,0,2,3,5,15,-1,-9,-2,-5,-8,-1,2,1,3]]},"evals":["attrs.interactionModel"],"jsHooks":[]}</script>
+<div id="htmlwidget-0eb6828b6c1154486afe" style="width:100%;height:384px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0eb6828b6c1154486afe">{"x":{"attrs":{"labels":"median_arr_delay","legend":"auto","retainDateWindow":false,"axes":{"x":{"pixelsPerLabel":60}},"showRangeSelector":true,"rangeSelectorHeight":40,"rangeSelectorPlotFillColor":" #A7B1C4","rangeSelectorPlotStrokeColor":"#808FAB","interactionModel":"Dygraph.Interaction.defaultModel"},"annotations":[],"shadings":[],"events":[],"format":"numeric","data":[[3,4,1,-7,-7,-2,-8,-8,-6,-11,-11,-14,-9,3,-3,16,1,-3,-12,-7,-3,2,-1,-1,3,-1,-9.5,-3,-12,-1,12,0,-9,-6,-3,1,-6,-5,10,-3,-5,7,-3,-6,-2,-3,-4,-12,-9.5,-3,-5,0,3,3,-8,-5,-5,11,-10,-8,-9,-13,-8,-10,-7.5,0,58,-9,-12,-7,3,-7,-7,-7,2.5,0,9,15,-3,-5,-6,3,-1,-1,-11,-11,-13,-14,-17,-10,0,-5,-4,-1,-2,-11,-9,-10,-9,-4,6,19,0,-3,-5,-8,-4,10,14,1,-3,19,13,4,23,11,-14,-11,-10,-13,-14,-13,-7,-15,-15,-12,-16,10,4,-3,2,-10,-12,-15,-12,-5,-6,-15,-3,-3,-6,5,30.5,10,-7,-14,-15,-9,-6,-10,-11,-16,-5,10,-5,-10,-6,5,-8,-9,3,-7,-5,30,4,-11,-9,3,13,4,-11,-11,-12,-8,14.5,15,5,8,14,0,11,44.5,1,2,-13.5,-15,-15,0,9,7,13,4,4,2,-16,-14,-6,-5.5,-6,-3,-1,-1,12,25,5,2,3,-7,7,3,-7,-8,11,2,-2,-4,-5,-8,-2,20,27,-1,-2,2,16,6,-2,-8,-12,-9,-9,-13,-14,10,-6,-16.5,-20,-18,-16,1,-6,-18,-15,-16,-2,-8,-18,-18,-19,-22,-16,-15,-15,-10,16,4,-17,-15,-7,-13,-16,-11,-13,-11,-8,-10,-12,-9,-9,-11,-19,-14,-15,-21,-16,-5,-10,-13,-10,5,-8,-11,-2,2,-13,-9,-7,-10,-7,-4,-2,-4,-5,-5,-4,-1,-4,-3,-5,-13,-7,-7,-9,-5,0,-4,-11,-1,-8,-8,-1,-3,-10,-9,-9,4,-12,-13,-8,-11,-2.5,-4,-6,-9,-5,-1,-1,-6,-8,-3,8,-5,-14,-17,-11.5,-7,-3,-7.5,12,9,1,10,29,35,7,0,-4,16,5.5,1,27,8,0,2,3,5,15,-1,-9,-2,-5,-8,-1,2,1,3]]},"evals":["attrs.interactionModel"],"jsHooks":[]}</script>
 <p><br></p>
 <p>The syntax here is a little different than what we have covered so far. The <code>dygraph</code> function is expecting for the dates to be given as the <code>rownames</code> of the object. We then remove the <code>date</code> variable from the <code>flights_summarized</code> data frame since it is accounted for in the <code>rownames</code>. Lastly, we run the <code>dygraph</code> function on the new data frame that only contains the median arrival delay as a column and then provide the ability to have a selector to zoom in on the interactive plot via <code>dyRangeSelector</code>. (Note that this plot will only be interactive in the HTML version of this book.)</p>
 <!--
@@ -540,7 +544,6 @@ flights_summarized &lt;-<span class="st"> </span><span class="kw">select</span>(
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -559,6 +562,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -579,6 +583,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
