@@ -893,8 +893,11 @@ Let's recap our data wrangling verbs in Table \@ref(tab:wrangle-summary-table). 
 # https://docs.google.com/spreadsheets/d/1nRkXfYMQiTj79c08xQPY0zkoJSpde3NC1w6DRhsWCss/edit#gid=0
 
 temp <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vRgwl1lugQA6zxzfB6_0hM5vBjXkU7cbUVYYXLcWeaRJ9HmvNXyCjzJCgiGW8HCe1kvjLCGYHf-BvYL/pub?gid=0&single=true&output=csv" %>% 
-  read_csv(na = "",) %>% 
-  select(-X1)
+  read_csv(
+    na = "", 
+    skip = 1, 
+    col_names = c("goodbye", "Verb" , "Data wrangling operation")) %>% 
+  select(-goodbye)
 
 temp %>% 
   kable(
