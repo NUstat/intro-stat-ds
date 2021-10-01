@@ -769,7 +769,7 @@ We see both the `fruits` and `fruits_counted` data frames represent the same col
 fruits
 ```
 
-... `fruits_counted` has a variable `count` which represents pre-counted values of each fruit. 
+... `fruits_counted` has a variable `number` which represents pre-counted values of each fruit. 
 
 ```{r fruitscounted, echo=FALSE}
 fruits_counted
