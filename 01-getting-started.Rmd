@@ -51,7 +51,7 @@ To begin using RStudio Cloud use the link provided by your instructor to gain ac
 
 After you open RStudio Cloud, you should now have access to the classroom under 'Spaces' on the left hand side (in this case 'Stat 202').
 
-![](images/RStudioCloud.PNG)
+![](images/RStudioCloud.png)
 
 Throughout class you will be working on various activities. Once the instructor has made an activity available you will click on the classroom Workspace (Stat 202) to access the available projects. To begin working on an activity click 'Start'. Once that activity project is open navigate to the 'File' pane and open the R Markdown '.Rmd' file.
 
