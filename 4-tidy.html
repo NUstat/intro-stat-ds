@@ -24,7 +24,7 @@
 <meta name="author" content="Elizabeth Tipton, Arend M. Kuyper, and Kaitlyn G. Fitzgerald - Adapted from ModernDive by Chester Ismay and Albert Y. Kim," />
 
 
-<meta name="date" content="2021-10-04" />
+<meta name="date" content="2021-12-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -130,9 +130,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.1.3" data-path="1-getting-started.html"><a href="1-getting-started.html#using-r-via-rstudio"><i class="fa fa-check"></i><b>1.1.3</b> Using R via RStudio</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="1-getting-started.html"><a href="1-getting-started.html#code"><i class="fa fa-check"></i><b>1.2</b> How do I code in R?</a><ul>
-<li class="chapter" data-level="1.2.1" data-path="1-getting-started.html"><a href="1-getting-started.html#programming-concepts"><i class="fa fa-check"></i><b>1.2.1</b> Basic programming concepts and terminology</a></li>
-<li class="chapter" data-level="1.2.2" data-path="1-getting-started.html"><a href="1-getting-started.html#errors-warnings-and-messages"><i class="fa fa-check"></i><b>1.2.2</b> Errors, warnings, and messages</a></li>
-<li class="chapter" data-level="1.2.3" data-path="1-getting-started.html"><a href="1-getting-started.html#tips-on-learning-to-code"><i class="fa fa-check"></i><b>1.2.3</b> Tips on learning to code</a></li>
+<li class="chapter" data-level="1.2.1" data-path="1-getting-started.html"><a href="1-getting-started.html#creating-your-first-r-markdown-document"><i class="fa fa-check"></i><b>1.2.1</b> Creating your first R Markdown document</a></li>
+<li class="chapter" data-level="1.2.2" data-path="1-getting-started.html"><a href="1-getting-started.html#programming-concepts"><i class="fa fa-check"></i><b>1.2.2</b> Basic programming concepts and terminology</a></li>
+<li class="chapter" data-level="1.2.3" data-path="1-getting-started.html"><a href="1-getting-started.html#errors-warnings-and-messages"><i class="fa fa-check"></i><b>1.2.3</b> Errors, warnings, and messages</a></li>
+<li class="chapter" data-level="1.2.4" data-path="1-getting-started.html"><a href="1-getting-started.html#tips-on-learning-to-code"><i class="fa fa-check"></i><b>1.2.4</b> Tips on learning to code</a></li>
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="1-getting-started.html"><a href="1-getting-started.html#packages"><i class="fa fa-check"></i><b>1.3</b> What are R packages?</a><ul>
 <li class="chapter" data-level="1.3.1" data-path="1-getting-started.html"><a href="1-getting-started.html#package-installation"><i class="fa fa-check"></i><b>1.3.1</b> Package installation</a></li>
@@ -456,7 +457,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </html>
 <div id="tidy" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Data Importing &amp; &quot;Tidy&quot; Data</h1>
-<p>In Subsection <a href="1-getting-started.html#programming-concepts">1.2.1</a> we introduced the concept of a data frame: a rectangular spreadsheet-like representation of data in R where the rows correspond to observations and the columns correspond to variables describing each observation. In Section <a href="1-getting-started.html#nycflights13">1.4</a>, we started exploring our first data frame: the <code>flights</code> data frame included in the <code>nycflights13</code> package. In Chapter <a href="2-viz.html#viz">2</a> we created visualizations based on the data included in <code>flights</code> and other data frames such as <code>weather</code>. In Chapter <a href="3-wrangling.html#wrangling">3</a>, we learned how to wrangle data, in other words take existing data frames and transform/ modify them to suit our analysis goals.</p>
+<p>In Subsection <a href="1-getting-started.html#programming-concepts">1.2.2</a> we introduced the concept of a data frame: a rectangular spreadsheet-like representation of data in R where the rows correspond to observations and the columns correspond to variables describing each observation. In Section <a href="1-getting-started.html#nycflights13">1.4</a>, we started exploring our first data frame: the <code>flights</code> data frame included in the <code>nycflights13</code> package. In Chapter <a href="2-viz.html#viz">2</a> we created visualizations based on the data included in <code>flights</code> and other data frames such as <code>weather</code>. In Chapter <a href="3-wrangling.html#wrangling">3</a>, we learned how to wrangle data, in other words take existing data frames and transform/ modify them to suit our analysis goals.</p>
 <p>In this final chapter of the &quot;Data Science via the tidyverse&quot; portion of the book, we extend some of these ideas by discussing a type of data formatting called &quot;tidy&quot; data. You will see that having data stored in &quot;tidy&quot; format is about more than what the colloquial definition of the term &quot;tidy&quot; might suggest: having your data &quot;neatly organized.&quot; Instead, we define the term &quot;tidy&quot; in a more rigorous fashion, outlining a set of rules by which data can be stored, and the implications of these rules for analyses.</p>
 <p>Although knowledge of this type of data formatting was not necessary for our treatment of data visualization in Chapter <a href="2-viz.html#viz">2</a> and data wrangling in Chapter <a href="3-wrangling.html#wrangling">3</a> since all the data was already in &quot;tidy&quot; format, we'll now see this format is actually essential to using the tools we covered in these two chapters. Furthermore, it will also be useful for all subsequent chapters in this book when we cover regression and statistical inference. First however, we'll show you how to import spreadsheet data for use in R.</p>
 <div id="pkgs-4" class="section level3 unnumbered">
@@ -531,18 +532,18 @@ dem_score</code></pre></div>
 <p>Let's now switch gears and learn about the concept of &quot;tidy&quot; data format by starting with a motivating example. Let's consider the <code>drinks</code> data frame included in the <code>fivethirtyeight</code> data. Run the following:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drinks</code></pre></div>
 <pre><code># A tibble: 193 × 5
-   country           beer_servings spirit_servings wine_servings total_litres_of…
-   &lt;chr&gt;                     &lt;int&gt;           &lt;int&gt;         &lt;int&gt;            &lt;dbl&gt;
- 1 Afghanistan                   0               0             0              0  
- 2 Albania                      89             132            54              4.9
- 3 Algeria                      25               0            14              0.7
- 4 Andorra                     245             138           312             12.4
- 5 Angola                      217              57            45              5.9
- 6 Antigua &amp; Barbuda           102             128            45              4.9
- 7 Argentina                   193              25           221              8.3
- 8 Armenia                      21             179            11              3.8
- 9 Australia                   261              72           212             10.4
-10 Austria                     279              75           191              9.7
+   country      beer_servings spirit_servings wine_servings total_litres_of_pur…
+   &lt;chr&gt;                &lt;int&gt;           &lt;int&gt;         &lt;int&gt;                &lt;dbl&gt;
+ 1 Afghanistan              0               0             0                  0  
+ 2 Albania                 89             132            54                  4.9
+ 3 Algeria                 25               0            14                  0.7
+ 4 Andorra                245             138           312                 12.4
+ 5 Angola                 217              57            45                  5.9
+ 6 Antigua &amp; B…           102             128            45                  4.9
+ 7 Argentina              193              25           221                  8.3
+ 8 Armenia                 21             179            11                  3.8
+ 9 Australia              261              72           212                 10.4
+10 Austria                279              75           191                  9.7
 # … with 183 more rows</code></pre>
 <p>After reading the help file by running <code>?drinks</code>, we see that <code>drinks</code> is a data frame containing results from a survey of the average number of servings of beer, spirits, and wine consumed for 193 countries. This data was originally reported on the data journalism website FiveThirtyEight.com in Mona Chalabi's article <a href="https://fivethirtyeight.com/features/dear-mona-followup-where-do-people-drink-the-most-beer-wine-and-spirits/">&quot;Dear Mona Followup: Where Do People Drink The Most Beer, Wine And Spirits?&quot;</a></p>
 <p>Let's apply some of the data wrangling verbs we learned in Chapter <a href="3-wrangling.html#wrangling">3</a> on the <code>drinks</code> data frame. Let's</p>
@@ -883,7 +884,7 @@ drinks_smaller <span class="op">%&gt;%</span><span class="st"> </span>
 <p>With our <code>drinks_smaller_tidy</code> &quot;tidy&quot; format data frame, we can now produce a side-by-side AKA dodged barplot using <code>geom_col()</code> and not <code>geom_bar()</code>, since we would like to map the <code>servings</code> variable to the <code>y</code>-aesthetic of the bars.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(drinks_smaller_tidy, <span class="kw">aes</span>(<span class="dt">x=</span>country, <span class="dt">y=</span>servings, <span class="dt">fill=</span>type)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre></div>
-<p><img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-124-1.png" width="\textwidth" style="display: block; margin: auto;" /></p>
+<p><img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-125-1.png" width="\textwidth" style="display: block; margin: auto;" /></p>
 <p>Converting &quot;wide&quot; format data to &quot;tidy&quot; format often confuses new R users. The only way to learn to get comfortable with the <code>pivot_longer()</code> function is with practice, practice, and more practice. For example, see the examples in the bottom of the help file for <code>pivot_longer()</code> by running <code>?pivot_longer</code>. We'll show another example of using <code>pivot_longer()</code> to convert a &quot;wide&quot; formatted data frame to &quot;tidy&quot; format in Section <a href="4-tidy.html#case-study-tidy">4.3</a>. For other examples of converting a dataset into &quot;tidy&quot; format, check out the different functions available for data tidying and a case study using data from the World Health Organization in <a href="http://r4ds.had.co.nz/tidy-data.html">R for Data Science</a> <span class="citation">(Grolemund and Wickham <a href="#ref-rds2016">2016</a>)</span>.</p>
 <div class="learncheck">
 <p>
@@ -1003,7 +1004,7 @@ Albert: I did for the drinks_smaller example above, but in this case it will be 
     <span class="dt">y =</span> <span class="st">&quot;Democracy Score&quot;</span>,
     <span class="dt">title =</span> <span class="st">&quot;Democracy score in Guatemala 1952-1992&quot;</span>
   )</code></pre></div>
-<p><img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-132-1.png" width="\textwidth" style="display: block; margin: auto;" /></p>
+<p><img src="tipton_kitzgerald_kuyper_files/figure-html/unnamed-chunk-133-1.png" width="\textwidth" style="display: block; margin: auto;" /></p>
 <div class="learncheck">
 <p>
 <strong><em>Learning check</em></strong>

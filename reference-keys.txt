@@ -15,8 +15,8 @@ fig:histogramexample
 fig:weather-histogram
 fig:weather-histogram-2
 fig:weather-histogram-3
-fig:unnamed-chunk-23
 fig:unnamed-chunk-24
+fig:unnamed-chunk-25
 fig:facethistogram
 fig:facethistogram2
 fig:nov1
@@ -30,10 +30,10 @@ fig:geomcol
 fig:flightsbar
 tab:flights-counted
 fig:carrierpie
-fig:unnamed-chunk-31
+fig:unnamed-chunk-32
 fig:flights-stacked-bar
 fig:flights-stacked-bar-color
-fig:unnamed-chunk-36
+fig:unnamed-chunk-37
 fig:facet-bar-vert
 tab:viz-summary-table
 fig:ggplot-cheatsheet
@@ -42,7 +42,7 @@ fig:sum1
 fig:sum2
 fig:groupsummarize
 fig:select
-fig:unnamed-chunk-82
+fig:unnamed-chunk-83
 fig:reldiagram
 fig:ijdiagram
 fig:selectfig
@@ -54,7 +54,7 @@ tab:non-tidy-stocks
 tab:tidy-stocks
 tab:tidy-stocks-2
 fig:import-cheatsheet
-tab:unnamed-chunk-143
+tab:unnamed-chunk-144
 tab:five-random-courses
 fig:correlation1
 fig:numxplot1
@@ -63,7 +63,7 @@ fig:numxplot2-a
 fig:numxplot3
 fig:numxplot4
 tab:numxplot4b
-tab:unnamed-chunk-157
+tab:unnamed-chunk-158
 fig:numxplot5
 tab:reg-points
 tab:model2-data-preview
@@ -88,7 +88,7 @@ tab:model3-table-output
 tab:model3-points-table
 tab:model4-data-preview
 fig:numxcatxplot1
-tab:unnamed-chunk-203
+tab:unnamed-chunk-204
 tab:regtable-interaction
 tab:interaction-summary
 fig:numxcatx-parallel
@@ -131,7 +131,7 @@ fig:bias-precision
 tab:SE-table-ch-9
 fig:empirical-rule
 fig:STAT-values
-fig:unnamed-chunk-269
+fig:unnamed-chunk-270
 fig:comparing-sampling-distributions
 tab:comparing-n
 fig:infant-mortality
@@ -151,13 +151,14 @@ tab:law-table
 tab:ht-table
 fig:promotions-barplot
 fig:promotions-p-value
-fig:unnamed-chunk-350
+fig:unnamed-chunk-351
 getting-started
 r-rstudio
 using-rstudio-cloud
 installing-r-and-rstudio-on-your-personal-computer
 using-r-via-rstudio
 code
+creating-your-first-r-markdown-document
 programming-concepts
 errors-warnings-and-messages
 tips-on-learning-to-code
