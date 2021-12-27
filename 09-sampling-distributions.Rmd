@@ -33,13 +33,16 @@ library(tidyverse)
 library(moderndive)
 library(skimr)
 library(dslabs)
+library(UsingR)
 ```
 
 ```{r message=FALSE, warning=FALSE, echo=FALSE}
+library(UsingR)
 library(tidyverse)
 library(moderndive)
 #library(skimr)
 library(dslabs)
+
 
 # Packages needed internally, but not in text.
 library(knitr)
@@ -48,15 +51,259 @@ library(patchwork)
 library(readr)
 library(stringr)
 library(gridExtra)
+
+summarize <- dplyr::summarize
+select <- dplyr::select
+filter <- dplyr::filter
 ```
 
 ***
 
+## Distributions {#parametric}
 
-## Theory of Repeated Samples {#theory}
+Recall from Section \@ref(histograms) that histograms allow us to visualize the *distribution* of a numerical variable: where the values center, how they vary, and the shape in terms of modality and symmetry/skew. Figure \@ref(fig:distribution) shows examples of some common distribution shapes.
+
+```{r distribution, echo=FALSE, out.width='100%', fig.cap="Common distribution shapes"}
+knitr::include_graphics('images/distribution.png')
+```
+
+<!-- retrieved diagram from previous 202 slides need to cite?-->
+
+When you visualize your population or sample data in a histogram, often times it will follow what is called a parametric distribution. Or simply put, a distribution with a fixed set of parameters. There are many known discrete and continuous distributions, however we will only focus on three common distributions: 
+
+*	Normal distribution
+*	T-distribution
+*	Chi-squared distribution.
+
+### Normal Distribution
+
+The **Normal Distribution** is the most common and important of all distributions. It is characterized by two parameters: $\mu$, which determines the center of the distribution, and $\sigma$ which determines the spread. 
+In Figure \@ref(fig:samplingdistribution-virtual), the solid- and dashed-line curves have the same standard deviation (i.e. $\sigma = 1$), so they have identical spread, but they have different means, so the dashed curve is simply shifted to the right to be centered at $\mu = 2$. On the other hand, the solid- and dotted-line curves are centered around the same value (i.e. $\mu = 0$), but the dotted curve has a larger standard deviation and is therefore more spread out. The solid line is a special case of the Normal distribution called the **Standard Normal distribution**, which has mean 0 and standard deviation 1. Importantly, for all possible values of $\mu$ and $\sigma$, the Normal distribution is **symmetric** and **unimodal**.
+
+```{r normaldist, echo=FALSE, fig.cap="Normal distribution"}
+ggplot(data.frame(x = c(-6, 6)), aes(x = x)) +
+  stat_function(fun = dnorm,
+                    aes(linetype = "mean = 0, sd = 1"), size = 1) +
+  stat_function(fun = dnorm, args = list(mean = 2, sd = 1),
+                    aes(linetype = "mean = 2, sd = 1"), size = 1) +
+  stat_function(fun = dnorm, args = list(mean = 0, sd = 2),
+                    aes(linetype = "mean = 0, sd = 2"), size = 1) +
+  scale_linetype_manual(values = c(1, 3, 2)) +
+  labs(title = "Normal distribution", ylab = "") +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+
+Normally distributed random variables arise naturally in many contexts. For examples, IQ, birth weight, height, shoe size, SAT scores, and the sum of two dice all tend to be Normally distributed. Let's consider the birth weight of babies from the `babies` data frame included in the `UsingR` package. We will use a histogram to visualize the distribution of weight for babies. Note that it is often difficult to obtain population data, for the sake of this example let's assume we have the entire population.
+
+<!--cite usingr.-->
+
+
+```{r}
+babies %>%
+  summarize(mean_weight = mean(wt),
+            sd_weight = sd(wt))
+
+ggplot(babies, aes(x=wt))+
+  geom_histogram(bins=30, color="white")+
+  labs(title = "Distribution of Birth Weight in Ounces", x="weight")+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5))
+  
+```
+
+Visually we can see that the distribution is bell-shaped, that is, unimodal and approximately symmetric. It clearly resembles a Normal distribution from the shape aspect with a mean weight of 119.6 ounces and standard deviation of 18.2 ounces. However, not all bell shaped distributions are Normally distributed.
+
+The Normal distribution has a very convenient property that says approximately 68%, 95%, and 99.7% of data fall within 1, 2, and 3 standard deviations of the mean, respectively. How can we confirm that the disbursement of birth weights adheres to this property? That would be difficult to visually check with a histogram. We could manually calculate the actual proportion of data that is within one, two, and three standard deviations of the mean, however that can be tedious. Luckily, a convenient tool exists for confirming that the disbursement of data is Normally distributed called a QQ plot, or quantile-quantile plot. A QQ plot is a scatterplot created by plotting two sets of quantiles (percentiles) against one another. That is, it plots the quantiles from our sample data against the theoretical quantiles of a Normal distribution. If the data is Normally distributed, we should see the points forming a line that’s roughly straight. Let's see if the QQ plot of birth weights suggest that the distribution is Normal.
+
+```{r}
+qqnorm(babies$wt)
+qqline(babies$wt)
+```
+
+The QQ plot appears to be approximately a straight line. Notice that the end of the quantiles deviate slightly from the line. This suggests that our sample data has more extreme data in the tails than an exact Normal distribution would suggest. Similar to a histogram this is a visual check and not an airtight proof. Given that our birth weight data is unimodal, symmetric, and the QQ plot is close enough to a straight line, we can say the data is Normally distributed.
+
+
+### Empirical Rule
+
+```{r empirical-rule2, echo=FALSE, out.width='100%', fig.cap="Empirical Rule: property of the Normal Distribution"}
+knitr::include_graphics('images/empirical_rule.png')
+```
+
+<!-- retrieved diagram from previous 202 slides need to cite?-->
+
+The property that approximately 68%, 95%, and 99.7% of data falls within 1, 2, and 3 standard deviations of the mean, respectively is known as the Empirical Rule. Figure \@ref(fig:empirical-rule2) displays this phenomenon.
+Note this is a property of the Normal distribution in general, for all values of $\mu$ and $\sigma$.
+
+If you were to plot the distribution of a Normally distributed random variable, this means you would expect:
+
+* Approximately 68% of values to fall between $\mu-\sigma$ and $\mu+\sigma$
+* Approximately 95% of values to fall between $\mu-2\sigma$ and $\mu+2\sigma$
+* Approximately 99.7% of values to fall between $\mu-3\sigma$ and $\mu+3\sigma$
+
+Let's continue to consider our birth weight data from the `babies` data set. We calculated above a mean $\mu= 119.6$ ounces and standard deviation $\sigma=18.2$ ounces. Remember, we are assuming this is population data for this example. Using the empirical rule we expect 68% of data to fall between 101.4 and 137.8 ounces; 95% of data to fall between 83.2 and 155.6 ounces; and 99.7% of data to fall between 65 and 174.2 ounces. It is important to note that the total area under the distribution curve is 1 or 100%.
+
+We can validate the empirical rule by comparing it to the actual values.
+
+```{r}
+babies %>% 
+  mutate(observed_1_sd = ifelse(101.4 < wt & wt< 137.8 ,1,0),
+         observed_2_sd = ifelse(83.2 < wt & wt< 155.6 ,1,0),
+         observed_3_sd = ifelse(65 < wt & wt< 174.2 ,1,0)) %>% 
+  # calculate actual proportion within 1, 2, and 3 sd
+  summarise(actual_1_sd = mean(observed_1_sd),
+            actual_2_sd = mean(observed_2_sd),
+            actual_3_sd = mean(observed_3_sd))
+```
+We can see that the actual proportion of data within 1 standard deviation is 69.6% compared to the expected 68%; within 2 standard deviations is 94.7% compared to the expected 95%; within 3 standard deviations is 99.4% compared to the expected 99.7%. Since all proportions are reasonably close, we find that the empirical rule is a very convenient approximation.
+
+
+### Standardization
+
+A special case of the Normal distribution is called the **Standard Normal distribution**, which has mean 0 and standard deviation 1. Any Normally distributed random variable can be **standardized**, or in other words converted into a Standard Normal distribution using the formula:
+
+$$STAT = \frac{x-\mu}{\sigma}.$$
+
+Figure \@ref(fig:standardization1) demonstrates the relationship between a Normally distributed random variable, $X$, and its standardized statistic.
+
+```{r standardization1, echo=FALSE, fig.cap="Converting normally distributed data to standard normal.", purl=FALSE, out.width = "90%"}
+knitr::include_graphics("images/standardization.png")
+```
+
+In some literature, STAT is called a Z-score or test statistic. Standardization is a useful statistical tool as it allows us to put measures that are on different scales all onto the same scale. For example, if we have a STAT value of 2.5, we know it will fall fairly far out in the right tail of the distribution. Or if we have a STAT value of -0.5, we know it falls slightly to the left of center. This is displayed in Figure \@ref(fig:STAT-values).
+
+```{r STAT-values, fig.cap = "N(0,1) example values: STAT = -0.5, STAT = 2.5", echo = FALSE}
+ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
+    stat_function(fun = dnorm) +
+  geom_vline(xintercept = 2.5, color = "red") +
+  geom_vline(xintercept = -0.5, color = "red") +
+  labs(x = "STAT",
+       y = "") +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.y = element_blank(),
+                axis.ticks.y = element_blank(),
+        axis.line.y = element_blank()) +
+  scale_x_continuous(breaks = c(-3,-2,-1,0,1,2,3))
+```
+
+
+
+Continuing our example of babies birth weight, let's observe the relationship between weight and the standardized statistic, STAT.
+
+```{r standardization2, echo=FALSE, fig.cap="Standardized birth weight distribution.", purl=FALSE, out.width = "90%"}
+knitr::include_graphics("images/standardization2.png")
+```
+
+What if we wanted to know the percent of babies that weigh less than 95 ounces at birth? Start by converting the value 95 to STAT.
+
+$$STAT = \frac{x-\mu}{\sigma} = \frac{95-119.6}{18.2}= -1.35$$
+Meaning that 95 ounces is 1.35 standard deviations below the mean. The standardized statistic already gives us an idea for a range of babies that weight less than 95 ounces because it falls somewhere between -2 and -1 standard deviations. Based on the empirical rule we know this probability should be between 2.5% and 16%, see Figure \@ref(fig:standardization3) for details. 
+
+```{r standardization3, echo=FALSE, fig.cap="Standardized birth weight distribution.", purl=FALSE, out.width = "90%"}
+knitr::include_graphics("images/standardization3.png")
+```
+
+We can calculate the exact probability of a baby weighing less than 95 ounces using the `pnorm()` function. 
+
+```{r}
+pnorm(q=95, mean=119.6, sd=18.2)
+pnorm(q=-1.35, mean=0, sd=1)
+```
+
+There is an 8.8% chance a baby weights less than 95 ounces. Notice that you can use either the data value or standardized value, the two functions give you the same results and any difference is simply due to rounding. By default, `pnorm()` calculates the area less than or to the left of a specified value.
+
+What if instead we want to calculate a value based on a percent. For example, 25% of babies weigh less than what weight? This is essentially the reverse of our previous question.
+
+```{r standardization4, echo=FALSE, fig.cap="Standardized birth weight distribution.", purl=FALSE, out.width = "70%"}
+knitr::include_graphics("images/standardization4.png")
+```
+
+We will use the function `qnorm()`. 
+
+```{r}
+qnorm(p=0.25, mean=119.6, sd=18.2)
+qnorm(p=0.25, mean=0, sd=1)
+```
+
+This returns the weight of 107.3 or STAT of -0.67. Meaning 25% of babies weigh less than 107.3 ounces or in other words are 0.67 standard deviations below the mean. Notice by default in `qnorm()` you are specifying the area less than or to the left of the value. If you need to calculate the area greater than a value or use a probability that is greater than a value, you can specify the upper tail by adding on the statement `lower.tail=FALSE`.
+
+
+### T-Distribution
+
+The **t-distribution** is a type of probability distribution that arises while sampling a normally distributed population when the sample size is small and the standard deviation of the population is unknown. The **t-distribution** (denoted $t(df)$) depends on one parameter, $df$, and has a mean of 0 and a standard deviation of $\sqrt{\frac{df}{df-2}}$. Degrees of freedom are dependent on the sample size and statistic (e.g. $df = n - 1$).
+
+In general, the t-distribution has the same shape as the Standard Normal distribution (symmetric, unimodal), but it has **heavier tails**. As sample size increases (and therefore degrees of freedom increases), the t-distribution becomes a very close approximation to the Normal distribution. 
+
+```{r, fig.cap="t-distribution with example 95% cutoff values", echo = FALSE, message=FALSE, warning=FALSE}
+ggplot(data.frame(x = c(-6, 6)), aes(x = x)) +
+    stat_function(fun = dnorm,
+                    aes(linetype = "Standard Normal"), size = 1) +
+    stat_function(fun = dt, args = list(df = 2),
+                    aes(linetype = "t-distribution, df = 2"), size = 1) +
+    stat_function(fun = dt, args = list(df = 30),
+                    aes(linetype = "t-distribution, df = 30"), size = 1) +
+  scale_linetype_manual(values = c(1, 3, 2)) +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  geom_vline(xintercept = -2.04, linetype = 2, color = "red") +
+  geom_vline(xintercept = -4.3, linetype = 3, color = "red") +
+  geom_vline(xintercept = 2.04, linetype = 2, color = "red") +
+  geom_vline(xintercept = 4.3, linetype = 3, color = "red") +
+  xlab("STAT")
+```
+
+Because the exact shape of the t-distribution depends on the sample size, we can't define one nice rule like the Empirical Rule to know which "cutoff" values correspond to 95% of the data, for example. If $df = 30$, for example, it can be shown that 95% of the data will fall between -2.04 and 2.04, but if $df = 2$, 95% of the data will fall between -4.3 and 4.3. This is what we mean by the t-distribution having "heavier tails"; more of the observations fall farther out in the tails of the distribution, compared to the Normal distribution.
+
+Similar to the Normal distribution we can calculate probabilities and test statistics from a t-distribution using the `pt()` and `qt()` function, respectively. You must specify the `df` parameter which recall is a function of sample size, $n$, and dependent on the statistic. We will learn more about the `df` of different statistics in Section \@ref(standardization).
+
+
+### Normal vs T
+
+The Normal distribution and t-distribution are very closely related, how do we know when to use which one? The t-distribution is used when the standard deviation of the population, $\sigma$, is unknown. The normal distribution is used when the population standard deviation, $\sigma$, is known. The fatter tail in the t-distribution allows us to take into account the uncertainty in not knowing the true population standard deviation.
+
+
+### Chi-squared Distribution
+
+The Chi-squared distribution is unimodal but skewed right. The Chi-squared distribution depends on one parameter $df$. 
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+ggplot(data.frame(x = c(0, 30)), aes(x = x)) +
+  stat_function(fun = dchisq, args = list(df = 2), size = 1,
+                  aes(linetype = "df = 2")) +
+  stat_function(fun = dchisq, args = list(df = 5), size = 1,
+                  aes(linetype = "df = 5")) +
+  stat_function(fun = dchisq, args = list(df = 10), size = 1,
+                  aes(linetype = "df = 10")) +
+  scale_linetype_manual(values = c(1, 3, 2)) +
+  labs(title = "Chi-squared distribution") +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position = c(0.6, 0.7))
+
+pF <- ggplot(data.frame(x = c(0, 10)), aes(x = x)) +
+    stat_function(fun = df, args = list(df1 = 2, df2 = 1), size = 1,
+                  aes(linetype = "df1 = 2, df2 = 1")) +
+  stat_function(fun = df, args = list(df1 = 5, df2 = 5), size = 1,
+                  aes(linetype = "df1 = 5, df2 = 5")) +
+  stat_function(fun = df, args = list(df1 = 10, df2 = 1), size = 1,
+                  aes(linetype = "df1 = 10, df2 = 1")) +
+  scale_linetype_manual(values = c(1, 3, 2)) +
+    labs(title = "F-distribution") +
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position = c(0.6, 0.7))
+```
+
+
+## Repeated Sampling
+
+A vast majority of the time we do not have data for the entire population of interest. Instead we take a sample from the population and use this sample to make generalizations and inferences about the population. How certain can we be that our sample estimate is close to the true population? In order to answer that question we must first delve into a theoretical framework, and use the theory of repeated sampling to develop the Cental Limit Theorem (CLT) and confidence intervals for our estimates.
+
+### Theory of Repeated Samples {#theory}
 
 Imagine that you want to know the average age of individuals at a football game, so you take a random sample of $n=100$ people. In this sample, you find the average age is $\bar{x} = 28.2$. This average age is an **estimate** of the population average age $\mu$. 
-
 Does this mean that the population mean is $\mu = 28.2$? The sample was selected randomly, so inferences are straightforward, right?
 
 It’s not this simple! Statisticians approach this problem by focusing not on the sample in hand, but instead on *possible other samples*. We will call this **counter-factual thinking**. This means that in order to understand the relationship between a sample estimate we are able to compute in our data and the population parameter, we have to understand *how results might differ if instead of our sample, we had another possible (equally likely) sample*. That is,
@@ -70,11 +317,13 @@ We do this type of simulation in order to understand how close any one sample’
 It is important to emphasize here that this process is *theoretical*. In real life, you do not know the values for all individuals or observations in a population. (If you did, why sample?) And in real life, you will not take repeated samples. Instead, you will have in front of you a **single sample** that you will need to use to make inferences to a population. What simulation exercises provide are properties that can help you understand *how far off the sample estimate you have in hand might be for the population parameter you care about*. 
 
 
-## Sampling Activity {#sampling-activity}
+### Sampling Activity {#sampling-activity}
 
 In the previous section, we provided an overview of repeated sampling and why the theoretical exercise is useful for understanding how to make inferences. This way of thinking, however, can be hard in the abstract.
 
-### What proportion of this bowl's balls are red?
+<p style="font-family: times, serif; font-size:16pt; font-style:italic">
+    **What proportion of this bowl's balls are red?**
+</p>
 
 In this section, we provide a concrete example, based upon a classroom activity completed in an introductory statistics class with 33 students. In the class, there is a large bowl of balls that contains red and white balls. **Importantly, we know that 37.5% of the balls are red (someone counted this!).**
 
@@ -84,7 +333,10 @@ knitr::include_graphics("images/sampling_bowl_1.jpg")
 
 The goal of the activity is to understand what would happen if we didn’t actually count all of the red balls (a census), but instead estimated the proportion that are red based upon a smaller random sample (e.g., n = 50).  
 
-### Taking one random sample 
+
+<p style="font-family: times, serif; font-size:16pt; font-style:italic">
+    **Taking one random sample**
+</p>
 
 We begin by taking a random sample of n = 50 balls. To do so, we insert a shovel into the bowl, as seen in Figure \@ref(fig:sampling-exercise-2).
 
@@ -100,7 +352,9 @@ knitr::include_graphics("images/sampling_bowl_3_cropped.jpg")
 
 Observe that 17 of the balls are red. There are a total of 5 x 10 = 50 balls, and thus 0.34 = 34% of the shovel's balls are red. We can view the proportion of balls that are red *in this shovel* as a guess of the proportion of balls that are red *in the entire bowl*. While not as exact as doing an exhaustive count, our guess of 34% took much less time and energy to obtain. 
 
-### Everyone takes a random sample (i.e., repeating this 33 times) {#student-shovels}
+<p style="font-family: times, serif; font-size:16pt; font-style:italic">
+    **Everyone takes a random sample (i.e., repeating this 33 times)**
+</p>
 
 In our random sample, we estimated the proportion of red balls to be 34%. But what if we were to have gotten a different random sample? Would we remove exactly 17 red balls again? In other words, would our guess at the proportion of the bowl's balls that are red be exactly 34% again? Maybe? What if we repeated this exercise several times? Would we obtain exactly 17 red balls each time? In other words, would our guess at the proportion of the bowl's balls that are red be exactly 34% every time? Surely not.
 
@@ -183,7 +437,10 @@ tactile_histogram +
 <!-- Albert will make sure that the chalkboard histogram matches up 
 with the ggplot2 histogram so that `boundary` isn't needed. -->
 
-### What are we doing here?
+
+<p style="font-family: times, serif; font-size:16pt; font-style:italic">
+    **What are we doing here?**
+</p>
 
 We just worked through a **thought experiment** in which we imagined 33 different realities that could have occurred. In each, a different random sample of size 50 balls was selected and the proportion of balls that were red was calculated, providing an **estimate of the true proportion** of balls that are red in the entire bowl. We then compared these estimates to the true parameter value. 
 
@@ -195,14 +452,16 @@ Unfortunately, the thought exercise we just completed wasn’t very precise – 
 
 Using a computer, not only will we be able to repeat the hands-on activity a very large number of times, but it will also allow us to use shovels with different numbers of slots than just 50. The purpose of these simulations is to develop an understanding of two key concepts relating to repeated sampling: understanding the concept of **sampling variation** and the role that **sample size** plays in this variation.
 
-## Computer simulation {#sampling-simulation}
+### Computer simulation {#sampling-simulation}
 
 In the previous Section \@ref(sampling-activity), we began imagining other realities and the other possible samples we could have gotten other than our own. To do so, we read about an activity in which a physical bowl of balls and a physical shovel were used by 33 members of a statistics class. We began with this approach so that we could develop a firm understanding of the root ideas behind the theory of repeated sampling. 
 
 In this section, we’ll extend this activity to include 10,000 other realities and possible samples using a computer. We focus on 10,000 hypothetical samples since it is enough to get a strong understanding of the properties of an estimator, while remaining computationally simple to implement.
 
 
-### Using the virtual shovel once
+<p style="font-family: times, serif; font-size:16pt; font-style:italic">
+    **Using the virtual shovel once**
+</p>
 
 Let's start by performing the virtual analogue of the tactile sampling simulation we performed in \@ref(sampling-activity). We first need a virtual analogue of the bowl seen in Figure \@ref(fig:sampling-exercise-1). To this end, we included a data frame `bowl` in the `moderndive` package whose rows correspond exactly with the contents of the actual bowl. 
 
@@ -294,7 +553,9 @@ virtual_shovel %>%
 Great! `r virtual_shovel_perc_red`% of `virtual_shovel`'s 50 balls were red! So based on this particular sample, our guess at the proportion of the `bowl`'s balls that are red is `r virtual_shovel_perc_red`%. But remember from our earlier tactile sampling activity that if we repeated this sampling, we would not necessarily obtain a sample of 50 balls with `r virtual_shovel_perc_red`% of them being red again; there will likely be some variation. In fact in Table \@ref(tab:tactilered) we displayed 33 such proportions based on 33 tactile samples and then in Figure \@ref(fig:sampling-exercise-5) we visualized the distribution of the 33 proportions in a histogram. Let's now perform the virtual analogue of having 10,000 students use the sampling shovel!
 
 
-### Using the virtual shovel 10,000 times
+<p style="font-family: times, serif; font-size:16pt; font-style:italic">
+    **Using the virtual shovel 10,000 times**
+</p>
 
 Recall that in our tactile sampling exercise in Section \@ref(sampling-activity) we had 33 students each use the shovel, yielding 33 samples of size 50 balls, which we then used to compute 33 proportions. In other words we repeated/replicated using the shovel 33 times. We can perform this repeated/replicated sampling virtually by once again using our virtual shovel function `rep_sample_n()`, but by adding the `reps = 10000` argument, indicating we want to repeat the sampling 10,000 times. Be sure to scroll through the contents of `virtual_samples` in RStudio's viewer. 
 
@@ -377,73 +638,13 @@ The histogram you produced is formally called a **sampling distribution**. While
 2.	What is the average value in this distribution? How does that compare to the population parameter?
 3.	What is the standard deviation of this distribution? What range of values are likely to occur in samples of size $n$?
 
+Hopefully you were able to see that in Figure \@ref(fig:samplingdistribution-virtual) that the sampling distribution of $\hat{\pi}$ follows a Normal distribution. As a result of the Central Limit Theorem (CLT), when sample sizes are large, most sampling distributions will be approximated well by a Normal Distribution. We will discuss the CLT further in Section \@ref(clt).
+
 Throughout this section, it is imperative that you remember that this is a theoretical exercise. By beginning with a situation in which we know the right answer, we will be able to deduce properties of estimators that we can leverage in cases in which we do not know the right answer (i.e., when you are conducting actual data analyses!). 
 
 
-### Distribution {#dist}
-The sampling distribution of an estimator refers to the general shape of the distribution of estimates across repeated samples.  We can, in general, characterize a distribution in terms of its modality and symmetry/skew. Figure \@ref(fig:distribution) shows examples of some common distribution shapes.
-
-```{r distribution, echo=FALSE, out.width='100%', fig.cap="Common distribution shapes"}
-knitr::include_graphics('images/distribution.png')
-```
-
-<!-- retrieved diagram from previous 202 slides need to cite?-->
-
-Most estimators follow one of a few common distributions. We will focus on two here:
-
-*	Normal distribution
-*	Chi-squared distribution 
-
-The Normal distribution is characterized by two parameters: $\mu$, which determines the center of the distribution, and $\sigma$ which determines the spread. In Figure \@ref(fig:samplingdistribution-virtual), the solid- and dashed-line curves have the same standard deviation (i.e. $\sigma = 1$), so they have identical spread, but they have different means, so the dashed curve is simply shifted to the right to be centered at $\mu = 2$. On the other hand, the solid- and dotted-line curves are centered around the same value (i.e. $\mu = 0$), but the dotted curve has a larger standard deviation and is therefore more spread out. The solid line is a special case of the Normal distribution called the **Standard Normal distribution**, which has mean 0 and standard deviation 1. Importantly, for all possible values of $\mu$ and $\sigma$, the normal distribution is **symmetric** and **unimodal**.
-
-```{r normaldist, echo=FALSE, fig.cap="Normal distribution"}
-ggplot(data.frame(x = c(-6, 6)), aes(x = x)) +
-  stat_function(fun = dnorm,
-                    aes(linetype = "mean = 0, sd = 1"), size = 1) +
-  stat_function(fun = dnorm, args = list(mean = 2, sd = 1),
-                    aes(linetype = "mean = 2, sd = 1"), size = 1) +
-  stat_function(fun = dnorm, args = list(mean = 0, sd = 2),
-                    aes(linetype = "mean = 0, sd = 2"), size = 1) +
-  scale_linetype_manual(values = c(1, 3, 2)) +
-  labs(title = "Normal distribution", ylab = "") +
-  theme_classic() +
-  theme(plot.title = element_text(hjust = 0.5))
-```
-
-
-The Chi-squared distribution is unimodal but skewed right. The Chi-squared distribution depends on one parameter $df$. 
-
-```{r, echo = FALSE, message=FALSE, warning=FALSE}
-ggplot(data.frame(x = c(0, 30)), aes(x = x)) +
-  stat_function(fun = dchisq, args = list(df = 2), size = 1,
-                  aes(linetype = "df = 2")) +
-  stat_function(fun = dchisq, args = list(df = 5), size = 1,
-                  aes(linetype = "df = 5")) +
-  stat_function(fun = dchisq, args = list(df = 10), size = 1,
-                  aes(linetype = "df = 10")) +
-  scale_linetype_manual(values = c(1, 3, 2)) +
-  labs(title = "Chi-squared distribution") +
-  theme_classic() +
-  theme(plot.title = element_text(hjust = 0.5),
-        legend.position = c(0.6, 0.7))
-
-pF <- ggplot(data.frame(x = c(0, 10)), aes(x = x)) +
-    stat_function(fun = df, args = list(df1 = 2, df2 = 1), size = 1,
-                  aes(linetype = "df1 = 2, df2 = 1")) +
-  stat_function(fun = df, args = list(df1 = 5, df2 = 5), size = 1,
-                  aes(linetype = "df1 = 5, df2 = 5")) +
-  stat_function(fun = df, args = list(df1 = 10, df2 = 1), size = 1,
-                  aes(linetype = "df1 = 10, df2 = 1")) +
-  scale_linetype_manual(values = c(1, 3, 2)) +
-    labs(title = "F-distribution") +
-  theme_classic() +
-  theme(plot.title = element_text(hjust = 0.5),
-        legend.position = c(0.6, 0.7))
-```
-
-The **Normal Distribution** is the most common and important of all distributions. As a result of the Central Limit Theorem (CLT), when sample sizes are large, most sampling distributions will be approximated well by a Normal Distribution. In fact, we can see in Figure \@ref(fig:samplingdistribution-virtual) that the sampling distribution of $\hat{\pi}$ follows a Normal distribution. We will discuss the CLT further in Section \@ref(clt)
-
 ### Mean of the sampling distribution {#bias}
+
 If we were to summarize a dataset beyond the distribution, the first statistic we would likely report is the mean of the distribution. This is true with sampling distributions as well. With sampling distributions, however, we do not simply want to know what the mean is – we want to know how similar or different this is from the population parameter value that the sample statistic is estimating.  Any difference in these two values is called **bias**. That is:
 
 $$Bias = Average \ \ value \ \ of \ \ sampling \ \ distribution - True \ \ population \ \ parameter \ \ value$$
@@ -574,7 +775,7 @@ It is imperative to remember that **sampling distributions are inherently theore
 
 Remember, a sample statistic is a tool we use to estimate a parameter value in a population. The sampling distribution tells us how good this tool is: Does it work on average (bias)? Does it work most of the time (standard error)? Does it tend to over- or under- estimate (distribution)?
 
-## Standardization, Special Distributions, and Theory {#standardization}
+## Common statistics and their theoretical distributions{#standardization}
 
 In the previous sections, we demonstrated that every statistic has a sampling distribution and that this distribution is used to make inferences between a statistic (estimate) calculated in a sample and its unknown (parameter) value in the population. For example, you now know that the sample mean’s sampling distribution is a normal distribution and that the sample variance’s sampling distribution is a chi-squared distribution. 
 
@@ -613,111 +814,19 @@ ch9_SE_table %>%
   column_spec(5, width = "1in")
 ```
 
+Recall if the population standard deviation is unknown, we use $s$ and the sampling distribution is the t-distribution. If the population standard deviation is known we replace the $s$'s in these formulas with $\sigma's$ and the sampling distribution is the Normal distribution.
+
 The fact that there is a formula for this standard error means that we can know properties of the sampling distribution **without having to do a simulation** and can use this knowledge to make inferences. For example, let’s pretend we’re estimating a population mean, which we don’t know. To do so, we take a random sample of the population and estimate the mean ($\bar{x} = 5.2$) and standard deviation ($s = 2.1$) based upon $n = 10$ observations. Now, looking at Table \@ref(tab:SE-table-ch-9), we know that the sample mean:
 
 * Is an unbiased estimate of the population mean (so, on average, we get the right answer),
-* That the sampling distribution is a normal distribution, and that
+* That the sampling distribution is a t-distribution, and that
 * The standard error (spread) of this distribution can be calculated as $SE(\bar{x}) = \frac{\sigma}{\sqrt{n}} = \frac{s}{\sqrt{n}} = \frac{2.1}{\sqrt{10}} = 0.664$.
 
 At this point, this is all you know, but in Chapters \@ref(CIs) – \@ref(hypothesis-tests), we will put these properties to good use. 
 
-### Standardization
-
-In order to make inferences, there is one additional step – **standardization**. Standardization is a useful statistical tool, in general, as it allows us to put measures that are on different scales all onto the same scale. You are already familiar with standardized measures – e.g., proportions and percentages – which allow you to make comparisons more easily. The idea is similar here. 
-
-To standardize, we take an estimate and divide it by its standard error, i.e.,
-			$$STAT = \frac{Estimate}{Standard \ \  Error}$$
-Note that you can calculate this statistic based on only values in your sample. For example, for the sample mean discussed previously, we would use:
-			$$STAT = \frac{\bar{x}}{SE(\bar{x})} = \frac{\bar{x}}{\frac{s}{\sqrt{n}}} = \frac{\sqrt{n}*\bar{x}}{s} =  
-				 \frac{\sqrt{10}*5.2}{{2.1}} = 7.83$$
-
-As another example, recall in Chapter \@ref(regression) when we fit the regression model:
-
-$$\widehat{score} = b_0 + b_1 \cdot\text{bty avg}$$
-
-and found $b_1 = 0.0666$. Using the formulas in Table \@ref(tab:SE-table-ch-9), we can calculate the standard error of $b_1$ by $$SE(b_1) = \sqrt{\frac{s_y^2}{(n-1)s_x^2}}$$
-
-Here, $s_y^2$ refers to the variance of the outcome variable $y$, which in this case is `score`, and $s_x^2$ refers to the variance in the explanatory variable $x$, which in this case is `bty_avg`. We can use our data wrangling skills to calculate these quantities.
-
-```{r}
-evals_ch5 <- evals %>%
-  select(score, bty_avg, age)
-
-evals_ch5 %>% 
-  summarize(n = n(),
-            sy2 = var(score),
-            sx2 = var(bty_avg)) %>% 
-  mutate(SE_b1 = sqrt(sy2/((n-1)*sx2)))
-```
-Therefore, our standardized statistic in this case is:
-
-$$STAT = \frac{b_1}{SE(b_1)} = \frac{b_1}{\sqrt{\frac{s_y^2}{(n-1)s_x^2}}} =  
-				 \frac{0.0666}{{0.0166}} = 4.01$$
-
-### Special distributions
-When the population parameter is zero, most standardized statistics can be shown to follow one of two distributions: 
-
-1. The **standard normal distribution** (denoted $N(0,1)$) has a mean of 0 and a standard deviation of 1
-2. The **t-distribution** (denoted $t(df)$) depends on one parameter, $df$, and has a mean of 0 and a standard deviation of $\sqrt{\frac{df}{df-2}}$. Again $df$ stands for "degrees of freedom," which are given for particular statistics (e.g. $df = n - 1$)
-
-These distributions have interesting features which will be very useful to us in Chapters \@ref(CIs) – \@ref(hypothesis-tests). Below, we provide some of them:
-
-#### Standard Normal Distribution vs T-distribution
-
-```{r empirical-rule, echo=FALSE, out.width='100%', fig.cap="Empirical Rule: property of the Normal Distribution"}
-knitr::include_graphics('images/empirical_rule.png')
-```
-
-The Normal distribution has a very convenient property that says that approximately 68%, 95%, and 99.7% of data fall within 1, 2, and 3 standard deviations of the mean, respectively. Figure \@ref(fig:empirical-rule) displays this phenomenon, which is often called the Empirical Rule. Note this is a property of the Normal distribution in general, for all values of $\mu$ and $\sigma$, but we will consider it here for the special case of the Standard Normal distribution $(\mu = 0, \sigma = 1)$.
-
-If you were to plot the sampling distribution of a standardized statistic (denoted STAT) that follows a standard normal, this means you would expect:
-
-* Approximately 68% of STAT values to fall between -1 and 1
-* Approximately 95% of STAT values to fall between -2 and 2
-* Approximately 99.7% of STAT values to fall between -3 and 3
-
-Working on this type of standardized scale makes it easy for us to quickly determine where in the distribution we expect a value to fall. For example, if we have a value of 2.5, we know it will fall fairly far out in the right tail of the distribution. Or if we have a value of -0.5, we know it falls slightly to the left of center. This is displayed in Figure \@ref(fig:STAT-values).
-
-```{r STAT-values, fig.cap = "N(0,1) example values: STAT = -0.5, STAT = 2.5", echo = FALSE}
-ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
-    stat_function(fun = dnorm) +
-  geom_vline(xintercept = 2.5, color = "red") +
-  geom_vline(xintercept = -0.5, color = "red") +
-  labs(x = "STAT",
-       y = "") +
-  theme_classic() +
-  theme(plot.title = element_text(hjust = 0.5),
-        axis.text.y = element_blank(),
-                axis.ticks.y = element_blank(),
-        axis.line.y = element_blank()) +
-  scale_x_continuous(breaks = c(-3,-2,-1,0,1,2,3))
-  
-
-```
-
-In general, the t-distribution has the same shape as the Standard Normal distribution (symmetric, unimodal), but it has **heavier tails**. As sample size increases (and therefore degrees of freedom increases), the t-distribution becomes a very close approximation to the Normal distribution. 
-
-```{r, fig.cap="t-distribution with example 95% cutoff values", echo = FALSE, message=FALSE, warning=FALSE}
-ggplot(data.frame(x = c(-6, 6)), aes(x = x)) +
-    stat_function(fun = dnorm,
-                    aes(linetype = "Standard Normal"), size = 1) +
-    stat_function(fun = dt, args = list(df = 2),
-                    aes(linetype = "t-distribution, df = 2"), size = 1) +
-    stat_function(fun = dt, args = list(df = 30),
-                    aes(linetype = "t-distribution, df = 30"), size = 1) +
-  scale_linetype_manual(values = c(1, 3, 2)) +
-  theme_classic() +
-  theme(plot.title = element_text(hjust = 0.5)) +
-  geom_vline(xintercept = -2.04, linetype = 2, color = "red") +
-  geom_vline(xintercept = -4.3, linetype = 3, color = "red") +
-  geom_vline(xintercept = 2.04, linetype = 2, color = "red") +
-  geom_vline(xintercept = 4.3, linetype = 3, color = "red") +
-  xlab("STAT")
-```
-
-Because the exact shape of the t-distribution depends on the sample size, we can't define one nice rule like the Empirical Rule to know which "cutoff" values correspond to 95% of the data, for example. If $df = 30$, for example, it can be shown that 95% of the data will fall between -2.04 and 2.04, but if $df = 2$, 95% of the data will fall between -4.3 and 4.3. This is what we mean by the t-distribution having "heavier tails"; more of the observations fall farther out in the tails of the distribution, compared to the Normal distribution.
 
 ## Sample Size and Sampling Distributions {#size} 
+
 Let’s return to our football stadium thought experiment. Let’s say you could estimate the average age of fans by selecting a sample of $n = 10$ or by selecting a sample of $n = 100$. Which would be better? Why? A larger sample will certainly cost more – is this worth it? What about a sample of $n = 500$? Is that worth it?
 
 This question of appropriate sample size drives much of statistics. For example, you might be conducting an experiment in a psychology lab and ask: how many participants do I need to estimate this treatment effect precisely? Or you might be conducting a survey and need to know: how many respondents do I need in order to estimate the relationship between income and education well? 
@@ -871,17 +980,8 @@ There is a very useful result in statistics called the **Central Limit Theorem**
 
 More formally, the CLT tells us that $$\bar{x} \sim N(mean = \mu, SE = \frac{\sigma}{\sqrt{n}}),$$ where $\mu$ is the population mean of X, $\sigma$ is the population standard deviation of X, and $n$ is the sample size. 
 
-Note that we if we standardize the sample mean, it will follow the standard normal distribution. That is: $$Z = \frac{\bar{x} - \mu}{\frac{\sigma}{\sqrt{n}}} \sim N(0,1)$$. 
+Note that we if we standardize the sample mean, it will follow the standard normal distribution. That is: $$STAT = \frac{\bar{x} - \mu}{\frac{\sigma}{\sqrt{n}}} \sim N(0,1)$$. 
 
-
-<!-- 
-Beth's rewrite: 
-
-There is a very useful result in statistics called the **Central Limit Theorem** which tells us that the sampling distribution of a **standardized statistic** is well approximated by the Normal distribution. While not all variables follow a normal distribution, many estimators have sampling distributions that are normal. We have already seen this to be true with the sample proportion. 
-
-More formally, the CLT tells us that when the population parameter is 0, $$STAT = \frac{{Estimate}}{SE} \rightarrow N(0,1)$$  
-
-Importantly, note that the $SE$ is a function of sample size (as seen in Table \@ref(tab:SE-table-ch-9)). The CLT holds when this sample size is large (that's what $\rightarrow$ means). For many statistics, this means when the sample size is bigger than about $n = 30$.  -->
 
 ### CLT conditions
 Certain conditions must be met for the CLT to apply:
@@ -947,7 +1047,8 @@ Figure \@ref(fig:infant-mortality-2) shows that for samples of size $n = 5$, the
 
 Overall, this simulation shows that not only might the precision of an estimate differ as a result of a larger sample size, but also the sampling distribution might be different for a smaller sample size (e.g., $n = 5$) than for a larger sample size (e.g., $n=100$).
 
-### Summary of Sampling Distributions
+
+## Conclusion
 
 In this chapter, you’ve been introduced to the **theory of repeated sampling** that undergirds our ability to connect estimates from samples to parameters from populations that we wish to know about. In order to make these inferences, we need to understand how our results might change if – in a different reality – a different random sample was collected, or, more generally, how our results might differ across the many, many possible random samples we could have drawn. This led us to simulate the **sampling distribution** for our estimator of the population proportion.
 
