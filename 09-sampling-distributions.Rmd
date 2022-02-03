@@ -256,7 +256,7 @@ ggplot(data.frame(x = c(-6, 6)), aes(x = x)) +
 
 Because the exact shape of the t-distribution depends on the sample size, we can't define one nice rule like the Empirical Rule to know which "cutoff" values correspond to 95% of the data, for example. If $df = 30$, for example, it can be shown that 95% of the data will fall between -2.04 and 2.04, but if $df = 2$, 95% of the data will fall between -4.3 and 4.3. This is what we mean by the t-distribution having "heavier tails"; more of the observations fall farther out in the tails of the distribution, compared to the Normal distribution.
 
-Similar to the Normal distribution we can calculate probabilities and test statistics from a t-distribution using the `pt()` and `qt()` function, respectively. You must specify the `df` parameter which recall is a function of sample size, $n$, and dependent on the statistic. We will learn more about the `df` of different statistics in Section \@ref(standardization).
+Similar to the Normal distribution we can calculate probabilities and test statistics from a t-distribution using the `pt()` and `qt()` function, respectively. You must specify the `df` parameter which recall is a function of sample size, $n$, and dependent on the statistic. We will learn more about the `df` of different statistics in Section \@ref(commonstat).
 
 
 ### Normal vs T
@@ -775,7 +775,7 @@ It is imperative to remember that **sampling distributions are inherently theore
 
 Remember, a sample statistic is a tool we use to estimate a parameter value in a population. The sampling distribution tells us how good this tool is: Does it work on average (bias)? Does it work most of the time (standard error)? Does it tend to over- or under- estimate (distribution)?
 
-## Common statistics and their theoretical distributions{#standardization}
+## Common statistics and their theoretical distributions{#commonstat}
 
 In the previous sections, we demonstrated that every statistic has a sampling distribution and that this distribution is used to make inferences between a statistic (estimate) calculated in a sample and its unknown (parameter) value in the population. For example, you now know that the sample mean’s sampling distribution is a normal distribution and that the sample variance’s sampling distribution is a chi-squared distribution. 
 
