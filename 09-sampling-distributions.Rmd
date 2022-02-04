@@ -115,14 +115,22 @@ ggplot(babies, aes(x=wt))+
 
 Visually we can see that the distribution is bell-shaped, that is, unimodal and approximately symmetric. It clearly resembles a Normal distribution from the shape aspect with a mean weight of 119.6 ounces and standard deviation of 18.2 ounces. However, not all bell shaped distributions are Normally distributed.
 
-The Normal distribution has a very convenient property that says approximately 68%, 95%, and 99.7% of data fall within 1, 2, and 3 standard deviations of the mean, respectively. How can we confirm that the disbursement of birth weights adheres to this property? That would be difficult to visually check with a histogram. We could manually calculate the actual proportion of data that is within one, two, and three standard deviations of the mean, however that can be tedious. Luckily, a convenient tool exists for confirming that the disbursement of data is Normally distributed called a QQ plot, or quantile-quantile plot. A QQ plot is a scatterplot created by plotting two sets of quantiles (percentiles) against one another. That is, it plots the quantiles from our sample data against the theoretical quantiles of a Normal distribution. If the data is Normally distributed, we should see the points forming a line that’s roughly straight. Let's see if the QQ plot of birth weights suggest that the distribution is Normal.
+The Normal distribution has a very convenient property that says approximately 68%, 95%, and 99.7% of data fall within 1, 2, and 3 standard deviations of the mean, respectively. How can we confirm that the disbursement of birth weights adheres to this property? That would be difficult to visually check with a histogram. We could manually calculate the actual proportion of data that is within one, two, and three standard deviations of the mean, however that can be tedious. Luckily, a convenient tool exists for confirming that the disbursement of data is Normally distributed called a QQ plot, or quantile-quantile plot. A QQ plot is a scatterplot created by plotting two sets of quantiles (percentiles) against one another. That is, it plots the quantiles from our sample data against the theoretical quantiles of a Normal distribution. If the data really is Normally distributed, the sample (data) quantiles should match-up with the theoretical quantiles. The data should match up with theory! Graphically we should see the points fall along the line of identity, where data matches theory. Let's see if the QQ plot of birth weights suggest that the distribution is Normal.
 
 ```{r}
-qqnorm(babies$wt)
-qqline(babies$wt)
+ggplot(babies, aes(sample = wt)) +
+  geom_qq(shape = 21) +
+  geom_qq_line() +
+  labs(
+    title = "Normal Q-Q Plot", 
+    x = "Theoretical Quantiles",
+    y = "Sample Quantiles"
+    ) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
 ```
 
-The QQ plot appears to be approximately a straight line. Notice that the end of the quantiles deviate slightly from the line. This suggests that our sample data has more extreme data in the tails than an exact Normal distribution would suggest. Similar to a histogram this is a visual check and not an airtight proof. Given that our birth weight data is unimodal, symmetric, and the QQ plot is close enough to a straight line, we can say the data is Normally distributed.
+The points in the QQ plot appear to fall along the line of identity, for the most part. Notice points at each end deviate slightly from the line at the. Meaning sample quartiles deviate more from theoretical quartiles at the tails. The QQ plot is suggesting that our sample data has more extreme data in the tails than an exact Normal distribution would suggest. Similar to a histogram this is a visual check and not an airtight proof. Given that our birth weight data is unimodal, symmetric, and the points of the QQ plot fall close enough to the line of identity, we can say the data is approximately Normally distributed. It is common to drop the approximately and say Normally distributed.
 
 
 ### Empirical Rule
