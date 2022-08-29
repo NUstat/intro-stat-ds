@@ -4,6 +4,12 @@
   background: #9ED3AD 5px center/3em no-repeat;
 }
 
+.practice {
+  padding: 0.1em 1em 0.1em 1em;
+  margin-bottom: 10px;
+  background: #B6ACD1 5px center/3em no-repeat;
+}
+
 .announcement {
   padding: 1em 1em 1em 1em;
   margin-bottom: 10px;
