@@ -168,11 +168,20 @@ image_link <- function(path,
 ```
 
 
+# Version Control Update {-}
 
+```{block, type='important', purl=FALSE}
+**This version of the book is deprecated. The new and most updated version of Introduction to Statistics and Data Science is available here [https://nustat.github.io/intro-stat-data-sci/](https://nustat.github.io/intro-stat-data-sci/)**
+
+```
 
 # Preface {-}
 
 
+```{block, type='important', purl=FALSE}
+**This version of the book is deprecated. The new and most updated version of Introduction to Statistics and Data Science is available here [https://nustat.github.io/intro-stat-data-sci/](https://nustat.github.io/intro-stat-data-sci/)**
+
+```
 ```{block, type='learncheck', purl=FALSE}
 **Please note that this is a "development version" of this book for the new design of STAT 202. Meaning this is a work in progress being edited and updated as we go.**
 

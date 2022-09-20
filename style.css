@@ -4,6 +4,13 @@
   background: #9ED3AD 5px center/3em no-repeat;
 }
 
+.important {
+  padding: 1em 1em 1em 1em;
+  margin-bottom: 10px;
+  background: #FF6961 5px center/3em no-repeat;
+}
+
+
 .announcement {
   padding: 1em 1em 1em 1em;
   margin-bottom: 10px;
